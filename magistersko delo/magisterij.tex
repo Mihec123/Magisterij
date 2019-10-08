@@ -1,4 +1,4 @@
-% !TeX spellcheck = sl_SI
+%!TeX spellcheck = sl_SI
 % vim: set spell spelllang=sl:
 % za preverjanje črkovanja, če se uporablja Texstudio ali vim
 \documentclass[12pt,a4paper,twoside]{article}
@@ -107,7 +107,7 @@
 \newcommand{\Q}{\mathbb Q}
 
 \newcommand{\F}{\mathbb F}
-\newcommand{\Fq}[1]{{\mathbb{F}}_{#1}}
+\newcommand{\Fq}[1]{{\mathbb{F}_{#1}}}
 \newcommand{\PP}{\mathbb P}
 \newcommand{\E}[1]{E({#1})}
 \newcommand{\MOD}[1]{\ \text{(mod }{#1}\text{)}}
@@ -611,6 +611,7 @@ Problem Diffie-Hellmanove izmenjave ključev lahko enostavno prevedemo na proble
 \end{proof}
 
 \subsection{Index Calculus}
+\label{IndexCalc}
 
 Naj bo $p$ praštevilo in naj bo $g$ generator ciklične grupe $\F^{\times}_{p}$. Naj $L(h)$ označuje vrednost, za katero velja
 $$g^{L(h)} \equiv h \ (\text{mod} \ p).$$
@@ -676,6 +677,7 @@ $$E[n] = \{ P \in \E{\overline{K}} | nP = \infty \}.$$
 \end{definicija}
 
 \begin{izrek}
+\label{IzrekTor}
 Naj bo $E$ eliptična krivulja nad poljem $K$ in naj bo $n \in \N$. Če karakteristika polja $K$ ne deli $n$, ali je enaka $0$ potem
 $$E[n] \cong \mathbb{Z}_n \oplus \mathbb{Z}_n$$
 
@@ -730,7 +732,8 @@ je \emph{grupa n-tih korenov enote} grupe $\overline{K}$.
 \end{definicija}
 
 \begin{trditev}
-Naj bo E eliptična krivulja definirana nad poljem $K$, in naj bo $n \in \N$. Predpostavimo, da karakteristika polja $K$ ne deli $n$. Potem obstaja \emph{Weilovo parjenje}
+\label{trd-WeilPar}
+Naj bo E eliptična krivulja definirana nad poljem $K$, in naj bo $n \in \N$. Predpostavimo, da karakteristika polja $K$ ne deli $n$. Potem obstaja Weilovo parjenje
 $$e_n:E[n] \times E[n] \rightarrow \mu_n,$$
 za katerega velja:
 \begin{itemize}
@@ -739,97 +742,85 @@ $$e_n(S_1+S_2,T) = e_n(S_1,T)e_n(S_2,T)$$
 in
 $$e_n(S,T_1+T_2) = e_n(S,T_1)e_n(S,T_2)$$
 za vse $S,S_1,S_2,T,T_1,T_2 \in E[n]$.
+\item $e_n$ je nedegenerirana v obeh spremenljivkah. To pomeni če je $e_n(S,T) = 1$ za vse $T \in E[n]$ potem $S = \infty$, ter obratno.
+
+\item $e_n(T,T) = 1$ za vse $T \in E[n]$
+
+\item $e_n(T,S) = e_n(S,T)^{-1}$ za vse $S,T \in E[n]$
+
+\item $e_n(\rho S,\rho T) = \rho(e_n(S,T))$ za vse avtomorfizme $\rho$ iz $\bar{K}$, za katere je $\rho$ identiteta na koeficientih $E$.
+
+\item $e_n(\alpha(S),\alpha(T)) = e_n(S,T)^{\text{deg}(\alpha)}$ za vse separabilne endomorfizme $\alpha$ polja $E$.
 \end{itemize}
+
 \end{trditev}
 
 
+\begin{posledica}
+\label{PosledicaTrdParj}
+Naj bosta $T_1,T_2$ baza $E[n]$. Potem je $e_n(T_1,T_2)$ generator grupe $\mu_N$.
+\end{posledica}
 
-
-
-
-\section{Integrali po \texorpdfstring{$\omega$}{ω}-kompleksih}
-\subsection{Definicija}
-\begin{definicija}
-  Neskončno zaporedje kompleksnih števil, označeno z $\omega = (\omega_1, \omega_2, \ldots)$,
-  se imenuje \emph{$\omega$-kompleks}.\footnote{To ime je izmišljeno.}
-
-  Črni blok zgoraj je tam namenoma. Označuje, da \LaTeX{} ni znal vrstice prelomiti pravilno
-  in vas na to opozarja. Preoblikujte stavek ali mu pomagajte deliti problematično besedo z
-  ukazom \verb|\hyphenation{an-ti-ko-mu-ta-ti-ven}| v preambuli.
-\end{definicija}
-\begin{trditev}[Znano ime ali avtor]
-  \label{trd:obstoj-omega}
-  Obstaja vsaj en $\omega$-kompleks.
-\end{trditev}
 \begin{proof}
-  Naštejmo nekaj primerov:
-  \begin{align}
-    \omega &= (0, 0, 0, \dots), \label{eq:zero-kompleks} \\
-    \omega &= (1, i, -1, -i, 1, \ldots), \nonumber \\
-    \omega &= (0, 1, 2, 3, \ldots). \nonumber \qedhere  % postavi QED na zadnjo vrstico enačbe
-  \end{align}
+Vemo, da za poljubni točki $T_1,T_2$ velja $e_n(T_1,T_2)^n = 1$, ker se slika parjenja nahaja v grupi $n$-tih korenov enote. Pokazati moramo torej, da če za neko število $d$ velja  $e_n(T_1,T_2)^d = 1$ potem od tod sledi, da je $d \geq n$.
+Recimo torej, da je $e_n(T_1,T_2) = \zeta$, kjer velja $\zeta^d = 1$.
+Po točki ena trditve \ref{trd-WeilPar} velja $$e_n(T_1,dT_2) = e_n(T_1,T_2)^d=1.$$ Prav tako velja $e_n(T_2,dT_2) = e_n(T_2,T_2)^d = 1 $. Naj bo $S \in E[n]$, potem se $S$ izraža kot $S = aT_1+bT_2$ za neka $a,b \in \N$.
+S ponovno uporabo trditve \ref{trd-WeilPar} vidimo, da velja
+$$e_n(S,dT_2)= e_n(T_1,dT_2)^ae_n(T_2,dT_2)^b = 1. $$
+Ker to valja za vsak $S$ po točki dva trditve \ref{trd-WeilPar} sledi, da je $dT_2 = \infty$. To pa je mogoče le če $n|d$, kar pomeni da je $n \leq d$.
 \end{proof}
 
-\section{Tehnični napotki za pisanje}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%MOV
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Sklicevanje in citiranje}
-Za sklice uporabljamo \verb|\ref|, za sklice na enačbe \verb|\eqref|, za citate \verb|\cite|. Pri
-sklicevanju in citiranju sklicano številko povežemo s prejšnjo besedo z nedeljivim presledkom
-$\sim$, kot npr.\ \verb|iz trditve~\ref{trd:obstoj-omega} vidimo|.
+\section{MOV}
+MOV napad s pomočjo Weilovega parjenja pretvori problem diskretnega logaritma iz $E(\F{q})$ v problem diskretnega logaritma nad $\F^{\times}_{q^m}$. Na ta način se izognemo težji strukturi grupe. Nov problem diskretnega logaritma pa lahko sedaj rešimo z različnimi napadi, med drugim tudi z napadom Index-Calculus \ref{IndexCalc}. MOV napad deluje če velikost polja $\F{q^m}$ ni dosti večja od velikosti polja $\F{q}$. Postopek napada sledi poteku dokaza naslednje trditve.
 
-\begin{primer}
-  Zaporedje~\eqref{eq:zero-kompleks} iz dokaza trditve~\ref{trd:obstoj-omega} na
-  strani~\pageref{trd:obstoj-omega} lahko najdemo tudi v Spletni enciklopediji zaporedij~\cite{oeis}.
-  Citiramo lahko tudi bolj natančno~\cite[trditev 2.1, str.\ 23]{lebedev2009introduction}.
-\end{primer}
+\begin{trditev}
+Naj bo $E$ eliptična krivulja nad $\F{q}$. Naj bosta $P,Q \in E(\F{q})$, ter naj bo $N$ red točke $P$. Predpostavimo, da velja $\text{gcd}(N,q)=1$. Potem obstaja tako število $k$, da velja $Q = kP$ natanko tedaj ko $NQ = \infty$ in $e_N(P,Q)=1$.
+\end{trditev}
 
-\subsection{Okrajšave}
-Pri uporabi okrajšav \LaTeX{} za piko vstavi predolg presledek, kot npr. tukaj. Zato se za vsako
-piko, ki ni konec stavka doda presledek običajne širine z ukazom \verb*|\ |, kot npr.\ tukaj.
-Primerjaj z okrajšavo zgoraj za razliko.
+\begin{proof}
+$(\Rightarrow)$ Če je $Q = kP$, potem je $NQ = kNP$, ampak ker je red $P$ enak $N$ od tod sledi $kNP = \infty$. Prav tako
+$$e_n(P,Q) = e_n(P,P)^k = 1^k = 1.$$
 
-\subsection{Vstavljanje slik}
-Sliko vstavimo v plavajočem okolju \texttt{figure}. Plavajoča okolja \emph{plavajo} po tekstu, in
-jih lahko postavimo na vrh strani z opcijskim parametrom `\texttt{t}', na lokacijo, kjer je v kodi s
-`\texttt{h}', in če to ne deluje, potem pa lahko rečete \LaTeX u, da ga \emph{res} želite tukaj,
-kjer ste napisali, s `\texttt{h!}'. Lepo je da so vstavljene slike vektorske (recimo \texttt{.pdf}
-ali \texttt{.eps} ali \texttt{.svg}) ali pa \texttt{.png} visoke resolucije (več kot
-\unit[300]{dpi}).  Pod vsako sliko je napis in na vsako sliko se skličemo v besedilu. Primer
-vektorske slike je na sliki~\ref{fig:sample}. Vektorsko sliko prepoznate tako, da močno
-zoomate v sliko, in še vedno ostane gladka. Več informacij je na voljo na
-\url{https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions}. Če so slike bitne, kot na
-primer slika~\ref{fig:image}, poskrbite, da so v dovolj visoki resoluciji.
+$(\Leftarrow)$ Naj bo $NQ = \infty$, torej je po definiciji $Q \in E[N]$. Ker je $\text{gcd}(N,q) = 1$ lahko uporabimo izrek \ref{IzrekTor} in zapišemo 
+$E[N] \cong \Z_N \oplus \Z_n$. Sedaj izberemo točko $R$ tako, da je $\{P,R \}$ baza $E[N]$. Ker sta $P,R$ baza  lahko $Q$ zapišemo kot
+$$Q = aP+bR,$$
+za neki števili $a,b \in \N$. Po posledici definicije Weilovega parjenja \ref{PosledicaTrdParj} velja 
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.6\textwidth]{images/sample.pdf}
-% \caption[caption za v kazalo]{Dolg caption pod sliko}
-  \caption[Primer vektorske slike.]{Primer vektorske slike z oznakami v enaki pisavi, kot jo
-     uporablja \LaTeX{}.  Narejena je s programom Inkscape, \LaTeX{} oznake so importane v
-     Inkscape iz pomožnega PDF.}
-  \label{fig:sample}
-\end{figure}
+\noindent $e_N(P,R)=\zeta$ je generator $\mu_N$.
+Po predpostavki velja $e_N(P,Q) = 1$ dobimo torej
+$$1 = e_N(P,Q) = e_N(P,P)^ae_N(P,R)^b = \zeta^b.$$
+Od tod sledi, da je $b$ večkratnik števila $N$, od tod pa po definiciji sledi $bR = \infty$, ter $Q = aP$.
+\end{proof}
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.8\textwidth]{images/image.png}
-  \caption[Primer bitne slike.]{Primer bitne slike, izvožene iz Matlaba. Poskrbite, da so slike v
-  dovolj visoki resoluciji in da ne vsebujejo prosojnih elementov (to zahteva PDF/A-1b format).}
-  \label{fig:image}
-\end{figure}
+Ideja dokaza nam sedaj, da korake MOV napada.
 
-\subsection{Kako narediti stvarno kazalo}
-Dodate ukaze \verb|\index{polje}| na besede, kjer je pojavijo, kot tukaj\index{tukaj}.
-Več o stvarnih kazalih je na voljo na \url{https://en.wikibooks.org/wiki/LaTeX/Indexing}.
+\begin{algorithm}[H]
+\caption[MOV]{MOV napad}
+\label{alg:MOV}
+Izberi $m$ tako, da $$E[N] \subset \E{\F{q^n}}.$$
+Ker imajo vse točke $E[N]$ koordiante v $\bar{\F{q}} = \cup_{j\geq 1}\F_{q^j}$ tak $m$ obstaja. Prav tako je $\mu_N$ v $\F{q^m}$.
+Nato postopaj po naslednjih korakih.
+\begin{enumerate}
+\item Izberi točko $T \in \E{\F{q^m}}$.
+\item Izračunaj red $M$ točke $T$.
+\item Naj bo $d = \text{gcd}(M,N)$ in naj bo $T_1 = (M/d)T$. Potem ima $T_1$ red, ki deli $N$, torej je $T_1 \in E[N]$.
+\item Izračunaj $\zeta_1 = e_N(P,T_1)$ in $\zeta_2 = e_N(Q,T_1)$. Tu sta $\zeta_1$ in $\zeta_2$ v $\mu_d \subset \F_{q^m}^\times$.
+\item Reši problem diskretnega logaritma $\zeta_2 = \zeta_1^k$ v $\F_{q^m}^\times$. To nam da $k \mod d$.
+\item Ponovi korake $1$-$5$ za različnke točke $T$ dokler ni $k$ določen.
+\end{enumerate}
 
-\subsection{Navajanje literature}
-Članke citiramo z uporabo \verb|\cite{label}|, \verb|\cite[text]{label}| ali pa več naenkrat s
-\verb|\cite\{label1, label2}|. Tudi tukaj predhodno besedo in citat povežemo z nedeljivim presledkom
-$\sim$. Na primer~\cite{chen2006meshless,liu2001point}, ali pa \cite{kibriya2007empirical}, ali pa
-\cite[str.\ 12]{trobec2015parallel}, \cite[enačba (2.3)]{pereira2016convergence}.
-Vnosi iz \verb|.bib| datoteke, ki niso citirani, se ne prikažejo v seznamu literature, zato jih
-tukaj citiram.~\cite{vene2000categorical}, \cite{gregoric2017stopniceni}, \cite{slak2015induktivni},
-\cite{nsphere}, \cite{kearsley1975linearly}, \cite{STtemplate}, \cite{NunbergerTand}.
+\end{algorithm}
+MOV napad deluje hitreje, kot če hočemo rešiti porblem diskretnega algoritma direktno nad krivuljo, če velja 
+$$k > log^2(p),$$
+kjer je krivulja $E(\F_p)$ in MOV pretvori to grupo v $\F^{\times}_{p^k}$.
+
+
+\cite{Washington2008}
+\cite{Silverman2009}
 
 % Literatura:
 % Primer navajanja na http://www.fmf.uni-lj.si/storage/24240/LiteraturaM.pdf,
