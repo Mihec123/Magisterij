@@ -111,6 +111,7 @@
 \newcommand{\PP}{\mathbb P}
 \newcommand{\E}[1]{E({#1})}
 \newcommand{\MOD}[1]{\ \text{(mod }{#1}\text{)}}
+\newcommand{\DIV}[1]{\ \text{Div(}{#1}\text{)}}
 % \DeclareMathOperator{\tr}{tr}  % morda potrebuješ operator za sled ali kaj drugega?
 
 % bold matematika znotraj \textbf{ }, tudi v naslovih, kot \omega spodaj
@@ -821,8 +822,131 @@ $$k > log^2(p),$$
 kjer je krivulja $E(\F_p)$ in MOV pretvori to grupo v $\F^{\times}_{p^k}$.
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%DELITELJI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Delitelji}
+
+\begin{definicija}~
+Naj bo $K$ polje in naj bo $P \in \E{\overline{K}}$. Za vsako točko $P$ definirajmo formalen simbol $[P]$. \emph{Delitelj} $D$ na krivulji $E$ je končna linearna kombinacija takih simbolov z celoštevilskimi koeficienti.
+$$D = \sum_{j}a_j[P_j], \ a_j \in \Z $$
+
+\end{definicija}
+
+Iz same definicije sledi, da je delitelj element Abelove grupe generirane s simboli $[P]$. Označimo to grupo z $\DIV{E}$.
+
+
+\begin{definicija}~
+Definirajmo \emph{vsoto} in \emph{stopnjo} delitelja kot
+$$sum(\sum_{j}a_j[P_j]) = \sum_ja_jP_j \ \in \E{\overline{K}},$$
+$$deg(\sum_{j}a_j[P_j]) = \sum_ja_j \ \in \Z.$$
+
+\end{definicija}
+
+
+\begin{definicija}~
+Naj bo $E$ eliptična krivulja. \emph{Funkcija} na $E$ je racionalna funkcija $$f(x,y) \in \ \overline{K},$$ ki je definirana za vsaj eno točko na $\E{\overline{K}}$. Funkcija torej zavzame vrednosti v $\overline{K} \cup {\infty}$.
+\end{definicija}
+
+\begin{opomba}
+Naj bo $E$ podana z enačbo $y^2 = x^3+Ax+B$. Racionalna funkcija $\frac{1}{y^2-x^3-Ax-B}$ torej ne predstavlja funkcije.
+
+\end{opomba}
+
+\begin{trditev}
+Obstaja taka funkcija $u_P$, imenovana \emph{uniformizer} v točki $P$ z lastnostjo $u_P(P) = 0$, ter lastnostjo, da se da vsaka funckijca $f(x,y)$ zapisati kot
+$$f = u^r_Pg, \ r\in \Z, g(P) \neq 0,\infty.$$
+Definirajmo \emph{red} funckije f v točki $P$ kot
+$$ord_P(f)=r.$$
+\end{trditev}
+
+\begin{primer}
+Naj bo $y^2 = x^3-x$ eliptična krivulja, naj bo $f(x,y) = x$. Izberimo $u(x,y) = y$. Očitno je $u(0,0) = 0$. Nad eliptično krivuljo velja 
+$$y^2 = x^3-x = x(x^2-1),$$ 
+od tod sledi $x = y^2\frac{1}{x^2-1}$ nad E.
+Prav tako velja $1/(x^2-1) \neq 0$ v točki $(0,0)$. Od tod sledi, da je 
+$$ord_{(0,0)}(x) = 2, ord_{(0,0)}(x/y) = 1.$$
+\end{primer}
+
+\begin{definicija}~
+Naj bo $f$ funkcija nad $E$, ki ni indentično enaka $0$. Definirajmo \emph{delitelja} funkcije $f$ kot,
+$$div(f) = \sum_{P\in \E{\overline{K}}} ord_P(f)[P] \in \DIV{E}.$$
+\end{definicija}
+
+
+\begin{trditev}
+\label{trditev 11.1}
+Naj bo $E$ eliptična krivulja in naj bo $f$ funkcija na $E$, ki ni identično enaka $0$. Potem veljajo naslednje trditve:
+\begin{itemize}
+
+\item $f$ ima le končno mnogo ničel in polov
+\item $deg(div(f))=0$
+\item Če $f$ nima ničel ali polov, potem je $f$ konstantna.
+\end{itemize}
+
+
+\end{trditev}
+
+\begin{izrek}
+Naj bo $E$ eliptična krivulja. Naj bo $D$ delitelj nad $E$ z $deg(D) = 0$. Potem obstaja taka funkcija $f$ na $E$ z lastnostjo
+$$div(f) = D$$
+natanko tedaj ko
+$$sum(D) = \infty.$$
+
+\end{izrek}
+
+\begin{proof}
+
+Pokažimo najprej, da se da $[P_1]+ [P_2]$ zapisati kot $[P_1+P_2] + [\infty]$ plus delitelj neke funkcije.
+Recimo, da imamo tri točke $P_1,P_2,P_3$ na neki krivulji $E$, ki ležijo na premici $ax+by+c = 0$.
+Naj bo $f(x,y) = ax+by+c$. Potem ima funkcija $f$ ničle v točkah $P_1,P_2,P_3$. Če $b$ ni enak $0$ potem ima funkcija po trditvi \ref{trditev 11.1} trojni pol v $\infty$.
+Velja torej $$div(ax+by+c) = [P_1]+[P_2]+[P_3]-3[\infty].$$
+Ker se nahajamo na Weierstrassovi krivulji, kjer točko $-P$ dobimo tako, da samo zamenjamo predznak y-koordinate, lahko za premico skozii točki $P_3 = (x_3,y_3)$, ter $-P_3=(x_3,-y_3)$ vzamemo $x-x_3=0$.
+Po  trditvi \ref{trditev 11.1} ponovno velja
+$$div(x-x_3) = [P_3]+[-P_3]-2[\infty].$$
+Od tod sledi
+$$div\left( \frac{ax+by+c}{x-x_3}\right) = div(ax+by+c) - div(x-x_3) =[P_1]+[P_2]-[-P_3]-[\infty].$$
+Ker na krivulji velja $P_1+P_2 = -P_3$ (to sledi iz načina kako na krivulji seštevamo točke), lahko zgornjo enačbo prepišemo v 
+$$[P_1]+[P_2] = [P_1+P_2]+[\infty]+div(g).$$ 
+
+
+Hitro se vidi, da velja
+$$sum(div(g))= P_1+P_2-(P_1+P_2)-\infty = \infty.$$
+Prav tako, pa se iz zgornje enačbe vidi, da velja $[P_1]+[P_2] = 2[\infty] + div(h)$, če velja $P_1+P_2 = \infty$. Zaradi tega je vsota vseh členov s pozitivnimi koeficienti v $D$ enaka nekemu simbolu $[P]$, večkratniku $[\infty]$, ter delitelju neke funkcije. Podobno velja tudi za člene z negativnimi koeficienti. Od tod sledi
+$$D = [P]-[Q]+n[\infty]+div(g_1).$$
+Zaradi tega, ker je $g_1$ kvocient produkta funkcij, ki sestavljajo $g$, velja tudi
+\newline $sum(div(g_1))= \infty$. Po trditvi \ref{trditev 11.1} velja $deg(div(g_1))=0$, ker funkcija ni konstantna. Imamo torej $$0 = deg(D) = 1-1+n+0=n.$$
+Od tod sledi
+$$D = [P]-[Q] + div(g_1).$$
+Prav tako velja
+$$sum(D) = P-Q+sum(div(g_1)) = P-Q.$$
+Predpostavimo sedaj, da velja $sum(D) = \infty$. Potem $P-Q = \infty$, kar pomeni da mora veljati $P=Q$ in $D = div(g_1)$. Če predpostavimo $D = div(f)$ za neko funkcijo f, potem
+$$[P]-[Q] = div(f/g_1).$$
+Od tod po lemi \ref{lema 11.3} sledi $P = Q$ in torej $sum(D) = \infty$.
+
+\end{proof}
+
+\begin{lema}
+\label{lema 11.3}
+
+Naj bosta $P,Q \in \E{\overline{K}}$, ter naj obstaja funkcija $h$ na $E$ za katero velja
+$$div(h)=[P]-[Q].$$
+Potem sledi $P=Q$.
+\end{lema}
+
+
 \cite{Washington2008}
 \cite{Silverman2009}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%VPRAŠANJA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%kako poslovenit uniformizer(poglavje delitelji)
+
+
 
 % Literatura:
 % Primer navajanja na http://www.fmf.uni-lj.si/storage/24240/LiteraturaM.pdf,
