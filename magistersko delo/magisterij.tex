@@ -758,6 +758,116 @@ za vse $S,S_1,S_2,T,T_1,T_2 \in E[n]$.
 
 \end{trditev}
 
+\begin{proof}
+%%%%%%%%%%%%
+%POMEMBNO
+%manka utemeljitev da je E[n] \subset E(K) in pa \mu_n \subset E(K)
+Naj bo $T \in E[n]$.
+Po izreku \ref{izrek 11.2} obstaja funkcija $f$, tako da velja
+\begin{equation}
+\label{enacba-Weil}
+div(f) = n[T]-n[\infty].
+\end{equation}
+To drži ker je $D = n[T]-n[\infty]$ delitelj za katerega velja $deg(D) = 0$. Prav tako pa velja $sum(D) = \infty$, ker se nahajamo v $E[n]$.
+Izberimo sedaj še točko $T' \in E[n^2]$, za katero velja $nT' = T$. Pokazati želimo, da obstaja funkcija $g$, tako da velja
+$$div(g) = \sum_{R \in E[n]}([T' + R]- [R]).$$
+Preden lahko uporabimo izrek \ref{izrek 11.2} moramo preveriti, da vse potrebne lastnosti držijo. Veljati mora torej $$sum( \sum_{R \in E[n]}([T' + R]- [R])) = \infty$$ in $$deg( \sum_{R \in E[n]}([T' + R]- [R])) = 0.$$
+Po izreku \ref{IzrekTor}, se da $E[n]$ zapisati kot $\mathbb{Z}_n \oplus \mathbb{Z}_n$. To pomeni, da $E[n]$ vsebuje $n^2$ različnih točk $R$. Velja torej
+$$sum(\sum_{R \in E[n]}([T' + R]- [R])) = \sum_{R \in E[n]} T' +R-R = \sum_{R \in E[n]} T' = n^2T' = nT = \infty.$$
+Podobno preverimo, še da velja $deg(\sum_{R \in E[n]}([T' + R]- [R])) = 0.$ Torej po izreku \ref{izrek 11.2} taka funkcija $g$ obstaja.
+Označimo z $f \circ n$ funkcijo, ki začne z neko točko jo pomnoži z $n$ in nato na njej uporabi $f$. Točke $P = T' + R$, kjer je $R\in E[n]$ so točke za katere velja $nP=T$. Iz \ref{enacba-Weil}
+sledi
+%zakaj je to res
+%????????????????????????????????????????????????????
+$$div(f \circ n) = n(\sum_{R \in E[n]}[T' + R]) - n(\sum_{R \in E[n]}[R]) = div(g^n).$$
+Iz definicije delitelja funckije sledi, da je funkcija $f \circ n$ oblike $g^n$ krat neka konstanta. Če za nov $f$ vzamemo ta $f$ pomnožen s primerno konstanto potem lahko predpostavimo, da velja
+$$f \circ n = g^n.$$
+Naj bo $S \in E[n]$, ter naj bo $P \in \E{\overline{K}}$. Potem velja
+$$g(P+S)^n = f(n(P+S)) = f(nP) = g(P)^n.$$
+Zaradi tega velja $g(P+S)/g(P) \in \mu_n$.
+Tako lahko sedaj definiramo Weilovo parjenje kot
+$$e_n(S,T) = \frac{g(P+S)}{g(P)}.$$
+Ta definicija je dobra, ker je $g$ zaradi delitelja določen do skalarja natančno, zaradi tega pa je definicija neodvisna od izbire $g$. Prav tako pa je definicija noedvisna od izbire $P$, a je obrazložitev bolj zahtevna in je ne bomo navedli.
+
+Sedaj, ko smo uspeli definirati Weilovo parjenje moramo preveriti, da zanj veljajo lastnosti $1$-$6$.
+\begin{enumerate}
+\item Ker je definicija neodvisna od izbire točke $P$ lahko uporabimo $P,P+S_1$.
+\begin{align}
+e_n(S_1,T)e_n(S_2,T) &{}= \frac{g(P+S_1)}{g(P)} \frac{g(P+S_1+S_2)}{g(P+S_1)} \nonumber \\
+&{} = \frac{g(P+S_1+S_2)}{g(P)} \nonumber \\
+&{} = e_n(S_1+S_2,T). \nonumber
+\end{align}
+Pokazati moramo še
+$$e_n(S,T_1)e_n(S,T_2) = e_n(S,T_1+T_2).$$
+Dokaz linearnosti v drugi spremenljivki pa je malce težji kot dokaz za prvo spremenljivko.
+Predpostavimo da $T_1,T_2,T_3 \in E[n]$ z lastnostjo $T_1 +T_2 = T_3.$ Označimo z $f_i,g_i$ funkcije ki spdajo k definicijam $e_n(S,T_i)$.
+Po izreku \ref{izrek 11.2} obstaja funkcija $h$, za katero velja
+$$div(h) = [T_3]-[T_1]-[T_2] + [\infty].$$
+
+Enačba \ref{enacba-Weil} nam da
+$$div \left(  \frac{f_3}{f_1f_2}\right) = n div(h) = div(h^n).$$
+Zato obstaja konstanta $c \in \overline{K}^{\times}$, tako da velja
+$$f_3 = cf_1f_2h^n.$$
+Od tod pa sledi
+$$g_3 = c^{1/n}(g_1)(g_2)(h \circ n)$$.
+
+To pa nas končno pripelje do
+\begin{align}
+e_n(S,T_1+T_2) &{}= \frac{g_3(P+S)}{g_3(P)} = \frac{g_1(P+S)}{g_1(P)} \frac{g_2(P+S)}{g_2(P)} \frac{h(n(P+S))}{h(nP)} \nonumber \\
+&{} = e_n(S,T_1)e_n(S,T_2). \nonumber
+\end{align}
+
+Tu smo upoštevali $nS = \infty$, od koder sledi $h(n(P+S)) = h(nP)$.
+
+\item Predpostavimo, da $T \in E[n]$, tak da velja $e_n(S,T)=1$ za vse $S \in E[n]$. To pomeni, da je $g(P+S) = g(P)$ za vse $P$ in $S \in E[n]$. Po trditvi \ref{manka}%manka%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+obstaja funkcija $h$, tako da velja $g = h \circ n$. Od tod sledi 
+$$(h \circ n) ^n = g^n = f \circ n.$$
+Ker je množenje z $n$ surjektivno na $E(\overline{K})$, od tod sledi $h^n = f$. %%%%%%%%%%%%%%%%ZAKAJ TO RES
+To pa pomeni
+$$ndiv(h) = div(f) = n[T]-n[\infty],$$
+kar pa pomeni, da je $div(h) = [T] - [\infty]$. Po izreku \ref{izrek 11.2} pa od tod sledi $T = \infty$. S tem smo, dokazali eno polovico točke $2$, druga polovica pa avtomatično sledi iz tega ter uporabe točke $4$.
+
+\item Označimo z $\tau_{jT}$ točko $jT$. V tem primeru $f \circ \tau_{jT}$ označuje funkcijo \newline $P \mapsto f(P+jT)$. Delitelj te funkcije je torej $n[T-jT]-n[-jT]$. Zaradi tega velja
+
+\begin{align}
+&{}div(\prod_{j=0}^{n-1}f\circ \tau_{jT}) = \sum_{j=0}^{n-1}(n[(1-j)T]-n[-jT]) \nonumber \\
+&{} = n[T] - n[-T] + n[-T] - n[-2T]+ \dots + n[(-n+2)T]-n[(-n+1)T]  \nonumber \\
+&{} = n[T]-n[(-n+1)T] = n[T]-n[-nT+T] = n[T] - n[\infty +T] \nonumber \\
+&{} = n[T]-n[T] = 0 \nonumber
+\end{align}
+
+To pomeni, da je funkcija $\prod_{j=0}^{n-1}f\circ \tau_{jT}$ konstantna. N-ta potenca funkcije $\prod_{j=0}^{n-1}g\circ \tau_{jT'}$ pa je ravno produkt $f$ komponirane z $n$. 
+\begin{align}
+(\prod_{j=0}^{n-1}g\circ \tau_{jT'})^n &{}= \prod_{j=0}^{n-1}f \circ n \circ \tau_{jT'} \nonumber \\
+&{}= \prod_{j=0}^{n-1}f \circ \tau_{jT}  \nonumber %A je res brez \circ n
+\end{align}
+
+To pa tudi pomeni, da je funkcija $\prod_{j=0}^{n-1}g\circ \tau_{jT'}$ konstantna.
+To pa pomeni, da lahko namesto točke $P$ vanjo vstavimo točko $P+T'$ in dobimo
+
+$$\prod_{j=0}^{n-1}g( P + T'+jT') = \prod_{j=0}^{n-1}g(P+jT') .$$
+Ko pokrajšamo stavri na levi in desni strani, dobimo
+$$g(P+nT') = g(P).$$
+Ker pa velja $nT' = T$, to ravno pomeni
+$$e_n(T,T) = \frac{g(P+T)}{g(P)} = 1.$$
+
+
+\item Iz točke $1$ in $3$ sledi
+
+\begin{align}
+1 &{}= e_n(S+T,S+T) = e_n(S,S)e_n(S,T)e_n(T,S)e_n(T,T) \nonumber \\
+ &{} = e_n(S,T)e_n(T,S). \nonumber
+\end{align}
+
+\item MANKA
+
+\item MANKA
+
+To pa pomeni $e_n(T,S) = e_n(S,T)^{-1}$.
+\end{enumerate}
+
+\end{proof}
+
 
 \begin{posledica}
 \label{PosledicaTrdParj}
@@ -820,6 +930,44 @@ Nato postopaj po naslednjih korakih.
 MOV napad deluje hitreje, kot če hočemo rešiti porblem diskretnega algoritma direktno nad krivuljo, če velja 
 $$k > log^2(p),$$
 kjer je krivulja $E(\F_p)$ in MOV pretvori to grupo v $\F^{\times}_{p^k}$.
+
+Preden pa lahko podamo podrobnejši algoritem, moramo razrešiti še nekaj vprašanj. Kako izračunamo red točke na nek ekonomičen način? Trenutno je najhitrejši algoritem za izračun reda točke Schoof–Elkies–Atkinsonov algoritem (SEA). Tu pa si bomo pogledali malo bolj preprost algoritem, ki pa vseeno predstavlja veliko izboljšanje glede na naiven pristop seštevanja točke same s seboj.
+\subsection{Mali korak, Velik korak}
+Naj bo $P \in E(\F{q})$. Radi bi izračunali red točke $P$. Iščemo torej tako število $k$, da bo veljalo $kP = \infty$. Algoritem Mali korak, Velik korak lahko izračuna red točke v približno $4q^{\frac{1}{4}}$ korakih. Koraki algoritma so sledeči:
+
+\begin{algorithm}[H]
+\caption[MV]{Mali korak, Velik korak}
+\label{alg:babyGiant}
+\begin{enumerate}
+\item Izračunaj $Q = (q+1)P$.
+\item Izberi število $m$ za katero velja $m >q^{\frac{1}{4}}$. Za $j = 0,1,\ldots,m$ izračunaj in shrani $jP$.
+\item Za $k = -m,-m+1,\ldots,m-1,m$ izračunaj točke $Q +k(2mP)$. V primeru, da se kakšna od teh točk ujema z $\pm jP$ prekini računanje in si zapomni ustrezna $k,j$.
+\item Izračunaj $(q+1+2mk \mp j)P$ in poglej v katerem primeru je to enako $\infty$. V tem primeru naj bo $M = (q+1+2mk \mp j)$.
+\item Faktoriziraj $M$. Označimo faktorje števila $M$ z $p_1,\ldots,p_r$.
+\item Izračunaj $(M/p_i)P$, za $i=1,\ldots r$. Če je $(M/p_i)P = \infty$ za nek $i$, potem zamenjaj $M$ z $M/p_i$ in pojdi nazaj na korak $(5)$. V nasprotnem primeru je $M$ red točke $P$.
+\end{enumerate}
+
+\end{algorithm}
+
+\begin{opomba}
+
+Algoritem \ref{alg:babyGiant} lahko preoblikujemo do te mere, da namesto reda točke izračunamo število točk na krivulji. Vse kar moramo narediti, je ponavljati korake $(1)$-$(6)$ za naključno izbrane točke $P \in E(\F{q})$. Ustavimo se ko najmanjši skupni večkratnik redov točk, deli le eno število $N$ v območju $q+1-2\sqrt{q} \leq N \leq q+q+2\sqrt{q}$. To število $N$ je potem število točk na dani krivulji. Pri tem postopku se upremo na Hassejev izrek o številu točk na eliptični krivulji.
+
+\end{opomba}
+
+Tu se sedaj pojavi še vprašanje zakaj ta algoritem deluje. Odgovor na to vprašanje pa nam da naslednja lema.
+
+\begin{lema}
+
+Naj bo $G$ aditivna grupa in naj bo $g\in G$. Denimo da velja $Mg = 0$ za nek $M \in \N$. Označimo z $p_1,\ldots,p_r$ različna prešttevila, ki delijo $M$. Če velja $(M/p_i)g \neq = 0$ za vse $i$, potem je $M$ red $g$.
+
+\end{lema}
+
+\begin{proof}
+
+Naj bo $k$ red $g\in G$. Ker velja $Mg = 0$ vemo, da $k|M$. Denimo, da $k \neq M$. Pokazati moramo, da obstaja praštevilo $p_i$, tako da $(M/p_i)g = 0$. Naj bo $p_i$ praštevilo, ki deli $M/k$. Tako število obstaja, ker $M \neq k$. Potem velja $p_ik|M$, to pa pomeni da $k|(M/p_i)$. Ker pa je $k$ red elementa $g$, to pomeni $(M/p_i)g = 0$.
+
+\end{proof}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -889,6 +1037,7 @@ Naj bo $E$ eliptična krivulja in naj bo $f$ funkcija na $E$, ki ni identično e
 \end{trditev}
 
 \begin{izrek}
+\label{izrek 11.2}
 Naj bo $E$ eliptična krivulja. Naj bo $D$ delitelj nad $E$ z $deg(D) = 0$. Potem obstaja taka funkcija $f$ na $E$ z lastnostjo
 $$div(f) = D$$
 natanko tedaj ko
