@@ -72,10 +72,23 @@ def BabyGiant(P):
     else:
         M = st2
 
-    print(M)
-    print("ni se dokoncan")
     #ni se dokoncan
+
+    odg = pomozna(M,P)
+
+    return odg
     
+
+
+def pomozna(M,P):
+    faktorji = Factor(M)
+    for el in faktorji:
+        if (M//el)*P == INFPoint:
+            rez = pomozna(M//el,P)
+            return rez
+        else:
+            return M
         
     
-BabyGiant(Point(-10,21,557,2,3))
+test = BabyGiant(Point(-10,21,557,2,3))
+print(test)

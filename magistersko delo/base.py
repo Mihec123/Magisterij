@@ -370,6 +370,37 @@ INFPoint = Point(None,None,None,INF,INF)
 
 
 
+
+def Factor(n):
+    faktorji = []
+
+    tmp = NumberMod(n,None).isPrime()
+    if tmp:
+        faktorji.append(n)
+        return faktorji
+    else:
+        tmp = n
+        while tmp %2 == 0:
+            faktorji.append(2)
+            tmp = tmp//2
+        i = 3
+        while i*i < tmp:
+
+            while tmp % i == 0:
+                faktorji.append(i)
+                tmp = tmp//i
+
+            i+=2
+
+        if tmp != 0:
+            faktorji.append(tmp)
+
+    return faktorji
+            
+        
+
+
+
 def CubicCurveSum(P,Q,a):
     """Sums points P and Q on the cubic curve.
     P=(x1,y1)...point on the curve x1,y1 are elements of calss NumberMod
