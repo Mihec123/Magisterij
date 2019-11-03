@@ -4,49 +4,23 @@ import numpy as np
 from base import *
 
 
-##def BabyGiant(P,q,a):
-##    (x1,y1) = P
-##    modul = x1.modul
-##    unit = (NumberMod(0,modul),NumberMod(1,modul))
-##    Q = CubicCurveMulti(P,q+1,a)
-##    m = int(q**1/4)+1
-##    seznam = [None]*(m+1)
-##    seznam[0] = unit
-##    for j in range(1,m+1):
-##        seznam[j] = CubicCurveMulti(P,j,a)
-##
-##    print(seznam)
-##
-##    mP = CubicCurveMulti(P,2*m,a)
-##    for k in range(-m,m+1):
-##        tmp = CubicCurveMulti(mP,k,a)
-##        tmp1 = CubicCurveSum(Q,tmp,a)
-##        (x2,y2) = tmp1
-##        tmp2 = (-x2,-y2)
-##        if (tmp1 in seznam):
-##            j = seznam.index(tmp1)
-##            print(k)
-##            break
-##        elif (tmp2 in seznam):
-##            j = seznam.index(tmp2)
-##            print(k)
-##            break
-##    print(k)
-##    stevilo1 = q+1+2*m*k-j
-##    stevilo2 = q+1+2*m*k+j
-##    P1 = CubicCurveMulti(P,stevilo1,a)
-##    P2 = CubicCurveMulti(P,stevilo2,a)
-##    if P1 == unit:
-##        M = stevilo1
-##    else:
-##        M = stevilo2
-##    print(P1)
-##    print(P2)
-##    print(M)
-##
-##    faktorji = [M] #ni ok
     
 def BabyGiant(P):
+    """
+    Opis:
+       Funkcija BabyGiant je implementacija algoritma
+       Baby step, Giant step za iskanje reda tocke P
+
+     Definicija:
+       BabyGiant(P)
+
+     Vhodni podatki:
+       P...razred Point, ki predstavljatocko na
+           elipticni krivulji
+
+     Izhodni  podatek:
+       int k, ki predstavlja red tocke P (kP = $\infty$)
+    """
     q = P.mod
     Q = (q+1)*P
     m = int(q**(1/4))+1
@@ -72,8 +46,6 @@ def BabyGiant(P):
     else:
         M = st2
 
-    #ni se dokoncan
-
     odg = pomozna(M,P)
 
     return odg
@@ -81,6 +53,23 @@ def BabyGiant(P):
 
 
 def pomozna(M,P):
+    """
+    Opis:
+       Funkcija pomozna predstavlja rekurzivni del funkcije
+       BabyGiant
+
+     Definicija:
+       pomozna(M,P)
+
+     Vhodni podatki:
+       M...stevilo, ki ga testiramo ce predstavlja red
+           tocke P
+       P...razred Point, ki predstavljatocko na
+           elipticni krivulji
+
+     Izhodni  podatek:
+       int k, ki predstavlja red tocke P (kP = $\infty$)
+    """
     faktorji = Factor(M)
     for el in faktorji:
         if (M//el)*P == INFPoint:
@@ -88,7 +77,16 @@ def pomozna(M,P):
             return rez
         else:
             return M
-        
+
+
+##def MOV(E,m,N):
+##    E1 = ElipticCurve(E.a,E.b,E.mod**m)
+##    while True:
+##        T = E1.rand()
+##        red = BabyGiant(T)
+##        d = gcd(red,N)
+##        T1 = (M//d)*T
+    
     
 test = BabyGiant(Point(-10,21,557,2,3))
 print(test)

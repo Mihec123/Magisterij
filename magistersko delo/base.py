@@ -123,7 +123,22 @@ class NumberMod:
             return self.num >= (other.modul + other.num)
         else:
             return self.num >= other.num
-        
+
+    def __pow__(self,b):
+        if not isinstance(b,int):
+            raise Exception('power must be an integer')
+        else:
+            if b == 0:
+                return NumberMod(1,self.modul)
+            elif b == 1:
+                return NumberMod(self.num,self.modul)
+            else:
+                if b%2 == 0:
+                    return NumberMod(self.num*self.num,self.modul)**(b//2)
+                else:
+                    return NumberMod(self.num,self.modul)*(NumberMod(self.num,self.modul)**(b-1))
+
+    
     def __str__(self):
         return str(self.num)
     
@@ -259,12 +274,30 @@ def gcd(a,b):
 
 
 class ElipticCurve:
+    """
+    Opis:
+       Razred elipticnih krivulj v Weierstrassovi obliki
+       modulo p
+       y^2 = x^3 + ax+b mod p
+
+     Definicija:
+       ElipticCurve(a,b,mod)
+
+     Vhodni podatki:
+       a...parameter a v enacbi
+       b...parameter b v enacbi
+       mod...modul p po katerem delamo
+
+     Izhodni  podatek:
+       Razred elipticne krivulje
+    """
 
     def __init__(self, a, b, modulo):
         self.a = a
         self.b = b
         self.mod = modulo
     def __str__(self):
+        """Pri izpisu print nam vrne krivuljo v lepi obliki"""
         if self.a > 0 and self.b > 0:
             return "y^2 = x^3 + {0}x + {1} mod {2}".format(self.a,self.b,self.mod)
         elif self.a > 0 and self.b <0:
@@ -283,31 +316,115 @@ class ElipticCurve:
             return "y^2 = x^3 - {0}x mod {1}".format(abs(self.a),self.mod)
         elif self.a < 0 and self.b <0:
             return "y^2 = x^3 - {0}x - {1} mod {2}".format(abs(self.a),abs(self.b),self.mod)
-            
+
+
+
+    def rand(self):
+        """
+        Opis:
+           Funkcija rand generira nakljucno tocko na
+           elipticni krivulji E
+           y^2 = x^3 + ax+b mod p
+
+         Definicija:
+           E.rand()
+
+         Vhodni podatki:
+           ni vhodnih podatkov
+
+         Izhodni  podatek:
+           Razred Point, ki predstavlja tocko na
+           elipticni krivulji
+        """
+        najdl = False
+        while not najdl:
+            x = random.randint(0,self.mod)
+            y2 = NumberMod(x,self.mod)**3 + NumberMod(self.a*x,self.mod) + NumberMod(self.b,self.mod)
+            y2 = y2.num
+            for i in range(self.mod+1):         
+                y = (i**2) %self.mod
+                if y == y2:
+                    najdl = True
+                    break
+        return Point(self.a,self.b,self.mod,x,i)
+
+    def isOn(self,P):
+        """
+        Opis:
+           Funkcija isOn preveri ali tocka P res
+           lezi na elipticni krivulji E
+
+         Definicija:
+           E.isOn(P)
+
+         Vhodni podatki:
+           P...razred Point, ki predstavlja tocko
+               na elipticni krivulji
+
+         Izhodni  podatek:
+           True/False
+        """
+        
+        if P.a != self.a or P.b != self.b or P.mod != self.mod:
+            return False
+        else:
+            x = NumberMod(P.x,self.mod)**3 + NumberMod(self.a*P.x,self.mod) + NumberMod(self.b,self.mod)
+            y = (P.y**2) % self.mod
+            return x.num==y
+
+           
 INF = "inf"
 
 class Point(ElipticCurve):
+    """
+    Opis:
+       Razred tock na elipticni krivulji, ki je
+       podrazred razdreda ElipticCurve.
+
+       Tocka $\infty$ je podana kot
+       INFPoint = Point(None,None,None,INF,INF),
+       kjer je spremenljivka INF = "inf"
+
+     Definicija:
+       Point(a,b,mod,x,y)
+
+     Vhodni podatki:
+       a...parameter a v enacbi
+       b...parameter b v enacbi
+       mod...modul p po katerem delamo
+       x...x-koordinate tocke
+       y...y-koordinata tocke
+
+     Izhodni  podatek:
+       Razred tocke na elipticni krivulji
+    """
 
     def __init__(self, a,b, mod, x, y):
         super().__init__(a,b, mod)
         self.x = x
         self.y = y
         if (self.x == INF or self.y == INF) and self.y != self.x:
+            #preverimo ali je tocka v neskoncnosti, v tem primeru zahtevamo,
+            #da sta obe koordianti INF
             raise Exception('Point is not a proper infinity')
 
     def __str__(self):
+        """Za lepsi izpis tocke po klicu print"""
         if self.x != INF:
             return "({0},{1}) mod {2}".format(self.x,self.y,self.mod)
         else:
             return u"\u221e"
 
     def __repr__(self):
+        """za lepsi izpis tocke po klicu return"""
         if self.x != INF:
             return "({0},{1}) mod {2}".format(self.x,self.y,self.mod)
         else:
             return u"\u221e"
 
     def __add__(self,Q):
+        """Algoritem za sestevanje tock nad isto elipticno
+        krivuljo."""
         infty = False
         if self.x == INF or Q.x == INF:
             infty = True
@@ -341,6 +458,8 @@ class Point(ElipticCurve):
             return Point(None,None,None,INF,INF)
 
     def __rmul__(self,num):
+        """Funkcija predstavlja mnozenje stevila z tocko
+        npr. 5P = P+P+P+P+P"""
         if not isinstance(num,int):
             raise Exception('Can only multiply with an int')
 
@@ -359,6 +478,9 @@ class Point(ElipticCurve):
                 return (self+(num-1)*self)
 
     def __eq__(self, Q):
+        """Dve tocki sta enaki, ce lezita na
+        isti krivulji in imata iste koordiante
+        ali pa predstavljata tocko v neskoncnosti"""
         if self.x == INF and Q.x == INF:
             return True
         elif self.a == Q.a and self.b == Q.b and self.x == Q.x and self.y == Q.y and self.mod == Q.mod:
@@ -372,6 +494,20 @@ INFPoint = Point(None,None,None,INF,INF)
 
 
 def Factor(n):
+    """
+    Opis:
+       Factor je enostavna neucinkovita funkcija
+       za iskanje fakotrojev stevila
+
+     Definicija:
+       Factor(n)
+
+     Vhodni podatki:
+       n...stevilo, ki ga hocemo faktorizirati
+
+     Izhodni  podatek:
+       Seznam faktorjev stevila n
+    """
     faktorji = []
 
     tmp = NumberMod(n,None).isPrime()
