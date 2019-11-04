@@ -457,6 +457,15 @@ class Point(ElipticCurve):
         else:
             return Point(None,None,None,INF,INF)
 
+    def __neg__(self):
+        return Point(self.a,self.b,self.mod,self.x,-self.y % self.mod)
+
+
+    def __sub__(self,Q):
+        return self + (-Q)
+
+    
+
     def __rmul__(self,num):
         """Funkcija predstavlja mnozenje stevila z tocko
         npr. 5P = P+P+P+P+P"""
@@ -464,7 +473,7 @@ class Point(ElipticCurve):
             raise Exception('Can only multiply with an int')
 
         if num < 0:
-            return (abs(num)*Point(self.a,self.b,self.mod,-self.x % self.mod,-self.y % self.mod))
+            return -(abs(num)*self)
 
         elif num == 0:
             return Point(None,None,None,INF,INF)
@@ -532,70 +541,3 @@ def Factor(n):
             faktorji.append(tmp)
 
     return faktorji
-            
-        
-
-
-
-def CubicCurveSum(P,Q,a):
-    """Sums points P and Q on the cubic curve.
-    P=(x1,y1)...point on the curve x1,y1 are elements of calss NumberMod
-    Q=(x2,y2)...point on the curve x2,y2 are elements of calss NumberMod
-    a...parameter which determines the cubic curve"""
-    (x1,y1) = P
-    (x2,y2) = Q
-    modul = x1.modul
-    unit = (NumberMod(0,modul),NumberMod(1,modul))
-    a1 = NumberMod(a,modul)
-    x12 = x1-x2
-    d = gcd(x12.num,modul)
-    if d == 1:
-        lam = (y1-y2)/(x12)
-        x3 = (lam.pow(2))-x1-x2
-        y3 = lam*(x1-x3)-y1
-        R = (x3,y3)
-        return R
-    elif d == modul:
-        y12 = y1+y2
-        d1 = gcd(y12.num,modul)
-        if d1 == 1:
-            lam = (NumberMod(3,modul)*(x1.pow(2)) + a1)/y12
-            x3 = lam.pow(2) - x1-x2
-            y3 = lam*(x1-x3)-y1
-            R = (x3,y3)
-            return R
-        elif d1 == modul:
-            return unit
-        else:
-            return d1
-    else:
-        return d
-
-def CubicCurveMulti(P,number,a):
-    """Cubic curve multiplication by sumation
-    P=(x1,y1)...point on the curve x1,y1 are elements of calss NumberMod
-    number... number of times we sum the point P
-    a... parameter which determines the curve"""
-    k = 0
-    (x1,y1) = P
-    modul = x1.modul
-    unit = (NumberMod(0,modul),NumberMod(1,modul))
-    P2 = P
-    znak = 1
-    if number == 0:
-        return unit
-    if number < 0:
-        number = -number
-        znak = -1
-    while k < number-1:
-        try:
-            P1 = CubicCurveSum(P,P2,a)
-            P2 = P1
-            k += 1
-        except TypeError:
-            return P1
-    if znak == 1:
-        return P2
-    else:
-        (x2,y2) = P2
-        return (-x2,-y2)
