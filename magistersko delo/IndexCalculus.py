@@ -124,7 +124,8 @@ def FindSystemMod(mod,g,base):
                     VSE = True
             
 
-        if np.prod(mamoSPR) != 0 and len(A) >= kratnik*len(base):
+        if (np.prod(mamoSPR) != 0 and
+            len(A) >= kratnik*len(base)):
             #prekinemo iskanje ce imamo dovolj enacb
             break
 
@@ -154,8 +155,8 @@ Opis:
 
        mod = 1216
 
-       posamezno vrstico pretvori tako, da namesto x2 = 1  dobimo
-       vrstico x2 + mod*X1(dodatna spremenljivka) = 1
+       posamezno vrstico pretvori tako, da namesto x2 = 1
+       dobimo vrstico x2 + mod*X1(dodatna spremenljivka) = 1
        (za vsako vrstico uvedemo novo dodatno spremenljivko)
 
  Definicija:

@@ -154,7 +154,7 @@ class NumberMod:
             a = self.num + n
         else:
             a = self.num
-        if n % a == 0:
+        if n % a == 0 and a != 1:
             raise Exception('inverse does not exist')
         else:
             return NumberMod(razEvk(a,n)[1],n)      
@@ -338,7 +338,7 @@ class ElipticCurve:
         """
         najdl = False
         while not najdl:
-            x = random.randint(0,self.mod)
+            x = random.randint(0,self.mod-1)
             y2 = NumberMod(x,self.mod)**3 + NumberMod(self.a*x,self.mod) + NumberMod(self.b,self.mod)
             y2 = y2.num
             for i in range(self.mod+1):         
@@ -458,7 +458,10 @@ class Point(ElipticCurve):
             return Point(None,None,None,INF,INF)
 
     def __neg__(self):
-        return Point(self.a,self.b,self.mod,self.x,-self.y % self.mod)
+        if self == INFPoint:
+            return INFPoint
+        else:
+            return Point(self.a,self.b,self.mod,self.x,-self.y % self.mod)
 
 
     def __sub__(self,Q):
@@ -541,3 +544,4 @@ def Factor(n):
             faktorji.append(tmp)
 
     return faktorji
+a = Point(0,1,529,253,1)

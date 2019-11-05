@@ -77,7 +77,8 @@
 
 % DRUGI TVOJI PAKETI:
 % tukaj
- \usepackage{algorithmicx}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
 \usepackage{listings}
 
 
@@ -883,6 +884,94 @@ $$e_n(S,dT_2)= e_n(T_1,dT_2)^ae_n(T_2,dT_2)^b = 1. $$
 Ker to valja za vsak $S$ po točki dva trditve \ref{trd-WeilPar} sledi, da je $dT_2 = \infty$. To pa je mogoče le če $n|d$, kar pomeni da je $n \leq d$.
 \end{proof}
 
+\subsection{Učinkovit algoritem za izračun Weilovega parjenja}
+
+Leta $1986$ je Vicor Miller napisal članek o tem, kako učinkovito izračunati Weilovo parjenje. Članek ni bil nikoli objavljen.
+
+\begin{izrek}
+\label{izrek:Miller}
+
+Naj bo $E$ eliptična krivulja in naj bosta $P=(x_P,y_P), Q = (x_Q,y_Q)$ ne ničelni točki na $E$.
+\begin{enumerate}
+\item Označimo z $\lambda$ naklon premice, ki povezuje točki $P,Q$. V primeru, da sta ti točki enaki, $\lambda$ predstavlja naklon tangente v točki. Če je premica navpična ($x_P = x_Q$), potem privzamemo, da je $\lambda = \infty$. Definirajmo funkcijo $g_{P,Q}$ na sledeči način:
+\[ g_{P,Q} =
+\begin{cases}
+\frac{y-y_P-\lambda(x-x_P)}{x+x_P+x_Q-\lambda^2} & \quad \text{če } \lambda \neq \infty ,\\
+x-x_P & \quad \text{sicer} .\\
+\end{cases}
+\]
+
+Potem velja 
+$$div(g_{P,Q}) = [P] + [Q] - [P+Q] - [\infty].$$
+
+
+\item (Millerjev algoritem) Naj bo $m \geq 1$. Zapišimo $m$ v binarnem kot
+$$m = m_0+m_1\cdot 2 + m_2\cdot 2^2 + \ldots + m_{n-1}\cdot 2^{n-},$$
+kjer so $m_i \in \{ 0,1 \}$ in $m_{n-1} \neq 0$. Potem algoritem \ref{alg:Miller} vrne
+funckijo $f_P$, za katero velja
+$$div(f_P) = m[P]-[mP]-(m-1)[\infty].$$ 
+
+
+\end{enumerate}
+
+
+\end{izrek}
+
+\begin{algorithm}[H]
+\caption[Miller]{Millerjev algoritem}
+\label{alg:Miller}
+
+\begin{algorithmic}
+\State T = P,f = 1
+\For {$i = n-2:0$}
+	\State $f = f^2 \cdot g_{T,T}$
+	\State $T = 2T$
+	\If {$m_i = 1$}
+		\State $f = f \cdot g_{T,P}$
+		\State $T=T+P$
+	\EndIf
+	
+\EndFor
+
+\end{algorithmic}
+\end{algorithm}
+
+\begin{proof}
+\begin{enumerate}
+\item Predpostavimo najprej, da $\lambda \neq \infty$, ter naj $y = \lambda x + \mu$ predstavlja premico skozi $P,Q$ (ali tangento v primeru, da je $P=Q$). Taka premica seka krivuljo $E$ v treh točkah $P,Q,-P-Q$. To sledi iz sestave grupe nad $E$. Za to premico torej velja
+$$div(y-\lambda x - \mu) = [P] + [Q] + [-P-Q] - 3[\infty].$$
+Navpične premice pa sekajo $E$ neki točki $P$ in $-P$. Torej velja
+$$div(x-x_{P+Q}) = [P+Q] + [-P-Q] - 2[\infty].$$
+Od tod sledi, da ima funkcija
+$$g_{P,Q} =\frac{y-\lambda x - \mu}{x-x_{P+Q}}$$
+željeni delitelj
+$$div(g_{P,Q}) = [P] + [Q] - [P+Q] - [\infty].$$
+Z uporabo formule za seštevanje točk sedaj lahko to funkcijo problikujemo v željeno obliko
+$$g_{P,Q} = \frac{y-y_P-\lambda(x-x_P)}{x+x_P+x_Q-\lambda^2} .$$
+
+V primeru da velja $\lambda = \infty$, potem velja $P+Q = \infty$. V tem primeru hočemo imeti delitelj oblike $div(g_{P,Q}) = [P] + [-P] - 2[\infty]$. Tak delitelj pa ima ravno funkcija $x-x_P$.
+
+\item Dokažemo s pomočjo indukcije, pri čemer upoštevamo $div(g_{T,T}) = 2[T]-[2T]-[\infty]$, $div(g_{T,P}) = [T]+[P]-[T+P]-[\infty]$.
+Preverimo, na primeru $m = 3$. binarni zapis $m$ je torej $11$.Sledimo korakom algoritma \ref{alg:Miller}.
+$$f = f^2 \cdot g_{T,T} = g_{P,P}$$
+Ker je v tem primeru $m_0 = 1$ moramo $f$ popraviti v $f = f \cdot g_{T,P}$. To nam da
+$$f = g_{P,P} \cdot g_{2T,P}.$$
+Če uporabimo sedaj zgornji zvezi dobimo
+$$div(f) = 2[P] - [2P] - [\infty] + [2P] + [P] - [2P+P] - [\infty] = 3[P] - [3P]-2[\infty].$$
+To pa je ravno to kar želimo.
+
+\end{enumerate}
+
+\end{proof}
+
+S pomočjo izreka $\ref{izrek:Miller}$ lahko sedaj izračunamo Weilovo parjenje $e_m(P,Q)$ kot
+$$e_m(P,Q) = (f_P(Q+S)/f_P(S)) / (f_Q(P-S)/f_Q(-S)) .$$
+Tu moramo za točko $S$ izbrati $S \notin \{ \infty,P,-Q,P-Q\}$.
+
+\subsection{Implementacija Millerjevega algoritma}
+
+\lstinputlisting[language=Python]{WeilPairing.py}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %MOV
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1087,6 +1176,8 @@ Potem sledi $P=Q$.
 
 \cite{Washington2008}
 \cite{Silverman2009}
+\cite{Miller}
+\cite{Jeffrey2008}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%VPRAŠANJA

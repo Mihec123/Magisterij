@@ -1,83 +1,4 @@
-import math
-import random
-import numpy as np
 from base import *
-
-
-    
-def BabyGiant(P):
-    """
-    Opis:
-       Funkcija BabyGiant je implementacija algoritma
-       Baby step, Giant step za iskanje reda tocke P
-
-     Definicija:
-       BabyGiant(P)
-
-     Vhodni podatki:
-       P...razred Point, ki predstavlja tocko na
-           elipticni krivulji
-
-     Izhodni  podatek:
-       int k, ki predstavlja red tocke P (kP = $\infty$)
-    """
-    q = P.mod
-    Q = (q+1)*P
-    m = int(q**(1/4))+1
-    seznam = []
-
-    for j in range(m+1):
-        seznam.append(j*P)
-
-
-    tmp = (2*m)*P
-    for k in range(-m,m+1):
-        T = Q + k*tmp
-        if T in seznam:
-            j = seznam.index(T)
-            break
-        elif -1*T in seznam:
-            j = seznam.index(-1*T)
-            break
-    st1 = q+1+2*m*k -j
-    st2 = q+1+2*m*k +j
-    print(st1,st2)
-    if st1*P == INFPoint:      
-        M = st1
-    else:
-        M = st2
-
-    odg = pomozna(M,P)
-
-    return odg
-    
-
-
-def pomozna(M,P):
-    """
-    Opis:
-       Funkcija pomozna predstavlja rekurzivni del funkcije
-       BabyGiant
-
-     Definicija:
-       pomozna(M,P)
-
-     Vhodni podatki:
-       M...stevilo, ki ga testiramo ce predstavlja red
-           tocke P
-       P...razred Point, ki predstavlja tocko na
-           elipticni krivulji
-
-     Izhodni  podatek:
-       int k, ki predstavlja red tocke P (kP = $\infty$)
-    """
-    faktorji = Factor(M)
-    for el in faktorji:
-        if (M//el)*P == INFPoint:
-            rez = pomozna(M//el,P)
-            return rez
-        else:
-            return M
 
 
 def naklon(P,Q):
@@ -116,8 +37,8 @@ def g(P,Q,X):
     """
     Opis:
        Funkcija g del funkcije potrebne za izracun Weilovega
-       parjenja, s pomocjo Millerjevega algoritma. Funkcija izracuna
-       funkcijo $g_{P,Q}(X)$
+       parjenja, s pomocjo Millerjevega algoritma.
+       Funkcija izracuna funkcijo $g_{P,Q}(X)$
 
      Definicija:
        g(P,Q,X)
@@ -140,18 +61,20 @@ def g(P,Q,X):
         #lambda je naklon premice
         lam = naklon(P,Q)
         st = (X.y-P.y-lam*(X.x-P.x)) % P.mod
-        im = NumberMod(X.x+P.x+Q.x-lam**2,P.mod).inverse().num
+        im = NumberMod(X.x+P.x+Q.x-lam**2,P.mod)
+        im = im.inverse().num
         rez = (st*im) % P.mod
         return rez
 
 def Miller(P,X,m):
     """
     Opis:
-       Funkcija Miller je implementacija Millerjevega algoritma
-       potrebnega za izracun Weilovega parjenja. Ce je
-       $$e_m(P,Q) = (f_P(Q+S)/f_P(S)) / (f_Q(P-S)/f_Q(-S)) $$
-       potem funkcija Miller predstavlja izracun vrednosti
-       $f_P(X)$.
+       Funkcija Miller je implementacija Millerjevega
+       algoritma potrebnega za izracun Weilovega
+       parjenja. Ce je
+       $$e_m(P,Q)=(f_P(Q+S)/f_P(S))/(f_Q(P-S)/f_Q(-S))$$
+       potem funkcija Miller predstavlja izracun
+       vrednosti $f_P(X)$.
 
      Definicija:
        Miller(P,X,m)
@@ -166,7 +89,8 @@ def Miller(P,X,m):
      Izhodni  podatek:
        vrednost funkcije $f_P(X)$
     """
-    binarno = bin(m)[2:] #vrne niz porezemo 0b na zacetku niza
+    binarno = bin(m)[2:]
+    #vrne niz porezemo 0b na zacetku niza
     n = len(binarno)
     T = P
     f = 1
@@ -184,7 +108,7 @@ def WeilPairing(P,Q,S,N):
     Opis:
        Funkcija WeilPairing je implementacija Weilovega
        parjenja $e_N(P,Q)$, kjer je
-       $$e_N(P,Q) = (f_P(Q+S)/f_P(S)) / (f_Q(P-S)/f_Q(-S)) $$
+       $$e_N(P,Q)=(f_P(Q+S)/f_P(S))/(f_Q(P-S)/f_Q(-S))$$
 
      Definicija:
        WeilPairing(P,Q,S,N)
@@ -224,42 +148,3 @@ Q = Point(30,34,631,121,244)
 S = Point(30,34,631,0,36)
 
 eN = WeilPairing(P,Q,S,5)
-    
-    
-
-
-def MOV(E,m,N,P,Q):
-    E1 = ElipticCurve(E.a,E.b,E.mod**m)
-    while True:
-        print("tuki")
-        T = E1.rand()
-        red = BabyGiant(T)
-        d = gcd(red,N)
-        print(d)
-        T1 = (red//d)*T
-        print(T1)
-        print(BabyGiant(T1))
-        while True:
-            S = E1.rand()
-            red1 = BabyGiant(S)
-            print(red1)
-            if red1 > red:
-                break
-        zeta1 = WeilPairing(P,T1,S,N)
-        zeta2 = WeilPairing(Q,T1,S,N)
-        break
-
-    return (zeta1,zeta2)
-
-E = ElipticCurve(0,1,23)
-P = Point(0,1,23,12,2)
-m = 2
-N = 24
-Q = Point(0,1,23,1,18)
-l = 12
-E1 = ElipticCurve(0,1,23**m)
-##a = MOV(E,m,N,P,Q)
-a = Point(0,1,529,253,1)
-    
-##test = BabyGiant(Point(-10,21,557,2,3))
-##print(test)
