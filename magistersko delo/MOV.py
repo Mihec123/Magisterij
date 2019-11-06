@@ -41,7 +41,6 @@ def BabyGiant(P):
             break
     st1 = q+1+2*m*k -j
     st2 = q+1+2*m*k +j
-    print(st1,st2)
     if st1*P == INFPoint:      
         M = st1
     else:
@@ -50,6 +49,38 @@ def BabyGiant(P):
     odg = pomozna(M,P)
 
     return odg
+
+
+def BabyGiantCount(E):
+    q = E.mod
+    mejasp = q+1-2*(q**0.5)
+    mejazg = q+1+2*(q**0.5)
+    seznamst = [i for i in range(int(mejasp),int(mejazg+1))]
+    redi = []
+    
+    #vsaj en red rabmo
+    T = E.rand()
+    red = BabyGiant(T)
+    redi.append(red)
+    lcm = red
+
+    while True:
+        T = E.rand()
+        red = BabyGiant(T)
+        redi.append(red)
+        lcm = lcm*red/gcd(lcm,red)
+        st = 0
+        for el in seznamst:
+            if el%lcm == 0 and st ==0:
+                N = el
+                st += 1
+            elif el%lcm == 0 and st >0:
+                st += 1
+                break
+
+        if st == 1:
+            return N
+    
     
 
 
@@ -250,6 +281,74 @@ def MOV(E,m,N,P,Q):
         break
 
     return (zeta1,zeta2)
+
+
+def projektivnaAdd(P,Q):
+    x1 = P.x
+    x2 = Q.x
+    y1 = P.y
+    y2 = Q.y
+    z1 = 1
+    z2 = 1
+    a = P.a
+    b = P.b
+    mod = P.mod
+    x31 = (x1*y2-x2*y1)*(y1*z2+y2*z1)+ (x1*z2-x2*z1)*y1*y2 \
+            -a*(x1*z2 + x2*z1)*(x1*z2-x2*z1)-3*b*(x1*z2-x2*z1)*z1*z2
+    y31 = -3*x1*x2*(x1*y2-x2*y1)-y1*y2*(y1*z2-y2*z1)-a*(x1*y2-x2*y1)*z1*z2 \
+          + a*(x1*z2+x2*z1)*(y1*z2-y2*z1)+3*b*(y1*z2-y2*z1)*z1*z2
+    z31 = 3*x1*x2*(x1*z2-x2*z1)-(y1*z2+y2*z1)*(y1*z2-y2*z1) \
+          + a*(x1*z2-x2*z1)*z1*z2
+
+    x31 = x31 % mod
+    y31 = y31 % mod
+    z31 = z31 % mod
+
+    x32 = y1*y2*(x1*y2+x2*y1)-a*x1*x2*(y1*z2+y2*z1)-a*(x1*y2+x2*y1)*(x1*z2+x2*z1) \
+          -3*b*(x1*y2+x2*y1)*z1*z2 - 3*b*(x1*z2+x2*z1)*(y1*z2+y2*z1)\
+          + a*a*(y1*z2+y2*z1)*z1*z2
+    y32 = y1*y1*y2*y2 + 3*a*x1*x1*x2*x2+9*b*x1*x2*(x1*z2+x2*z1)\
+          -a*a*x1*z2*(x1*z2+2*x2*z1)-a*a*x2*z1*(2*x1*z2+x2*z1)\
+          -3*a*b*z1*z2*(x1*z2+x2*z1)-(a*a*a+9*b*b)*z1*z1*z2*z2
+    z32 = 3*x1*x2*(x1*y2+x2*y1)+y1*y2*(y1*z2+y2*z1)+a*(x1*y2+x2*y1)*z1*z2\
+          +a*(x1*z2+x2*z1)*(y1*z2+y2*z1)+3*b*(y1*z2+y2*z1)*z1*z2
+
+    x32 = x32 % mod
+    y32 = y32 % mod
+    z32 = z32 % mod
+
+    x33 = (x1*y2+x2*y1)*(x1*y2-x2*y1) + a*x1*x2*(x1*z2-x2*z1)\
+          +3*b*(x1*z2+x2*z1)*(x1*z2-x2*z1)-a*a*(x1*z2-x2*z1)*z1*z2
+    y33 = (x1*y2-x2*y1)*y1*y2-3*a*x1*x2*(y1*z2-y2*z1)\
+          +a*(x1*y2+x2*y1)*(x1*z2-x2*z1)+3*b*(x1*y2-x2*y1)*z1*z2\
+          -3*b*(x1*z2+x2*z1)*(y1*z2-y2*z1)+a*a*(y1*z2-y2*z1*z1*z2)
+    z33 = -(x1*y2+x2*y1)*(y1*z2-y2*z1)-(x1*z2-x2*z1)*y1*y2 \
+          -a*(x1*z2+x2*z1)*(x1*z2-x2*z1)-3*b*(x1*z2-x2*z1)*z1*z2
+
+    x33 = x33 % mod
+    y33 = y33 % mod
+    z33 = z33 % mod
+
+    tocka = ((x31+x32+x33)%mod,(y31+y32+y33)%mod,(z31+z32+z33)%mod)
+    print([[x31,y31,z31],[x32,y32,z32],[x33,y33,z33]])
+
+    try:
+        inv = NumberMod(tocka[2],mod).inverse().num
+        tocka = (tocka[0]*inv %mod,tocka[1]*inv% mod,1)
+    except:
+        pass
+ 
+
+    #return [[x31,y31,z31],[x32,y32,z32],[x33,y33,z33]]
+    return tocka
+
+##E = ElipticCurve(1,1,13)
+##P = E.rand()
+##Q = E.rand()
+
+P = Point(-1,1,25,1,1)
+Q = Point(-1,1,25,21,4)
+        
 
 E = ElipticCurve(0,1,23)
 P = Point(0,1,23,12,2)

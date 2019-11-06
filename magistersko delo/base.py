@@ -1,5 +1,6 @@
 import math
 import random
+import time
 
 def razEvk(a, b,inverz = True):
     """extended quclidian algorithm can compute inverse"""
@@ -341,12 +342,10 @@ class ElipticCurve:
             x = random.randint(0,self.mod-1)
             y2 = NumberMod(x,self.mod)**3 + NumberMod(self.a*x,self.mod) + NumberMod(self.b,self.mod)
             y2 = y2.num
-            for i in range(self.mod+1):         
-                y = (i**2) %self.mod
-                if y == y2:
-                    najdl = True
-                    break
-        return Point(self.a,self.b,self.mod,x,i)
+            if pow(y2,(self.mod-1)//2,self.mod) == 1:
+                y = TonelliShanks(y2,self.mod)
+                najdl = True
+        return Point(self.a,self.b,self.mod,x,y)
 
     def isOn(self,P):
         """
@@ -502,7 +501,43 @@ class Point(ElipticCurve):
 
 INFPoint = Point(None,None,None,INF,INF)
 
+def TonelliShanks(n,p1):
+    p = p1-1
+    s = 0
+    while True:
+        if p %2 == 0:
+            s+=1
+            p = p//2
+        else:
+            break
+    Q = p
+    
+    while True:
+        z = random.randint(0,p1-1)
+        if pow(z,(p1-1)//2,p1) == p1-1:
+            break
+    M = s
+    c = pow(z,Q,p1)
+    t = pow(n,Q,p1)
+    R = pow(n,(Q+1)//2,p1)
 
+    while True:
+        if t == 0:
+            return 0
+        elif t == 1:
+            return R
+        else:
+            i = 1
+            while i < M:
+                if pow(t,pow(2,i),p1) == 1:
+                    break
+                i += 1
+            b = pow(c,pow(2,M-i-1),p1)
+            M = i
+            c = pow(b,2,p1)
+            t = (t*pow(b,2,p1)) % p1
+            R = (R*b) % p1
+    
 
 
 def Factor(n):

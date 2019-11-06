@@ -424,8 +424,46 @@ Pri čemer upoštevamo zvezo med afinimi in projektivnimi koordinatami točk:
 $$(x,y)\in (\Z/n\Z)^2 \Leftrightarrow [x,y,1]\in \PP^2(\Z/n\Z).$$
 
 \end{definicija}
-\newpage
+
+Pomembno vlogo v kriptografiji igra tudi naključnost. Če privzamemo, da lahko nakjlučno izberemo število $0 \leq x \leq n$, potem nas zanima, kako izberemo naključno točko na krivulji oblike
+$y^2 = x^3 +Ax+B \ \text{mod } n$. Ideja je preprosta. Naključno generirajmo koordianto $x$ in nato probajmo rešiti enačbo $y^2 = X \ \text{mod } n$, če tak $y$ obstaja. V nasprotnem primeru generiramo novo $x$ koordinato in poiskusimo ponovno. Problem se torej skriva le v reševanju kvadratne enačbe. Tu pa nam pomaga Tonneli-Shankov algoritem.
+
+\begin{trditev}
+
+Nak bo $p > 2$ praštevilo. Če se da $n \in \Z_p$ zapisati kot $n = r^2, r \in \Z_p$, potem na algoritem \ref{alg:Tonelli} vrne $r$.
+
+\end{trditev}
+
+\begin{algorithm}[H]
+\caption[Tonelli]{Tonelli-Shanks}
+\label{alg:Tonelli}
+
+\begin{algorithmic}
+\State Najdi tak $z \in Z_p$, da $z$ ni kvadrat
+\State Poišči $s,Q$, tako da $p-1 = Q2^s$
+\State $M = s,c = z^Q,t = n^Q,R=n^{\frac{Q+1}{2}}$
+\While {True}
+	\If {$t=0$}
+		\State \Return $r=0$
+	\ElsIf {$t=1$}
+		\State \Return $r=R$
+	\Else
+		\State Poišči $0<i<M$, da velja $t^{2^i} = 1$
+		\State  $M = i,c = b^2,t = tb^2,R=Rb$
+	\EndIf
+\EndWhile
+
+\end{algorithmic}
+\end{algorithm}
+
+\begin{opomba}
+V algoritmu \ref{alg:Tonelli} lahko prvi korak izvedemo tako, da porabavamo naključne $g\in \Z_p$, dokler ne velja $g^{(p-1)/2} = -1$.
+\end{opomba}
+
+
 \subsection{Struktura grupe na kubičnih krivuljah}
+
+
 Za definicijo grupe na kubičnih krivuljah uvedimo najprej pomožno operacijo
 
 $$\ast : \mathcal{C}_P \times \mathcal{C}_P \rightarrow \mathcal{C}_P,$$
@@ -922,7 +960,7 @@ $$div(f_P) = m[P]-[mP]-(m-1)[\infty].$$
 \label{alg:Miller}
 
 \begin{algorithmic}
-\State T = P,f = 1
+\State $T = P,f = 1$
 \For {$i = n-2:0$}
 	\State $f = f^2 \cdot g_{T,T}$
 	\State $T = 2T$
@@ -967,6 +1005,28 @@ To pa je ravno to kar želimo.
 S pomočjo izreka $\ref{izrek:Miller}$ lahko sedaj izračunamo Weilovo parjenje $e_m(P,Q)$ kot
 $$e_m(P,Q) = (f_P(Q+S)/f_P(S)) / (f_Q(P-S)/f_Q(-S)) .$$
 Tu moramo za točko $S$ izbrati $S \notin \{ \infty,P,-Q,P-Q\}$.
+
+\begin{primer}
+
+Naj bo $y^2 = x^3+30x+34$ eliptična krivulja nad poljem $\F_{631}$. Izberimo točki $P = (36,60),Q = (121,387)$. Izračunati želimo Weilovo parjenje $e_5(P,Q)$. Če hočemo uporabiti Millerjev algoritem moramo izbrati točko $S$. Izberimo $S=(0,36)$. Hitro lahko preverimo, da $S$ res zadošča kriterijem izbire.
+Za izračun $e_5(P,Q)$ moramo izračunati $f_P,f_Q$ v dveh različnih točkah. Poglejmo si podrobnejši izračun za $f_P(S)$.
+
+V prvem koraku, moramo izračunati $g_{P,P}(S)$. Po vseh potrebnih izračunih dobimo $$\text{naklon} = 569,\ \text{stevec} = 268,\ \text{imenovalec} = 14.$$ Od tod torej sledi $g_{P,P}(S) = 560$. Ker velja $m_1 = 0$. Torej po prvem koraku dobimo $f = 560, T = 2P$.
+
+V drugem koraku moramo poračunati $g_{2P,2P}(S)$, kjer kot rezultat dobimo $399$. Vrednost $f$ pa moramo popraviti na $362$. V tem koraku velja $m_0 = 1$, torej moramo tu poračunati še
+$g_{4P,P}(S)$. Premica med $P,4P$ je navpična zato uporabimo drugo vejo funkcije $g$. Kot rezultat dobimo $g_{4P,P}(S) = 595$. Še zadnjič popravimo $f$ in kot končni rezultat dobimo
+$f_P(S) = 219$.
+
+Na podoben način sedaj poračunamo še ostale vrednosti, ter dobimo
+\begin{align}
+\frac{f_P(Q+S)}{f_P(S)} &{}= \frac{103}{219} = 473, \nonumber \\
+\frac{f_Q(P-S)}{f_Q(-S)} &{}= \frac{284}{204} = 88. \nonumber
+\end{align}
+
+Kot končni rezultat imamo torej
+$$e_5(P,Q) =\frac{473}{88} = 242.$$
+
+\end{primer}
 
 \subsection{Implementacija Millerjevega algoritma}
 
@@ -1178,6 +1238,7 @@ Potem sledi $P=Q$.
 \cite{Silverman2009}
 \cite{Miller}
 \cite{Jeffrey2008}
+\cite{Lynn2007}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%VPRAŠANJA
