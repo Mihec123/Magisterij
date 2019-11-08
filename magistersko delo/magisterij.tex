@@ -603,6 +603,150 @@ Iskana točka $A+B \in \PP^2$ je torej enaka $[-\frac{1}{3},1,-\frac{2\sqrt{6}}{
 
 \end{primer}
 
+
+Poglejmo si še primer kubične krivulje v $\Z_n$.
+
+\begin{primer}
+
+Naj bo $E$ krivulja oblike $y^2 = x^3+x-1$ nad poljem $\Z_5$. Poglejmo si kako izgledajo točke na krivulji $E$.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c|c|c|c}
+$x$      & $x^3+x-1$ & $y$      & Točke         \\ \hline
+$0$      & $-1$      & $\pm 3$  & $(0,3),(0,2)$ \\
+$1$      & $1$       & $\pm 1$  & $(1,1),(1,4)$ \\
+$2$      & $4$       & $\pm 3$  & $(2,3),(2,2)$ \\
+$3$      & $4$       & $\pm 3$  & $(3,3),(3,2)$ \\
+$4$      & $2$       & /        & /             \\
+$\infty$ & $\infty$  & $\infty$ & $\infty$     
+\end{tabular}
+\end{table}
+
+\begin{figure}[ht]
+  \centering
+\begin{minipage}{.5\textwidth}
+  \includegraphics[scale = 0.5]{images/krivuljamod0.png}
+  \caption[Primer algebraične krivulje.]{Algebraična krivulja $y^2 = x^3+x-1$ v $\R$.}
+  \label{fig:krivuljamod0}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+\centering
+\includegraphics[scale=0.5]{images/krivuljamod1.png}
+\caption[Presek algebraične krivulje z ravnino $z=1$.]{Algebraična krivulja $y^2 = x^3+x-1$ v $\Z_5$.}
+\label{fig:krivuljamod1}
+\end{minipage}
+\end{figure}
+
+Izračunajmo sedaj še $(2,3)+(1,1)$. Uporabimo formule \ref{sestevanje}, tako dobimo
+\begin{align}
+m &{}= \frac{1-3}{1-2} = \frac{3}{4} = 3\cdot 4 = 2, \nonumber \\
+x_3 &{} = 4-1-2 = 1, \nonumber \\
+y_3 &{} = 2(2-1)-3 = 4. \nonumber
+\end{align}
+
+$(2,3)+(1,1)$ je torej enako $(1,4)$ nad $E$.
+
+\end{primer}
+
+\subsection{Frobeniusev endomorfizem}
+
+Naj bo $\F_q$ končno polje z algebrajičnim zaprtjem $\overline{\F_q}$ in naj bo
+\begin{align}
+\phi_q:\overline{\F_q} &{} \rightarrow \overline{\F_q}, \nonumber \\
+x &{} \mapsto x^q \nonumber
+\end{align}
+Frobeniuseva preslikava na $\F_q$.
+Če je $E$ eliptična krivulja definirana nad $\F_q$, potem $\phi_q$ deluje na točkah $E$ kot:
+$$\phi_q(x,y) = (x^q,y^q), \ \phi_q(\infty) = \infty.$$
+
+\begin{lema}
+
+Naj bo $E$ eliptična krivulja definirana nad $\F_q$, in naj bo $(x,y) \in \E{\overline{\F_q}}$. Velja
+\begin{itemize}
+
+\item $\phi_q(x,y) \in \E{\overline{\F_q}}$,
+\item $(x,y) \in \E{\F_q}$ natanko tedaj ko $\phi_q(x,y) = (x,y)$.
+
+
+\end{itemize}
+
+\end{lema}
+
+\begin{izrek}{Hasse}
+Naj bo $E$ eliptična krivulja nad končnim poljem $\F_q$.  Potem red $\E{\F_q}$ zadošča zvezi
+$$|q+q-\#\E{\_q}| \leq 2\sqrt{q}.$$
+\end{izrek}
+
+
+\begin{izrek}
+\label{izrek:4.10}
+
+Naj bo E eliptična krivulja definirana nad $\F_q$. Naj bo $a = q+1-\#\E{\F_q} = q+1-def(\phi_q-1)$. Potem velja
+$$\phi^2_q-a\phi_q+q = 0,$$
+kot endomorfizem nad $E$. Prav tako pa je $a$ edino število $k$ za katerega velja
+$$\phi^2_{q^n}-k\phi_{q^n}+q^n = 0.$$
+
+Povedano drugače velja naslednja lastnost. Naj bo $(x,y) \in  \overline{\F_q}$, potem velja
+$$(x^{q^2},y^{q^2})-a(x^q,y^q)+q(x,y) = \infty,$$
+$a$ pa je edino število, tako da ta lastnost velja za vse $(x,y) \in \overline{\F_q} $. Velja še več
+$$a \equiv Trace((\phi_q)_m) \MOD{m},$$
+za vse $m$, ki zadoščajo $\text{gcd}(m,q)=1$.
+
+\end{izrek}
+
+\begin{proof}
+
+\end{proof}
+
+\subsection{Red grupe nad eliptičnimi krivuljami}
+
+
+V kriptografiji nas bo velikokrat zanimalo, koliko točk leži na neki krivulji $E$.
+
+
+
+
+\begin{trditev}
+\label{trd:red}
+
+Naj bo $\# \E{\F_q} = q+1-a$. Zapišimo $X^2-aX+q = (X-\alpha)(x-\beta)$. Potem velja
+$$\# \E{\F_{q^{n}}} = q^n+1-(\alpha^n+\beta^n),$$
+za vse $n \geq 1$.
+
+\end{trditev}
+
+\begin{proof}
+V dokazu bomo najprej potrebovali lastnost $\alpha^n+\beta^n \in \N$. Pri tem nam bo pomagala naslednja lema.
+
+
+\begin{lema}
+\label{lema:4.13}
+Naj bo $s_n = \alpha^n +  \beta^n$. Potem velja $s_0 = 2,s_1 = 1, s_{n+1} = as_n-qs_{n-1}$, za vse $n \geq 1$.
+
+\end{lema}
+
+\begin{proof}
+Če je $n = 0$, potem lema očitno velja. Za $n=1$ lema sledi iz definicije $\alpha,\beta$, ki sta ničli enačbe $X^2-aX+q$, ter uporabe Vietovih formul. Dokažimo torej še za splošen $n$.
+Ker sta $\alpha,\beta$ ničli, lahko zapišemo $\alpha^2-a\alpha +q = 0, \beta^2-a\beta+q=0$. Sedaj enačbi pomnožimo z $\alpha^{n-1},\beta^{n-1}$. S tem dobimo
+$$\alpha^{n+1} = a\alpha^n +q\alpha^{n-1}, \beta^{n+1} = a\beta^n +q\beta^{n-1}.$$
+Če enačbi seštejemo dobimo rekurzivno zvezo
+$$s_{n+1} = as_n-qs_{n-1}.$$
+\end{proof}
+
+Iz lema takoj sledi, da velja $\alpha^n+\beta^n \in \N$. Naj bo $f$ funkcija
+
+$$f(X) = (X^n-\alpha^n)(X^n-\beta^n) = X^{2n}-(\alpha^n+\beta^n)X^n+q^n.$$
+Tu smo ponovno uporabili Vietovo formulo za produkt ničel funkcije. Iz prve enakosti sledi, da funkcija $X^2-aX+q = (X-\alpha)(X-\beta)$ deli $f$. Po osnovnem izreku od deljenju lahko f zapišemo kot $f(X) = g(X)Q(x)+r(x)$, kjer je $g(X)= X^2-aX+q$. Prav tako pa ima kvocient $Q$ celoštevilske koeficiente. Po izreku \ref{izrek:4.10} velja
+
+$$(\phi^n_q)^2 -(\alpha^n+\beta^n)\phi^n_q + q^n = f(\phi_q) = Q(\phi_q)(\phi^2_q-a\phi_q+q) = 0,$$
+kjer je $\phi_q$ endomorfizem na $E$. Velja tudi $\phi^n_q = \phi_{q^n}$. Ponovno uporabimo izrek \ref{izrek:4.10} od koder sledi, da obstaja natanko en $k \in \Z$, tako da 
+$\phi^2_{q^n}-k\phi_{q^n}+q^n=0$. Ta $k$ pa je določen z $k = q^n+1-\#\E{\F_{q^n}}$. Od tod torej sledi
+$$\alpha^n+\beta^n = q^n+1-\#\E{\F_{q^n}}.$$
+
+\end{proof}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %DIEFFIE-HELLMAN
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
