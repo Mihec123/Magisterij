@@ -579,4 +579,28 @@ def Factor(n):
             faktorji.append(tmp)
 
     return faktorji
+
+
+def lema(n,a,q):
+    s0 = 2
+    s1 = a
+    if n == 1:
+        return a
+    else:
+        i=1
+        while i < n:
+            s2 = a*s1-q*s0
+            s0 = s1
+            s1 = s2
+            i +=1
+        return s2
+
+def NumberPoints(steviloOsnovne,potenca,q):
+    a = q+1-steviloOsnovne
+    sn = lema(potenca,a,q)
+    stevilo = pow(q,potenca)+1-sn
+    return stevilo
+    
+
+    
 a = Point(0,1,529,253,1)

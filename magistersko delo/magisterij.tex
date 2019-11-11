@@ -673,10 +673,86 @@ Naj bo $E$ eliptična krivulja definirana nad $\F_q$, in naj bo $(x,y) \in \E{\o
 
 \end{lema}
 
+\begin{proof}
+
+Za dokaz leme bomo potrebovali lastnost $(a+b)^q = a^q+b^q$, če je $q$ potenca karakteristike polja v katerem delamo. To sledi iz razvoja v vrsto in dejstva, da pri binomskih koeficientih velja
+${q\choose i} \equiv 0,\  1 \leq i \leq q-1$. To je res ker pri zapisu binomskega koeficienta po krajšanju vedno ostane vsaj en $q$, ki je potenca karakteristike. Prav tako bomo potrebovali dejstvo, da velja $a^q = a$ za vse $a \in \F_q$. 
+Vzemimo namesto Weierstrassove oblike posplošeno Weierstrassovo obliko, saj to ne vpliva na sam dokaz. Imamo torej
+\begin{equation}
+\label{enc:razWeier}
+y^2+a_1xy+a_3y=x^3+a_2x^2+a_4x+a_6,
+\end{equation}
+$a_i \in \F_q$. Če to enačbo sedaj potenciramo na $q$ in uporabimo zgornja dejstva dobimo
+$$(y^q)^2+a_1(x^qy^q)+a_3(y^q)=(x^q)^3+a_2(x^q)^2+a_4(x^q)+a_6.$$
+To ravno pomeni, da točke oblike $(x^q,y^q)$ ležijo na krivulji podani z enačbo \ref{enc:razWeier}.
+
+Za drugi del leme se upremo na dejstvo, da velja $x \in \F_q$ natanko tedaj, ko $\phi_q(x) = x$.
+Od tod sledi
+
+\begin{align}
+(x,y) \in E(\F_q) &{}\Leftrightarrow x,y \in \F_q \nonumber \\
+&{}  \Leftrightarrow \phi_q(x) = x \text{ in } \phi_q(y) = y  \nonumber \\
+&{} \Leftrightarrow \phi_q(x,y) = (x,y). \nonumber
+\end{align} 
+
+\end{proof}
+
+\begin{trditev}
+\label{trd:3.16}
+Naj bosta $\alpha,\beta$ enomorzima na $E$, ter naj bosta $a,b \in \Z$. Definirajmo enomorfizem
+$$(a+\alpha+b\beta)(P) = a\alpha(P)+b\beta(P).$$
+Potem velja
+$$deg(a\alpha+b\beta) = a^2deg(\alpha)+b^2deg(\beta) + ab(deg(\alpha+\beta)-deg(\alpha)-deg(\beta)).$$
+\end{trditev}
+
+\begin{proof}
+Naj bo $n \in \Z$, število ki ni deljivo z karakteristiko $K$. Predstavimo $\alpha,\beta$ z matrikami $\alpha_n,\beta_n$, glede na neko bazo $E[n]$.
+Velja
+\begin{align}
+det(a\alpha_n+b\beta_n) &{}=  a^2det(\alpha_n)+b^2det(\beta_n) + ab(det(\alpha_n+\beta_n)-det(\alpha_n)-det(\beta_n)) \nonumber
+\end{align}
+za vse matrike $\alpha_n,\beta_n$.
+Od tod sledi
+\begin{align}
+deg(a\alpha+b\beta) &{}\equiv a^2deg(\alpha)+b^2deg(\beta) + ab(deg(\alpha+\beta)-deg(\alpha)-deg(\beta)) \MOD{n}. \nonumber
+\end{align}
+Ker to drži za neskončno mnogo $n$ v tej enačbi velja enakost.
+
+
+\end{proof}
+
 \begin{izrek}{Hasse}
+\label{izr:Hasse}
 Naj bo $E$ eliptična krivulja nad končnim poljem $\F_q$.  Potem red $\E{\F_q}$ zadošča zvezi
-$$|q+q-\#\E{\_q}| \leq 2\sqrt{q}.$$
+$$|q+q-\#\E{\F_q}| \leq 2\sqrt{q}.$$
 \end{izrek}
+
+\begin{proof}
+Zapišimo
+$$a=q+1-\#\E{\F_q} = q+1 -deg(\phi_q-1).$$
+Pokazati moramo $|a| \leq 2\sqrt{q}.$
+Za dokaz tega bomo potrebovali še eno lemo.
+\begin{lema}
+Naj bosta $r,s \in \Z$, taka da velja $gcd(s,q)=1$. Potem velja
+$$deg(r\phi_q-s) = r^2q+s^2-rsa.$$
+\end{lema}
+
+\begin{proof}
+Z uporabo trditve \ref{trd:3.16} dobimo
+$$deg(r\phi_q-s) = r^2deg(\phi_q)+s^2deg(-1)+rs(deg(\phi_q-1)-deg(\phi_q)-deg(-1)).$$
+Če sedaj uporabimo dejstvo $deg(\phi_q) = q,deg(-1) = 1$, ter $deg(\phi_q-1) = q+1-a$, željeni rezultat sledi.
+\end{proof}
+
+Ker velja $deg(r\phi_q-s) \geq 0$, nam lema implicira
+$$q(\frac{r}{s})^2-a\frac{r}{s}+1 \geq 0,$$
+za vse $r,s$ za katere velja $gcd(s,q)=1$. Množica racionalnih števil oblike $r/s$, ki zadoščajo tej lastnosti je gosta v $\R$. Zato velja
+$$qx^2-ax + 1 \geq 0,$$
+za vse $x\in \R$. To pa pomeni, da je diskriminanta polinoma negativna ali nič. Kar povedano z drugimi besedami pomeni
+$$a^2-4q \leq 0,$$
+to pa je ravno pogoj $|a|\leq 2\sqrt{q}$.
+
+
+\end{proof}
 
 
 \begin{izrek}
@@ -722,7 +798,7 @@ V dokazu bomo najprej potrebovali lastnost $\alpha^n+\beta^n \in \N$. Pri tem na
 
 \begin{lema}
 \label{lema:4.13}
-Naj bo $s_n = \alpha^n +  \beta^n$. Potem velja $s_0 = 2,s_1 = 1, s_{n+1} = as_n-qs_{n-1}$, za vse $n \geq 1$.
+Naj bo $s_n = \alpha^n +  \beta^n$. Potem velja $s_0 = 2,s_1 = a, s_{n+1} = as_n-qs_{n-1}$, za vse $n \geq 1$.
 
 \end{lema}
 
@@ -745,6 +821,25 @@ $\phi^2_{q^n}-k\phi_{q^n}+q^n=0$. Ta $k$ pa je določen z $k = q^n+1-\#\E{\F_{q^
 $$\alpha^n+\beta^n = q^n+1-\#\E{\F_{q^n}}.$$
 
 \end{proof}
+
+\begin{primer}
+Naj bo $E$ podana s predpisom $y^2+xy = x^3+1$. S preprostim pregledom vseh možnosti vidimo, da je $\#\E{\F_2} = 4$. Izračunajmo sedaj $\#\E{\F_4}$. Po trditvi \ref{trd:red} moramo
+$\#\E{\F_2}$ zapisati kot $q+1-a$. Sledi torej $a = 2+1-4 = -1$. Polinom je potem oblike
+$$X^2+X+2 = (X-\frac{-1+\sqrt{-7}}{2}) (X-\frac{-1-\sqrt{-7}}{2}).$$
+Za število točk na krivulji bomo moramli najprej poračunati še $\alpha^2+\beta^2$, pri čemer si lahko pomagamo z lemo \ref{lema:4.13}.
+$$s_2 = as_1-qs_0 = (-1)^2-2\cdot2 = -3$$
+Od tod sledi
+$$\#\E{\F_{2^2}} = 2^2+1-s_2 = 4+1+3 = 8.$$
+ Če naštejemo vse točke na $\E{\F_{4}} = \{ \infty,(0,1),(1,0),(1,1),(1,2),(3,0),(0,3),(1,3)\}$, vidimo da se naš rezultat ujema.
+Moč tega izreka pa se skriva v velikih potencah. Če bi naprimer želeli izračunati
+$\E{\F_{2^{200}}}$ z naštevanjem točk ne bi prišli prav daleč. S pomočjo tega izreka in lema pa lahko hitro poračunamo
+$$(\frac{-1+\sqrt{-7}}{2})^{200}+ (\frac{-1-\sqrt{-7}}{2})^{200} = -2534943693362688758337590430751,$$
+od koder sledi
+\begin{align}
+\E{\F_{2^{200}}} &{}= 2^{200} + 1 +2534943693362688758337590430751 \nonumber \\
+&{}= 1606938044258990275541962092343697546215565682541130425732128 \nonumber
+\end{align}
+\end{primer}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
