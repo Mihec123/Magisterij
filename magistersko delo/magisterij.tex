@@ -889,6 +889,61 @@ Problem Diffie-Hellmanove izmenjave ključev lahko enostavno prevedemo na proble
 
 \end{proof}
 
+%ODLOČITVENI DIFFIE HELMAN
+Na podoben način lahko definiramo tudi odločitveni Diffie-Hellmanov problem, ki se glasi.
+\begin{definicija}
+Naj bodo dani $P,aP,bP,Q$ in $\E{F_q}$. Ali velja $Q = abP$?
+\end{definicija}
+
+Povedano drugače, če dobimo namig ki vsebuje $abP$, ali lahko povemo če je ta informacija pravilna.
+
+Poglejmo si na primeru, kako lahko v določenih primerih dobimo odgovor na ta problem s pomočjo Weilovega parjenja.
+
+\begin{primer}
+
+Naj bo $E$ podana kot $y^2=x^3+1$ nad $\F_q$, kjer je $q \equiv 2 \MOD{3}$. Naj bo $\omega \in \F_{q^2}$ tretji koren enote. Opazimo, da $\omega \notin \F_q$, saj je red $\F^{\times}_q$ enak $q-1$, kar pa ni deljivo s tri.
+Definirajmo preslikavo
+$$\beta:\E{\overline{\F_q}} \rightarrow \E{\overline{\F_q}}, \ (x,y) \mapsto (\omega x,y), \ \beta(\infty) = \infty.$$
+
+Preverimo lahko, da je tako podana preslikava izomorfizem. Denimo, da ima $P \in \E{\overline{\F_q}}$ red $n$. Potem iz lastnosti izomorfizmov sledi, da ima tudi $\beta(P)$ red $n$.
+Definirajmo modificirano Weilovo parjenje
+$$e_n'(P_1,P_2) = e_n(P_1,\beta(P_2)),$$
+kjer je $e_n$ običajno Weilovo parjenje in $P_1,P_2 \in E[n]$.
+
+Predpostavimo sedaj, da poznamo $P,aP,bP,Q$ in želimo preveriti ali velja $Q=abP$. Najprej preverimo, če je $Q$ večkratnik $P$. Po trditvi \ref{trd:5.1} bo to res natanko tedaj ko $e_n(P,Q) = 1$.
+Predpostavimo, da velja $Q = tP$, za nek $t \in \N$.Potem imamo
+$$e_n'(aP,bP)=e_n'(P,P)^{ab} = e_n'(P,abP),$$
+ter
+$$e_n'(Q,P) = e_n'(P,P)^t.$$
+
+Če predpostavimo $3 \nmid n$, potem je $e_n'(P,P)$ n-ti koren enote. To pa pomeni
+$$Q=abP \iff t \equiv ab \MOD{n} \iff e_n'(aP,bP)=e_n'(P,P)^t.$$
+\end{primer}
+
+V zgornjem primeru je potrebna še dodatna utemeljitev, ki jo lahko zapišemo kot lemo.
+
+\begin{lema}
+Naj $3 \nmid n$. Če ima $P \in \E{\F_q}$ red n, potem je $e_n'(P,P)$ n-ti koren enote.
+\end{lema}
+
+\begin{proof}
+
+Naj bo $uP = v\beta(P)$ za neki števili $u,v$. Potem zaradi lastnosti izomorfizmov velja
+$$\beta(vP) = v\beta(P) = uP \in \E{\F_q}.$$
+Obravnavajmo sedaj dva primera.
+\begin{itemize}
+\item Če je $vP = \infty$, potem po definiciji $\beta$ sledi $uP = \infty$. To pa pomeni, da je $u \equiv 0 \MOD{n}$.
+\item Če velja $vP \neq \infty$, potem zapišimo $vP = (x,y)$, kjer sta $x,y \in \F_q$. Velja
+$$(\omega x,y) = \beta(vP) \in \E{\F_q}.$$
+Ker $\omega \notin \F_q$, mora veljati $x = 0$. Torej je točka $vP$ oblike $(0,\pm 1)$. Take točke pa imajo red tri, kar lahko poračunamo z definicijo grupe. To pa ni možno saj smo predpostavili $3 \nmid n$.
+\end{itemize}
+
+V obeh primerih mora torej veljati $u,v \equiv 0 \MOD{n}$. Od tod pa sledi, da sta $P$ in $\beta(P)$ baza $E[n]$. Po posledici \ref{PosledicaTrdParj} to pomeni, da je $e_n'(P,P)$ n-ti koren enote.
+
+\end{proof}
+
+
+
 \subsection{Index Calculus}
 \label{IndexCalc}
 
@@ -1279,6 +1334,7 @@ $$e_5(P,Q) =\frac{473}{88} = 242.$$
 MOV napad s pomočjo Weilovega parjenja pretvori problem diskretnega logaritma iz $E(\F{q})$ v problem diskretnega logaritma nad $\F^{\times}_{q^m}$. Na ta način se izognemo težji strukturi grupe. Nov problem diskretnega logaritma pa lahko sedaj rešimo z različnimi napadi, med drugim tudi z napadom Index-Calculus \ref{IndexCalc}. MOV napad deluje če velikost polja $\F{q^m}$ ni dosti večja od velikosti polja $\F{q}$. Postopek napada sledi poteku dokaza naslednje trditve.
 
 \begin{trditev}
+\label{trd:5.1}
 Naj bo $E$ eliptična krivulja nad $\F{q}$. Naj bosta $P,Q \in E(\F{q})$, ter naj bo $N$ red točke $P$. Predpostavimo, da velja $\text{gcd}(N,q)=1$. Potem obstaja tako število $k$, da velja $Q = kP$ natanko tedaj ko $NQ = \infty$ in $e_N(P,Q)=1$.
 \end{trditev}
 
@@ -1473,11 +1529,45 @@ Potem sledi $P=Q$.
 \end{lema}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%KRIPTOGRAFIJA NAD ELIPTIČNIMI KRIVULJAMI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Kriptografija nad Eliptičnimi krivuljami}
+
+\subsection{ElGamalova enkripcija}
+
+ElGamalova enkripicja javnega ključa temelji na problemu diskretnega logaritma. V primeru, da bi rešili problem diskretnega logaritma, bi lahko prebrali tudi vsa poslana sporočila. Denimo, da hoče Alenka komunicirati z Borisom. Vsaj eden od njih mora imeti na nekem javnem mestu objavlene nekatere informacije. Pa recimo, da ima Boris izbrano neko krivuljo $E$ nad nekim končnim poljem $\F_q$. Na tej krivulji ima izbrano točko $P$. Boris si sedaj izbere še skrivni ključ $s$, s katerim poračuna $B=sP$. Sedaj podatke $E,P,B$ javno objavi. Če hoče Alenka komunicirati z Borisom ta postopek poteka na sledeč način:
+\begin{enumerate}
+\item Predstavi sporočilo, kot neko točko $M\in \E{\F_q}$.
+\item Izberi skrivno število $k$ in izračunaj $M_1 = kP$.
+\item Izračunaj $M_2 = M+kB$.
+\item Pošlji Borisu $M_1,M_2$.
+\end{enumerate}
+
+Boris izračuna $M$ kot
+$$M = M_2-sM_1.$$
+Prepričajmo se, da na ta način res dobimo točko $M$.
+$$M_2-sM_1 = (M+kB)-k(sP)=M+ksBP-ksP = M.$$
+
+Vsak tretji poslušalec, ki bi znal rešiti problem diskretnega logaritma, bi lahko s pomočjo $P,B$ izračunal $s$, ali pa s pomočjo $P,M_1$ izračunal $k$.
+
+Pomembno pri celotni shemi pa je tudi to, da Alenka za različna sporočila ne uporablja enakega števila $k$. Recimo, da bi za sporočili $M,M'$ Alenka uporabila isti $k$. Vsak tretji poslušalec bi lahko opazil, da sta v tem primeru točki $M_1,M_1'$ enaki. Tako bi lahko izračunal
+$$M_2-M_2' = M'-M.$$
+To na prvi pogled ne deluje resna grožnja, a bi lahko povzročila velika škodo, če delamo z informacijami ki bi kasneje postale javne. Če bi npr.\ sporočilo, ki je predstavljeno s točko $M$ kasneje postalo javno bi lahko brez težav sedaj izračunali še
+$$M' = M-M_2+M_2'.$$
+
+Vprašanje, ki ga moramo tu še razrešiti je kako sporočilo predstaviti kot točko na krivulji. Ena izmed možnosti je način, ki ga je predlagal Koblitz. Denimo, da jekrivulaj podana z enačbo
+$y^2 = x^3+Ax+B$ nad $\F_p$. Sporočilo $m$ predstavimo kot število $0 \leq m \leq p/100$. Sedaj določimo $x_j = 100m+j$, za $0\leq j < 100$. Podobno, kot pri generiranju naključne točke sedaj poiskusimo določiti koordinato $y_j$ če ta obstaja. Če smo uspeli poračunati obe koordianti je naša točka $M=(x_j,y_j)$. Ker velja $0\leq x_j < p+100$ je $m$ določen kot
+$m = \lfloor x_j \rfloor$.
+Ocenimo lahko, da je verjetnost neobstoja take točke približno $2^{-100}$.
+
 \cite{Washington2008}
 \cite{Silverman2009}
 \cite{Miller}
 \cite{Jeffrey2008}
 \cite{Lynn2007}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%VPRAŠANJA
