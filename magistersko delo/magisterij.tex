@@ -1413,7 +1413,51 @@ Naj bo $k$ red $g\in G$. Ker velja $Mg = 0$ vemo, da $k|M$. Denimo, da $k \neq M
 
 \end{proof}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%DELITELJI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Anomalne krivulje}
+
+Delovanje MOV temelji na uporabi Weilovega parjenja. Pojavi se torej ideja, da bi konstruirali tako krivuljo, ki vedno da trivialno Weilovo parjenje. S tem bi preprečili MOV napad. Krivulje za katere je to res so take, da za njih velja
+$$\#\E{\F_q}.$$
+Takim krivuljam rečemo anomalne krivulje. Če je $p$ praštevilo, je potem $E[n]$ ciklična grupa, kar pomeni da bo Weilovo parjenje konstantno enako $1$. Vender za tak tip krivulj obstaja napad, ki deluje še hitreje kot MOV.
+Pokažimo algoritem, ki deluje če je $q$ praštevilo.
+Za tak napad bomo najprej morali krivuljo $E$in točki $P,Q$ razširiti iz $\F_p$ na $\Z$. Pri tem bomo potrebovali naslednjo trditev.
+
+\begin{trditev}
+
+Naj bo $E$ eliptična krivulja nad $\F_p$ in naj bosta $P,Q \in \E{\F_p}$. Predpostavimo še, da je krivulja $E$ oblike $y^2=x^3+Ax+B$. Potem obstajajo cela števila
+$A',B',x_1,x_2,y_1,y_2$ in eliptična krivulja $E'$ podana z
+$$y^2=x^3+A'x+B',$$
+oblike $P'=(x_1,y_1),Q'=(x_2,y_2), \in E'(\Q)$.
+Za ta števila velja
+$$A\equiv A',B \equiv B', P \equiv P', Q \equiv Q' \MOD{p}.$$
+
+\end{trditev}
+
+\begin{proof}
+
+Izberi števili $x_1,x_2$ tako, da velja $x_1,x_2 \MOD{p}$ podajata x-kooridnati $P,Q$. Predpostavimo najprej, da $x_1 \not \equiv x_2 \MOD{p}$. Nato izberi $y_1$ tako, da velja
+$P' \equiv P \MOD{p}$. Tu ekvivalenco gledamo po koordinatah. Pri izbiri $y_2$ moramo biti bolj previdni. Izberimo $y_2$ tako, da velja
+$$y_2^2\equiv y_1^2 \MOD{x_2-x_1} \text{ in } (x_2,y_2) \equiv Q \MOD{p}.$$
+To je mogoče, saj lahko uporabimo Kitajski izrek o ostankih, ker velja $gcd(p,x_2-x_1) = 1$.
+
+Na ta način dobimo dve enačbi s pomočjo katerih moramo določiti konstanti $A',B'$.
+Enačbi se glasita
+\begin{align}
+y_1^2&{}=x_1^3+A'x_1+B, \nonumber  \\
+y_2^2&{}=x_2^3+A'x_2+B. \nonumber
+\end{align}
+
+Rešitev se torej glasi
+$$A' = \frac{(y_2^2-y_1^2)-(x_2^3-x_1^3)}{x_2-x_1}, B' = y_1^2-x_1^3-A'x_1.$$
+Ker je $y_2^2-y_1^2$ po konstrukciji deljivo z $x_2-x_1$ in ker so vse ostale konstante cela števila, od tod sledi, da sta tudi $A',B' \in \Z$. Točki $P',Q'$ pa ležita na $E'$ po konstrukciji.
+
+Obravnavati moramo še primer če je $x_1 \equiv x_2 \MOD{p}$. V tem primeru velja $P = \pm Q$. Izberimo potem $x_1 = x_2$, ter $y_1$ tako, da nam $y_1 \MOD{p}$ podaja y-koordinato točke $P$. Na isti način izberemo še $A'$, ter določimo $B' = y_1^2-x_1^3-A'x_1$. $Q'$ pa izberemo kot $\pm P'$.
+
+MANKA TO DA E' RES ELIPTIČNA. TEGA NI KER JE DISKRIMINANTA K JE NISM OMENU. DOKAZ SICER 2 VRSTICI.
+\end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %DELITELJI
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
