@@ -1426,7 +1426,7 @@ Pokažimo algoritem, ki deluje če je $q$ praštevilo.
 Za tak napad bomo najprej morali krivuljo $E$in točki $P,Q$ razširiti iz $\F_p$ na $\Z$. Pri tem bomo potrebovali naslednjo trditev.
 
 \begin{trditev}
-
+\label{trd:5.6}
 Naj bo $E$ eliptična krivulja nad $\F_p$ in naj bosta $P,Q \in \E{\F_p}$. Predpostavimo še, da je krivulja $E$ oblike $y^2=x^3+Ax+B$. Potem obstajajo cela števila
 $A',B',x_1,x_2,y_1,y_2$ in eliptična krivulja $E'$ podana z
 $$y^2=x^3+A'x+B',$$
@@ -1458,6 +1458,71 @@ Obravnavati moramo še primer če je $x_1 \equiv x_2 \MOD{p}$. V tem primeru vel
 
 MANKA TO DA E' RES ELIPTIČNA. TEGA NI KER JE DISKRIMINANTA K JE NISM OMENU. DOKAZ SICER 2 VRSTICI.
 \end{proof}
+
+
+\begin{definicija}
+
+Naj bosta $a,b$ rationali števili za kateri velja $a/b \neq 0$ in $a,b$ tuji števili. Zapišimo $a/b = p^ra_1/b_1$, kjer $p \nmid a_1b_1$. Potem je \emph{p-adična vrednost} definirana
+kot
+$$v_p(a/b) = r.$$
+Definirajmo še
+$$v_p(0) = \infty.$$
+\end{definicija}
+
+\begin{primer}
+
+$\frac{7}{40} = 2^{-3}\frac{7}{5}$, zato velja
+$$v_2(7/40) = -3.$$
+Poglejmo si še kakšen priemr
+$$v_5(50/3) = 2,\ v_7(1/2) = 0.$$
+\end{primer}
+
+Naj bo $E'$ eliptična krivulja nad $\Z$ podana z $y^2 = x^3+A'x+B'$. Naj bo $r \in N$. Potem lahko definiramo
+$$E_r' = \{  (x,y) \in E'(\Q) | v_p(x) \leq -2r, v_p(y) \leq -3r \} \cup \{ \infty \}.$$
+
+\begin{izrek}
+
+Naj bo $E'$ podana z $y^2 = x^3+A'x+B'$, $A',B' \in \Z$. Naj bo $p$ praštevilo in naj bo $r \in \N$. Potem velja
+\begin{enumerate}
+
+\item $E_r'$ je podgrupa $E'(\Q)$.
+\item Če je $(x,y) \in E'(\Q)$, potem $v_p(x)<0$ natanko tedaj ko $v_p(y) <0$. V tem primeru obstaja število $r \geq 1$, za katero velja $v_p(x) = -2r, v_p(y) = -3r$.
+\item Preslikava
+\begin{align}
+\lambda_r: E'_r/E_{5r}' &{}\rightarrow \Z_{p^{4r}} \nonumber \\
+(x,y) &{}\mapsto p^{-r}x/y \MOD{p^{4r}} \nonumber \\
+\infty &{}\mapsto 0 \nonumber
+\end{align}
+je injektivni homomorfizem.
+\item Če $(x,y) \in E_r'$ ampak $(x,y) \not \in E_{r+1}'$, potem $\lambda_r(x,y) \not \equiv 0 \MOD{p}$.
+
+\end{enumerate}
+\end{izrek}
+
+Potrebovali bomo še preslikavo redukicje po modulu $p$
+\begin{align}
+red_p: E'(\Q) &{}\rightarrow E' \MOD{p} \nonumber \\
+(x,y) &{}\mapsto (x,y) \MOD{p} \nonumber \\
+E_1' &{}\mapsto \{ \infty \} \nonumber
+\end{align}
+Ta preslikava je homomorfizem, z jedrom $E_1'$.
+
+Vrnimo se sedaj k prvotnemu problemu. Imamo torej anomalno krivuljo $E$ nad $\F_p$. Želimo poiskati $k$, tako da bo veljalo $Q = kP$. Sledeči algoritem nam da rešitev tega problema.
+
+\begin{algorithm}[H]
+\caption[AN]{Teoretični algoritem nad anomalnimi krivuljami}
+\label{alg:Anomal}
+\begin{enumerate}
+\item Razširi $E,P,Q$ nad $\Z$, kot v trditvi \ref{trd:5.6}.
+\item Naj bo $P_1' = pP',Q_1' = pQ'$.
+\item Če $P_1' \in E_2'$, izberi nove $E',P',Q'$ in se vrni na korak $2$. V nasprotnem primeru je $l_1 = \lambda_1(P_1'),l_2 = \lambda_1(Q_1')$. Iskani $k$ pa je $k \equiv l_1/l_2 \MOD{p}$.
+\end{enumerate}
+
+\end{algorithm}
+
+\begin{opomba}
+Drugi korak algoritma nam zagotavlja, da so $P_1',Q_1' \in E_1'$. To je res, ker smo na anomalni krivulji in velja $red_p(pP') = p\cdot red_p(P') = \infty$.
+\end{opomba}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %DELITELJI
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
