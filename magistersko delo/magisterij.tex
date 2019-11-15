@@ -1523,6 +1523,33 @@ Vrnimo se sedaj k prvotnemu problemu. Imamo torej anomalno krivuljo $E$ nad $\F_
 \begin{opomba}
 Drugi korak algoritma nam zagotavlja, da so $P_1',Q_1' \in E_1'$. To je res, ker smo na anomalni krivulji in velja $red_p(pP') = p\cdot red_p(P') = \infty$.
 \end{opomba}
+
+Tu je potrebno podati še utemeljitev, da tak napad res deluje. Označimo $K' = kP'-Q'$.
+Velja
+$$\infty = kP-Q = red_p(kP'-Q') = red_p(K').$$
+To ravno pomeni, da $K' \in E_1'$. Od tod pa sledi, da je $\lambda_1(K')$ definiran in velja
+$$\lambda_1(pK') = p \lambda_1(K') \equiv 0 \MOD{p}.$$
+
+Torej velja
+$$kl_1-l_2 = \lambda_1(kP_1'-Q_1') = \lambda_1(kpP'-pQ') = \lambda_1(pK') \equiv 0 \MOD{p}.$$
+To pa je ravno to kar hočemo pokazati.
+Izkaže se, da je ta algoritem nepraktičen, saj ima x-kooridinata točk ponavadi okoli $p^2$ števk.
+Izkaže se, da lahko problem rešimo, če delamo po modolu $p^2$ namesto da delamo v $\Q$.
+Tako pridemo, do novega algoritma
+
+\begin{algorithm}[H]
+\caption[ANC]{Napad na anomalne krivulje}
+\label{alg:AnomalAttack}
+\begin{enumerate}
+\item Razširi $E,P,Q$ nad $\Z$, kot v trditvi \ref{trd:5.6}.
+\item Izračunaj $P_2' = (p-1)P' \equiv (x',y') \MOD{p^2}$.
+\item Izračunaj $Q_2' = (p-1)Q' \equiv(x'',y'') \MOD{p^2}$.
+\item Izračunaj
+$$m_1 = p\frac{y'-y_1}{x'-x_1}, \ m_2 = p\frac{y''-y2}{x''-x_2}.$$
+\item Če $v_p(m_2) <0$ ali $v_p(m_1)<0$ poiskusi na drugi krivulji $E'$. V nasprotnem primeru je $k \equiv m_1/m_2 \MOD{p}$.
+\end{enumerate}
+
+\end{algorithm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %DELITELJI
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
