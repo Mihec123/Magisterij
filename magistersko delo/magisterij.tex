@@ -1061,6 +1061,40 @@ Primer obravnavamo podobno kot $n=2m$.
 
 \end{proof}
 
+Definirajmo še polinoma
+\begin{align}
+\phi_m &{}=x\gamma^2_m-\gamma_{m+1}\gamma_{m-1}, \nonumber \\
+\omega_m &{} = (4y)^{-1}(\gamma_{m+2}\gamma^2_{m-1}-\gamma_{m-2}\gamma^2_{m+1}). \nonumber
+\end{align}
+
+Podobno, kot pri polinomih $\gamma$ lahko tudi tu formuliramo lemo
+
+\begin{lema}
+
+$\phi_{n}$ je element $\Z[x,y^2,A,B]$, za vse $n$. Če je $n$ lih, potem je $\omega_{n}$ element $y\Z[x,y^2,A,B]$. V primeru, da je $n$ sod pa je $\omega_{n}$ element $\Z[x,y^2,A,B]$.
+
+\end{lema}
+
+Glejmo sedaj te polinome nad eliptičnimi krivuljami
+$$E: y^2=x^3+Ax+B.$$
+Polinome v $\Z[x,y^2,A,B]$ lahko gledamo kot polinome v $\Z[x,A,B]$, tako da $y^2$ nadomestimo z $x^3+Ax+B$.
+\begin{opomba}
+Polinom $\gamma_n$ ni nujno samo polinom spremenljivke $x$, saj je odvisno od tega ali je $n$ lih ali sod. Vseeno pa velja, da  $\gamma^2_n$ vedno lahko zapišemo kot polinoms premenljivke $x$.
+
+\end{opomba}
+
+\begin{izrek}
+Naj bo $P = (x,y)$ točka na krivulji $y^2 = x^3+Ax+B$, katere karakteristika ni $2$. Naj bo $n\in \N$, potem velja
+$$nP = \left( \frac{\phi_n(x)}{\gamma^2_n(x)}, \frac{\omega_n(x,y)}{\gamma^3_n(x,y)}\right).$$
+
+
+\end{izrek}
+
+\begin{posledica}
+Naj bo $E$ eliptična krivulja. Endomorfizem $E$ podan z množenjem z $n$ ima stopnjo $n^2$.
+\end{posledica}
+
+
 \begin{definicija}~
 Naj bo $K$ polje in naj bo $n \in \N$ tak, da karakteristika $K$ ne deli $n$.
 $$\mu_n = \{ x \in \overline{K} | x^n = 1 \}$$
@@ -1550,6 +1584,34 @@ $$m_1 = p\frac{y'-y_1}{x'-x_1}, \ m_2 = p\frac{y''-y2}{x''-x_2}.$$
 \end{enumerate}
 
 \end{algorithm}
+
+\begin{primer}
+
+Naj bo krivulja $E$ podana z enačbo $y^2=x^3+154x+82$ nad poljem $\F_{163}$. Naj bosta $P = (7,6),Q = (150,152)$ točki na krivulji. Iščemo tak $k$, da bo veljalo $kP=Q$. Preden lahko uporabimo algoritem \ref{alg:AnomalAttack} se moramo prepričati, da je $E$ res anomalna krivulja. Za točko $P$ velja $163P = \infty$. Ker je $163$ preštevilo od tod sledi, da je red točke $P$ enak $163$. To pa pomeni, da $163|\#\E{\F_{163}}$. Hassejev izrek \ref{izr:Hasse} nam pove 
+\begin{align}
+q+1-2\sqrt{q} &{}\leq \#\E{\F_q} \leq q+1+2\sqrt{q}, \nonumber \\
+139 &{}\leq \#\E{\F_{163}} \leq 189. \nonumber
+\end{align}
+
+Hkrati pa vemo, da red točke deli red grupe, kar pomeni, da je $\#\E{\F_{163}} = 163$. To velja, ker je $163$ edino število v tem območju, ki je deljivo z $163$.
+
+Sedaj lahko uporabimo zgornji napad. Razširimo krivuljo in točke nad $\Q$ in dobimo
+$$E': y^2 = x^3-11908x+83049, \ P =(7,6), \ Q=(150,1293).$$
+Od tod potem poračunamo
+\begin{align}
+P2 &{}= 162\cdot P1 = (12884,24607) \MOD{26569} \nonumber \\
+Q2 &{}= 162\cdot Q1 = (10908,3108) \MOD{26569} \nonumber
+\end{align}
+
+Prav tako imamo
+
+\begin{align}
+m_1 &{}= 163\frac{24607-6}{12884-7} = \frac{24601}{79} \nonumber \\
+m_2 &{}= 163\frac{3108-1293}{10908-150} = \frac{55}{2} \MOD{26569} \nonumber
+\end{align}
+ Velja torej
+$$k = \frac{m_1}{m_2} = \frac{49202}{4345} \equiv 47 \MOD{163}.$$
+\end{primer}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %DELITELJI
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
