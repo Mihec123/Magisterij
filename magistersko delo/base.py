@@ -147,6 +147,8 @@ class NumberMod:
         return str(self.num)
     
     def inverse(self):
+        #print("num: ",self.original)
+        #print("modul: ",self.modul)
         """inverse of self.num by modulo self.modul returns num()"""
         if self.modul == None:
             raise Exception('modul equals None')
@@ -155,7 +157,7 @@ class NumberMod:
             a = self.num + n
         else:
             a = self.num
-        if n % a == 0 and a != 1:
+        if gcd(a,n) != 1:
             raise Exception('inverse does not exist')
         else:
             return NumberMod(razEvk(a,n)[1],n)      
@@ -347,6 +349,33 @@ class ElipticCurve:
                 najdl = True
         return Point(self.a,self.b,self.mod,x,y)
 
+    def randComplex(self):
+        """
+        Opis:
+           Funkcija randNotPrime generira nakljucno tocko na
+           elipticni krivulji E kjer modul ni praštevilo
+           y^2 = x^3 + ax+b mod q
+         Definicija:
+           E.rand()
+         Vhodni podatki:
+           ni vhodnih podatkov
+         Izhodni  podatek:
+           Razred Point, ki predstavlja tocko na
+           elipticni krivulji
+        """
+        najdl = False
+        while not najdl:
+            x = complex(random.randint(0,self.mod-1),random.randint(0,self.mod-1))
+            y2 = CMod(x**3 + self.a*x + self.b,self.mod)
+            
+            for i in range(self.mod**2):
+                y = complex(random.randint(0,self.mod-1),random.randint(0,self.mod-1))
+                y22 = CMod(y**2,self.mod)
+                if y22 == y2:
+                    najdl = True
+                    break
+        return PointComplex(self.a,self.b,self.mod,x,y)
+
     def isOn(self,P):
         """
         Opis:
@@ -438,6 +467,7 @@ class Point(ElipticCurve):
 
         elif self.x != Q.x:
             m = NumberMod(Q.x-self.x,self.mod).inverse().num
+            #print("stevec: ",Q.y-self.y)
             m = (m*(Q.y-self.y)) % self.mod
             x3 = (m**2-self.x-Q.x) % self.mod
             y3 = (m*(self.x-x3) - self.y) % self.mod
@@ -567,7 +597,7 @@ def Factor(n):
             faktorji.append(2)
             tmp = tmp//2
         i = 3
-        while i*i < tmp:
+        while i*i <= tmp:
 
             while tmp % i == 0:
                 faktorji.append(i)

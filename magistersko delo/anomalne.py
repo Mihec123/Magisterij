@@ -46,6 +46,10 @@ def AnomalneAttack(P,Q):
     
             
     
-P = Point(108,4,853,0,2)
-Q= Point(108,4,853,563,755)
+##P = Point(108,4,853,0,2)
+##Q= Point(108,4,853,563,755)
+##k = AnomalneAttack(P,Q)
+
+P = Point(154,82,163,7,6)
+Q = Point(154,82,163,150,152)
 k = AnomalneAttack(P,Q)

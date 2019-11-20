@@ -347,7 +347,7 @@ def projektivnaAdd(P,Q):
 ##Q = E.rand()
 
 P = Point(-1,1,25,1,1)
-Q = Point(-1,1,25,21,4)
+Q = Point(-1,1,25,21,4)#k = 5
         
 
 E = ElipticCurve(0,1,23)
