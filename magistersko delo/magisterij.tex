@@ -314,6 +314,85 @@ Kubične krivulje se v kriptografiji uporabljajo, ker zagotavljajo isto varnost,
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%GALUISOVA POLJA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Končna polja}
+
+Končna polja ali Galoisova polja, so polja s končnim številom elementov. Najpogostejši primer takih polj so število modulo $p$, kjer je $p$ praštevilo. Polje z $q$ elementi označimo z $\F_q$. Poglejmo si nekaj pomembnih lastnosti takih polj.
+\begin{trditev}
+Naj bo $p$ praštevilo, potem veljajo naslednje lastnosti.
+\begin{itemize}
+\item Končno polje reda $q$ obstaja natanko tedaj, ko velja $q=p^k$, za nek $k \in \N$.
+\item Vsa končna polja reda $q$ so si izomorfna.
+\item Vsak element polja $\F_q$ zadošča enačbi $x^{q} -x = 0$.
+\item Multiplikativna grupa končnega polja je ciklična.
+
+\end{itemize}
+\end{trditev}
+
+Tekom magisterskega dela bomo večkrat delali v poljih katerih število elementov je potenca praštevila. Poglejmo si kako konstruiramo polje z $q = p^n$ elementi.
+
+Najprej si izberemo nerazcepni polinom $P$ v $\F_p[X]$ stopnje $n$. Potem velja, da je kvocientni prostor
+$$\F_q = \F_p[X]/(P)$$
+polinomov nad $\F_p$ z idealom generiranim z $P$, polje reda $q$.
+Bolj natančno so torej elementi $\F_q$ polinomi nad poljem $\F_p$ stopnje strogo manjše, kot $n$. Seštevanje in odštevanje  poteka na standardni način. Produkt dveh elementov dobimo, kot ostanek pri deljenju z $P$ produkta polinomov v $\F_p[X]$. Invezne elemente pa lhako poiščemo s pomočjo razširjenega Evklidovega algoritma.
+
+\begin{primer}
+Poglejmo si polje $\F_4$. Vzemimo nerazcepni polinom
+$$X^2+X+1.$$
+Velja torej
+$$\F_4 = \F_2[X]/(X^2+X+1) = \{ 0,1,\alpha,1 +\alpha \},$$
+kjer je $\alpha$ ničla zgornjega polinoma v $\F_4$.
+Vse operacije na elementih $\F_4$ bi lahko zapisali s tabelami
+
+
+\begin{table}[H]
+  \centering
+\begin{minipage}{.5\textwidth}
+ \begin{tabular}{l|llll}
++          & 0          & 1          & $\alpha$   & 1+$\alpha$ \\ \hline
+0          & 0          & 1          & $\alpha$   & 1+$\alpha$ \\
+1          & 1          & 0          & 1+$\alpha$ & $\alpha$   \\
+$\alpha$   & $\alpha$   & 1+$\alpha$ & 0          & 1          \\
+1+$\alpha$ & 1+$\alpha$ & $\alpha$   & 1          & 0         
+\end{tabular}
+  \label{table:ses}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+\centering
+\begin{tabular}{l|llll}
+$\times$   & 0 & 1        & $\alpha$   & 1+$\alpha$ \\ \hline
+0          & 0 & 0        & 0          & 0          \\
+1          & 0 & 1        & $\alpha$   & 1+$\alpha$ \\
+$\alpha$   & 0 & $\alpha$ & 1+$\alpha$ & $\alpha$   \\
+1+$\alpha$ & 0 & $\alpha$ & $\alpha$   & 1+$\alpha$
+\end{tabular}
+\label{table:mno}
+\end{minipage}
+\end{table}
+
+
+\begin{table}[H]
+\begin{tabular}{l|llll}
+$x/y$      & 0 & 1          & $\alpha$   & 1+$\alpha$ \\ \hline
+0          & / & 0          & 0          & 0          \\
+1          & / & 1          & 1+$\alpha$ & $\alpha$   \\
+$\alpha$   & / & $\alpha$   & 1          & 1+$\alpha$ \\
+1+$\alpha$ & / & 1+$\alpha$ & $\alpha$   & 1         
+\end{tabular}
+\label{table:delj}
+\end{table}
+\end{primer}
+
+\begin{primer}
+Poglejmo si še en zanimiv primer. Naj bo $\F_q= \F_{p^2}$, kjer je $p$ praštevilo za katero velja $p \equiv 3 \MOD{4}$. V tem primeru lahko za nerazcepni polinom izberemo $X^2+1$. Elementi polja $\F_q$ so torej oblike
+$$a+b\alpha,$$
+$a,b \in \F_p$, $\alpha$ pa je število za katero velja $\alpha^2 = 1$. To nas močno spominja na kompleksna števila. Tudi računske operacije se obnašajo enkako kot pri kompleksnih številih. V takih poljih lahko torej namesto s polinomi delamo kar s kompleksnimi števili.
+\end{primer}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %KUBIČNE KRIVULJE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Kubične krivulje}
