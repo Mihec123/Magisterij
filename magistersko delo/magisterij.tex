@@ -740,6 +740,7 @@ Frobeniuseva preslikava na $\F_q$.
 $$\phi_q(x,y) = (x^q,y^q), \ \phi_q(\infty) = \infty.$$
 
 \begin{lema}
+\label{lema:4.5}
 
 Naj bo $E$ eliptična krivulja definirana nad $\F_q$, in naj bo $(x,y) \in \E{\overline{\F_q}}$. Velja
 \begin{itemize}
@@ -1002,6 +1003,7 @@ $$Q=abP \iff t \equiv ab \MOD{n} \iff e_n'(aP,bP)=e_n'(P,P)^t.$$
 V zgornjem primeru je potrebna še dodatna utemeljitev, ki jo lahko zapišemo kot lemo.
 
 \begin{lema}
+\label{lema:6.1}
 Naj $3 \nmid n$. Če ima $P \in \E{\F_q}$ red n, potem je $e_n'(P,P)$ n-ti koren enote.
 \end{lema}
 
@@ -1488,8 +1490,34 @@ MOV napad deluje hitreje, kot če hočemo rešiti porblem diskretnega algoritma 
 $$k > log^2(p),$$
 kjer je krivulja $E(\F_p)$ in MOV pretvori to grupo v $\F^{\times}_{p^k}$.
 
-Preden pa lahko podamo podrobnejši algoritem, moramo razrešiti še nekaj vprašanj. Kako izračunamo red točke na nek ekonomičen način? Trenutno je najhitrejši algoritem za izračun reda točke Schoof–Elkies–Atkinsonov algoritem (SEA). Tu pa si bomo pogledali malo bolj preprost algoritem, ki pa vseeno predstavlja veliko izboljšanje glede na naiven pristop seštevanja točke same s seboj.
+MOV napad deluje na supersingularnih krivuljah, saj lahko za take krivulje ponavadi vzamemo $m=2$.
+
+\begin{definicija}
+Naj bo $E$ eliptična krivulja nad $\F_q$, kjer je $q$ potenca nekaga praštevila $p$. Potem velja $\#\E{\F_q} = q+1-a$ za neko število $a$. Krivulaj $E$ je \emph{supersingularna} če velja $a \equiv 0 \MOD{p}$.
+\end{definicija}
+
+\begin{opomba}
+Izkaže se, da je pri pogoju $q=p \geq 5$ ta definicija ekvivalentna temu, da je $a=0$.
+\end{opomba}
+Naslednja trditev, nam bo dala utemeljitev izbire $m$ pri supersingularnih krivuljah.
+
+\begin{trditev}
+Naj bo $E$ eliptična krivulja nad $\F_q$, ter naj velja $a = q+1-\#\E{\F_q} =0$. Naj bo $N\in \N$. Če obstaja točka $P \in \E{\F_q}$ reda $N$, potem velja
+$$E[N] \subseteq \E{\F_{q^2}}.$$
+\end{trditev}
+
+\begin{proof}
+
+ Frobeniusev endomorfizem $\phi_q$ po izreku \ref{izrek:4.10} zadošča $\phi^2_q-a\phi_q+q=0$. Ker velja $a = 0$, to pomeni
+$$\phi^2_q = -q.$$
+
+Naj bo $S \in E[N]$. Ker velja $\#\E{\F_q} = q+1$ in ker obstaja točka reda $N$, od tod sledi $N|q+1$. Povedano drugače to pomeni $-q \equiv 1 \MOD{N}$. Od tod sledi
+$$\phi^2_q(S) = -qS = 1\cdot S.$$
+Po lemi \ref{lema:4.5} od tot sledi $S \in \E{\F_{q^2}}$. 
+\end{proof}
+
 \subsection{Mali korak, Velik korak}
+Kako izračunamo red točke na nek ekonomičen način? Trenutno je najhitrejši algoritem za izračun reda točke Schoof–Elkies–Atkinsonov algoritem (SEA). Tu pa si bomo pogledali malo bolj preprost algoritem, ki pa vseeno predstavlja veliko izboljšanje glede na naiven pristop seštevanja točke same s seboj.
 Naj bo $P \in E(\F{q})$. Radi bi izračunali red točke $P$. Iščemo torej tako število $k$, da bo veljalo $kP = \infty$. Algoritem Mali korak, Velik korak lahko izračuna red točke v približno $4q^{\frac{1}{4}}$ korakih. Koraki algoritma so sledeči:
 
 \begin{algorithm}[H]
@@ -1838,6 +1866,46 @@ Vprašanje, ki ga moramo tu še razrešiti je kako sporočilo predstaviti kot to
 $y^2 = x^3+Ax+B$ nad $\F_p$. Sporočilo $m$ predstavimo kot število $0 \leq m \leq p/100$. Sedaj določimo $x_j = 100m+j$, za $0\leq j < 100$. Podobno, kot pri generiranju naključne točke sedaj poiskusimo določiti koordinato $y_j$ če ta obstaja. Če smo uspeli poračunati obe koordianti je naša točka $M=(x_j,y_j)$. Ker velja $0\leq x_j < p+100$ je $m$ določen kot
 $m = \lfloor x_j \rfloor$.
 Ocenimo lahko, da je verjetnost neobstoja take točke približno $2^{-100}$.
+
+\subsection{Kriptosistemi nad parjenji}
+
+V enem od prejšnjih poglavij smo videli, kako lahko s pomočjo Weilovega parjenja izvedemo napad na supersingularne krivulje. Sedaj pa si bomo ogledali kriptosistem, ki uporablja supersingularne krivulje. Tu se opremo na dejstvo, da kljub napadom kot je MOV problem diskretnega logaritma v $\F^{\times}_p$ ni enostaven. Če izberemo dovolj velik $p$ je ta problem še vedno zelo zahteven. Take krivulje izbiramo zato, ker lahko izkoristimo določene lastnosti.
+
+Delajmo sedaj nad krivuljo $E$ podano z enačbo $y^2=x^3+1$ nad $\F_p$, kjer je $p \equiv 2 \MOD{3}$. Take krivulje so supersingularne. Naj bo $\omega \in \F_{p^2}$ tretji koren enote. Definirajmo preslikavo
+$$\beta:\E{\F_{p^2}} \rightarrow \E{\F_{p^2}}, \ (x,y) \mapsto (\omega x,y), \ \beta(\infty) = \infty.$$
+
+Predpostavimo, da ima $P$ red $n$. Potem ima tudi $\beta(P)$ red $n$. Uporabimo modificirano Weilovo parjenje
+$$e'_n(P_1,P_2)  =e_n(P_1,\beta(P_2)).$$
+Pokazali smo že v lemi \ref{lema:6.1} da v primeru ko velja $3 \nmid n$ in ima $P \in \E{\F_p}$ red $n$, potem sledi , da je $e'_n(P,P)$ primitivni n-ti koren enote.
+
+Ker je $E$ supersingularna ima red $p+1$. Predpostavimo še, da velja $p = 6l-1$ za neko praštevilo $l$. To pomeni, da ima točka $6P$ red $l$ ali $1$ za vsako točko $P$.
+Za pripravo kriptosistema najprej neka agencija, ki jamči našo identiteto naredi sledeče:
+\begin{itemize}
+\item Izbere veliko praštevilo $p = 6l-1$.
+\item Izbere točko $P$ reda $l$ na $\E{\F_p}$.
+\item Izbere zgoščevalni funkciji $H_1, H_2$. Funkcija $H_1$ vzame niz bitov poljubne dolžine in vrne točko reda $l$ na krivulji $E$. Funkcija $H_2$ pa vzame element reda $l$ iz $\F^{\times}_{p^2}$ in vrne binarni niz dolžine $n$, kjer je $n$ dolžina sporočila, ki bo poslano.
+\item Izbere skrivno število $s\in \F^{\times}_l$ in izračuna $P_{\text{javni}} = sP$.
+\item Javno objavi $p,H_1,H_2,n,P,P_{\text{javni}}$ obdrži pa $s$.
+\end{itemize}
+
+Če hoče sedaj uporabnik z identiteto $I$ dobiti privatni ključ, agencija naredi sledeče:
+
+\begin{itemize}
+\item Izračuna $Q_I = H_1(I)$.
+\item Izračuna $D_I = sQ_I$.
+\item Ko preveri ideniteto uporabnika $I$ pošlje $D_I$ uporabniku.
+\end{itemize}
+
+Če hoče sedaj Alenka Borisu poslati sporočilo $M$ to naredi tako:
+
+\begin{itemize}
+\item Alenka poišče Borisovo identiteto $I$, ter izračuna $Q_I = H_1(I)$.
+\item Izbere naključni element $r \in \F^{\times}_l$.
+\item Izračuna $g_I = e'_l(Q_I,P_{\text{javni}})$.
+\item Sporočilo $c$ zapiše kot
+$$c = (rP,M \oplus H_2(g^r_I)).$$
+Tu oznaka $\oplus$ predstavlja operacijo XOR na bitih.
+\end{itemize}
 
 \cite{Washington2008}
 \cite{Silverman2009}
