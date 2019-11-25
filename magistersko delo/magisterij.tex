@@ -728,6 +728,44 @@ $(2,3)+(1,1)$ je torej enako $(1,4)$ nad $E$.
 
 \end{primer}
 
+\subsection{Endomorfizmi}
+
+\begin{definicija}
+\emph{Endomorfizem} na $E$ je homomorfizem $\alpha: \E{\overline{K}} \rightarrow \E{\overline{K}} $, ki je podan z racionalno funkcijo. Torej obstajata racionalni funkciji $R_1,R_2$ s koeficienti v $\overline{K}$ tako da velja
+$$\alpha(x,y) = (R_1(x,y),R_2(x,y)),$$
+za vse $(x,y) \in \E{\overline{K}}$.
+\end{definicija}
+
+\begin{primer}
+Naj bo $E$ krivulja podana z $y^2 = x^3+Ax+B$, ter naj bo $\alpha(P) = 2P$. $\alpha$ je očitno homomorfizem. Prav tako pa obstajajo racionalne funkcije za seštevanje točk na kubičnih krivuljah, zato je $\alpha$ tudi endomorfizem nad E.
+\end{primer}
+
+Standardizirajmo zapis endomorfizmov. V racionalni funkciji $R(x,y)$ lahko zaradi tega ker se nahajamo na Weierstrassovi krivulji vse sode potence $y$ zamenjamo z nekim izrazom, ki vsebuje samo $x$. Zaradi tega lahko $R(x,y)$ zapišemo kot
+$$R(x,y) = \frac{p_1(x)+p_2(x)y}{p_3(x)+p_4(x)y}.$$
+Če sedaj še pomnožimo števec in imenovalec z $p_3-p_4y$ ter potem zamenjamo $y^2$ z $x^3+Ax+B$, dobimo izraz oblike
+$$R(x,y) = \frac{q_1(x)+q_2(x)y}{q_3(x)}.$$
+Ker za točke na Weierstrassovi krivulji velja $-(x,y) = (x,-y)$ od tod sledi, da za vsak endomorfizem $\alpha = (R_1,R_2) $ nad $E$ velja
+$$R_1(x,-y) = R_1(x,y), \ R_2(x,-y) = -R_2(x,y).$$
+To sledi iz dejstva, da je $\alpha$ homomorfizem in velja
+$$\alpha(x,-y) = \alpha(-(x,y)) = -\alpha(x,y).$$
+To pa pomeni, da se da $\alpha(x,y)$ zapisati kot
+$\alpha(x,y) = (r_1(x),r_2(x)y),$
+kjer sta $r_1,r_2$ racionalni funkciji.
+
+Če zapišemo sedaj $r_1(x)$ kot
+$$r_1(x) = \frac{p(x)}{q(x)},$$
+potem lahko definiramo še nekaj pojmov. 
+
+\begin{definicija}
+\emph{Stopnja} endomorfizma je  definirano kot
+$$deg(\alpha) = \text{Max} \{ deg\ p(x),deg\ q(x)\},$$
+če je $\alpha$ netrivialen. V primeru $\alpha = 0$, definiramo $deg(0) = 0$.
+\end{definicija}
+
+\begin{definicija}
+$\alpha \neq 0$ je \emph{separabilni} endomorfizem če je odvod $r'_1(x) \neq 0$.
+\end{definicija}
+
 \subsection{Frobeniusev endomorfizem}
 
 Naj bo $\F_q$ končno polje z algebrajičnim zaprtjem $\overline{\F_q}$ in naj bo
@@ -1307,11 +1345,17 @@ $$e_n(T,T) = \frac{g(P+T)}{g(P)} = 1.$$
  &{} = e_n(S,T)e_n(T,S). \nonumber
 \end{align}
 
-\item MANKA
-
-\item MANKA
-
 To pa pomeni $e_n(T,S) = e_n(S,T)^{-1}$.
+
+\item Naj bo $\rho$ automorfizem na $\overline{K}$, za katerega velja, da je $\rho$ identiteta na koeficientih $E$. Če $\rho$ apliciramo na vsakem koraku konstrukcije Weilovega parjenja dobimo
+$$div(f^{\rho}) = n[\rho T] - n[\infty],$$
+ter podobno za $g^{\rho}$. Tu $f^{\rho},g^{\rho}$ uznačujeta funkciji, ki jih dobimo tako, da $\rho$ apliciramo na koeficiente racionalnih funkcij, ki definirajo $f,g$.
+Zato velja
+$$\rho(e_n(S,T)) = \rho \left( \frac{g(P+S)}{g(P)} \right) = \frac{g^{\rho}(\rho P+\rho S)}{g^{\rho}(\rho P)} = e_n(\rho S,\rho T).$$
+
+\item MANKA
+
+
 \end{enumerate}
 
 \end{proof}
@@ -1906,6 +1950,18 @@ Za pripravo kriptosistema najprej neka agencija, ki jamči našo identiteto nare
 $$c = (rP,M \oplus H_2(g^r_I)).$$
 Tu oznaka $\oplus$ predstavlja operacijo XOR na bitih.
 \end{itemize}
+
+Boris sedaj sporočilo $c = (u,v)$ dešifrira na sledeči način.
+\begin{itemize}
+\item S pomočjo privatnega ključa $D_I$ izračunaj $h_I = e'_l(D_I,u)$.
+\item Izračunaj $m= v \oplus H_2(h_I)$.
+\end{itemize}
+
+Prepričajmo se, da na ta način res dobimo originalno sporočilo.
+$$e'_l(D_I,u) = e'_l(sQ_I,rP) = e'_l(Q_I,P)^{sr}= e'_l(Q_I,P_{\text{javni}})^r = g^r_I.$$
+Sporočilo pa je sedaj
+$$m = v \oplus H_2(e'_l(D_I,u)) = (M \oplus H_2(g^r_I)) \oplus H_2(g^r_I) = M.$$
+
 
 \cite{Washington2008}
 \cite{Silverman2009}
