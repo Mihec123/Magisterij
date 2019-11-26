@@ -766,6 +766,35 @@ $$deg(\alpha) = \text{Max} \{ deg\ p(x),deg\ q(x)\},$$
 $\alpha \neq 0$ je \emph{separabilni} endomorfizem če je odvod $r'_1(x) \neq 0$.
 \end{definicija}
 
+\begin{primer}
+Če vzamemo enak endomorfizem kot v prejšnem primeru $\alpha(P) = 2P$ imamo funkcijo
+$$R_1(x,y) = \left(\frac{3x^2+A}{2y}\right)^2-2x.$$
+To lahko sedaj preoblikujemo kot
+\begin{align}
+\left(\frac{3x^2+A}{2y}\right)^2-2x &{}= \frac{9x^4+6Ax^2+A^2}{4y^2}-2x \nonumber \\
+&{} = \frac{9x^4+6Ax^2+A^2 - 2x(4(x^2+Ax+B))}{4(x^2+Ax+B)} \nonumber \\
+&{} = \frac{x^4-2Ax^2-8Bx+A^2}{4(x^2+Ax+B)} \nonumber
+\end{align}
+Dobimo torej
+$$r_1(x) = \frac{x^4-2Ax^2-8Bx+A^2}{4(x^2+Ax+B)}.$$
+Stopnja $deg(\alpha) = 4$.
+%
+%Poglejmo si še odvod $r'_1(x)$.
+%\begin{align}
+%r'_1(x) &{}=\frac{(4x^3-4Ax-8B)4(x^3+Ax+B)-(x^4-2Ax^2-8Bx+A^2)(12x^2+4A)}{16(x^2+Ax+B)^2} \nonumber \\
+%&{}= \ldots = \nonumber \\
+%&{} = \frac{-A^3 - 8 B^2 + 2 x^5 - 2 A^2 x (1 + x) + 4 B x^2 (2 + x) +  A (-4 B x + 3 x^4)}{4 (B + x (A + x))^2}
+%\end{align}
+\end{primer}
+
+\begin{izrek}
+\label{izrek:2.21}
+Naj bo $\alpha \neq 0$ seperabilni enodmorfizem nad eliptično krivuljo $E$. Potem velja
+$$deg(\alpha)= \# Ker(\alpha).$$
+Če $\alpha \neq 0$ ni seperabilen velja
+$$deg(\alpha) > \# Ker(\alpha).$$
+\end{izrek}
+
 \subsection{Frobeniusev endomorfizem}
 
 Naj bo $\F_q$ končno polje z algebrajičnim zaprtjem $\overline{\F_q}$ in naj bo
@@ -1353,8 +1382,41 @@ ter podobno za $g^{\rho}$. Tu $f^{\rho},g^{\rho}$ uznačujeta funkciji, ki jih d
 Zato velja
 $$\rho(e_n(S,T)) = \rho \left( \frac{g(P+S)}{g(P)} \right) = \frac{g^{\rho}(\rho P+\rho S)}{g^{\rho}(\rho P)} = e_n(\rho S,\rho T).$$
 
-\item MANKA
+\item Naj bo $\{Q_1,\ldots,Q_k\} = Ker(\alpha)$. Ker je $\alpha$ seperabilen, po izreku \ref{izrek:2.21} velja $k = deg(\alpha)$.
+Naj bo
+$$div(f_T) = n[T]-n[\infty],\ div(f_{\alpha(T)}) = n[\alpha(T)]-n[\infty]$$
+in
+$$g^n_T = f_T \circ n, \ g^n_{\alpha(T)} = f_{\alpha(T)} \circ n.$$
+Če uporabimo oznako $\tau_Q$ iz točke $3$ velja
+$$div(f_t \circ \tau_{-Q_i}) = n[T+Q_i]-n[Q_i].$$
+Zato velja
+\begin{align}
+div( f_{\alpha(T)} \circ \alpha) &{}= n \sum_{T'',\alpha(T'')=\alpha(T)}[T'']-n\sum_{Q,\alpha(Q)=\infty}[Q] \nonumber \\
+&{} = n\sum_i ([T+Q_i]-[Q_i]) \nonumber \\
+&{} = div(\prod_i(f_T \circ \tau_{-Q_i})) \nonumber
+\end{align}
 
+Za vsak $i$ sedaj izberemo $Q'_i$, tako da velja $nQ'_i = Q_i$. Potem
+$$g_T(P-Q'_i)^n=f_T(nP-Q_i).$$
+
+Za to funkcijo velja
+
+\begin{align}
+div(\prod_i(g_T \circ \tau_{-Q'_i})^n) &{} = div(\prod_i f_T \circ \tau_{-Q_i}\circ n) \nonumber \\
+&{} = div(f_{\alpha(T)} \circ \alpha \circ n) \nonumber \\
+&{} = div(f_{\alpha(T)} \circ n \circ \alpha) \nonumber \\
+&{} = div(g_{\alpha(T)} \circ \alpha)^n. \nonumber
+\end{align}
+
+Delitelja $\prod_i g_T \circ \tau_{-Q'_i}$ in $g_{\alpha(T)} \circ \alpha$ se torej razlikujeta samo za produkt neke konstante $C$.
+
+Velja
+\begin{align}
+e_n(\alpha(S),\alpha(T)) &{}= \frac{g_{\alpha(T)}(\alpha(P+S))}{g_{\alpha(T)}(\alpha(P))} \nonumber \\
+&{} = \prod_i \frac{g_T(P+S-Q'_i)}{g_T(P-Q'_i)} \nonumber \\
+&{} = \prod_i e_n(S,T) \nonumber  \\
+&{} = e_n(S,T)^k = e_n(S,T)^{deg(\alpha)}. \nonumber
+\end{align}
 
 \end{enumerate}
 
@@ -1599,7 +1661,7 @@ Naj bo $k$ red $g\in G$. Ker velja $Mg = 0$ vemo, da $k|M$. Denimo, da $k \neq M
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%DELITELJI
+%ANOMALNE KRIVULJE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Anomalne krivulje}
