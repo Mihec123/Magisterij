@@ -1232,6 +1232,7 @@ Polinom $\gamma_n$ ni nujno samo polinom spremenljivke $x$, saj je odvisno od te
 \end{opomba}
 
 \begin{izrek}
+\label{izrek:3.6}
 Naj bo $P = (x,y)$ točka na krivulji $y^2 = x^3+Ax+B$, katere karakteristika ni $2$. Naj bo $n\in \N$, potem velja
 $$nP = \left( \frac{\phi_n(x)}{\gamma^2_n(x)}, \frac{\omega_n(x,y)}{\gamma^3_n(x,y)}\right).$$
 
@@ -1239,8 +1240,31 @@ $$nP = \left( \frac{\phi_n(x)}{\gamma^2_n(x)}, \frac{\omega_n(x,y)}{\gamma^3_n(x
 \end{izrek}
 
 \begin{posledica}
+\label{posledica:3.7}
 Naj bo $E$ eliptična krivulja. Endomorfizem $E$ podan z množenjem z $n$ ima stopnjo $n^2$.
 \end{posledica}
+
+
+\begin{proof}
+Predpostavimo, da $n$ ni večkratnik karakteristike $p$ polja. Po izreku \ref{izrek:3.6} vemo, da ima množenje z $n$ prvo koordinato oblike
+$$R(x) = \frac{x^{n^2}+\ldots}{n^2x^{n^2-1}+ \ldots}.$$
+Če poračunamo odvod dobimo v števcu $n^2x^{2n^2-2}+ \ldots$, kar ni identično enako $0$. To pomeni, da je množenje z $n$ seperabilno. Po posledici \ref{posledica:3.7} in trditvi \ref{trditev:2.21} ima jedro množenja z $n$, E[n], red $n^2$. Iz algebre vemo, da so končne Abelove grupe, torej tudi  $E[n]$ izomorfne
+$$\Z_{n_1} \oplus \Z_{n_2} \oplus \ldots \oplus \Z_{n_k},$$
+za neka naravna števila $n_1,n_2,\ldots,n_k$, za katere velja $n_i|n_{i+1}$  za vse $i$. Naj bo $l$ praštevilo, ki deli $n_1$. Potem $l|n_i$ za vse $i$. To pa pomeni, da ima $E[l] \subseteq E[n]$ red $l^k$. Ker ima $E[l]$ red $l^2$ po tem kar smo povedali zgoraj, od tod sledi $k=2$. Množenje z $n$ ima torej jedro $E[n] \simeq \Z_{n_1} \oplus \Z_{n_2}$. Veljati pa mora tudi $n_2|n$. Ker velja $n^2=\#E[n] = n_1n_2$ od tod sledi $n_1=n_2=n$. Zato velja
+$$E[n] \simeq \Z_n \oplus \Z_n,$$
+ko karakteristika polja ne deli $n$.
+
+Pokazati moramo trditev še v primeru, ko $p|n$. Po trditvi \ref{trditev:2.28} množenje z $p$ ni seperabilno. Po trditvi \ref{trditev:2.21} ima jedro $E[p]$ množenja s $p$ red strogo manjši kot je stopnja endomorfizma, ki je $p^2$ po posledici \ref{posledica:3.7}. Ker ima vsak element $E[p]$ red $1$ ali $p$, sledi da ima $E[p]$ red potence $p$. Torej mora biti red $1$ ali $p$. Če je $E[p]$ trivialna, potem je $E[p^k]$ trivialna za vse $k$. Če ima $E[p]$ red $p$ potem trdimo, da velja $E[p^k] \simeq \Z_{p ^k}$ za vse $k$. Enostavno je videti, da je $E[p^k]$ ciklična. Pokazati moramo, da ima taka grupa red $p^k$ in ne nekaj manjšega. Denimo da obstaja element $P$ reda $p^j$. Po izreku \ref{izrek:2.22} je množenje z $p$ surjektivno. Torej obstaja točka $Q$ tako da velja $pQ = P$. Ker velja
+$$p^jQ = p^{j-1}P \neq \infty, \ p^{j+1}Q = p^jP = \infty,$$
+torej ima $Q$ red $p^{j+1}$. Z indukcijo lahko pokažemo, da obstajajo točke reda $p^k$ za vse $k$. Zato je $E[p^k]$ ciklična reda $p^k$.
+
+Zapišimo sedaj $n=p^rn'$, $r\geq0$ in $p\nmid n'$. Potem velja
+$$E[n] \simeq E[n'] \oplus E[p^r].$$
+Po dokazanem zgoraj lahko zapišemo $E[n'] \simeq Z_{n'} \oplus Z_{n'}$, ker $p \nmid n'$. Vemo da velja zveza
+$$\Z_{n'} \oplus \Z_{p^r} \simeq \Z_{n'p^r} \simeq Z_n$$.
+Od tod pa sledi
+$$E[n] \simeq \Z_{n'} \oplus \Z_{n'} \text{ ali } \Z_n \oplus \Z_{n'}.$$
+\end{proof}
 
 
 \begin{definicija}~
