@@ -310,7 +310,25 @@ the content and not the structure of your work.
 %UVOD
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Uvod}
-Kubične krivulje se v kriptografiji uporabljajo, ker zagotavljajo isto varnost, kot drugi klasični kriptosistemi, pri tem pa potrebujejo manjšo velikost ključa. Ocenjuje se, da je $2048$ bitni ključ v RSA algoritmu enako varen kot $224$ bitni ključ nad kubičnimi krivuljami. Krajši kluči predstavljajo veliko prednost v okoljih s slabšo procesorsko močjo in/ali omejenim pomnilnikom. Primer take uporabe predstavljajo pametne kartice. Uporaba kubičnih krivulj v namene kriptografije je prvi predlagal Victor S. Miller leta 1985, a so le te v širšo rabo vstopile še le okoli leta 2004.
+Kubične krivulje v kriptografiji dobivajo vedno večji pomen, saj zagotavljajo isto varnost, kot drugi klasični kriptosistemi, pri tem pa potrebujejo manjšo velikost ključa. Ocenjuje se, da je $2048$ bitni ključ v RSA algoritmu enako varen kot $224$ bitni ključ nad kubičnimi krivuljami. Podrobnejšo primerjavo, pa lahko vidimo v spodnji tabeli.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textit{\textbf{SIM}} & \textit{\textbf{ECC}} & \textit{\textbf{RSA}} \\ \hline
+80                    & 160                   & 1024                  \\ \hline
+112                   & 224                   & 2048                  \\ \hline
+128                   & 256                   & 3072                  \\ \hline
+192                   & 384                   & 7680                  \\ \hline
+256                   & 521                   & 15360                 \\ \hline
+\end{tabular}
+ \caption[Primerjava kriptosistemov.]{V tabeli so v posamezni vrstici dolžine ključev v bitih, ki glede na simetrične kriptosisteme, kriptosisteme z uporabo kubičnih krivulj, ter RSA zagotavljajo enako varnost.}
+\end{table}
+Tu je potrebno dodati, da simetrični kriptosistemi ne omogočajo enostavne komunikacije, saj je za njihovo uporabo potreben predhoden dogovor o ključu. Klasično se uporablja npr.\ RSA ali ECC,  za samo izmenjavo ključa, nato pa se komunikacija nadaljuje s pomočjo simetričnih kripotsistemov.
+Krajši kluči predstavljajo veliko prednost v okoljih s slabšo procesorsko močjo in/ali omejenim pomnilnikom. Te naprave pa so v današnjem svetu kljub hitrim tehnološkim napredkom zelo pogoste. Med njih bi lahko umestili razne naprave v t.\ i.\  pametne hiše, razne pametne kartice, itd. Zgodovinsko gledano sega uporaba kubičnih krivulj v kriptografske namene v konec 20.\ stoletja. Njihovo uporabo je prvi predlagal Victor S. Miller leta 1985, a so le te v širšo rabo vstopile še le okoli leta 2004.
+
+V tem magisterskem delu, se bomo najprej spoznali osnove definicije in izreke v povezavi z kubičnimi krivuljami nad končnimi polji. Za tem pa se bomo posvetili problemu diskretnega logaritma nad eliptičnimi krivuljami. S pomočjo tega bomo spoznali nekaj napadov na eliptične krivulje, ter izvedeli nekaj o primerni izbiri krivulj za kriptografske namene. Pri tem bomo govorili tudi o parjenju nad eliptičnimi krivuljami in spoznali učinkovit algoritem za izračun le tega. Vse skupaj pa bomo pospremili še s programsko kodo.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2047,6 +2065,12 @@ Prepričajmo se, da na ta način res dobimo originalno sporočilo.
 $$e'_l(D_I,u) = e'_l(sQ_I,rP) = e'_l(Q_I,P)^{sr}= e'_l(Q_I,P_{\text{javni}})^r = g^r_I.$$
 Sporočilo pa je sedaj
 $$m = v \oplus H_2(e'_l(D_I,u)) = (M \oplus H_2(g^r_I)) \oplus H_2(g^r_I) = M.$$
+
+\section{Zaključek}
+
+Skozi delo smo spoznali, da izredno pomembno vlogo pri varnosti kriptosistemov nad eliptičnimi krivuljami igra sama izbira krivulje. Tako smo ugotovili, da supersingularne krivulje ne predstavljajo dobre izbire če hočemo delati z zelo majhnjimi ključi, saj le te niso odporne na napade kot je MOV. Prav tako smo videli, da lahko probleme nad anomalnimi krivuljami rešimo zelo enostavno. Ker smo si ogledali samo majhen del krivulj in načinov kako lahko izkoristimo njihovo obliko zaključimo delo s primerom krivulje, ki trenutno velja za varno. Krivulja imenovana M-221 je podana z enačbo
+$$E:\ y^2 = x^3+117050x^2+x \MOD{2^{221} - 3}.$$
+Predstavili pa so jo Aranha, Barreto, Pereira in  Ricardini leta 2013.
 
 
 \cite{Washington2008}
