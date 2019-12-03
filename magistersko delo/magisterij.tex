@@ -318,10 +318,12 @@ Kubične krivulje v kriptografiji dobivajo vedno večji pomen, saj zagotavljajo 
  \caption[Primerjava kriptosistemov.]{V tabeli so v posamezni vrstici dolžine ključev v bitih, ki glede na simetrične kriptosisteme, kriptosisteme z uporabo kubičnih krivulj, ter RSA zagotavljajo enako varnost.}
 \end{table}
 Tu je potrebno dodati, da simetrični kriptosistemi ne omogočajo enostavne komunikacije, saj je za njihovo uporabo potreben predhoden dogovor o ključu. Klasično se uporablja npr.\ RSA ali ECC,  za samo izmenjavo ključa, nato pa se komunikacija nadaljuje s pomočjo simetričnih kriptosistemov
-Krajši ključi predstavljajo veliko prednost v okoljih s slabšo procesorsko močjo in/ali omejenim pomnilnikom. Te naprave pa so v današnjem svetu kljub hitrim tehnološkim napredkom zelo pogoste. Med njih bi lahko umestili razne naprave v t.\ i.\  pametne hiše, razne pametne kartice, itd. Zgodovinsko gledano sega uporaba kubičnih krivulj v kriptografske namene v konec 20.\ stoletja. Njihovo uporabo je prvi predlagal Victor S. Miller leta 1985, a so le te v širšo rabo vstopile še le okoli leta 2004.
+Krajši ključi predstavljajo veliko prednost v okoljih s slabšo procesorsko močjo in/ali omejenim pomnilnikom. Te naprave pa so v današnjem svetu kljub hitrim tehnološkim napredkom zelo pogoste. Med njih bi lahko umestili razne naprave v t.\ i.\  pametni hiši, razne pametne kartice, itd. Zgodovinsko gledano sega uporaba kubičnih krivulj v kriptografske namene v konec 20.\ stoletja. Uporaba kubičnih krivulj pa ni omejena le na kriptosistem, ki uporabljajo krivulje, ampak lahko služi tudi kot orodje za napade na klasične kriptosisteme. Tako lahko kubične krivulje uporabljamo tudi pri faktorizacijskih algoritmih, saj pri določenih pogojih predstavljajo enega najhitrejših poznanih algoritmov za razcep števil. S pomočjo tega lahko napademo vse kriptosisteme, katerih varnost temelji na problemu faktorizacije.  Njihovo uporabo je prvi predlagal Victor S. Miller leta 1985, a so le te v širšo rabo vstopile še le okoli leta 2004.
 
 V tem magistrskem delu, se bomo najprej spoznali osnove definicije in izreke v povezavi z kubičnimi krivuljami nad končnimi polji. Za tem pa se bomo posvetili problemu diskretnega logaritma nad eliptičnimi krivuljami. S pomočjo tega bomo spoznali nekaj napadov na eliptične krivulje, ter izvedeli nekaj o primerni izbiri krivulj za kriptografske namene. Pri tem bomo govorili tudi o parjenju nad eliptičnimi krivuljami in spoznali učinkovit algoritem za izračun le tega. Vse skupaj pa bomo pospremili še s programsko kodo.
 
+
+\newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %GALUISOVA POLJA
@@ -330,8 +332,9 @@ V tem magistrskem delu, se bomo najprej spoznali osnove definicije in izreke v p
 
 \section{Končna polja}
 
-Končna polja ali Galoisova polja, so polja s končnim številom elementov. Najpogostejši primer takih polj so število modulo $p$, kjer je $p$ praštevilo. Polje z $q$ elementi označimo z $\F_q$. Poglejmo si nekaj pomembnih lastnosti takih polj.
-\begin{trditev}
+Končna polja ali Galoisova polja, so polja s končnim številom elementov. Najpogostejši primer takih polj so število modulo $p$, kjer je $p$ praštevilo. Polje z $q$ elementi označimo z $\F_q$, pojavlja pa se tudi oznaka $GF(q)$. Poglejmo si nekaj pomembnih lastnosti takih polj.
+\begin{trditev}~
+
 Naj bo $p$ praštevilo, potem veljajo naslednje lastnosti.
 \begin{itemize}
 \item Končno polje reda $q$ obstaja natanko tedaj, ko velja $q=p^k$, za nek $k \in \N$.
@@ -349,7 +352,8 @@ $$\F_q = \F_p[X]/(P)$$
 polinomov nad $\F_p$ z idealom generiranim z $P$, polje reda $q$.
 Bolj natančno so torej elementi $\F_q$ polinomi nad poljem $\F_p$ stopnje strogo manjše, kot $n$. Seštevanje in odštevanje  poteka na standardni način. Produkt dveh elementov dobimo, kot ostanek pri deljenju z $P$ produkta polinomov v $\F_p[X]$. Inverzne elemente pa lahko poiščemo s pomočjo razširjenega Evklidovega algoritma.
 
-\begin{primer}
+\begin{primer}~
+
 Poglejmo si polje $\F_4$. Vzemimo nerazcepni polinom
 $$X^2+X+1.$$
 Velja torej
@@ -396,19 +400,19 @@ $\alpha$   & / & $\alpha$   & 1          & 1+$\alpha$ \\
 \end{table}
 \end{primer}
 
-\begin{primer}
+\begin{primer}~
+
 Poglejmo si še en zanimiv primer. Naj bo $\F_q= \F_{p^2}$, kjer je $p$ praštevilo za katero velja $p \equiv 3 \MOD{4}$. V tem primeru lahko za nerazcepni polinom izberemo $X^2+1$. Elementi polja $\F_q$ so torej oblike
 $$a+b\alpha,$$
 $a,b \in \F_p$, $\alpha$ pa je število za katero velja $\alpha^2 = 1$. To nas močno spominja na kompleksna števila. Tudi računske operacije se obnašajo enako kot pri kompleksnih številih. V takih poljih lahko torej namesto s polinomi delamo kar s kompleksnimi števili.
 \end{primer}
 
+\newpage
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %KUBIČNE KRIVULJE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Kubične krivulje}
-
-
-KOPIRANO IZ DIPLOME ALI JE OK????
 
 \subsection{Točke na krivulji}
 
@@ -451,7 +455,7 @@ Ta zapis vsebuje $10$ koeficientov, vendar se v gladkih primerih lahko polinom p
 Algebraična krivulja je \emph{gladka}, če nima nobenih samopresečišč ali singularnosti.
 \end{definicija}
 
-\begin{izrek}[\protect{\cite{gibson}, Izrek 15.2}]~
+\begin{izrek}[\protect{\cite{Gibson1999}, Izrek 15.2}]~
 
 Gladko kubično krivuljo nad algebraično zaprtim poljem lahko zapišemo v Weierstrassovi obliki
 $$y^2z = x^3 + axz^2 + bz^3.$$
@@ -505,6 +509,7 @@ Na zgornjih slikah lahko vidimo, kako krivuljo predstavimo v projektivni ravnini
 V nadaljevanju nas bodo zanimale predvsem gladke kubične krivulje v polju $\mathbb{Z}/n\mathbb{Z}$.
 
 \begin{definicija}~
+
 Za dani števili $a$, $b \in \mathbb{Z}/n\mathbb{Z}$ je \emph{kubična krivulja} nad poljem $\mathbb{Z}/n\mathbb{Z}$ množica točk
 $$E_{(a,b)}(\mathbb{Z}/n\mathbb{Z}) =\left\{ [x,y,z] \in \PP^2(\mathbb{Z}/n\mathbb{Z}): y^2z=x^3+axz^2+bz^3 \right\} .$$
 Drugače povedano, afina kubična krivulja je množica rešitev enačbe
@@ -517,7 +522,7 @@ $$(x,y)\in (\Z/n\Z)^2 \Leftrightarrow [x,y,1]\in \PP^2(\Z/n\Z).$$
 Pomembno vlogo v kriptografiji igra tudi naključnost. Če privzamemo, da lahko naključno izberemo število $0 \leq x \leq n$, potem nas zanima, kako izberemo naključno točko na krivulji oblike
 $y^2 = x^3 +Ax+B \ \text{mod } n$. Ideja je preprosta. Naključno generirajmo koordinato $x$ in nato poizkusimo rešiti enačbo $y^2 = X \ \text{mod } n$, če tak $y$ obstaja. V nasprotnem primeru generiramo novo $x$ koordinato in poizkusimo ponovno. Problem se torej skriva le v reševanju kvadratne enačbe. Tu pa nam pomaga Tonneli-Shankov algoritem.
 
-\begin{trditev}
+\begin{trditev}~
 
 Naj bo $p > 2$ praštevilo. Če se da $n \in \Z_p$ zapisati kot $n = r^2, r \in \Z_p$, potem na algoritem \ref{alg:Tonelli} vrne $r$.
 
@@ -545,7 +550,8 @@ Naj bo $p > 2$ praštevilo. Če se da $n \in \Z_p$ zapisati kot $n = r^2, r \in 
 \end{algorithmic}
 \end{algorithm}
 
-\begin{opomba}
+\begin{opomba}~
+
 V algoritmu \ref{alg:Tonelli} lahko prvi korak izvedemo tako, da preiskušamo naključne $g\in \Z_p$, dokler ne velja $g^{(p-1)/2} = -1$.
 \end{opomba}
 
@@ -647,7 +653,8 @@ ter $\mu = b_1 - \lambda a_1$.
 \end{lema}
 
 
-\begin{opomba}
+\begin{opomba}~
+
 Če krivuljo $\mathcal{C}_P$ predstavimo v projektivni ravnini, torej s homogenim polinomom $yz^2=x^3+\alpha x^2z+\beta xz^2+ \gamma yz^2$ je prevoj $O=[0,1,0].$
 \end{opomba}
 
@@ -695,7 +702,7 @@ Iskana točka $A+B \in \PP^2$ je torej enaka $[-\frac{1}{3},1,-\frac{2\sqrt{6}}{
 
 Poglejmo si še primer kubične krivulje v $\Z_n$.
 
-\begin{primer}
+\begin{primer}~
 
 Naj bo $E$ krivulja oblike $y^2 = x^3+x-1$ nad poljem $\Z_5$. Poglejmo si kako izgledajo točke na krivulji $E$.
 
@@ -740,13 +747,15 @@ $(2,3)+(1,1)$ je torej enako $(1,4)$ nad $E$.
 
 \subsection{Endomorfizmi}
 
-\begin{definicija}
+\begin{definicija}~
+
 \emph{Endomorfizem} na $E$ je homomorfizem $\alpha: \E{\overline{K}} \rightarrow \E{\overline{K}} $, ki je podan z racionalno funkcijo. Torej obstajata racionalni funkciji $R_1,R_2$ s koeficienti v $\overline{K}$ tako da velja
 $$\alpha(x,y) = (R_1(x,y),R_2(x,y)),$$
 za vse $(x,y) \in \E{\overline{K}}$.
 \end{definicija}
 
-\begin{primer}
+\begin{primer}~
+
 Naj bo $E$ krivulja podana z $y^2 = x^3+Ax+B$, ter naj bo $\alpha(P) = 2P$. $\alpha$ je očitno homomorfizem. Prav tako pa obstajajo racionalne funkcije za seštevanje točk na kubičnih krivuljah, zato je $\alpha$ tudi endomorfizem nad E.
 \end{primer}
 
@@ -766,13 +775,15 @@ kjer sta $r_1,r_2$ racionalni funkciji.
 $$r_1(x) = \frac{p(x)}{q(x)},$$
 potem lahko definiramo še nekaj pojmov. 
 
-\begin{definicija}
+\begin{definicija}~
+
 \emph{Stopnja} endomorfizma je  definirano kot
 $$deg(\alpha) = \text{Max} \{ deg\ p(x),deg\ q(x)\},$$
 če je $\alpha$ ne trivialen V primeru $\alpha = 0$, definiramo $deg(0) = 0$.
 \end{definicija}
 
-\begin{definicija}
+\begin{definicija}~
+
 $\alpha \neq 0$ je \emph{separabilni} endomorfizem če je odvod $r'_1(x) \neq 0$.
 \end{definicija}
 
@@ -797,7 +808,8 @@ Stopnja $deg(\alpha) = 4$.
 %\end{align}
 \end{primer}
 
-\begin{izrek}
+\begin{izrek}~
+
 \label{izrek:2.21}
 Naj bo $\alpha \neq 0$ seperabilni endomorfizem nad eliptično krivuljo $E$. Potem velja
 $$deg(\alpha)= \# Ker(\alpha).$$
@@ -816,7 +828,8 @@ Frobeniuseva preslikava na $\F_q$.
 Če je $E$ eliptična krivulja definirana nad $\F_q$, potem $\phi_q$ deluje na točkah $E$ kot:
 $$\phi_q(x,y) = (x^q,y^q), \ \phi_q(\infty) = \infty.$$
 
-\begin{lema}
+\begin{lema}~
+
 \label{lema:4.5}
 
 Naj bo $E$ eliptična krivulja definirana nad $\F_q$, in naj bo $(x,y) \in \E{\overline{\F_q}}$. Velja
@@ -1656,6 +1669,20 @@ $$\phi^2_q(S) = -qS = 1\cdot S.$$
 Po lemi \ref{lema:4.5} od tot sledi $S \in \E{\F_{q^2}}$. 
 \end{proof}
 
+\begin{primer}
+Denimo, da želimo rešiti problem diskretnega logaritma na krivulji $E: \ y^2 = x^3+x \MOD{547}$, podanega z točkama $P=(67,481),Q = (167,405)$. Iščemo $k$ tako da bo veljalo $P = kQ$.
+Najprej moramo prvotno polje razširiti z nekim $m$. Ker je podana krivulja supersingularna, lahko za $m$ izberemo $2$. Krivuljo torej razširimo na polje $GF(547^2)$. Vzemimo za nerazcepni polinom stopnje $2$ polinom $x^2+543x+2$. Elementi tega polja so torej polinomi stopnje $1$ z koeficienti v $\Z_p$.
+Sedaj moramo izbrati neko naključno točko $T$. Denimo, da smo izbrali točko $T = (24x+219,273x+466)$. Z algoritmom \ref{alg:babyGiant} sedaj poračunamo red $M$ točke $T$. Kot odgovor dobimo $M = 274$. Poračunati moramo tudi red $N$ točke $P$. Ta pa je enak $N = 137$. Največji skupni delitelj teh števil je $137$. Zaradi tega dobimo novo točko $T1$ kot 
+$$T1 = (M/d) T = (274/137)T = 2T = (440x+318,363x+296).$$
+Ko izračunamo to točko sedaj s pomočjo Weilovega parjenja poračunamo
+$$e_{137}(P,T1) = 50x+422, \ e_{137}(Q,T1) = 416x+519.$$
+Tu moramo sedaj rešiti problem diskretnega logaritma v polju $GF(547^2)$. To lahko naredimo s posplošitvijo index calculusa. Rešitev tega problema je $83$. Rešitev lahko preverimo.
+Če poračunamo
+$$(50x+422)^{83} \div (x^2+543x+2),$$
+bi kot ostanek v $GF(547^2)$ res dobili polinom $416x+519$.
+Postopek z naključno izbranimi $T$, bi sedaj še nekajkrat ponovili. Od tod pa bi potem lahko zaključili, da je iskani $k=83$. Ta rezultat pa lahko s pomočjo algoritma za seštevanje točk tudi hitro preverimo.
+\end{primer}
+
 \subsection{Mali korak, Velik korak}
 Kako izračunamo red točke na nek ekonomičen način? Trenutno je najhitrejši algoritem za izračun reda točke Schoof–Elkies–Atkinsonov algoritem (SEA). Tu pa si bomo pogledali malo bolj preprost algoritem, ki pa vseeno predstavlja veliko izboljšanje glede na naiven pristop seštevanja točke same s seboj.
 Naj bo $P \in E(\F{q})$. Radi bi izračunali red točke $P$. Iščemo torej tako število $k$, da bo veljalo $kP = \infty$. Algoritem Mali korak, Velik korak lahko izračuna red točke v približno $4q^{\frac{1}{4}}$ korakih. Koraki algoritma so sledeči:
@@ -1693,6 +1720,18 @@ Naj bo $G$ aditivna grupa in naj bo $g\in G$. Denimo da velja $Mg = 0$ za nek $M
 Naj bo $k$ red $g\in G$. Ker velja $Mg = 0$ vemo, da $k|M$. Denimo, da $k \neq M$. Pokazati moramo, da obstaja praštevilo $p_i$, tako da $(M/p_i)g = 0$. Naj bo $p_i$ praštevilo, ki deli $M/k$. Tako število obstaja, ker $M \neq k$. Potem velja $p_ik|M$, to pa pomeni da $k|(M/p_i)$. Ker pa je $k$ red elementa $g$, to pomeni $(M/p_i)g = 0$.
 
 \end{proof}
+
+
+\begin{primer}
+
+Vzemimo problem iz prejšnega primera. Zanima nas torej red točke $P=(67,481)$, ki se nahaja na krivulji $y^2 = x^3+x \MOD{547}$.
+
+Najprej poračunamo točko $Q = (q+1)P = 548*P = \infty$. Ker je $Q$ točka v neskončnosti lahko izpustimo iskanje pravega $k$ iz algoritma, saj bo pri $k=0,j=0$ veljalo
+$$Q+k(2mP) = Q =  \infty = jP.$$
+Za število $M$ prav tako v obeh primerih dobimo isti rezultat in sicer $M = 548$. Velja $548=2\cdot 2\cdot 137$. Pri zvajanju nadaljnih korakov algoritma stevilo $M$ dvakrat delimo z $2$, saj velja $274P = \infty, \ 137P = \infty$. Ker pa je $137$ praštevilo in $P \neq \infty$ od tod sledi red $N$ točke $P$ je enak $137$.
+
+\end{primer}
+
 
 \subsection{MOV napad program}
 
@@ -2077,6 +2116,7 @@ Predstavili pa so jo Aranha, Barreto, Pereira in  Ricardini leta 2013.
 \cite{Miller}
 \cite{Jeffrey2008}
 \cite{Lynn2007}
+\cite{Gibson1999}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
