@@ -80,6 +80,7 @@
 \usepackage{algorithmicx}
 \usepackage{algpseudocode}
 \usepackage{listings}
+\usepackage{appendix}
 
 
 \setlength{\overfullrule}{50pt} % označi predlogo vrstico
@@ -113,6 +114,7 @@
 \newcommand{\E}[1]{E({#1})}
 \newcommand{\MOD}[1]{\ \text{(mod }{#1}\text{)}}
 \newcommand{\DIV}[1]{\ \text{Div(}{#1}\text{)}}
+\newcommand{\DEG}[1]{\ \text{deg(}{#1}\text{)}}
 % \DeclareMathOperator{\tr}{tr}  % morda potrebuješ operator za sled ali kaj drugega?
 
 % bold matematika znotraj \textbf{ }, tudi v naslovih, kot \omega spodaj
@@ -332,7 +334,9 @@ V tem magistrskem delu, se bomo najprej spoznali osnove definicije in izreke v p
 
 \section{Končna polja}
 
-Končna polja ali Galoisova polja, so polja s končnim številom elementov. Najpogostejši primer takih polj so število modulo $p$, kjer je $p$ praštevilo. Polje z $q$ elementi označimo z $\F_q$, pojavlja pa se tudi oznaka $GF(q)$. Poglejmo si nekaj pomembnih lastnosti takih polj.
+Skozi celotno delo se bomo ukvarjali s končimi polji in njihovimi razširitvami. Spomnimo se najprej vseh definicij in lastnosti, ki jih bomo kasneje potrebovali.
+
+\emph{Končna polja} ali \emph{Galoisova polja}, so polja s končnim številom elementov. Najpogostejši primer takih polj so število modulo $p$, kjer je $p$ praštevilo. Polje z $q$ elementi označimo z $\F_q$, pojavlja pa se tudi oznaka $GF(q)$. Poglejmo si nekaj pomembnih lastnosti takih polj.
 \begin{trditev}~
 
 Naj bo $p$ praštevilo, potem veljajo naslednje lastnosti.
@@ -407,6 +411,39 @@ $$a+b\alpha,$$
 $a,b \in \F_p$, $\alpha$ pa je število za katero velja $\alpha^2 = 1$. To nas močno spominja na kompleksna števila. Tudi računske operacije se obnašajo enako kot pri kompleksnih številih. V takih poljih lahko torej namesto s polinomi delamo kar s kompleksnimi števili.
 \end{primer}
 
+Velikokrat se bo v nadaljevanju pojavljal tudi pojem algebraičnega zaprtja polja $\F_q$ z oznako $\overline{\F_q}$. Spomnimo se vseh potrebnih pojmov za razumevanje le tega.
+
+\begin{definicija}~
+
+Naj bo polje $\mathcal{E}$ razširitev polja $\mathcal{F}$. Pravimo, da je $a \in \mathcal{E}$ \emph{algebraičen}
+nad $\mathcal{F}$, če obstaja tak $0 \neq f(X) \in \mathcal{F}[X]$, da velja f(a) = 0.
+
+\end{definicija}
+
+\begin{definicija}~
+
+Polje $\mathcal{E}$ je \emph{algebraična razširitev} polja $\mathcal{F}$, če je vsak element
+iz $\mathcal{E}$ algebraičen nad $\mathcal{F}$.
+\end{definicija}
+
+\begin{definicija}~
+Polje $\mathcal{F}$ je \emph{algebrično zaprto}, če ima vsak nekonstanten polinom
+iz $\mathcal{F} [X]$ vsaj eno ničlo v $\mathcal{F}$.
+\end{definicija}
+
+\begin{definicija}~
+
+Polje $\mathcal{A}$ se imenuje \emph{algebraično zaprtje} poja $\mathcal{F}$, če je algebraično
+zaprto in je algebraična razširitev $\mathcal{F}$.
+\end{definicija}
+
+
+\begin{primer}~
+
+$\C$ je algebraično zaprtje $\R$, ni pa algebraično zaprtje $\Q$, saj ni algebraična razširitev.
+
+\end{primer}
+
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -467,14 +504,16 @@ Polinom $P(x,y,z) = z^2y-x^3$ je homogen polinom stopnje $3$. Rešitve enačbe $
 \\
 
 
-\begin{figure}[ht]
+\begin{figure}[t]
   \centering
-\begin{minipage}{.5\textwidth}
+\begin{minipage}{.45\textwidth}
+\centering
   \includegraphics[width=0.8\textwidth]{images/krivulja.png}
   \caption[Primer algebraične krivulje.]{Algebraična krivulja, podana s polinomom $z^2y-x^3$.}
   \label{fig:krivulja}
 \end{minipage}%
-\begin{minipage}{.5\textwidth}
+\hfill
+\begin{minipage}{.45\textwidth}
 \centering
 \includegraphics[scale=0.5]{images/projektivnaz.png}
 \caption[Presek algebraične krivulje z ravnino $z=1$.]{Presek algebraične krivulje z ravnino $z=1$.}
@@ -483,15 +522,16 @@ Polinom $P(x,y,z) = z^2y-x^3$ je homogen polinom stopnje $3$. Rešitve enačbe $
 \end{figure}
 
 
-\begin{figure}[ht]
+\begin{figure}[t]
 \centering
-\begin{minipage}{.5\textwidth}
+\begin{minipage}{.45\textwidth}
 \centering
 \includegraphics[scale=0.5]{images/projektivnay.png}
 \caption[Presek algebraične krivulje z ravnino $y=1$.]{Presek algebraične krivulje z ravnino $y=1$.}
 \label{fig:projektivnay}
 \end{minipage}%
-\begin{minipage}{.5\textwidth}
+\hfill
+\begin{minipage}{.45\textwidth}
 \centering
 \includegraphics[scale=0.5]{images/projektivnax.png}
 \caption[Presek algebraične krivulje z ravnino $x=1$.]{Presek algebraične krivulje z ravnino $x=1$.}
@@ -519,8 +559,9 @@ $$(x,y)\in (\Z/n\Z)^2 \Leftrightarrow [x,y,1]\in \PP^2(\Z/n\Z).$$
 
 \end{definicija}
 
-Pomembno vlogo v kriptografiji igra tudi naključnost. Če privzamemo, da lahko naključno izberemo število $0 \leq x \leq n$, potem nas zanima, kako izberemo naključno točko na krivulji oblike
-$y^2 = x^3 +Ax+B \ \text{mod } n$. Ideja je preprosta. Naključno generirajmo koordinato $x$ in nato poizkusimo rešiti enačbo $y^2 = X \ \text{mod } n$, če tak $y$ obstaja. V nasprotnem primeru generiramo novo $x$ koordinato in poizkusimo ponovno. Problem se torej skriva le v reševanju kvadratne enačbe. Tu pa nam pomaga Tonneli-Shankov algoritem.
+\subsection{Tonelli-Shanks}
+Pomembno vlogo v kriptografiji igra tudi naključnost. Če privzamemo, da lahko naključno izberemo število $0 \leq x \leq n$, potem nas zanima, kako učinkovito izberemo naključno točko na krivulji oblike
+$y^2 = x^3 +Ax+B \ \text{mod } n$. Ideja je preprosta. Naključno generirajmo koordinato $x$ in nato poizkusimo rešiti enačbo $y^2 = X \ \text{mod } n$, če tak $y$ obstaja. V nasprotnem primeru generiramo novo $x$ koordinato in poizkusimo ponovno. Problem se torej skriva le v reševanju kvadratne enačbe. Tu pa nam pomaga Tonneli-Shankov algoritem, ki učinkovito reši zgornjo enačbo.
 
 \begin{trditev}~
 
@@ -635,6 +676,7 @@ izračunamo vsoto dveh točk, v kolikor imamo kubično krivuljo v Weierstrassvi 
 \label{sestevanje}
 Naj bo $\mathcal{C}_P$ afina krivulja v Weierstrassovi obliki $y^2 = x^3 + \alpha x^2 + \beta x + \gamma$, ter $O$ prevoj v neskončnosti. Če sta $A_1 = (a_1,b_1)$ in $A_2 = (a_2,b_2)$ točki na afinem delu $\mathcal{C}_P$, potem za $A_3 = A_1 + A_2 = (a_3,b_3)$ velja
 
+%staro seštevanje
 \begin{align}
 &{} a_3 = \lambda ^2 - \alpha - a_1 - a_2 \nonumber \\
 &{} b_3 = -\lambda a_3 - \mu, \nonumber
@@ -649,6 +691,19 @@ kjer sta
 \]
 
 ter $\mu = b_1 - \lambda a_1$.
+
+%\begin{itemize}
+%\item Če $a_1 \neq a_2$, potem
+%$$a_3 = m^2-a_1-a_2, \ b_3 = m(a_1-a_3)-b_1, \text{ kjer velja } m= \frac{b_2-b_1}{a_2-a_1}.$$
+%\item Če $a_1=a_2$, ampak $b_1 \neq b_2$, potem $A_1+A_2 = O$.
+%\item Če $A_1 = A_2$ in $b_1 \neq 0$, potem
+%$$a_3 = m^2-2a_1, \ b_3 = m(a_1-a_3)-b_1, \text{ kjer velja } m= \frac{3a_1^2+\alpha}{2b_1}.$$
+%\item Če je $A_1 = A_2$ in $b_1 = 0$, potem $A_1 + A_2 = O$.
+%\end{itemize}
+%
+%Poleg tega pa definiramo še 
+%$$A_1+O = A_1,$$
+%za vse točke $A_1$ na $E$.
 
 \end{lema}
 
@@ -721,12 +776,14 @@ $\infty$ & $\infty$  & $\infty$ & $\infty$
 
 \begin{figure}[ht]
   \centering
-\begin{minipage}{.5\textwidth}
+\begin{minipage}{.45\textwidth}
+\centering
   \includegraphics[scale = 0.5]{images/krivuljamod0.png}
   \caption[Primer algebraične krivulje.]{Algebraična krivulja $y^2 = x^3+x-1$ v $\R$.}
   \label{fig:krivuljamod0}
 \end{minipage}%
-\begin{minipage}{.5\textwidth}
+\hfill
+\begin{minipage}{.45\textwidth}
 \centering
 \includegraphics[scale=0.5]{images/krivuljamod1.png}
 \caption[Presek algebraične krivulje z ravnino $z=1$.]{Algebraična krivulja $y^2 = x^3+x-1$ v $\Z_5$.}
@@ -736,9 +793,11 @@ $\infty$ & $\infty$  & $\infty$ & $\infty$
 
 Izračunajmo sedaj še $(2,3)+(1,1)$. Uporabimo formule \ref{sestevanje}, tako dobimo
 \begin{align}
-m &{}= \frac{1-3}{1-2} = \frac{3}{4} = 3\cdot 4 = 2, \nonumber \\
-x_3 &{} = 4-1-2 = 1, \nonumber \\
-y_3 &{} = 2(2-1)-3 = 4. \nonumber
+\lambda &{}=\frac{3-1}{2-1} = \frac{2}{1} = 2, \nonumber \\ 
+%m &{}= \frac{1-3}{1-2} = \frac{3}{4} = 3\cdot 4 = 2, \nonumber \\
+x_3 &{} = 4-2-1 = 1, \nonumber \\
+\mu &{}= 3-2\cdot 2 = -1 = 4, \nonumber \\
+y_3 &{} = -2(1)-4 = 4. \nonumber
 \end{align}
 
 $(2,3)+(1,1)$ je torej enako $(1,4)$ nad $E$.
@@ -756,10 +815,11 @@ za vse $(x,y) \in \E{\overline{K}}$.
 
 \begin{primer}~
 
-Naj bo $E$ krivulja podana z $y^2 = x^3+Ax+B$, ter naj bo $\alpha(P) = 2P$. $\alpha$ je očitno homomorfizem. Prav tako pa obstajajo racionalne funkcije za seštevanje točk na kubičnih krivuljah, zato je $\alpha$ tudi endomorfizem nad E.
+Naj bo $E$ krivulja podana z $y^2 = x^3+Ax+B$, ter naj bo $\alpha(P) = 2P$. $\alpha$ je očitno homomorfizem. Prav tako pa po lemi \ref{sestevanje} obstajajo racionalne funkcije za seštevanje točk na kubičnih krivuljah, zato je $\alpha$ tudi endomorfizem nad E.
 \end{primer}
 
-Standardizirajmo zapis endomorfizmov. V racionalni funkciji $R(x,y)$ lahko zaradi tega ker se nahajamo na Weierstrassovi krivulji vse sode potence $y$ zamenjamo z nekim izrazom, ki vsebuje samo $x$. Zaradi tega lahko $R(x,y)$ zapišemo kot
+Zaradi vseh možnih oblik racionalnih funkcij bo priročno, če bomo zapis endomorfizmov standardizirali, ter bomo od tod naprej privzeli, da so vsi endomorfizmi zapisani v taki obliki.
+V racionalni funkciji $R(x,y)$ lahko zaradi tega ker se nahajamo na Weierstrassovi krivulji vse sode potence $y$ zamenjamo z $x^3+Ax+B$ na primerno potenco. Zaradi tega lahko $R(x,y)$ zapišemo kot
 $$R(x,y) = \frac{p_1(x)+p_2(x)y}{p_3(x)+p_4(x)y}.$$
 Če sedaj še pomnožimo števec in imenovalec z $p_3-p_4y$ ter potem zamenjamo $y^2$ z $x^3+Ax+B$, dobimo izraz oblike
 $$R(x,y) = \frac{q_1(x)+q_2(x)y}{q_3(x)}.$$
@@ -778,14 +838,16 @@ potem lahko definiramo še nekaj pojmov.
 \begin{definicija}~
 
 \emph{Stopnja} endomorfizma je  definirano kot
-$$deg(\alpha) = \text{Max} \{ deg\ p(x),deg\ q(x)\},$$
-če je $\alpha$ ne trivialen V primeru $\alpha = 0$, definiramo $deg(0) = 0$.
+$$\DEG{\alpha} = \text{Max} \{ \deg{p(x)},\deg{q(x)} \},$$
+če je $\alpha$ ne trivialen V primeru $\alpha \equiv 0$, definiramo $\DEG{0} = 0$.
 \end{definicija}
 
 \begin{definicija}~
 
-$\alpha \neq 0$ je \emph{separabilni} endomorfizem če je odvod $r'_1(x) \neq 0$.
+$\alpha \not \equiv 0$ je \emph{separabilni} endomorfizem če je odvod $r'_1(x) \not \equiv 0$.
 \end{definicija}
+
+Poglejmo si na primeru, kako določimo stopnjo, ter ali je enodmorfizem seperabilen.
 
 \begin{primer}
 Če vzamemo enak endomorfizem kot v prejšnjem primeru $\alpha(P) = 2P$ imamo funkcijo
@@ -799,22 +861,29 @@ To lahko sedaj preoblikujemo kot
 Dobimo torej
 $$r_1(x) = \frac{x^4-2Ax^2-8Bx+A^2}{4(x^2+Ax+B)}.$$
 Stopnja $deg(\alpha) = 4$.
-%
-%Poglejmo si še odvod $r'_1(x)$.
-%\begin{align}
-%r'_1(x) &{}=\frac{(4x^3-4Ax-8B)4(x^3+Ax+B)-(x^4-2Ax^2-8Bx+A^2)(12x^2+4A)}{16(x^2+Ax+B)^2} \nonumber \\
-%&{}= \ldots = \nonumber \\
-%&{} = \frac{-A^3 - 8 B^2 + 2 x^5 - 2 A^2 x (1 + x) + 4 B x^2 (2 + x) +  A (-4 B x + 3 x^4)}{4 (B + x (A + x))^2}
-%\end{align}
+
+Poglejmo si še odvod $r'_1(x)$.
+\begin{align}
+r'_1(x) &{}=\frac{(4x^3-4Ax-8B)4(x^3+Ax+B)-(x^4-2Ax^2-8Bx+A^2)(12x^2+4A)}{16(x^2+Ax+B)^2} \nonumber \\
+&{}= \ldots = \nonumber \\
+&{} = \frac{-A^3 - 8 B^2 + 2 x^5 - 2 A^2 x (1 + x) + 4 B x^2 (2 + x) +  A (-4 B x + 3 x^4)}{4 (B + x (A + x))^2} \nonumber
+\end{align}
+Števec zgornje enačbe pa ni identično enak $0$, torej je endomorfizem seperabilen.
+\begin{opomba}~
+
+Če bi zgornji endomorfizem gledali v $\F_2$, bi dobili primer endomorfizma, ki ni seperabilen.
+\end{opomba}
 \end{primer}
 
-\begin{izrek}~
+V nadaljevanju bomo potrebovali naslednji izrek, za katerega ne bomo podali dokaza.
+
+\begin{izrek}[\protect{\cite{Washington2008}, Izrek 2.21}]~
 
 \label{izrek:2.21}
 Naj bo $\alpha \neq 0$ seperabilni endomorfizem nad eliptično krivuljo $E$. Potem velja
-$$deg(\alpha)= \# Ker(\alpha).$$
+$$\DEG{\alpha}= \# \text{Ker}(\alpha).$$
 Če $\alpha \neq 0$ ni seperabilen velja
-$$deg(\alpha) > \# Ker(\alpha).$$
+$$\DEG{\alpha} > \# \text{Ker}(\alpha).$$
 \end{izrek}
 
 \subsection{Frobeniusev endomorfizem}
@@ -843,20 +912,27 @@ Naj bo $E$ eliptična krivulja definirana nad $\F_q$, in naj bo $(x,y) \in \E{\o
 
 \end{lema}
 
-\begin{proof}
+\begin{proof}~
 
-Za dokaz leme bomo potrebovali lastnost $(a+b)^q = a^q+b^q$, če je $q$ potenca karakteristike polja v katerem delamo. To sledi iz razvoja v vrsto in dejstva, da pri binomskih koeficientih velja
-${q\choose i} \equiv 0,\  1 \leq i \leq q-1$. To je res ker pri zapisu binomskega koeficienta po krajšanju vedno ostane vsaj en $q$, ki je potenca karakteristike. Prav tako bomo potrebovali dejstvo, da velja $a^q = a$ za vse $a \in \F_q$. 
-Vzemimo namesto Weierstrassove oblike posplošeno Weierstrassovo obliko, saj to ne vpliva na sam dokaz. Imamo torej
+Za dokaz leme bomo potrebovali lastnost $$(a+b)^q = a^q+b^q,$$ kjer je $q$ potenca karakteristike polja v katerem delamo. To sledi iz razvoja v vrsto in dejstva, da pri binomskih koeficientih velja
+${q\choose i} \equiv 0$, za $1 \leq i \leq q-1$. To je res ker pri zapisu binomskega koeficienta po krajšanju vedno ostane vsaj en $q$, ki je potenca karakteristike. 
+
+Prav tako bomo potrebovali dejstvo, da velja $a^q = a$ za vse $a \in \F_q$. Dokaz tega sledi iz dejstva, da ima grupa vseh obrnljivih elementov $\F^{\times}_q$ red $q-1$, kar pa ravno pomeni $a^{q-1} = 1$, za vse $a \in \F_q \neq 0$. To pa je ekvivalentno zgornji trditvi.
+
+Lemo lahko brez težav namesto za krivulje v Weierstrassovi obliki dokažemo za krivulje v posplošeni Weierstrassovi obliki.
+Imamo torej
 \begin{equation}
 \label{enc:razWeier}
 y^2+a_1xy+a_3y=x^3+a_2x^2+a_4x+a_6,
 \end{equation}
 $a_i \in \F_q$. Če to enačbo sedaj potenciramo na $q$ in uporabimo zgornja dejstva dobimo
 $$(y^q)^2+a_1(x^qy^q)+a_3(y^q)=(x^q)^3+a_2(x^q)^2+a_4(x^q)+a_6.$$
-To ravno pomeni, da točke oblike $(x^q,y^q)$ ležijo na krivulji podani z enačbo \ref{enc:razWeier}.
+To pa ravno pomeni, da točke oblike $(x^q,y^q)$ ležijo na krivulji podani z enačbo \ref{enc:razWeier}.
 
-Za drugi del leme se upremo na dejstvo, da velja $x \in \F_q$ natanko tedaj, ko $\phi_q(x) = x$.
+Za drugi del leme se upremo na dejstvo, da velja $x \in \F_q$ natanko tedaj, ko $\phi_q(x) = x$. V eno smer smo to lastnost že dokazali. Potrebujemo še dokaz v drugi smeri. Ta del pa sledi iz lastnosti, da ima polinom $X^q-X$, q različnih ničel v $\overline{\F_p}$. Ker pa
+$$\{ \alpha \in \overline{\F_p} | \alpha^q = \alpha \} \text{ in } \F_q$$
+vsebujeta $q$ elementov in je ena množica vsebovana v drugi, sledi da sta ti množici enaki.
+
 Od tod sledi
 
 \begin{align}
@@ -2110,6 +2186,10 @@ Skozi delo smo spoznali, da izredno pomembno vlogo pri varnosti kriptosistemov n
 $$E:\ y^2 = x^3+117050x^2+x \MOD{2^{221} - 3}.$$
 Predstavili pa so jo Aranha, Barreto, Pereira in  Ricardini leta 2013.
 
+\appendix
+
+\section{Program osnovne strukture kubičnih krivulj}
+\lstinputlisting[language=Python]{base.py}
 
 \cite{Washington2008}
 \cite{Silverman2009}

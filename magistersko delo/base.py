@@ -353,7 +353,7 @@ class ElipticCurve:
         """
         Opis:
            Funkcija randNotPrime generira nakljucno tocko na
-           elipticni krivulji E kjer modul ni praštevilo
+           elipticni krivulji E kjer modul ni prastevilo
            y^2 = x^3 + ax+b mod q
          Definicija:
            E.rand()
