@@ -559,6 +559,11 @@ $$(x,y)\in (\Z/n\Z)^2 \Leftrightarrow [x,y,1]\in \PP^2(\Z/n\Z).$$
 
 \end{definicija}
 
+\begin{definicija}~
+
+\emph{Eliptična} krivulja je gladka kubična krivulja.
+\end{definicija}
+
 \subsection{Tonelli-Shanks}
 Pomembno vlogo v kriptografiji igra tudi naključnost. Če privzamemo, da lahko naključno izberemo število $0 \leq x \leq n$, potem nas zanima, kako učinkovito izberemo naključno točko na krivulji oblike
 $y^2 = x^3 +Ax+B \ \text{mod } n$. Ideja je preprosta. Naključno generirajmo koordinato $x$ in nato poizkusimo rešiti enačbo $y^2 = X \ \text{mod } n$, če tak $y$ obstaja. V nasprotnem primeru generiramo novo $x$ koordinato in poizkusimo ponovno. Problem se torej skriva le v reševanju kvadratne enačbe. Tu pa nam pomaga Tonneli-Shankov algoritem, ki učinkovito reši zgornjo enačbo.
@@ -943,55 +948,77 @@ Od tod sledi
 
 \end{proof}
 
-\begin{trditev}
+\begin{trditev}~
+
 \label{trd:3.16}
 Naj bosta $\alpha,\beta$ endomorfizma na $E$, ter naj bosta $a,b \in \Z$. Definirajmo endomorfizem
 $$(a+\alpha+b\beta)(P) = a\alpha(P)+b\beta(P).$$
 Potem velja
-$$deg(a\alpha+b\beta) = a^2deg(\alpha)+b^2deg(\beta) + ab(deg(\alpha+\beta)-deg(\alpha)-deg(\beta)).$$
+$$\DEG{a\alpha+b\beta} = a^2\DEG{\alpha}+b^2\DEG{\beta} + ab(\DEG{\alpha+\beta}-\DEG{\alpha}-\DEG{\beta}).$$
 \end{trditev}
 
-\begin{proof}
+\begin{proof}~
+
 Naj bo $n \in \Z$, število ki ni deljivo z karakteristiko $K$. Predstavimo $\alpha,\beta$ z matrikami $\alpha_n,\beta_n$, glede na neko bazo $E[n]$.
 Velja
 \begin{align}
-det(a\alpha_n+b\beta_n) &{}=  a^2det(\alpha_n)+b^2det(\beta_n) + ab(det(\alpha_n+\beta_n)-det(\alpha_n)-det(\beta_n)) \nonumber
+\text{det}(a\alpha_n+b\beta_n) &{}=  a^2\text{det}(\alpha_n)+b^2\text{det}(\beta_n) + ab(\text{det}(\alpha_n+\beta_n)-\text{det}(\alpha_n)-\text{det}(\beta_n)) \nonumber
 \end{align}
 za vse matrike $\alpha_n,\beta_n$.
 Od tod sledi
 \begin{align}
-deg(a\alpha+b\beta) &{}\equiv a^2deg(\alpha)+b^2deg(\beta) + ab(deg(\alpha+\beta)-deg(\alpha)-deg(\beta)) \MOD{n}. \nonumber
+\DEG{a\alpha+b\beta} &{}\equiv a^2\DEG{\alpha}+b^2\DEG{\beta} + ab(\DEG{\alpha+\beta} \nonumber \\
+&{}-\DEG{\alpha}-\DEG{\beta}) \MOD{n}. \nonumber
 \end{align}
 Ker to drži za neskončno mnogo $n$ v tej enačbi velja enakost.
 
 
 \end{proof}
 
-\begin{izrek}{Hasse}
+\begin{trditev}[\protect{\cite{Washington2008}, Trditev 4.7}]~
+
+\label{trd:4.7}
+Naj bo $E$ definirana nad $\F_q$ in naj bo $n \geq 1$. Velja
+\begin{itemize}
+\item $\text{Ker}(\phi^n_q-1) = \E{\F_{q^n}}$.
+\item $\phi^n_q-1$ je seperabilen endomorfizem. Velja torej $\#\E{\F_{q^n}} = \DEG{\phi^n_q-1}$.
+\end{itemize}
+\end{trditev}
+
+\begin{opomba}~
+
+$\phi^n_q$ predstavlja kompozicijo $\phi_q \circ \phi_q \circ \ldots \circ \phi_q$. Prav tako pa je $\phi^n_q-1$ endomorfizem, saj je množenje z $-1$ endomorfizem.
+\end{opomba}
+
+\begin{izrek}[Hasse]~
+
 \label{izr:Hasse}
 Naj bo $E$ eliptična krivulja nad končnim poljem $\F_q$.  Potem red $\E{\F_q}$ zadošča zvezi
-$$|q+q-\#\E{\F_q}| \leq 2\sqrt{q}.$$
+$$|q+1-\#\E{\F_q}| \leq 2\sqrt{q}.$$
 \end{izrek}
 
-\begin{proof}
-Zapišimo
+\begin{proof}~
+
+Po trditvi \ref{trd:4.7} lahko zapišemo
 $$a=q+1-\#\E{\F_q} = q+1 -deg(\phi_q-1).$$
 Pokazati moramo $|a| \leq 2\sqrt{q}.$
 Za dokaz tega bomo potrebovali še eno lemo.
-\begin{lema}
+\begin{lema}~
+
 Naj bosta $r,s \in \Z$, taka da velja $gcd(s,q)=1$. Potem velja
-$$deg(r\phi_q-s) = r^2q+s^2-rsa.$$
+$$\DEG{r\phi_q-s} = r^2q+s^2-rsa.$$
 \end{lema}
 
-\begin{proof}
+\begin{proof}~
+
 Z uporabo trditve \ref{trd:3.16} dobimo
-$$deg(r\phi_q-s) = r^2deg(\phi_q)+s^2deg(-1)+rs(deg(\phi_q-1)-deg(\phi_q)-deg(-1)).$$
-Če sedaj uporabimo dejstvo $deg(\phi_q) = q,deg(-1) = 1$, ter $deg(\phi_q-1) = q+1-a$, željeni rezultat sledi.
+$$\DEG{r\phi_q-s} = r^2\DEG{\phi_q}+s^2\DEG{-1}+rs(\DEG{\phi_q-1}-\DEG{\phi_q}-\DEG{-1}).$$
+Če sedaj uporabimo dejstvo $\DEG{\phi_q} = q,\ \DEG{-1} = 1$, ter $\DEG{\phi_q-1} = q+1-a$, željeni rezultat sledi.
 \end{proof}
 
-Ker velja $deg(r\phi_q-s) \geq 0$, nam lema implicira
-$$q(\frac{r}{s})^2-a\frac{r}{s}+1 \geq 0,$$
-za vse $r,s$ za katere velja $gcd(s,q)=1$. Množica racionalnih števil oblike $r/s$, ki zadoščajo tej lastnosti je gosta v $\R$. Zato velja
+Ker velja $\DEG{r\phi_q-s} \geq 0$, nam lema implicira
+$$q \left( \frac{r}{s} \right)^2-a\frac{r}{s}+1 \geq 0,$$
+za vse $r,s$ za katere velja $\text{gcd}(s,q)=1$. Množica racionalnih števil oblike $r/s$, ki zadoščajo tej lastnosti je gosta v $\R$. Zato velja
 $$qx^2-ax + 1 \geq 0,$$
 za vse $x\in \R$. To pa pomeni, da je diskriminanta polinoma negativna ali nič. Kar povedano z drugimi besedami pomeni
 $$a^2-4q \leq 0,$$
@@ -1001,7 +1028,8 @@ to pa je ravno pogoj $|a|\leq 2\sqrt{q}$.
 \end{proof}
 
 
-\begin{izrek}
+\begin{izrek}[\protect{\cite{Washington2008}, Izrek 4.10}]~
+
 \label{izrek:4.10}
 
 Naj bo E eliptična krivulja definirana nad $\F_q$. Naj bo $a = q+1-\#\E{\F_q} = q+1-deg(\phi_q-1)$. Potem velja
@@ -1017,19 +1045,17 @@ za vse $m$, ki zadoščajo $\text{gcd}(m,q)=1$.
 
 \end{izrek}
 
-\begin{proof}
-
-\end{proof}
-
 \subsection{Red grupe nad eliptičnimi krivuljami}
 
 
-V kriptografiji nas bo velikokrat zanimalo, koliko točk leži na neki krivulji $E$.
+Pogosto nas bo zanimalo tudi, koliko točk leži na dani krivulji $E$. S pomočjo naslednje trditve bomo dobili preprost način kako izračunati $\# \E{\F_q^n}$, če poznamo $\# \E{\F_q}$.
+Pojavlja se še vprašanje kako izračunati $\# \E{\F_q}$. Eden od možnih načinov se nahaja v opombi \ref{opo:MaliVeliki}.
 
 
 
 
-\begin{trditev}
+\begin{trditev}~
+
 \label{trd:red}
 
 Naj bo $\# \E{\F_q} = q+1-a$. Zapišimo $X^2-aX+q = (X-\alpha)(x-\beta)$. Potem velja
@@ -1038,20 +1064,23 @@ za vse $n \geq 1$.
 
 \end{trditev}
 
-\begin{proof}
+\begin{proof}~
+
 V dokazu bomo najprej potrebovali lastnost $\alpha^n+\beta^n \in \N$. Pri tem nam bo pomagala naslednja lema.
 
 
-\begin{lema}
+\begin{lema}~
+
 \label{lema:4.13}
 Naj bo $s_n = \alpha^n +  \beta^n$. Potem velja $s_0 = 2,s_1 = a, s_{n+1} = as_n-qs_{n-1}$, za vse $n \geq 1$.
 
 \end{lema}
 
-\begin{proof}
+\begin{proof}~
+
 Če je $n = 0$, potem lema očitno velja. Za $n=1$ lema sledi iz definicije $\alpha,\beta$, ki sta ničli enačbe $X^2-aX+q$, ter uporabe Vietovih formul. Dokažimo torej še za splošen $n$.
-Ker sta $\alpha,\beta$ ničli, lahko zapišemo $\alpha^2-a\alpha +q = 0, \beta^2-a\beta+q=0$. Sedaj enačbi pomnožimo z $\alpha^{n-1},\beta^{n-1}$. S tem dobimo
-$$\alpha^{n+1} = a\alpha^n +q\alpha^{n-1}, \beta^{n+1} = a\beta^n +q\beta^{n-1}.$$
+Ker sta $\alpha,\beta$ ničli, lahko zapišemo $\alpha^2-a\alpha +q = 0,\  \beta^2-a\beta+q=0$. Sedaj enačbi pomnožimo z $\alpha^{n-1},\ \beta^{n-1}$. S tem dobimo
+$$\alpha^{n+1} = a\alpha^n +q\alpha^{n-1},\ \beta^{n+1} = a\beta^n +q\beta^{n-1}.$$
 Če enačbi seštejemo dobimo rekurzivno zvezo
 $$s_{n+1} = as_n-qs_{n-1}.$$
 \end{proof}
@@ -1059,7 +1088,7 @@ $$s_{n+1} = as_n-qs_{n-1}.$$
 Iz lema takoj sledi, da velja $\alpha^n+\beta^n \in \N$. Naj bo $f$ funkcija
 
 $$f(X) = (X^n-\alpha^n)(X^n-\beta^n) = X^{2n}-(\alpha^n+\beta^n)X^n+q^n.$$
-Tu smo ponovno uporabili Vietovo formulo za produkt ničel funkcije. Iz prve enakosti sledi, da funkcija $X^2-aX+q = (X-\alpha)(X-\beta)$ deli $f$. Po osnovnem izreku od deljenju lahko f zapišemo kot $f(X) = g(X)Q(x)+r(x)$, kjer je $g(X)= X^2-aX+q$. Prav tako pa ima kvocient $Q$ celoštevilske koeficiente. Po izreku \ref{izrek:4.10} velja
+Iz prve enakosti sledi, da funkcija $X^2-aX+q = (X-\alpha)(X-\beta)$ deli $f$. Po osnovnem izreku od deljenju lahko f zapišemo kot $f(X) = g(X)Q(x)+r(x)$, kjer je $g(X)= X^2-aX+q$. Prav tako pa ima kvocient $Q$ celoštevilske koeficiente. Po izreku \ref{izrek:4.10} velja
 
 $$(\phi^n_q)^2 -(\alpha^n+\beta^n)\phi^n_q + q^n = f(\phi_q) = Q(\phi_q)(\phi^2_q-a\phi_q+q) = 0,$$
 kjer je $\phi_q$ endomorfizem na $E$. Velja tudi $\phi^n_q = \phi_{q^n}$. Ponovno uporabimo izrek \ref{izrek:4.10} od koder sledi, da obstaja natanko en $k \in \Z$, tako da 
@@ -1068,7 +1097,8 @@ $$\alpha^n+\beta^n = q^n+1-\#\E{\F_{q^n}}.$$
 
 \end{proof}
 
-\begin{primer}
+\begin{primer}~
+
 Naj bo $E$ podana s predpisom $y^2+xy = x^3+1$. S preprostim pregledom vseh možnosti vidimo, da je $\#\E{\F_2} = 4$. Izračunajmo sedaj $\#\E{\F_4}$. Po trditvi \ref{trd:red} moramo
 $\#\E{\F_2}$ zapisati kot $q+1-a$. Sledi torej $a = 2+1-4 = -1$. Polinom je potem oblike
 $$X^2+X+2 = (X-\frac{-1+\sqrt{-7}}{2}) (X-\frac{-1-\sqrt{-7}}{2}).$$
@@ -1087,190 +1117,31 @@ od koder sledi
 \end{align}
 \end{primer}
 
-
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%DIEFFIE-HELLMAN
+%Torzijske točke
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Diffie-Hellmanova izmenjava ključev nad gladkimi kubičnimi krivuljami}
-
-Diffe-Hellmanova izmenjava ključev je postopek, pri katerem se dve osebi npr.\  Alenka in Boris dogovorita za skrivni ključ na takšen način, da tudi v primeru ko njun pogovor posluša tretji nepovabljeni gost npr.\  Ciril le ta iz pogovora ne more rekonstruirati ključa za katerega sta se tekom pogovora dogovorila Alenka in Boris. 
-\begin{algorithm}[H]
-\caption[Diffe-Hellman]{Diffie-Hellmanova izmenjava ključev.}
-\label{alg:diffie-hellman}
-
-\begin{enumerate}
-
-\item Alenka in Boris se dogovorita za eliptično krivuljo $E$ nad končnim obsegom $\F{q}$, ter za točko $P \in \E{\Fq{q}}$.
-\item Alenka se odloči za skrivno število $a \in \N$, in izračuna $P_a = aP$, ter to pošlje Borisu.
-\item Boris se odloči za skrivno število $b \in \N$, in izračuna $P_b = bP$, ter to pošlje Alenki.
-\item Alenka izračuna $aP_b=abP$.
-\item Boris izračuna $bP_a=baP$.
-
-\end{enumerate}
-\end{algorithm}
-
-Kot sam ključ bi lahko na koncu Alenka in Boris uporabila npr.\  zadnjih $256$ bitov x-koordinate točke $abP$. Tu se zanašamo na to, da je iz $E, \F{q},P, P_a, P_b$ težko izračunati $baP$. Zelo veliko pa je tu odvisno od same izbire krivulje E.
-
-To nas privede do t.\ i.\ problema diskretnega logaritma.
-
+\section{Torzijske točke}
 
 \begin{definicija}~
-Naj bosta $a, b \in \N$, ter naj bo p praštevilo. Iščemo število k tako, da bo
-$$a^k \equiv b\ (\text{mod} \ p).$$
-\end{definicija}
 
-\begin{trditev}~
-Če lahko rešimo problem diskretnega logaritma, potem smo rešili tudi problem Diffie-Hellmanove izmenjave ključev. Povedano drugače velja
-$$\text{DL} \Rightarrow DH.$$
-\end{trditev}
-
-\begin{proof}
-Problem Diffie-Hellmanove izmenjave ključev lahko enostavno prevedemo na problem diskretnega logaritma na sledeč način:
-
-\begin{itemize}
-\item Vzemi $aP$ in izračunaj $a$ tako, da rešiš problem diskretnega logaritma.
-\item Izračunaj $a(bP)$.
-\end{itemize}
-
-\end{proof}
-
-%ODLOČITVENI DIFFIE HELMAN
-Na podoben način lahko definiramo tudi odločitveni Diffie-Hellmanov problem, ki se glasi.
-\begin{definicija}
-Naj bodo dani $P,aP,bP,Q$ in $\E{F_q}$. Ali velja $Q = abP$?
-\end{definicija}
-
-Povedano drugače, če dobimo namig ki vsebuje $abP$, ali lahko povemo če je ta informacija pravilna.
-
-Poglejmo si na primeru, kako lahko v določenih primerih dobimo odgovor na ta problem s pomočjo Weilovega parjenja.
-
-\begin{primer}
-
-Naj bo $E$ podana kot $y^2=x^3+1$ nad $\F_q$, kjer je $q \equiv 2 \MOD{3}$. Naj bo $\omega \in \F_{q^2}$ tretji koren enote. Opazimo, da $\omega \notin \F_q$, saj je red $\F^{\times}_q$ enak $q-1$, kar pa ni deljivo s tri.
-Definirajmo preslikavo
-$$\beta:\E{\overline{\F_q}} \rightarrow \E{\overline{\F_q}}, \ (x,y) \mapsto (\omega x,y), \ \beta(\infty) = \infty.$$
-
-Preverimo lahko, da je tako podana preslikava izomorfizem. Denimo, da ima $P \in \E{\overline{\F_q}}$ red $n$. Potem iz lastnosti izomorfizmov sledi, da ima tudi $\beta(P)$ red $n$.
-Definirajmo modificirano Weilovo parjenje
-$$e_n'(P_1,P_2) = e_n(P_1,\beta(P_2)),$$
-kjer je $e_n$ običajno Weilovo parjenje in $P_1,P_2 \in E[n]$.
-
-Predpostavimo sedaj, da poznamo $P,aP,bP,Q$ in želimo preveriti ali velja $Q=abP$. Najprej preverimo, če je $Q$ večkratnik $P$. Po trditvi \ref{trd:5.1} bo to res natanko tedaj ko $e_n(P,Q) = 1$.
-Predpostavimo, da velja $Q = tP$, za nek $t \in \N$.Potem imamo
-$$e_n'(aP,bP)=e_n'(P,P)^{ab} = e_n'(P,abP),$$
-ter
-$$e_n'(Q,P) = e_n'(P,P)^t.$$
-
-Če predpostavimo $3 \nmid n$, potem je $e_n'(P,P)$ n-ti koren enote. To pa pomeni
-$$Q=abP \iff t \equiv ab \MOD{n} \iff e_n'(aP,bP)=e_n'(P,P)^t.$$
-\end{primer}
-
-V zgornjem primeru je potrebna še dodatna utemeljitev, ki jo lahko zapišemo kot lemo.
-
-\begin{lema}
-\label{lema:6.1}
-Naj $3 \nmid n$. Če ima $P \in \E{\F_q}$ red n, potem je $e_n'(P,P)$ n-ti koren enote.
-\end{lema}
-
-\begin{proof}
-
-Naj bo $uP = v\beta(P)$ za neki števili $u,v$. Potem zaradi lastnosti izomorfizmov velja
-$$\beta(vP) = v\beta(P) = uP \in \E{\F_q}.$$
-Obravnavajmo sedaj dva primera.
-\begin{itemize}
-\item Če je $vP = \infty$, potem po definiciji $\beta$ sledi $uP = \infty$. To pa pomeni, da je $u \equiv 0 \MOD{n}$.
-\item Če velja $vP \neq \infty$, potem zapišimo $vP = (x,y)$, kjer sta $x,y \in \F_q$. Velja
-$$(\omega x,y) = \beta(vP) \in \E{\F_q}.$$
-Ker $\omega \notin \F_q$, mora veljati $x = 0$. Torej je točka $vP$ oblike $(0,\pm 1)$. Take točke pa imajo red tri, kar lahko poračunamo z definicijo grupe. To pa ni možno saj smo predpostavili $3 \nmid n$.
-\end{itemize}
-
-V obeh primerih mora torej veljati $u,v \equiv 0 \MOD{n}$. Od tod pa sledi, da sta $P$ in $\beta(P)$ baza $E[n]$. Po posledici \ref{PosledicaTrdParj} to pomeni, da je $e_n'(P,P)$ n-ti koren enote.
-
-\end{proof}
-
-
-
-\subsection{Index Calculus}
-\label{IndexCalc}
-
-Naj bo $p$ praštevilo in naj bo $g$ generator ciklične grupe $\F^{\times}_{p}$. Naj $L(h)$ označuje vrednost, za katero velja
-$$g^{L(h)} \equiv h \ (\text{mod} \ p).$$
-Iz definicije $L(h)$ sledi, da velja $$L(h_1h_2) = L(h_1)+L(h_2) \ (\text{mod} \ p).$$
-Idejo napada na problem diskretnega logaritma v taki grupi najlažje vidimo na primeru.
-
-\begin{primer}
-Naj bo $p = 1217$ in $g= 3$. Rešiti hočemo $3^k \equiv 37 \mod 1217$. Izberimo si bazo praštevil $\{ 2,3,5,7,11,13 \}$. Pri tem upoštevamo, da bo večja baza pomenila več računanja a hkrati lažjo pot do odgovora. Iščemo $x$-e  tako, da bo
-$$3^x \equiv \pm \text{produktu praštevil iz baze} \mod 1217.$$
-
-Ob iskanju takih $x$ najdemo naslednje enakosti:
-\begin{align}
-3^1 &\equiv 3 \MOD{1217} \nonumber \\ 
-3^{24}  &\equiv -2^2\cdot 7\cdot 13 \MOD{1217} \nonumber \\
-3^{25}  &\equiv 5^3 \MOD{1217} \nonumber \\
-3^{30}  &\equiv -2 \cdot 5^2 \MOD{1217} \nonumber \\
-3^{54}  &\equiv -5\cdot 11 \MOD{1217} \nonumber \\
-3^{87}  &\equiv 13 \MOD{1217} \nonumber
-\end{align}
-Z večjo bazo bi v tem primeru lažje našli take enačbe, a bi jih hkrati potrebovali več.
-Z uporabo malega Fermatovega izreka, velja
-$$3^{1216} \equiv 1 \equiv (-1)^2 \mod 1217, $$
-od koder sledi $L(-1) \equiv 608 \mod 1216$.
-Če enačbe sedaj zapišemo z uporabo $L(h)$, dobimo
-\begin{align}
-1 &\equiv L(3) \MOD{1216} \nonumber \\ 
-24&\equiv 608 + 2L(2) + L(7) +L(13) \MOD{1216} \nonumber \\
-25 &\equiv 3L(5) \MOD{1216} \nonumber \\
-30 &\equiv 608+L(2)+2L(5) \MOD{1216} \nonumber \\
-54 &\equiv 608+L(5)+L(11) \MOD{1216} \nonumber \\
-87  &\equiv L(13) \MOD{1216}  \nonumber
-\end{align}
-
-Od tod dobimo $L(2) = 216, L(11)=1059,L(7) = 113,L(5) = 819,L(13) = 87,L(3)=1$.
-Sedaj poračunamo za različne $j$ vrednost $3^j*37$, dokler ne dobimo $3^j*37 \equiv \text{produktu elementov iz baze}$.
-Pri vrednosti $j=16$ dobimo
-$$3^{16}\cdot 37 \equiv 2^3\cdot 7 \cdot 11 \MOD{1217}.$$
-Iščemo $L(37)$, iz definicije $L$ pa velja
-$$3^{L(37)} \equiv 37 \MOD{1217} \equiv 2^3\cdot 7 \cdot 11 \cdot 3^{-16}\MOD{1217}.$$
-Če sedaj namesto baze vstavimo primerne $L$ dobimo
-$$3^{L(37)} \equiv 3^{3L(2)}\cdot 3^{L(7)} \cdot 3^{L(11)} \cdot 3^{-16L(3)}\MOD{1217}.$$
-$L(37)$ lahko sedaj zapišemo kot
-$$L(37) \equiv 3L(2) +L(7)+L(11) - 16L(3) \MOD{1216} \equiv 588 \MOD{1216}.$$
-
-Torej je naš iskani $k=588$.
-
-\end{primer}
-\subsection{Index Calculus program}
-
-\lstinputlisting[language=Python]{IndexCalculus.py}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%PARJENJA
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Parjenja}
-
-Parjenja imajo pomembno vlogo pri napadih na problem diskretnega logaritma nad gladkimi kubičnimi krivuljami.
-
-\begin{definicija}~
-\emph{Eliptična} krivulja je gladka kubična krivulja.
-\end{definicija}
-
-\begin{definicija}~
 Naj bo $E$ eliptična krivulja nad poljem $K$, ter naj bo $n\in \N$. \emph{Torizjske točke} so množica
 $$E[n] = \{ P \in \E{\overline{K}} | nP = \infty \}.$$
 \end{definicija}
 
-\begin{izrek}
+\begin{izrek}~
+
 \label{IzrekTor}
 Naj bo $E$ eliptična krivulja nad poljem $K$ in naj bo $n \in \N$. Če karakteristika polja $K$ ne deli $n$, ali je enaka $0$ potem
-$$E[n] \cong \mathbb{Z}_n \oplus \mathbb{Z}_n$$
+$$E[n] \cong \mathbb{Z}_n \oplus \mathbb{Z}_n.$$
+
+Zapišimo $n=p^rn'$, kjer $p\nmid n'$. Če je karakteristika $K$ enaka $p >0$ in $p|n$ potem velja
+$$E[n] \cong \mathbb{Z}_n' \oplus \mathbb{Z}_n' \text{ ali } E[n] \cong \mathbb{Z}_n \oplus \mathbb{Z}_n'.$$
 
 \end{izrek}
 
-\begin{proof}
-Se ne vem kako bo napisan
-\end{proof}
-
 \begin{definicija}~
+
 Definirajmo \emph{deliteljski polinom} $\gamma_m \in \Z[x,y,A,B]$ kot,
 
 
@@ -1286,13 +1157,14 @@ Definirajmo \emph{deliteljski polinom} $\gamma_m \in \Z[x,y,A,B]$ kot,
 
 \end{definicija}
 
-\begin{lema}
+\begin{lema}~
 
-$\gamma_{n}$ je element $\Z[x,y^2,A,B]$, za vse lihe $n$.  Za sode $n$ pa je $\gamma_{n}$ element $2y\Z[x,y^2,A,B]$.
+$\gamma_{n}$ je element $\Z[x,y^2,A,B]$, za vse lihe $n$.  Za sode $n$ pa je $\gamma_{n}$ element \newline $2y\Z[x,y^2,A,B]$.
 
 \end{lema}
 
-\begin{proof}
+\begin{proof}~
+
 Dokažimo to s pomočjo indukcije. Za $n \leq 4$ lema očitno velja. Obravnavajmo primera, ko je $n=2m$ in  $n=2m+1$ za nek $m\in\N$.
 \begin{itemize}
 \item{n=2m}
@@ -1316,21 +1188,23 @@ Definirajmo še polinoma
 
 Podobno, kot pri polinomih $\gamma$ lahko tudi tu formuliramo lemo
 
-\begin{lema}
+\begin{lema}~
 
-$\phi_{n}$ je element $\Z[x,y^2,A,B]$, za vse $n$. Če je $n$ lih, potem je $\omega_{n}$ element $y\Z[x,y^2,A,B]$. V primeru, da je $n$ sod pa je $\omega_{n}$ element $\Z[x,y^2,A,B]$.
+$\phi_{n}$ je element $\Z[x,y^2,A,B]$, za vse $n$. Če je $n$ lih, potem je $\omega_{n}$ element \newline $y\Z[x,y^2,A,B]$. V primeru, da je $n$ sod pa je $\omega_{n}$ element $\Z[x,y^2,A,B]$.
 
 \end{lema}
 
-Glejmo sedaj te polinome nad eliptičnimi krivuljami
+Glejmo sedaj te polinome nad eliptičnimi krivuljami oblike
 $$E: y^2=x^3+Ax+B.$$
 Polinome v $\Z[x,y^2,A,B]$ lahko gledamo kot polinome v $\Z[x,A,B]$, tako da $y^2$ nadomestimo z $x^3+Ax+B$.
-\begin{opomba}
-Polinom $\gamma_n$ ni nujno samo polinom spremenljivke $x$, saj je odvisno od tega ali je $n$ lih ali sod. Vseeno pa velja, da  $\gamma^2_n$ vedno lahko zapišemo kot polinom spremenljivke $x$.
+\begin{opomba}~
+
+Polinom $\gamma_n$ ni nujno samo polinom spremenljivke $x$, saj je odvisno od tega ali je $n$ lih ali sod. Vseeno pa velja, da lahko $\gamma^2_n$ vedno zapišemo kot polinom spremenljivke $x$.
 
 \end{opomba}
 
-\begin{izrek}
+\begin{izrek}[\protect{\cite{Washington2008}, Izrek 3.6}]~
+
 \label{izrek:3.6}
 Naj bo $P = (x,y)$ točka na krivulji $y^2 = x^3+Ax+B$, katere karakteristika ni $2$. Naj bo $n\in \N$, potem velja
 $$nP = \left( \frac{\phi_n(x)}{\gamma^2_n(x)}, \frac{\omega_n(x,y)}{\gamma^3_n(x,y)}\right).$$
@@ -1338,13 +1212,46 @@ $$nP = \left( \frac{\phi_n(x)}{\gamma^2_n(x)}, \frac{\omega_n(x,y)}{\gamma^3_n(x
 
 \end{izrek}
 
-\begin{posledica}
+\begin{posledica}~
+
 \label{posledica:3.7}
-Naj bo $E$ eliptična krivulja. Endomorfizem $E$ podan z množenjem z $n$ ima stopnjo $n^2$.
+Naj bo $E$ eliptična krivulja. Endomorfizem $E$ podan kot množenjem z $n$ ima stopnjo $n^2$.
 \end{posledica}
 
+Brez dokazov formulirajmo še nekaj trditev, ki jih bomo potrebovali za dokaz izreka \ref{IzrekTor}.
 
-\begin{proof}
+\begin{trditev}[\protect{\cite{Washington2008}, Trditev 2.21}]~
+
+\label{trditev:2.21}
+Naj bo $\alpha \neq 0$ seperabilen avtomorfizem eliptične krivulje $E$. Potem velja
+$$\deg \alpha = \# \text{Ker}(\alpha), $$
+kjer je $\text{Ker}(\alpha)$ jedro homomorfizma $\alpha: \E{overline{K}} \rightarrow \E{overline{K}}$.
+Če $\alpha \neq 0$ ni seperabilen, potem
+$$\deg \alpha >  \# \text{Ker}(\alpha).$$
+
+\end{trditev}
+
+\begin{izrek}[\protect{\cite{Washington2008}, Izrek 2.22}]~
+
+\label{izrek:2.22}
+Naj bo $E$ eliptična krivulja definirana nad poljem $K$. Naj bo $\alpha \neq 0$ endomorfizem $E$. Potem je $\alpha: \E{\overline{K}} \rightarrow \E{\overline{K}}$ surjektivna preslikava.
+
+\end{izrek}
+
+\begin{trditev}[\protect{\cite{Washington2008}, Trditev 2.28}]~
+
+\label{trditev:2.28}
+Naj bo $E$ eliptična krivulja definirana nad poljem $K$, ter naj bo $n\in \N$. Naj bo množenje z $n$ na $E$ podano, kot
+$$n(x,y) = (R_n(x),yS_n(x))$$
+za vse $(x,y) \in \E{\overline{K}}$. Tu sta $R_n,\ S_n$ racionalni funkciji. Potem velja
+$$\frac{R'_n(x)}{S_n(x)} = n.$$
+Od tod pa sledi, da je množenje z $n$ seperabilno natanko tedaj, ko $n$ ni večkratnik karakteristike polja $K$. 
+\end{trditev}
+
+Sedaj imamo vse kar potrebujemo, da dokažemo izrek \ref{IzrekTor}.
+
+\begin{proof}[Dokaz izreka \ref{IzrekTor}]~
+
 Predpostavimo, da $n$ ni večkratnik karakteristike $p$ polja. Po izreku \ref{izrek:3.6} vemo, da ima množenje z $n$ prvo koordinato oblike
 $$R(x) = \frac{x^{n^2}+\ldots}{n^2x^{n^2-1}+ \ldots}.$$
 Če poračunamo odvod dobimo v števcu $n^2x^{2n^2-2}+ \ldots$, kar ni identično enako $0$. To pomeni, da je množenje z $n$ seperabilno. Po posledici \ref{posledica:3.7} in trditvi \ref{trditev:2.21} ima jedro množenja z $n$, E[n], red $n^2$. Iz algebre vemo, da so končne Abelove grupe, torej tudi  $E[n]$ izomorfne
@@ -1366,13 +1273,22 @@ $$E[n] \simeq \Z_{n'} \oplus \Z_{n'} \text{ ali } \Z_n \oplus \Z_{n'}.$$
 \end{proof}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%APRJENJE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Weilovo parjenje}
+Parjenja imajo pomembno vlogo pri napadih na problem diskretnega logaritma nad
+gladkimi kubičnimi krivuljami.
+
 \begin{definicija}~
+
 Naj bo $K$ polje in naj bo $n \in \N$ tak, da karakteristika $K$ ne deli $n$.
 $$\mu_n = \{ x \in \overline{K} | x^n = 1 \}$$
 je \emph{grupa n-tih korenov enote} grupe $\overline{K}$.
 \end{definicija}
 
-\begin{trditev}
+\begin{trditev}~
+
 \label{trd-WeilPar}
 Naj bo E eliptična krivulja definirana nad poljem $K$, in naj bo $n \in \N$. Predpostavimo, da karakteristika polja $K$ ne deli $n$. Potem obstaja Weilovo parjenje
 $$e_n:E[n] \times E[n] \rightarrow \mu_n,$$
@@ -1396,7 +1312,44 @@ za vse $S,S_1,S_2,T,T_1,T_2 \in E[n]$.
 
 \end{trditev}
 
-\begin{proof}
+
+
+
+\begin{posledica}~
+
+\label{PosledicaTrdParj}
+Naj bosta $T_1,T_2$ baza $E[n]$. Potem je $e_n(T_1,T_2)$ generator grupe $\mu_N$.
+\end{posledica}
+
+\begin{proof}~
+
+Vemo, da za poljubni točki $T_1,T_2$ velja $e_n(T_1,T_2)^n = 1$, ker se slika parjenja nahaja v grupi $n$-tih korenov enote. Pokazati moramo torej, da če za neko število $d$ velja  $e_n(T_1,T_2)^d = 1$ potem od tod sledi, da je $d \geq n$.
+Recimo torej, da je $e_n(T_1,T_2) = \zeta$, kjer velja $\zeta^d = 1$.
+Po točki ena trditve \ref{trd-WeilPar} velja $$e_n(T_1,dT_2) = e_n(T_1,T_2)^d=1.$$ Prav tako velja $e_n(T_2,dT_2) = e_n(T_2,T_2)^d = 1 $. Naj bo $S \in E[n]$, potem se $S$ izraža kot $S = aT_1+bT_2$ za neka $a,b \in \N$.
+S ponovno uporabo trditve \ref{trd-WeilPar} vidimo, da velja
+$$e_n(S,dT_2)= e_n(T_1,dT_2)^ae_n(T_2,dT_2)^b = 1. $$
+Ker to valja za vsak $S$ po točki dva trditve \ref{trd-WeilPar} sledi, da je $dT_2 = \infty$. To pa je mogoče le če $n|d$, kar pomeni da je $n \leq d$.
+\end{proof}
+
+\begin{posledica}~
+
+Če $E[n] \subseteq \E{K}$, potem $\mu_n \subset K$.
+
+\end{posledica}
+
+\begin{proof}~
+
+Naj bo $\rho$ tak avtomorfizem $\overline{K}$, da je $\rho$ indentiteta na elementih $K$. Naj bosta $T_1,T_2$ baza $E[n]$. Ker imata po predpostavki točki koordinate v $K$ zanju velja
+$\rho T_1 = T_1, \ \rho T_2 = T_2$.
+Po trditvi \ref{trd-WeilPar} velja
+$$\zeta = e_n(T_1,T_2) = e_n(\rho T_1,\rho T_2) = \rho(e_n(T_1,T_2)) = \rho(\zeta).$$
+
+Eden od izrekov Galoisove teorije pa pravi, če je $x \in \overline{K}$ fiksen za vse take avtomorfizme $\rho$ potem je $x\in K$. Torej je $\zeta \in K$. Ker pa je $\zeta$ primitivni koren enote od tod sledi $\mu_n \subset K$.
+
+\end{proof}
+
+\begin{proof}[Dokaz trditve \ref{trd-WeilPar}]~
+
 %%%%%%%%%%%%
 %POMEMBNO
 %manka utemeljitev da je E[n] \subset E(K) in pa \mu_n \subset E(K)
@@ -1545,21 +1498,6 @@ e_n(\alpha(S),\alpha(T)) &{}= \frac{g_{\alpha(T)}(\alpha(P+S))}{g_{\alpha(T)}(\a
 
 \end{proof}
 
-
-\begin{posledica}
-\label{PosledicaTrdParj}
-Naj bosta $T_1,T_2$ baza $E[n]$. Potem je $e_n(T_1,T_2)$ generator grupe $\mu_N$.
-\end{posledica}
-
-\begin{proof}
-Vemo, da za poljubni točki $T_1,T_2$ velja $e_n(T_1,T_2)^n = 1$, ker se slika parjenja nahaja v grupi $n$-tih korenov enote. Pokazati moramo torej, da če za neko število $d$ velja  $e_n(T_1,T_2)^d = 1$ potem od tod sledi, da je $d \geq n$.
-Recimo torej, da je $e_n(T_1,T_2) = \zeta$, kjer velja $\zeta^d = 1$.
-Po točki ena trditve \ref{trd-WeilPar} velja $$e_n(T_1,dT_2) = e_n(T_1,T_2)^d=1.$$ Prav tako velja $e_n(T_2,dT_2) = e_n(T_2,T_2)^d = 1 $. Naj bo $S \in E[n]$, potem se $S$ izraža kot $S = aT_1+bT_2$ za neka $a,b \in \N$.
-S ponovno uporabo trditve \ref{trd-WeilPar} vidimo, da velja
-$$e_n(S,dT_2)= e_n(T_1,dT_2)^ae_n(T_2,dT_2)^b = 1. $$
-Ker to valja za vsak $S$ po točki dva trditve \ref{trd-WeilPar} sledi, da je $dT_2 = \infty$. To pa je mogoče le če $n|d$, kar pomeni da je $n \leq d$.
-\end{proof}
-
 \subsection{Učinkovit algoritem za izračun Weilovega parjenja}
 
 Leta $1986$ je Vicor Miller napisal članek o tem, kako učinkovito izračunati Weilovo parjenje. Članek ni bil nikoli objavljen.
@@ -1670,6 +1608,172 @@ $$e_5(P,Q) =\frac{473}{88} = 242.$$
 
 \lstinputlisting[language=Python]{WeilPairing.py}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%DIEFFIE-HELLMAN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Problem diskretnega logaritma}
+
+Diffe-Hellmanova izmenjava ključev je postopek, pri katerem se dve osebi npr.\  Alenka in Boris dogovorita za skrivni ključ. To naredita tako, da tudi v primeru ko njun pogovor posluša tretji nepovabljeni gost npr.\  Ciril, le ta iz pogovora ne more rekonstruirati ključa, za katerega sta se tekom pogovora dogovorila Alenka in Boris. 
+\begin{algorithm}[H]
+\caption[Diffe-Hellman]{Diffie-Hellmanova izmenjava ključev.}
+\label{alg:diffie-hellman}
+
+\begin{enumerate}
+
+\item Alenka in Boris se dogovorita za eliptično krivuljo $E$ nad končnim obsegom $\F{q}$, ter za točko $P \in \E{\Fq{q}}$.
+\item Alenka se odloči za skrivno število $a \in \N$, in izračuna $P_a = aP$, ter to pošlje Borisu.
+\item Boris se odloči za skrivno število $b \in \N$, in izračuna $P_b = bP$, ter to pošlje Alenki.
+\item Alenka izračuna $aP_b=abP$.
+\item Boris izračuna $bP_a=baP$.
+
+\end{enumerate}
+\end{algorithm}
+
+Kot sam ključ bi lahko na koncu Alenka in Boris uporabila npr.\  zadnjih $256$ bitov x-koordinate točke $abP$. Tu se zanašamo na to, da je iz $E, \F{q},P, P_a, P_b$ težko izračunati $baP$. Zelo veliko pa je tu odvisno od same izbire krivulje E.
+
+To nas privede do t.\ i.\ problema diskretnega logaritma.
+
+
+\begin{definicija}~
+
+Naj bosta $a, b \in \N$, ter naj bo p praštevilo. Iščemo število k tako, da bo
+$$a^k \equiv b\ (\text{mod} \ p).$$
+\end{definicija}
+
+\begin{trditev}~
+
+Če lahko rešimo problem diskretnega logaritma, potem smo rešili tudi problem Diffie-Hellmanove izmenjave ključev. Povedano drugače velja
+$$\text{DL} \Rightarrow DH.$$
+\end{trditev}
+
+\begin{proof}~
+
+Problem Diffie-Hellmanove izmenjave ključev lahko enostavno prevedemo na problem diskretnega logaritma na sledeč način:
+
+\begin{itemize}
+\item Vzemi $aP$ in izračunaj $a$ tako, da rešiš problem diskretnega logaritma.
+\item Izračunaj $a(bP)$.
+\end{itemize}
+
+\end{proof}
+
+%ODLOČITVENI DIFFIE HELMAN
+Na podoben način lahko definiramo tudi odločitveni Diffie-Hellmanov problem, ki se glasi.
+\begin{definicija}~
+
+Naj bodo dani $P,aP,bP,Q$ in $\E{F_q}$. Ali velja $Q = abP$?
+\end{definicija}
+
+Povedano drugače, če dobimo namig ki vsebuje $abP$, ali lahko preverimo če ta informacija drži.
+
+Poglejmo si na primeru, kako lahko s pomočjo Weilovega parjenja, v določenih primerih, pridemo do rešitve tega problema.
+
+\begin{primer}~
+
+Naj bo $E$ podana kot $y^2=x^3+1$ nad $\F_q$, kjer je $q \equiv 2 \MOD{3}$. Naj bo $\omega \in \F_{q^2}$ primitivni tretji koren enote. Opazimo, da $\omega \notin \F_q$, saj je red $\F^{\times}_q$ enak $q-1$, kar pa ni deljivo s tri.
+Definirajmo preslikavo
+$$\beta:\E{\overline{\F_q}} \rightarrow \E{\overline{\F_q}}, \ (x,y) \mapsto (\omega x,y), \ \beta(\infty) = \infty.$$
+
+Preverimo lahko, da je tako podana preslikava izomorfizem. Denimo, da ima $P \in \E{\overline{\F_q}}$ red $n$. Potem iz lastnosti izomorfizmov sledi, da ima tudi $\beta(P)$ red $n$.
+Definirajmo modificirano Weilovo parjenje
+$$e_n'(P_1,P_2) = e_n(P_1,\beta(P_2)),$$
+kjer je $e_n$ običajno Weilovo parjenje in $P_1,P_2 \in E[n]$.
+
+Predpostavimo sedaj, da poznamo $P,aP,bP,Q$ in želimo preveriti ali velja $Q=abP$. Najprej preverimo, če je $Q$ večkratnik $P$. Po trditvi \ref{trd:5.1} bo to res natanko tedaj ko $e_n(P,Q) = 1$.
+Predpostavimo, da velja $Q = tP$, za nek $t \in \N$.Potem imamo
+$$e_n'(aP,bP)=e_n'(P,P)^{ab} = e_n'(P,abP),$$
+ter
+$$e_n'(Q,P) = e_n'(P,P)^t.$$
+
+Če predpostavimo $3 \nmid n$, potem je $e_n'(P,P)$ n-ti koren enote. To pa pomeni
+$$Q=abP \iff t \equiv ab \MOD{n} \iff e_n'(aP,bP)=e_n'(P,P)^t.$$
+\end{primer}
+
+V zgornjem primeru je potrebna še dodatna utemeljitev, ki jo lahko zapišemo kot lemo.
+
+\begin{lema}~
+
+\label{lema:6.1}
+Naj $3 \nmid n$. Če ima $P \in \E{\F_q}$ red n, potem je $e_n'(P,P)$ n-ti koren enote.
+\end{lema}
+
+\begin{proof}~
+
+Naj bo $uP = v\beta(P)$ za neki števili $u,v$. Potem zaradi lastnosti izomorfizmov velja
+$$\beta(vP) = v\beta(P) = uP \in \E{\F_q}.$$
+Obravnavajmo sedaj dva primera.
+\begin{itemize}
+\item Če je $vP = \infty$, potem po definiciji $\beta$ sledi $uP = \infty$. To pa pomeni, da je $u \equiv 0 \MOD{n}$.
+\item Če velja $vP \neq \infty$, potem zapišimo $vP = (x,y)$, kjer sta $x,y \in \F_q$. Velja
+$$(\omega x,y) = \beta(vP) \in \E{\F_q}.$$
+Ker $\omega \notin \F_q$, mora veljati $x = 0$. Torej je točka $vP$ oblike $(0,\pm 1)$. Take točke pa imajo red tri, kar lahko poračunamo z definicijo grupe. To pa ni možno saj smo predpostavili $3 \nmid n$.
+\end{itemize}
+
+V obeh primerih mora torej veljati $u,v \equiv 0 \MOD{n}$. Od tod pa sledi, da sta $P$ in $\beta(P)$ baza $E[n]$. Po posledici \ref{PosledicaTrdParj} to pomeni, da je $e_n'(P,P)$ n-ti koren enote.
+
+\end{proof}
+
+
+
+\subsection{Index Calculus}
+\label{IndexCalc}
+
+Naj bo $p$ praštevilo in naj bo $g$ generator ciklične grupe $\F^{\times}_{p}$. Naj $L(h)$ označuje vrednost, za katero velja
+$$g^{L(h)} \equiv h \ (\text{mod} \ p).$$
+Iz definicije $L(h)$ sledi, da velja $$L(h_1h_2) = L(h_1)+L(h_2) \ (\text{mod} \ p).$$
+Idejo napada na problem diskretnega logaritma v taki grupi najlažje vidimo na primeru.
+
+\begin{primer}~
+
+Naj bo $p = 1217$ in $g= 3$. Rešiti hočemo $3^k \equiv 37 \mod 1217$. Izberimo si bazo praštevil $\{ 2,3,5,7,11,13 \}$. Pri tem upoštevamo, da bo večja baza pomenila več računanja a hkrati lažjo pot do odgovora. Iščemo $x$-e  tako, da bo
+$$3^x \equiv \pm \text{produktu praštevil iz baze} \mod 1217.$$
+
+Ob iskanju takih $x$ najdemo naslednje enakosti:
+\begin{align}
+3^1 &\equiv 3 \MOD{1217} \nonumber \\ 
+3^{24}  &\equiv -2^2\cdot 7\cdot 13 \MOD{1217} \nonumber \\
+3^{25}  &\equiv 5^3 \MOD{1217} \nonumber \\
+3^{30}  &\equiv -2 \cdot 5^2 \MOD{1217} \nonumber \\
+3^{54}  &\equiv -5\cdot 11 \MOD{1217} \nonumber \\
+3^{87}  &\equiv 13 \MOD{1217} \nonumber
+\end{align}
+Z večjo bazo bi v tem primeru lažje našli take enačbe, a bi jih hkrati potrebovali več.
+Z uporabo malega Fermatovega izreka, velja
+$$3^{1216} \equiv 1 \equiv (-1)^2 \mod 1217, $$
+od koder sledi $L(-1) \equiv 608 \mod 1216$.
+Če enačbe sedaj zapišemo z uporabo $L(h)$, dobimo
+\begin{align}
+1 &\equiv L(3) \MOD{1216} \nonumber \\ 
+24&\equiv 608 + 2L(2) + L(7) +L(13) \MOD{1216} \nonumber \\
+25 &\equiv 3L(5) \MOD{1216} \nonumber \\
+30 &\equiv 608+L(2)+2L(5) \MOD{1216} \nonumber \\
+54 &\equiv 608+L(5)+L(11) \MOD{1216} \nonumber \\
+87  &\equiv L(13) \MOD{1216}  \nonumber
+\end{align}
+
+Od tod dobimo $L(2) = 216, L(11)=1059,L(7) = 113,L(5) = 819,L(13) = 87,L(3)=1$.
+Sedaj poračunamo za različne $j$ vrednost $3^j*37$, dokler ne dobimo $3^j*37 \equiv \text{produktu elementov iz baze}$.
+Pri vrednosti $j=16$ dobimo
+$$3^{16}\cdot 37 \equiv 2^3\cdot 7 \cdot 11 \MOD{1217}.$$
+Iščemo $L(37)$, iz definicije $L$ pa velja
+$$3^{L(37)} \equiv 37 \MOD{1217} \equiv 2^3\cdot 7 \cdot 11 \cdot 3^{-16}\MOD{1217}.$$
+Če sedaj namesto baze vstavimo primerne $L$ dobimo
+$$3^{L(37)} \equiv 3^{3L(2)}\cdot 3^{L(7)} \cdot 3^{L(11)} \cdot 3^{-16L(3)}\MOD{1217}.$$
+$L(37)$ lahko sedaj zapišemo kot
+$$L(37) \equiv 3L(2) +L(7)+L(11) - 16L(3) \MOD{1216} \equiv 588 \MOD{1216}.$$
+
+Torej je naš iskani $k=588$.
+
+\end{primer}
+
+\subsection{Index Calculus program}
+
+Z uporabo programskega okolja SAGE, lahko napad enostavno tudi sprogramiramo.
+
+\lstinputlisting[language=Python]{IndexCalculus.py}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %MOV
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1779,6 +1883,7 @@ Naj bo $P \in E(\F{q})$. Radi bi izračunali red točke $P$. Iščemo torej tako
 
 \begin{opomba}
 
+\label{opo:MaliVeliki}
 Algoritem \ref{alg:babyGiant} lahko preoblikujemo do te mere, da namesto reda točke izračunamo število točk na krivulji. Vse kar moramo narediti, je ponavljati korake $(1)$-$(6)$ za naključno izbrane točke $P \in E(\F{q})$. Ustavimo se ko najmanjši skupni večkratnik redov točk, deli le eno število $N$ v območju $q+1-2\sqrt{q} \leq N \leq q+q+2\sqrt{q}$. To število $N$ je potem število točk na dani krivulji. Pri tem postopku se upremo na Hassejev izrek o številu točk na eliptični krivulji.
 
 \end{opomba}
