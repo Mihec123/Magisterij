@@ -141,10 +141,3 @@ def WeilPairing(P,Q,S,N):
     eN  = (eN1*eN2) % P.mod
 
     return eN
-    
-
-P = Point(30,34,631,36,60)
-Q = Point(30,34,631,121,387)
-S = Point(30,34,631,0,36)
-
-eN = WeilPairing(P,Q,S,5)

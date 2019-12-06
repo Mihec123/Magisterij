@@ -115,6 +115,8 @@
 \newcommand{\MOD}[1]{\ \text{(mod }{#1}\text{)}}
 \newcommand{\DIV}[1]{\ \text{Div(}{#1}\text{)}}
 \newcommand{\DEG}[1]{\ \text{deg(}{#1}\text{)}}
+\newcommand{\Div}[1]{\ \text{div(}{#1}\text{)}}
+\newcommand{\ORD}[1]{\ \text{ord(}{#1}\text{)}}
 % \DeclareMathOperator{\tr}{tr}  % morda potrebuješ operator za sled ali kaj drugega?
 
 % bold matematika znotraj \textbf{ }, tudi v naslovih, kot \omega spodaj
@@ -1118,6 +1120,131 @@ od koder sledi
 \end{primer}
 
 \newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%DELITELJI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Delitelji}
+
+\begin{definicija}~
+
+Naj bo $K$ polje in naj bo $P \in \E{\overline{K}}$. Za vsako točko $P$ definirajmo formalen simbol $[P]$. \emph{Delitelj} $D$ na krivulji $E$ je končna linearna kombinacija takih simbolov s celoštevilskimi koeficienti.
+$$D = \sum_{j}a_j[P_j], \ a_j \in \Z $$
+
+\end{definicija}
+
+Iz same definicije sledi, da je delitelj element Abelove grupe generirane s simboli $[P]$. Označimo to grupo z $\DIV{E}$.
+
+
+\begin{definicija}~
+
+Definirajmo \emph{vsoto} in \emph{stopnjo} delitelja kot
+$$sum(\sum_{j}a_j[P_j]) = \sum_ja_jP_j \ \in \E{\overline{K}},$$
+$$deg(\sum_{j}a_j[P_j]) = \sum_ja_j \ \in \Z.$$
+
+\end{definicija}
+
+
+\begin{definicija}~
+
+Naj bo $E$ eliptična krivulja. \emph{Funkcija} na $E$ je racionalna funkcija $$f(x,y) \in \ \overline{K},$$ ki je definirana za vsaj eno točko na $\E{\overline{K}}$. Funkcija torej zavzame vrednosti v $\overline{K} \cup {\infty}$.
+\end{definicija}
+
+\begin{opomba}~
+
+Naj bo $E$ podana z enačbo $y^2 = x^3+Ax+B$. Racionalna funkcija $\frac{1}{y^2-x^3-Ax-B}$ torej ne predstavlja funkcije.
+
+\end{opomba}
+
+\begin{trditev}~
+
+Obstaja taka funkcija $u_P$, imenovana \emph{uniformizer} v točki $P$ z lastnostjo $u_P(P) = 0$, ter lastnostjo, da se da vsaka funkcija $f(x,y)$ zapisati kot
+$$f = u^r_Pg, \ r\in \Z, g(P) \neq 0,\infty.$$
+Definirajmo \emph{red} funkcije f v točki $P$ kot
+$$ord_P(f)=r.$$
+\end{trditev}
+
+\begin{primer}~
+
+Naj bo $y^2 = x^3-x$ eliptična krivulja, naj bo $f(x,y) = x$. Izberimo $u(x,y) = y$. Očitno je $u(0,0) = 0$. Nad eliptično krivuljo velja 
+$$y^2 = x^3-x = x(x^2-1),$$ 
+od tod sledi $x = y^2\frac{1}{x^2-1}$ nad E.
+Prav tako velja $1/(x^2-1) \neq 0$ v točki $(0,0)$. Od tod sledi, da je 
+$$ord_{(0,0)}(x) = 2, ord_{(0,0)}(x/y) = 1.$$
+\end{primer}
+
+\begin{definicija}~
+
+Naj bo $f$ funkcija nad $E$, ki ni identično enaka $0$. Definirajmo \emph{delitelja} funkcije $f$ kot,
+$$div(f) = \sum_{P\in \E{\overline{K}}} ord_P(f)[P] \in \DIV{E}.$$
+\end{definicija}
+
+
+\begin{trditev}~
+
+\label{trditev 11.1}
+Naj bo $E$ eliptična krivulja in naj bo $f$ funkcija na $E$, ki ni identično enaka $0$. Potem veljajo naslednje trditve:
+\begin{itemize}
+
+\item $f$ ima le končno mnogo ničel in polov
+\item $deg(div(f))=0$
+\item Če $f$ nima ničel ali polov, potem je $f$ konstantna.
+\end{itemize}
+
+
+\end{trditev}
+
+\begin{izrek}~
+
+\label{izrek 11.2}
+Naj bo $E$ eliptična krivulja. Naj bo $D$ delitelj nad $E$ z $deg(D) = 0$. Potem obstaja taka funkcija $f$ na $E$ z lastnostjo
+$$div(f) = D$$
+natanko tedaj ko
+$$sum(D) = \infty.$$
+
+\end{izrek}
+
+\begin{proof}~
+
+Pokažimo najprej, da se da $[P_1]+ [P_2]$ zapisati kot $[P_1+P_2] + [\infty]$ plus delitelj neke funkcije.
+Recimo, da imamo tri točke $P_1,P_2,P_3$ na neki krivulji $E$, ki ležijo na premici $ax+by+c = 0$.
+Naj bo $f(x,y) = ax+by+c$. Potem ima funkcija $f$ ničle v točkah $P_1,P_2,P_3$. Če $b$ ni enak $0$ potem ima funkcija po trditvi \ref{trditev 11.1} trojni pol v $\infty$.
+Velja torej $$div(ax+by+c) = [P_1]+[P_2]+[P_3]-3[\infty].$$
+Ker se nahajamo na Weierstrassovi krivulji, kjer točko $-P$ dobimo tako, da samo zamenjamo predznak y-koordinate, lahko za premico skozi točki $P_3 = (x_3,y_3)$, ter $-P_3=(x_3,-y_3)$ vzamemo $x-x_3=0$.
+Po  trditvi \ref{trditev 11.1} ponovno velja
+$$div(x-x_3) = [P_3]+[-P_3]-2[\infty].$$
+Od tod sledi
+$$div\left( \frac{ax+by+c}{x-x_3}\right) = div(ax+by+c) - div(x-x_3) =[P_1]+[P_2]-[-P_3]-[\infty].$$
+Ker na krivulji velja $P_1+P_2 = -P_3$ (to sledi iz načina kako na krivulji seštevamo točke), lahko zgornjo enačbo prepišemo v 
+$$[P_1]+[P_2] = [P_1+P_2]+[\infty]+div(g).$$ 
+
+
+Hitro se vidi, da velja
+$$sum(div(g))= P_1+P_2-(P_1+P_2)-\infty = \infty.$$
+Prav tako, pa se iz zgornje enačbe vidi, da velja $[P_1]+[P_2] = 2[\infty] + div(h)$, če velja $P_1+P_2 = \infty$. Zaradi tega je vsota vseh členov s pozitivnimi koeficienti v $D$ enaka nekemu simbolu $[P]$, večkratniku $[\infty]$, ter delitelju neke funkcije. Podobno velja tudi za člene z negativnimi koeficienti. Od tod sledi
+$$D = [P]-[Q]+n[\infty]+div(g_1).$$
+Zaradi tega, ker je $g_1$ kvocient produkta funkcij, ki sestavljajo $g$, velja tudi
+\newline $sum(div(g_1))= \infty$. Po trditvi \ref{trditev 11.1} velja $deg(div(g_1))=0$, ker funkcija ni konstantna. Imamo torej $$0 = deg(D) = 1-1+n+0=n.$$
+Od tod sledi
+$$D = [P]-[Q] + div(g_1).$$
+Prav tako velja
+$$sum(D) = P-Q+sum(div(g_1)) = P-Q.$$
+Predpostavimo sedaj, da velja $sum(D) = \infty$. Potem $P-Q = \infty$, kar pomeni da mora veljati $P=Q$ in $D = div(g_1)$. Če predpostavimo $D = div(f)$ za neko funkcijo f, potem
+$$[P]-[Q] = div(f/g_1).$$
+Od tod po lemi \ref{lema 11.3} sledi $P = Q$ in torej $sum(D) = \infty$.
+
+\end{proof}
+
+\begin{lema}~
+
+\label{lema 11.3}
+
+Naj bosta $P,Q \in \E{\overline{K}}$, ter naj obstaja funkcija $h$ na $E$ za katero velja
+$$div(h)=[P]-[Q].$$
+Potem sledi $P=Q$.
+\end{lema}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Torzijske točke
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1274,7 +1401,7 @@ $$E[n] \simeq \Z_{n'} \oplus \Z_{n'} \text{ ali } \Z_n \oplus \Z_{n'}.$$
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%APRJENJE
+%%PARJENJE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Weilovo parjenje}
 Parjenja imajo pomembno vlogo pri napadih na problem diskretnega logaritma nad
@@ -1357,21 +1484,24 @@ Naj bo $T \in E[n]$.
 Po izreku \ref{izrek 11.2} obstaja funkcija $f$, tako da velja
 \begin{equation}
 \label{enacba-Weil}
-div(f) = n[T]-n[\infty].
+\Div{f} = n[T]-n[\infty].
 \end{equation}
-To drži ker je $D = n[T]-n[\infty]$ delitelj za katerega velja $deg(D) = 0$. Prav tako pa velja $sum(D) = \infty$, ker se nahajamo v $E[n]$.
+To drži ker je $D = n[T]-n[\infty]$ delitelj za katerega velja $\DEG{D} = 0$. Prav tako pa velja $\text{sum}(D) = \infty$, ker se nahajamo v $E[n]$.
 Izberimo sedaj še točko $T' \in E[n^2]$, za katero velja $nT' = T$. Pokazati želimo, da obstaja funkcija $g$, tako da velja
-$$div(g) = \sum_{R \in E[n]}([T' + R]- [R]).$$
-Preden lahko uporabimo izrek \ref{izrek 11.2} moramo preveriti, da vse potrebne lastnosti držijo. Veljati mora torej $$sum( \sum_{R \in E[n]}([T' + R]- [R])) = \infty$$ in $$deg( \sum_{R \in E[n]}([T' + R]- [R])) = 0.$$
+$$\Div{g} = \sum_{R \in E[n]}([T' + R]- [R]).$$
+Preden lahko uporabimo izrek \ref{izrek 11.2} moramo preveriti, da vse potrebne lastnosti držijo. Veljati mora torej 
+$$\text{sum}( \sum_{R \in E[n]}([T' + R]- [R])) = \infty$$
+ in
+ $$\DEG{ \sum_{R \in E[n]}([T' + R]- [R])} = 0.$$
 Po izreku \ref{IzrekTor}, se da $E[n]$ zapisati kot $\mathbb{Z}_n \oplus \mathbb{Z}_n$. To pomeni, da $E[n]$ vsebuje $n^2$ različnih točk $R$. Velja torej
-$$sum(\sum_{R \in E[n]}([T' + R]- [R])) = \sum_{R \in E[n]} T' +R-R = \sum_{R \in E[n]} T' = n^2T' = nT = \infty.$$
-Podobno preverimo, še da velja $deg(\sum_{R \in E[n]}([T' + R]- [R])) = 0.$ Torej po izreku \ref{izrek 11.2} taka funkcija $g$ obstaja.
+$$\text{sum}(\sum_{R \in E[n]}([T' + R]- [R])) = \sum_{R \in E[n]} T' +R-R = \sum_{R \in E[n]} T' = n^2T' = nT = \infty.$$
+Podobno preverimo, še da velja $\DEG{\sum_{R \in E[n]}([T' + R]- [R])} = 0.$ Torej po izreku \ref{izrek 11.2} taka funkcija $g$ obstaja.
 Označimo z $f \circ n$ funkcijo, ki začne z neko točko jo pomnoži z $n$ in nato na njej uporabi $f$. Točke $P = T' + R$, kjer je $R\in E[n]$ so točke za katere velja $nP=T$. Iz \ref{enacba-Weil}
 sledi
 %zakaj je to res
 %????????????????????????????????????????????????????
-$$div(f \circ n) = n(\sum_{R \in E[n]}[T' + R]) - n(\sum_{R \in E[n]}[R]) = div(g^n).$$
-Iz definicije delitelja funkcije sledi, da je funkcija $f \circ n$ oblike $g^n$ krat neka konstanta. Če za nov $f$ vzamemo ta $f$ pomnožen s primerno konstanto potem lahko predpostavimo, da velja
+$$\Div{f \circ n} = n(\sum_{R \in E[n]}[T' + R]) - n(\sum_{R \in E[n]}[R]) = \Div{g^n}.$$
+Iz definicije delitelja funkcije sledi, da je funkcija $f \circ n$ oblike $g^n$ krat neka konstanta. Če za nov $f$ vzamemo ta $f$ pomnožen s primerno konstanto, potem lahko predpostavimo, da velja
 $$f \circ n = g^n.$$
 Naj bo $S \in E[n]$, ter naj bo $P \in \E{\overline{K}}$. Potem velja
 $$g(P+S)^n = f(n(P+S)) = f(nP) = g(P)^n.$$
@@ -1393,10 +1523,10 @@ $$e_n(S,T_1)e_n(S,T_2) = e_n(S,T_1+T_2).$$
 Dokaz linearnosti v drugi spremenljivki pa je malce težji kot dokaz za prvo spremenljivko.
 Predpostavimo da $T_1,T_2,T_3 \in E[n]$ z lastnostjo $T_1 +T_2 = T_3.$ Označimo z $f_i,g_i$ funkcije ki spadajo k definicijam $e_n(S,T_i)$.
 Po izreku \ref{izrek 11.2} obstaja funkcija $h$, za katero velja
-$$div(h) = [T_3]-[T_1]-[T_2] + [\infty].$$
+$$\Div{h} = [T_3]-[T_1]-[T_2] + [\infty].$$
 
 Enačba \ref{enacba-Weil} nam da
-$$div \left(  \frac{f_3}{f_1f_2}\right) = n div(h) = div(h^n).$$
+$$\text{div} \left(  \frac{f_3}{f_1f_2}\right) = n \Div{h} = \Div{h^n}.$$
 Zato obstaja konstanta $c \in \overline{K}^{\times}$, tako da velja
 $$f_3 = cf_1f_2h^n.$$
 Od tod pa sledi
@@ -1415,8 +1545,8 @@ obstaja funkcija $h$, tako da velja $g = h \circ n$. Od tod sledi
 $$(h \circ n) ^n = g^n = f \circ n.$$
 Ker je množenje z $n$ surjektivno na $E(\overline{K})$, od tod sledi $h^n = f$. %%%%%%%%%%%%%%%%ZAKAJ TO RES
 To pa pomeni
-$$ndiv(h) = div(f) = n[T]-n[\infty],$$
-kar pa pomeni, da je $div(h) = [T] - [\infty]$. Po izreku \ref{izrek 11.2} pa od tod sledi $T = \infty$. S tem smo, dokazali eno polovico točke $2$, druga polovica pa avtomatično sledi iz tega ter uporabe točke $4$.
+$$n\Div{h} = \Div{f} = n[T]-n[\infty],$$
+kar pa pomeni, da je $\Div{h} = [T] - [\infty]$. Po izreku \ref{izrek 11.2} pa od tod sledi $T = \infty$. S tem smo, dokazali eno polovico točke $2$, druga polovica pa avtomatično sledi iz tega ter uporabe točke $4$.
 
 \item Označimo z $\tau_{jT}$ točko $jT$. V tem primeru $f \circ \tau_{jT}$ označuje funkcijo \newline $P \mapsto f(P+jT)$. Delitelj te funkcije je torej $n[T-jT]-n[-jT]$. Zaradi tega velja
 
@@ -1453,23 +1583,23 @@ $$e_n(T,T) = \frac{g(P+T)}{g(P)} = 1.$$
 To pa pomeni $e_n(T,S) = e_n(S,T)^{-1}$.
 
 \item Naj bo $\rho$ avtomorfizem na $\overline{K}$, za katerega velja, da je $\rho$ identiteta na koeficientih $E$. Če $\rho$ apliciramo na vsakem koraku konstrukcije Weilovega parjenja dobimo
-$$div(f^{\rho}) = n[\rho T] - n[\infty],$$
+$$\Div{f^{\rho}} = n[\rho T] - n[\infty],$$
 ter podobno za $g^{\rho}$. Tu $f^{\rho},g^{\rho}$ označujeta funkciji, ki jih dobimo tako, da $\rho$ apliciramo na koeficiente racionalnih funkcij, ki definirajo $f,g$.
 Zato velja
 $$\rho(e_n(S,T)) = \rho \left( \frac{g(P+S)}{g(P)} \right) = \frac{g^{\rho}(\rho P+\rho S)}{g^{\rho}(\rho P)} = e_n(\rho S,\rho T).$$
 
-\item Naj bo $\{Q_1,\ldots,Q_k\} = Ker(\alpha)$. Ker je $\alpha$ seperabilen, po izreku \ref{izrek:2.21} velja $k = deg(\alpha)$.
+\item Naj bo $\{Q_1,\ldots,Q_k\} = Ker(\alpha)$. Ker je $\alpha$ seperabilen, po izreku \ref{izrek:2.21} velja $k = \DEG{\alpha}$.
 Naj bo
-$$div(f_T) = n[T]-n[\infty],\ div(f_{\alpha(T)}) = n[\alpha(T)]-n[\infty]$$
+$$\Div{f_T} = n[T]-n[\infty],\ \Div{f_{\alpha(T)}} = n[\alpha(T)]-n[\infty]$$
 in
 $$g^n_T = f_T \circ n, \ g^n_{\alpha(T)} = f_{\alpha(T)} \circ n.$$
 Če uporabimo oznako $\tau_Q$ iz točke $3$ velja
-$$div(f_t \circ \tau_{-Q_i}) = n[T+Q_i]-n[Q_i].$$
+$$\Div{f_t \circ \tau_{-Q_i}} = n[T+Q_i]-n[Q_i].$$
 Zato velja
 \begin{align}
-div( f_{\alpha(T)} \circ \alpha) &{}= n \sum_{T'',\alpha(T'')=\alpha(T)}[T'']-n\sum_{Q,\alpha(Q)=\infty}[Q] \nonumber \\
+\Div{ f_{\alpha(T)} \circ \alpha} &{}= n \sum_{T'',\alpha(T'')=\alpha(T)}[T'']-n\sum_{Q,\alpha(Q)=\infty}[Q] \nonumber \\
 &{} = n\sum_i ([T+Q_i]-[Q_i]) \nonumber \\
-&{} = div(\prod_i(f_T \circ \tau_{-Q_i})) \nonumber
+&{} = \Div{\prod_i(f_T \circ \tau_{-Q_i})} \nonumber
 \end{align}
 
 Za vsak $i$ sedaj izberemo $Q'_i$, tako da velja $nQ'_i = Q_i$. Potem
@@ -1478,10 +1608,10 @@ $$g_T(P-Q'_i)^n=f_T(nP-Q_i).$$
 Za to funkcijo velja
 
 \begin{align}
-div(\prod_i(g_T \circ \tau_{-Q'_i})^n) &{} = div(\prod_i f_T \circ \tau_{-Q_i}\circ n) \nonumber \\
-&{} = div(f_{\alpha(T)} \circ \alpha \circ n) \nonumber \\
-&{} = div(f_{\alpha(T)} \circ n \circ \alpha) \nonumber \\
-&{} = div(g_{\alpha(T)} \circ \alpha)^n. \nonumber
+\Div{\prod_i(g_T \circ \tau_{-Q'_i})^n} &{} = \Div{\prod_i f_T \circ \tau_{-Q_i}\circ n} \nonumber \\
+&{} = \Div{f_{\alpha(T)} \circ \alpha \circ n} \nonumber \\
+&{} = \Div{f_{\alpha(T)} \circ n \circ \alpha} \nonumber \\
+&{} = \Div{g_{\alpha(T)} \circ \alpha}^n. \nonumber
 \end{align}
 
 Delitelja $\prod_i g_T \circ \tau_{-Q'_i}$ in $g_{\alpha(T)} \circ \alpha$ se torej razlikujeta samo za produkt neke konstante $C$.
@@ -1500,9 +1630,10 @@ e_n(\alpha(S),\alpha(T)) &{}= \frac{g_{\alpha(T)}(\alpha(P+S))}{g_{\alpha(T)}(\a
 
 \subsection{Učinkovit algoritem za izračun Weilovega parjenja}
 
-Leta $1986$ je Vicor Miller napisal članek o tem, kako učinkovito izračunati Weilovo parjenje. Članek ni bil nikoli objavljen.
+Leta $1986$ je Vicor Miller napisal članek o tem, kako učinkovito izračunati Weilovo parjenje \cite{Miller} .
 
-\begin{izrek}
+\begin{izrek}~
+
 \label{izrek:Miller}
 
 Naj bo $E$ eliptična krivulja in naj bosta $P=(x_P,y_P), Q = (x_Q,y_Q)$ ne ničelni točki na $E$.
@@ -1516,14 +1647,14 @@ x-x_P & \quad \text{sicer} .\\
 \]
 
 Potem velja 
-$$div(g_{P,Q}) = [P] + [Q] - [P+Q] - [\infty].$$
+$$\Div{g_{P,Q}} = [P] + [Q] - [P+Q] - [\infty].$$
 
 
 \item (Millerjev algoritem) Naj bo $m \geq 1$. Zapišimo $m$ v binarnem kot
 $$m = m_0+m_1\cdot 2 + m_2\cdot 2^2 + \ldots + m_{n-1}\cdot 2^{n-},$$
 kjer so $m_i \in \{ 0,1 \}$ in $m_{n-1} \neq 0$. Potem algoritem \ref{alg:Miller} vrne
 funkcijo $f_P$, za katero velja
-$$div(f_P) = m[P]-[mP]-(m-1)[\infty].$$ 
+$$\Div{f_P} = m[P]-[mP]-(m-1)[\infty].$$ 
 
 
 \end{enumerate}
@@ -1550,28 +1681,29 @@ $$div(f_P) = m[P]-[mP]-(m-1)[\infty].$$
 \end{algorithmic}
 \end{algorithm}
 
-\begin{proof}
+\begin{proof}~
+
 \begin{enumerate}
 \item Predpostavimo najprej, da $\lambda \neq \infty$, ter naj $y = \lambda x + \mu$ predstavlja premico skozi $P,Q$ (ali tangento v primeru, da je $P=Q$). Taka premica seka krivuljo $E$ v treh točkah $P,Q,-P-Q$. To sledi iz sestave grupe nad $E$. Za to premico torej velja
-$$div(y-\lambda x - \mu) = [P] + [Q] + [-P-Q] - 3[\infty].$$
+$$\Div{y-\lambda x - \mu} = [P] + [Q] + [-P-Q] - 3[\infty].$$
 Navpične premice pa sekajo $E$ neki točki $P$ in $-P$. Torej velja
-$$div(x-x_{P+Q}) = [P+Q] + [-P-Q] - 2[\infty].$$
+$$\Div{x-x_{P+Q}} = [P+Q] + [-P-Q] - 2[\infty].$$
 Od tod sledi, da ima funkcija
 $$g_{P,Q} =\frac{y-\lambda x - \mu}{x-x_{P+Q}}$$
 željen delitelj
-$$div(g_{P,Q}) = [P] + [Q] - [P+Q] - [\infty].$$
+$$\Div{g_{P,Q}} = [P] + [Q] - [P+Q] - [\infty].$$
 Z uporabo formule za seštevanje točk sedaj lahko to funkcijo preoblikujemo v želeno obliko
 $$g_{P,Q} = \frac{y-y_P-\lambda(x-x_P)}{x+x_P+x_Q-\lambda^2} .$$
 
-V primeru da velja $\lambda = \infty$, potem velja $P+Q = \infty$. V tem primeru hočemo imeti delitelj oblike $div(g_{P,Q}) = [P] + [-P] - 2[\infty]$. Tak delitelj pa ima ravno funkcija $x-x_P$.
+V primeru da velja $\lambda = \infty$, potem velja $P+Q = \infty$. V tem primeru hočemo imeti delitelj oblike $\Div{g_{P,Q}} = [P] + [-P] - 2[\infty]$. Tak delitelj pa ima ravno funkcija $x-x_P$.
 
-\item Dokažemo s pomočjo indukcije, pri čemer upoštevamo $div(g_{T,T}) = 2[T]-[2T]-[\infty]$, $div(g_{T,P}) = [T]+[P]-[T+P]-[\infty]$.
+\item Dokažemo s pomočjo indukcije, pri čemer upoštevamo $\Div{g_{T,T}} = 2[T]-[2T]-[\infty]$, $\Div{g_{T,P}} = [T]+[P]-[T+P]-[\infty]$.
 Preverimo, na primeru $m = 3$. binarni zapis $m$ je torej $11$.Sledimo korakom algoritma \ref{alg:Miller}.
 $$f = f^2 \cdot g_{T,T} = g_{P,P}$$
 Ker je v tem primeru $m_0 = 1$ moramo $f$ popraviti v $f = f \cdot g_{T,P}$. To nam da
 $$f = g_{P,P} \cdot g_{2T,P}.$$
 Če uporabimo sedaj zgornji zvezi dobimo
-$$div(f) = 2[P] - [2P] - [\infty] + [2P] + [P] - [2P+P] - [\infty] = 3[P] - [3P]-2[\infty].$$
+$$\Div{f} = 2[P] - [2P] - [\infty] + [2P] + [P] - [2P+P] - [\infty] = 3[P] - [3P]-2[\infty].$$
 To pa je ravno to kar želimo.
 
 \end{enumerate}
@@ -1579,18 +1711,20 @@ To pa je ravno to kar želimo.
 \end{proof}
 
 S pomočjo izreka $\ref{izrek:Miller}$ lahko sedaj izračunamo Weilovo parjenje $e_m(P,Q)$ kot
-$$e_m(P,Q) = (f_P(Q+S)/f_P(S)) / (f_Q(P-S)/f_Q(-S)) .$$
+$$e_m(P,Q) = \frac{\frac{f_P(Q+S)}{f_P(S)}}{\frac{f_Q(P-S)}{f_Q(-S)}} .$$
 Tu moramo za točko $S$ izbrati $S \notin \{ \infty,P,-Q,P-Q\}$.
 
-\begin{primer}
+\begin{primer}~
 
-Naj bo $y^2 = x^3+30x+34$ eliptična krivulja nad poljem $\F_{631}$. Izberimo točki $P = (36,60),Q = (121,387)$. Izračunati želimo Weilovo parjenje $e_5(P,Q)$. Če hočemo uporabiti Millerjev algoritem moramo izbrati točko $S$. Izberimo $S=(0,36)$. Hitro lahko preverimo, da $S$ res zadošča kriterijem izbire.
+Naj bo $y^2 = x^3+30x+34$ eliptična krivulja nad poljem $\F_{631}$. Izberimo točki $P = (36,60),Q = (121,387)$. Izračunati želimo Weilovo parjenje $e_5(P,Q)$
+
+Če želimo uporabiti Millerjev algoritem moramo izbrati točko $S$. Izberimo $S=(0,36)$. Hitro lahko preverimo, da $S$ res zadošča kriterijem izbire.
 Za izračun $e_5(P,Q)$ moramo izračunati $f_P,f_Q$ v dveh različnih točkah. Poglejmo si podrobnejši izračun za $f_P(S)$.
 
 V prvem koraku, moramo izračunati $g_{P,P}(S)$. Po vseh potrebnih izračunih dobimo $$\text{naklon} = 569,\ \text{stevec} = 268,\ \text{imenovalec} = 14.$$ Od tod torej sledi $g_{P,P}(S) = 560$. Ker velja $m_1 = 0$. Torej po prvem koraku dobimo $f = 560, T = 2P$.
 
 V drugem koraku moramo poračunati $g_{2P,2P}(S)$, kjer kot rezultat dobimo $399$. Vrednost $f$ pa moramo popraviti na $362$. V tem koraku velja $m_0 = 1$, torej moramo tu poračunati še
-$g_{4P,P}(S)$. Premica med $P,4P$ je navpična zato uporabimo drugo vejo funkcije $g$. Kot rezultat dobimo $g_{4P,P}(S) = 595$. Še zadnjič popravimo $f$ in kot končni rezultat dobimo
+$g_{4P,P}(S)$. Premica med $P,\ 4P$ je navpična zato uporabimo drugo vejo funkcije $g$. Kot rezultat dobimo $g_{4P,P}(S) = 595$. Še zadnjič popravimo $f$ in kot končni rezultat dobimo
 $f_P(S) = 219$.
 
 Na podoben način sedaj poračunamo še ostale vrednosti, ter dobimo
@@ -1605,10 +1739,11 @@ $$e_5(P,Q) =\frac{473}{88} = 242.$$
 \end{primer}
 
 \subsection{Implementacija Millerjevega algoritma}
+Tu je podana implementacija Millerjevega algoritma v programskem okolju Python.
 
 \lstinputlisting[language=Python]{WeilPairing.py}
 
-
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %DIEFFIE-HELLMAN
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1781,12 +1916,14 @@ Z uporabo programskega okolja SAGE, lahko napad enostavno tudi sprogramiramo.
 \section{MOV}
 MOV napad s pomočjo Weilovega parjenja pretvori problem diskretnega logaritma iz $E(\F{q})$ v problem diskretnega logaritma nad $\F^{\times}_{q^m}$. Na ta način se izognemo težji strukturi grupe. Nov problem diskretnega logaritma pa lahko sedaj rešimo z različnimi napadi, med drugim tudi z napadom Index-Calculus \ref{IndexCalc}. MOV napad deluje če velikost polja $\F{q^m}$ ni dosti večja od velikosti polja $\F{q}$. Postopek napada sledi poteku dokaza naslednje trditve.
 
-\begin{trditev}
+\begin{trditev}~
+
 \label{trd:5.1}
 Naj bo $E$ eliptična krivulja nad $\F{q}$. Naj bosta $P,Q \in E(\F{q})$, ter naj bo $N$ red točke $P$. Predpostavimo, da velja $\text{gcd}(N,q)=1$. Potem obstaja tako število $k$, da velja $Q = kP$ natanko tedaj ko $NQ = \infty$ in $e_N(P,Q)=1$.
 \end{trditev}
 
-\begin{proof}
+\begin{proof}~
+
 $(\Rightarrow)$ Če je $Q = kP$, potem je $NQ = kNP$, ampak ker je red $P$ enak $N$ od tod sledi $kNP = \infty$. Prav tako
 $$e_n(P,Q) = e_n(P,P)^k = 1^k = 1.$$
 
@@ -1801,13 +1938,13 @@ $$1 = e_N(P,Q) = e_N(P,P)^ae_N(P,R)^b = \zeta^b.$$
 Od tod sledi, da je $b$ večkratnik števila $N$, od tod pa po definiciji sledi $bR = \infty$, ter $Q = aP$.
 \end{proof}
 
-Ideja dokaza nam sedaj, da korake MOV napada.
+Ideja dokaza nam sedaj da korake MOV napada.
 
 \begin{algorithm}[H]
 \caption[MOV]{MOV napad}
 \label{alg:MOV}
 Izberi $m$ tako, da $$E[N] \subset \E{\F{q^n}}.$$
-Ker imajo vse točke $E[N]$ koordinate v $\bar{\F{q}} = \cup_{j\geq 1}\F_{q^j}$ tak $m$ obstaja. Prav tako je $\mu_N$ v $\F{q^m}$.
+Ker imajo vse točke $E[N]$ koordinate v $\overline{\F{q}} = \cup_{j\geq 1}\F_{q^j}$ tak $m$ obstaja. Prav tako je $\mu_N$ v $\F{q^m}$.
 Nato postopaj po naslednjih korakih.
 \begin{enumerate}
 \item Izberi točko $T \in \E{\F{q^m}}$.
@@ -1821,25 +1958,28 @@ Nato postopaj po naslednjih korakih.
 \end{algorithm}
 MOV napad deluje hitreje, kot če hočemo rešiti problem diskretnega algoritma direktno nad krivuljo, če velja 
 $$k > log^2(p),$$
-kjer je krivulja $E(\F_p)$ in MOV pretvori to grupo v $\F^{\times}_{p^k}$.
+kjer krivuljo $E(\F_p)$ MOV napad pretvori v grupo $\F^{\times}_{p^k}$.
 
-MOV napad deluje na supersingularnih krivuljah, saj lahko za take krivulje ponavadi vzamemo $m=2$.
+MOV napad deluje na supersingularnih krivuljah, saj lahko za take krivulje ponavadi lahko vzamemo $m=2$.
 
-\begin{definicija}
+\begin{definicija}~
+
 Naj bo $E$ eliptična krivulja nad $\F_q$, kjer je $q$ potenca nekega praštevila $p$. Potem velja $\#\E{\F_q} = q+1-a$ za neko število $a$. Krivulja $E$ je \emph{supersingularna} če velja $a \equiv 0 \MOD{p}$.
 \end{definicija}
 
-\begin{opomba}
+\begin{opomba}~
+
 Izkaže se, da je pri pogoju $q=p \geq 5$ ta definicija ekvivalentna temu, da je $a=0$.
 \end{opomba}
 Naslednja trditev, nam bo dala utemeljitev izbire $m$ pri supersingularnih krivuljah.
 
-\begin{trditev}
+\begin{trditev}~
+
 Naj bo $E$ eliptična krivulja nad $\F_q$, ter naj velja $a = q+1-\#\E{\F_q} =0$. Naj bo $N\in \N$. Če obstaja točka $P \in \E{\F_q}$ reda $N$, potem velja
 $$E[N] \subseteq \E{\F_{q^2}}.$$
 \end{trditev}
 
-\begin{proof}
+\begin{proof}~
 
  Frobeniusev endomorfizem $\phi_q$ po izreku \ref{izrek:4.10} zadošča $\phi^2_q-a\phi_q+q=0$. Ker velja $a = 0$, to pomeni
 $$\phi^2_q = -q.$$
@@ -1849,23 +1989,25 @@ $$\phi^2_q(S) = -qS = 1\cdot S.$$
 Po lemi \ref{lema:4.5} od tot sledi $S \in \E{\F_{q^2}}$. 
 \end{proof}
 
-\begin{primer}
+\begin{primer}~
+
 Denimo, da želimo rešiti problem diskretnega logaritma na krivulji $E: \ y^2 = x^3+x \MOD{547}$, podanega z točkama $P=(67,481),Q = (167,405)$. Iščemo $k$ tako da bo veljalo $P = kQ$.
-Najprej moramo prvotno polje razširiti z nekim $m$. Ker je podana krivulja supersingularna, lahko za $m$ izberemo $2$. Krivuljo torej razširimo na polje $GF(547^2)$. Vzemimo za nerazcepni polinom stopnje $2$ polinom $x^2+543x+2$. Elementi tega polja so torej polinomi stopnje $1$ z koeficienti v $\Z_p$.
+
+Najprej moramo prvotno polje razširiti z nekim $m$. Ker je podana krivulja supersingularna, lahko za $m$ izberemo $2$. Krivuljo torej razširimo na polje $\F_{547^2}$. Vzemimo za nerazcepni polinom stopnje $2$ polinom $x^2+543x+2$. Elementi tega polja so torej polinomi stopnje $1$ s koeficienti v $\F_p$.
 Sedaj moramo izbrati neko naključno točko $T$. Denimo, da smo izbrali točko $T = (24x+219,273x+466)$. Z algoritmom \ref{alg:babyGiant} sedaj poračunamo red $M$ točke $T$. Kot odgovor dobimo $M = 274$. Poračunati moramo tudi red $N$ točke $P$. Ta pa je enak $N = 137$. Največji skupni delitelj teh števil je $137$. Zaradi tega dobimo novo točko $T1$ kot 
 $$T1 = (M/d) T = (274/137)T = 2T = (440x+318,363x+296).$$
 Ko izračunamo to točko sedaj s pomočjo Weilovega parjenja poračunamo
 $$e_{137}(P,T1) = 50x+422, \ e_{137}(Q,T1) = 416x+519.$$
-Tu moramo sedaj rešiti problem diskretnega logaritma v polju $GF(547^2)$. To lahko naredimo s posplošitvijo index calculusa. Rešitev tega problema je $83$. Rešitev lahko preverimo.
+Tu moramo sedaj rešiti problem diskretnega logaritma v polju $\F_{547^2}$. To lahko naredimo s posplošitvijo index calculusa na končna polja \cite{Henri2005}. Rešitev tega problema je $83$. Rešitev lahko preverimo.
 Če poračunamo
 $$(50x+422)^{83} \div (x^2+543x+2),$$
-bi kot ostanek v $GF(547^2)$ res dobili polinom $416x+519$.
+bi kot ostanek v $\F_{547^2}$ res dobili polinom $416x+519$.
 Postopek z naključno izbranimi $T$, bi sedaj še nekajkrat ponovili. Od tod pa bi potem lahko zaključili, da je iskani $k=83$. Ta rezultat pa lahko s pomočjo algoritma za seštevanje točk tudi hitro preverimo.
 \end{primer}
 
 \subsection{Mali korak, Velik korak}
 Kako izračunamo red točke na nek ekonomičen način? Trenutno je najhitrejši algoritem za izračun reda točke Schoof–Elkies–Atkinsonov algoritem (SEA). Tu pa si bomo pogledali malo bolj preprost algoritem, ki pa vseeno predstavlja veliko izboljšanje glede na naiven pristop seštevanja točke same s seboj.
-Naj bo $P \in E(\F{q})$. Radi bi izračunali red točke $P$. Iščemo torej tako število $k$, da bo veljalo $kP = \infty$. Algoritem Mali korak, Velik korak lahko izračuna red točke v približno $4q^{\frac{1}{4}}$ korakih. Koraki algoritma so sledeči:
+Naj bo $P \in E(\F_q)$. Radi bi izračunali red točke $P$. Iščemo torej tako število $k$, da bo veljalo $kP = \infty$. Algoritem Mali korak, Velik korak lahko izračuna red točke v približno $4q^{\frac{1}{4}}$ korakih. Koraki algoritma so sledeči:
 
 \begin{algorithm}[H]
 \caption[MV]{Mali korak, Velik korak}
@@ -1881,7 +2023,7 @@ Naj bo $P \in E(\F{q})$. Radi bi izračunali red točke $P$. Iščemo torej tako
 
 \end{algorithm}
 
-\begin{opomba}
+\begin{opomba}~
 
 \label{opo:MaliVeliki}
 Algoritem \ref{alg:babyGiant} lahko preoblikujemo do te mere, da namesto reda točke izračunamo število točk na krivulji. Vse kar moramo narediti, je ponavljati korake $(1)$-$(6)$ za naključno izbrane točke $P \in E(\F{q})$. Ustavimo se ko najmanjši skupni večkratnik redov točk, deli le eno število $N$ v območju $q+1-2\sqrt{q} \leq N \leq q+q+2\sqrt{q}$. To število $N$ je potem število točk na dani krivulji. Pri tem postopku se upremo na Hassejev izrek o številu točk na eliptični krivulji.
@@ -1890,34 +2032,37 @@ Algoritem \ref{alg:babyGiant} lahko preoblikujemo do te mere, da namesto reda to
 
 Tu se sedaj pojavi še vprašanje zakaj ta algoritem deluje. Odgovor na to vprašanje pa nam da naslednja lema.
 
-\begin{lema}
+\begin{lema}~
 
-Naj bo $G$ aditivna grupa in naj bo $g\in G$. Denimo da velja $Mg = 0$ za nek $M \in \N$. Označimo z $p_1,\ldots,p_r$ različna praštevila, ki delijo $M$. Če velja $(M/p_i)g \neq = 0$ za vse $i$, potem je $M$ red $g$.
+Naj bo $G$ aditivna grupa in naj bo $g\in G$. Denimo da velja $Mg = 0$ za nek $M \in \N$. Označimo z $p_1,\ldots,p_r$ različna praštevila, ki delijo $M$. Če velja $(M/p_i)g \neq  0$ za vse $i$, potem je $M$ red $g$.
 
 \end{lema}
 
-\begin{proof}
+\begin{proof}~
 
 Naj bo $k$ red $g\in G$. Ker velja $Mg = 0$ vemo, da $k|M$. Denimo, da $k \neq M$. Pokazati moramo, da obstaja praštevilo $p_i$, tako da $(M/p_i)g = 0$. Naj bo $p_i$ praštevilo, ki deli $M/k$. Tako število obstaja, ker $M \neq k$. Potem velja $p_ik|M$, to pa pomeni da $k|(M/p_i)$. Ker pa je $k$ red elementa $g$, to pomeni $(M/p_i)g = 0$.
 
 \end{proof}
 
 
-\begin{primer}
+\begin{primer}~
 
-Vzemimo problem iz prejšnega primera. Zanima nas torej red točke $P=(67,481)$, ki se nahaja na krivulji $y^2 = x^3+x \MOD{547}$.
+Vzemimo problem iz prejšnega primera. Zanima nas torej red točke \newline $P=(67,481)$, ki se nahaja na krivulji $y^2 = x^3+x \MOD{547}$.
 
-Najprej poračunamo točko $Q = (q+1)P = 548*P = \infty$. Ker je $Q$ točka v neskončnosti lahko izpustimo iskanje pravega $k$ iz algoritma, saj bo pri $k=0,j=0$ veljalo
+Najprej poračunamo točko $Q = (q+1)P = 548P = \infty$. Ker je $Q$ točka v neskončnosti lahko izpustimo iskanje pravega $k$ iz algoritma, saj bo pri $k=0,j=0$ veljalo
 $$Q+k(2mP) = Q =  \infty = jP.$$
-Za število $M$ prav tako v obeh primerih dobimo isti rezultat in sicer $M = 548$. Velja $548=2\cdot 2\cdot 137$. Pri zvajanju nadaljnih korakov algoritma stevilo $M$ dvakrat delimo z $2$, saj velja $274P = \infty, \ 137P = \infty$. Ker pa je $137$ praštevilo in $P \neq \infty$ od tod sledi red $N$ točke $P$ je enak $137$.
+Za število $M$ prav tako v obeh primerih dobimo isti rezultat in sicer $M = 548$. Velja $548=2\cdot 2\cdot 137$. Pri izvajanju nadaljnih korakov algoritma število $M$ dvakrat delimo z $2$, saj velja $274P = \infty, \ 137P = \infty$. Ker pa je $137$ praštevilo in $P \neq \infty$ od tod sledi red $N$ točke $P$ je enak $137$.
 
 \end{primer}
 
 
 \subsection{MOV napad program}
 
+Algoritem MOV sprogramiran v programskem okolju SAGE.
+
 \lstinputlisting[language=Python]{MOV.py}
 
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %ANOMALNE KRIVULJE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1925,23 +2070,24 @@ Za število $M$ prav tako v obeh primerih dobimo isti rezultat in sicer $M = 548
 \section{Anomalne krivulje}
 
 Delovanje MOV temelji na uporabi Weilovega parjenja. Pojavi se torej ideja, da bi konstruirali tako krivuljo, ki vedno da trivialno Weilovo parjenje. S tem bi preprečili MOV napad. Krivulje za katere je to res so take, da za njih velja
-$$\#\E{\F_q}.$$
-Takim krivuljam rečemo anomalne krivulje. Če je $p$ praštevilo, je potem $E[n]$ ciklična grupa, kar pomeni da bo Weilovo parjenje konstantno enako $1$. Vender za tak tip krivulj obstaja napad, ki deluje še hitreje kot MOV.
+$$\#\E{\F_q} = q.$$
+Takim krivuljam rečemo anomalne krivulje. V primeru, ko je $p$ praštevilo, velja da je $E[n]$ ciklična grupa, kar pomeni da bo Weilovo parjenje konstantno enako $1$. Vender za tak tip krivulj obstaja napad, ki deluje še hitreje kot MOV.
 Pokažimo algoritem, ki deluje če je $q$ praštevilo.
-Za tak napad bomo najprej morali krivuljo $E$in točki $P,Q$ razširiti iz $\F_p$ na $\Z$. Pri tem bomo potrebovali naslednjo trditev.
+Za tak napad bomo morali najprej krivuljo $E$ in točki $P,Q$ razširiti iz $\F_p$ na $\Z$. Pri tem bomo potrebovali naslednjo trditev.
 
-\begin{trditev}
+\begin{trditev}~
+
 \label{trd:5.6}
 Naj bo $E$ eliptična krivulja nad $\F_p$ in naj bosta $P,Q \in \E{\F_p}$. Predpostavimo še, da je krivulja $E$ oblike $y^2=x^3+Ax+B$. Potem obstajajo cela števila
 $A',B',x_1,x_2,y_1,y_2$ in eliptična krivulja $E'$ podana z
 $$y^2=x^3+A'x+B',$$
-oblike $P'=(x_1,y_1),Q'=(x_2,y_2), \in E'(\Q)$.
+ter točke $P'=(x_1,y_1),Q'=(x_2,y_2), \in E'(\Q)$.
 Za ta števila velja
-$$A\equiv A',B \equiv B', P \equiv P', Q \equiv Q' \MOD{p}.$$
+$$A\equiv A',\ B \equiv B',\ P \equiv P',\ Q \equiv Q' \MOD{p}.$$
 
 \end{trditev}
 
-\begin{proof}
+\begin{proof}~
 
 Izberi števili $x_1,x_2$ tako, da velja $x_1,x_2 \MOD{p}$ podajata x-koordinati $P,Q$. Predpostavimo najprej, da $x_1 \not \equiv x_2 \MOD{p}$. Nato izberi $y_1$ tako, da velja
 $P' \equiv P \MOD{p}$. Tu ekvivalenco gledamo po koordinatah. Pri izbiri $y_2$ moramo biti bolj previdni. Izberimo $y_2$ tako, da velja
@@ -1965,7 +2111,7 @@ MANKA TO DA E' RES ELIPTIČNA. TEGA NI KER JE DISKRIMINANTA K JE NISM OMENU. DOK
 \end{proof}
 
 
-\begin{definicija}
+\begin{definicija}~
 
 Naj bosta $a,b$ racionalni števili za kateri velja $a/b \neq 0$ in $a,b$ tuji števili. Zapišimo $a/b = p^ra_1/b_1$, kjer $p \nmid a_1b_1$. Potem je \emph{p-adična vrednost} definirana
 kot
@@ -1974,7 +2120,7 @@ Definirajmo še
 $$v_p(0) = \infty.$$
 \end{definicija}
 
-\begin{primer}
+\begin{primer}~
 
 $\frac{7}{40} = 2^{-3}\frac{7}{5}$, zato velja
 $$v_2(7/40) = -3.$$
@@ -1985,7 +2131,7 @@ $$v_5(50/3) = 2,\ v_7(1/2) = 0.$$
 Naj bo $E'$ eliptična krivulja nad $\Z$ podana z $y^2 = x^3+A'x+B'$. Naj bo $r \in N$. Potem lahko definiramo
 $$E_r' = \{  (x,y) \in E'(\Q) | v_p(x) \leq -2r, v_p(y) \leq -3r \} \cup \{ \infty \}.$$
 
-\begin{izrek}
+\begin{izrek}[\protect{\cite{Washington2008}, Izrek 5.8}]~
 
 Naj bo $E'$ podana z $y^2 = x^3+A'x+B'$, $A',B' \in \Z$. Naj bo $p$ praštevilo in naj bo $r \in \N$. Potem velja
 \begin{enumerate}
@@ -2006,7 +2152,7 @@ je injektivni homomorfizem.
 
 Potrebovali bomo še preslikavo redukcije po modulu $p$
 \begin{align}
-red_p: E'(\Q) &{}\rightarrow E' \MOD{p} \nonumber \\
+\text{red}_p: E'(\Q) &{}\rightarrow E' \MOD{p} \nonumber \\
 (x,y) &{}\mapsto (x,y) \MOD{p} \nonumber \\
 E_1' &{}\mapsto \{ \infty \} \nonumber
 \end{align}
@@ -2025,13 +2171,14 @@ Vrnimo se sedaj k prvotnemu problemu. Imamo torej anomalno krivuljo $E$ nad $\F_
 
 \end{algorithm}
 
-\begin{opomba}
-Drugi korak algoritma nam zagotavlja, da so $P_1',Q_1' \in E_1'$. To je res, ker smo na anomalni krivulji in velja $red_p(pP') = p\cdot red_p(P') = \infty$.
+\begin{opomba}~
+
+Drugi korak algoritma nam zagotavlja, da so $P_1',Q_1' \in E_1'$. To je res, ker smo na anomalni krivulji in velja $\text{red}_p(pP') = p\cdot \text{red}_p(P') = \infty$.
 \end{opomba}
 
 Tu je potrebno podati še utemeljitev, da tak napad res deluje. Označimo $K' = kP'-Q'$.
 Velja
-$$\infty = kP-Q = red_p(kP'-Q') = red_p(K').$$
+$$\infty = kP-Q = \text{red}_p(kP'-Q') = red_p(K').$$
 To ravno pomeni, da $K' \in E_1'$. Od tod pa sledi, da je $\lambda_1(K')$ definiran in velja
 $$\lambda_1(pK') = p \lambda_1(K') \equiv 0 \MOD{p}.$$
 
@@ -2039,7 +2186,7 @@ Torej velja
 $$kl_1-l_2 = \lambda_1(kP_1'-Q_1') = \lambda_1(kpP'-pQ') = \lambda_1(pK') \equiv 0 \MOD{p}.$$
 To pa je ravno to kar hočemo pokazati.
 Izkaže se, da je ta algoritem nepraktičen, saj ima x-koordinata točk ponavadi okoli $p^2$ števk.
-Izkaže se, da lahko problem rešimo, če delamo po modolu $p^2$ namesto da delamo v $\Q$.
+Vendar pa lahko problem rešimo, če delamo po modolu $p^2$ namesto da delamo v $\Q$.
 Tako pridemo, do novega algoritma
 
 \begin{algorithm}[H]
@@ -2056,7 +2203,9 @@ $$m_1 = p\frac{y'-y_1}{x'-x_1}, \ m_2 = p\frac{y''-y2}{x''-x_2}.$$
 
 \end{algorithm}
 
-\begin{primer}
+Utemeljitev delovanja algoritma lahko najdemo v \cite{Washington2008}.
+
+\begin{primer}~
 
 Naj bo krivulja $E$ podana z enačbo $y^2=x^3+154x+82$ nad poljem $\F_{163}$. Naj bosta $P = (7,6),Q = (150,152)$ točki na krivulji. Iščemo tak $k$, da bo veljalo $kP=Q$. Preden lahko uporabimo algoritem \ref{alg:AnomalAttack} se moramo prepričati, da je $E$ res anomalna krivulja. Za točko $P$ velja $163P = \infty$. Ker je $163$ praštevilo od tod sledi, da je red točke $P$ enak $163$. To pa pomeni, da $163|\#\E{\F_{163}}$. Hassejev izrek \ref{izr:Hasse} nam pove 
 \begin{align}
@@ -2086,119 +2235,7 @@ $$k = \frac{m_1}{m_2} = \frac{49202}{4345} \equiv 47 \MOD{163}.$$
 
 \subsection{Anonomalne program}
 \lstinputlisting[language=Python]{anomalne.py}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%DELITELJI
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Delitelji}
-
-\begin{definicija}~
-Naj bo $K$ polje in naj bo $P \in \E{\overline{K}}$. Za vsako točko $P$ definirajmo formalen simbol $[P]$. \emph{Delitelj} $D$ na krivulji $E$ je končna linearna kombinacija takih simbolov z celoštevilskimi koeficienti.
-$$D = \sum_{j}a_j[P_j], \ a_j \in \Z $$
-
-\end{definicija}
-
-Iz same definicije sledi, da je delitelj element Abelove grupe generirane s simboli $[P]$. Označimo to grupo z $\DIV{E}$.
-
-
-\begin{definicija}~
-Definirajmo \emph{vsoto} in \emph{stopnjo} delitelja kot
-$$sum(\sum_{j}a_j[P_j]) = \sum_ja_jP_j \ \in \E{\overline{K}},$$
-$$deg(\sum_{j}a_j[P_j]) = \sum_ja_j \ \in \Z.$$
-
-\end{definicija}
-
-
-\begin{definicija}~
-Naj bo $E$ eliptična krivulja. \emph{Funkcija} na $E$ je racionalna funkcija $$f(x,y) \in \ \overline{K},$$ ki je definirana za vsaj eno točko na $\E{\overline{K}}$. Funkcija torej zavzame vrednosti v $\overline{K} \cup {\infty}$.
-\end{definicija}
-
-\begin{opomba}
-Naj bo $E$ podana z enačbo $y^2 = x^3+Ax+B$. Racionalna funkcija $\frac{1}{y^2-x^3-Ax-B}$ torej ne predstavlja funkcije.
-
-\end{opomba}
-
-\begin{trditev}
-Obstaja taka funkcija $u_P$, imenovana \emph{uniformizer} v točki $P$ z lastnostjo $u_P(P) = 0$, ter lastnostjo, da se da vsaka funkcija $f(x,y)$ zapisati kot
-$$f = u^r_Pg, \ r\in \Z, g(P) \neq 0,\infty.$$
-Definirajmo \emph{red} funkcije f v točki $P$ kot
-$$ord_P(f)=r.$$
-\end{trditev}
-
-\begin{primer}
-Naj bo $y^2 = x^3-x$ eliptična krivulja, naj bo $f(x,y) = x$. Izberimo $u(x,y) = y$. Očitno je $u(0,0) = 0$. Nad eliptično krivuljo velja 
-$$y^2 = x^3-x = x(x^2-1),$$ 
-od tod sledi $x = y^2\frac{1}{x^2-1}$ nad E.
-Prav tako velja $1/(x^2-1) \neq 0$ v točki $(0,0)$. Od tod sledi, da je 
-$$ord_{(0,0)}(x) = 2, ord_{(0,0)}(x/y) = 1.$$
-\end{primer}
-
-\begin{definicija}~
-Naj bo $f$ funkcija nad $E$, ki ni identično enaka $0$. Definirajmo \emph{delitelja} funkcije $f$ kot,
-$$div(f) = \sum_{P\in \E{\overline{K}}} ord_P(f)[P] \in \DIV{E}.$$
-\end{definicija}
-
-
-\begin{trditev}
-\label{trditev 11.1}
-Naj bo $E$ eliptična krivulja in naj bo $f$ funkcija na $E$, ki ni identično enaka $0$. Potem veljajo naslednje trditve:
-\begin{itemize}
-
-\item $f$ ima le končno mnogo ničel in polov
-\item $deg(div(f))=0$
-\item Če $f$ nima ničel ali polov, potem je $f$ konstantna.
-\end{itemize}
-
-
-\end{trditev}
-
-\begin{izrek}
-\label{izrek 11.2}
-Naj bo $E$ eliptična krivulja. Naj bo $D$ delitelj nad $E$ z $deg(D) = 0$. Potem obstaja taka funkcija $f$ na $E$ z lastnostjo
-$$div(f) = D$$
-natanko tedaj ko
-$$sum(D) = \infty.$$
-
-\end{izrek}
-
-\begin{proof}
-
-Pokažimo najprej, da se da $[P_1]+ [P_2]$ zapisati kot $[P_1+P_2] + [\infty]$ plus delitelj neke funkcije.
-Recimo, da imamo tri točke $P_1,P_2,P_3$ na neki krivulji $E$, ki ležijo na premici $ax+by+c = 0$.
-Naj bo $f(x,y) = ax+by+c$. Potem ima funkcija $f$ ničle v točkah $P_1,P_2,P_3$. Če $b$ ni enak $0$ potem ima funkcija po trditvi \ref{trditev 11.1} trojni pol v $\infty$.
-Velja torej $$div(ax+by+c) = [P_1]+[P_2]+[P_3]-3[\infty].$$
-Ker se nahajamo na Weierstrassovi krivulji, kjer točko $-P$ dobimo tako, da samo zamenjamo predznak y-koordinate, lahko za premico skozi točki $P_3 = (x_3,y_3)$, ter $-P_3=(x_3,-y_3)$ vzamemo $x-x_3=0$.
-Po  trditvi \ref{trditev 11.1} ponovno velja
-$$div(x-x_3) = [P_3]+[-P_3]-2[\infty].$$
-Od tod sledi
-$$div\left( \frac{ax+by+c}{x-x_3}\right) = div(ax+by+c) - div(x-x_3) =[P_1]+[P_2]-[-P_3]-[\infty].$$
-Ker na krivulji velja $P_1+P_2 = -P_3$ (to sledi iz načina kako na krivulji seštevamo točke), lahko zgornjo enačbo prepišemo v 
-$$[P_1]+[P_2] = [P_1+P_2]+[\infty]+div(g).$$ 
-
-
-Hitro se vidi, da velja
-$$sum(div(g))= P_1+P_2-(P_1+P_2)-\infty = \infty.$$
-Prav tako, pa se iz zgornje enačbe vidi, da velja $[P_1]+[P_2] = 2[\infty] + div(h)$, če velja $P_1+P_2 = \infty$. Zaradi tega je vsota vseh členov s pozitivnimi koeficienti v $D$ enaka nekemu simbolu $[P]$, večkratniku $[\infty]$, ter delitelju neke funkcije. Podobno velja tudi za člene z negativnimi koeficienti. Od tod sledi
-$$D = [P]-[Q]+n[\infty]+div(g_1).$$
-Zaradi tega, ker je $g_1$ kvocient produkta funkcij, ki sestavljajo $g$, velja tudi
-\newline $sum(div(g_1))= \infty$. Po trditvi \ref{trditev 11.1} velja $deg(div(g_1))=0$, ker funkcija ni konstantna. Imamo torej $$0 = deg(D) = 1-1+n+0=n.$$
-Od tod sledi
-$$D = [P]-[Q] + div(g_1).$$
-Prav tako velja
-$$sum(D) = P-Q+sum(div(g_1)) = P-Q.$$
-Predpostavimo sedaj, da velja $sum(D) = \infty$. Potem $P-Q = \infty$, kar pomeni da mora veljati $P=Q$ in $D = div(g_1)$. Če predpostavimo $D = div(f)$ za neko funkcijo f, potem
-$$[P]-[Q] = div(f/g_1).$$
-Od tod po lemi \ref{lema 11.3} sledi $P = Q$ in torej $sum(D) = \infty$.
-
-\end{proof}
-
-\begin{lema}
-\label{lema 11.3}
-
-Naj bosta $P,Q \in \E{\overline{K}}$, ter naj obstaja funkcija $h$ na $E$ za katero velja
-$$div(h)=[P]-[Q].$$
-Potem sledi $P=Q$.
-\end{lema}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
