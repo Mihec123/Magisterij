@@ -1,6 +1,5 @@
 import math
 import random
-import time
 
 def razEvk(a, b,inverz = True):
     """extended quclidian algorithm can compute inverse"""
@@ -19,12 +18,21 @@ def razEvk(a, b,inverz = True):
         return  a, s0
 
 class NumberMod:
-    """NumberMod(a,n = None) represents the number a modulo n. If n= None
-    then the number behaives as normal otherwise it is represented modulo n
-    in a way such that it is writen either with + or - depending on which number
-    is smaller. Example b = NumberMod(15,17) will be represented as -2 instead of
-    15. To perform any calculations between numbers they must have the same
-    modulo."""
+    """
+    Opis:
+       Razred za predstavitev stevil po nekem
+       modulu p
+
+     Definicija:
+       NumberMod(a,mod)
+
+     Vhodni podatki:
+       a...stevilo, ki ga hocemo predstaviti
+       mod...modul po katerem delamo
+
+     Izhodni  podatek:
+       Razred stevila po modolu
+    """
     def __init__(self,a, n=None):
         self.original = a
         self.modul = n
@@ -39,33 +47,36 @@ class NumberMod:
         return NumberMod(-self.num,self.modul)
             
     def __add__(self,other):
-        """addition returns num()"""
+        """sestevanje stevil po modolu"""
         if self.modul != other.modul:
             raise Exception('numbers have different modul')
         else:
-            novonum = NumberMod((self.num + other.num) % self.modul,self.modul)
+            novonum = NumberMod((self.num + other.num)\
+                                % self.modul,self.modul)
             return novonum
         
     def __sub__(self,other):
-        """substracting returns num()"""
+        """odstevanje stevil po modolu"""
         if self.modul != other.modul:
             raise Exception('numbers have different modul')
         elif self.modul == None:
             return NumberMod(self.num-other.num,self.modul)
         else:
-            novonum = NumberMod((self.num - other.num) % self.modul,self.modul)
+            novonum = NumberMod((self.num - other.num)\
+                                % self.modul,self.modul)
             return novonum
         
     def __mul__(self,other):
-        """multiplaying returns num()"""
+        """mnozenje stevil po modolu"""
         if self.modul != other.modul:
             raise Exception('numbers have different modul')
         else:
-            novonum = NumberMod((self.num * other.num) % self.modul,self.modul)
+            novonum = NumberMod((self.num * other.num)\
+                                % self.modul,self.modul)
             return novonum
         
     def __truediv__(self,other):
-        """multiplying by inverse of other returns num()"""
+        """mnozenje z inverzom stevila po modolu"""
         if self.modul != other.modul:
             raise Exception('numbers have different modul')
         else:
@@ -74,7 +85,7 @@ class NumberMod:
             return novonum
 
     def __lt__(self, other):
-        """less then returns True or False in modulo arithemtic"""
+        """manjse kot"""
         if self.num > 0 and other.num > 0:
             return self.num < other.num
         elif self.num < 0 and other.num > 0:
@@ -85,7 +96,7 @@ class NumberMod:
             return self.num < other.num
 
     def __le__(self, other):
-        """less or equal returns True or False in modulo arithemtic"""
+        """manjse ali enako"""
         if self.num > 0 and other.num > 0:
             return self.num <= other.num
         elif self.num < 0 and other.num > 0:
@@ -96,15 +107,15 @@ class NumberMod:
             return self.num <= other.num
 
     def __eq__(self, other):
-        """equal returns True or False in modulo arithemtic"""
+        """enakost"""
         return self.num == other.num
 
     def __ne__(self, other):
-        """not equal returns True or False in modulo arithemtic"""
+        """ne enakost"""
         return self.num != other.num
 
     def __gt__(self, other):
-        """greater then returns True or False in modulo arithemtic"""
+        """vecje kot"""
         if self.num > 0 and other.num > 0:
             return self.num > other.num
         elif self.num < 0 and other.num > 0:
@@ -115,7 +126,7 @@ class NumberMod:
             return self.num > other.num
 
     def __ge__(self, other):
-        """greater or equal then returns True or False in modulo arithemtic"""
+        """vecje ali enako"""
         if self.num > 0 and other.num > 0:
             return self.num >= other.num
         elif self.num < 0 and other.num > 0:
@@ -126,18 +137,21 @@ class NumberMod:
             return self.num >= other.num
 
     def __pow__(self,b):
+        p = self.mod
         if not isinstance(b,int):
             raise Exception('power must be an integer')
         else:
             if b == 0:
-                return NumberMod(1,self.modul)
+                return NumberMod(1,p)
             elif b == 1:
-                return NumberMod(self.num,self.modul)
+                return NumberMod(self.num,p)
             else:
                 if b%2 == 0:
-                    return NumberMod(self.num*self.num,self.modul)**(b//2)
+                    st = NumberMod(self.num*self.num,p)
+                    return st**(b//2)
                 else:
-                    return NumberMod(self.num,self.modul)*(NumberMod(self.num,self.modul)**(b-1))
+                    st = NumberMod(self.num,p)**(b-1)
+                    return NumberMod(self.num,p)*st
 
     
     def __str__(self):
@@ -147,9 +161,7 @@ class NumberMod:
         return str(self.num)
     
     def inverse(self):
-        #print("num: ",self.original)
-        #print("modul: ",self.modul)
-        """inverse of self.num by modulo self.modul returns num()"""
+        """inverz stevila po modolu"""
         if self.modul == None:
             raise Exception('modul equals None')
         n = self.modul
@@ -163,9 +175,8 @@ class NumberMod:
             return NumberMod(razEvk(a,n)[1],n)      
         
     def small(self,n):
-        """correts self.num by changing it into the smallest value by modulo n
-        i.e. if n= 31 and self.num = 30 it changes self.num into
-        self.num = -1. It does this if (n-1)/2 is lees then self.num"""
+        """ce je stevilo veliko ga proba funkcija zapisati
+        s predznakom minus"""
         if n == None:
             pass
         else:
@@ -175,7 +186,8 @@ class NumberMod:
                 self.numS = self.numS+n
                 
     def isPrime(self,eps = 1/100000):
-        """Miller-Rabin test for primes with error eps"""
+        """Miller-Rabinov test za prastevilskost
+        z napako eps"""
         #Napaka posameznega koraka je manjsa kot 1/4
         k = int(math.log(eps)/math.log(1/4))+1
         r = 0
@@ -199,7 +211,8 @@ class NumberMod:
             j = 1
             while j < r+1:
                 xnov = pow(xprej,2,n)
-                if xnov % n == 1 and (xprej != n-1 and xprej != 1):
+                if (xnov % n == 1 and
+                (xprej != n-1 and xprej != 1)):
                     #xprej je Millerjeva prica
                     return False
                 j += 1
@@ -211,63 +224,13 @@ class NumberMod:
         return True
     
     def gcd(self,other):
-        if self.modul == other.modul:
-            return NumberMod(gcd(self.num,other.num),self.modul)
+        p = self.modul
+        q = other.modul
+        if p == q:
+            return NumberMod(gcd(self.num,other.num),p)
         else:
             raise Exception('numbers have different modul')
 
-    def pow(self,exp1):
-        """computes NumberMod(a,b)^exp1 by squaring"""
-        exp = NumberMod(exp1,self.modul)
-        base = self
-        ans = NumberMod(1,self.modul)
-        while exp > NumberMod(0,self.modul):
-            if exp.num % 2 == 0:
-                exp = NumberMod(exp.num /2,self.modul)
-                base = base*base
-            else:
-                exp = NumberMod(exp.num -1,self.modul)
-                ans = ans*base
-
-                exp = NumberMod(exp.num /2,self.modul)
-                base = base*base
-                                 
-        return ans
-
-
-
-def testPrimitiveRoot(g,m,razcepPhi,Phi):
-    """
-    Opis:
-       testPrimitiveRoot  testira ali je element g generator grupe $\Z_{m}$. Pri tem moramo podati razcep $\fi(m-1)$ ter $\fi(m)$
-
-
-     Zgled:
-         Phi = 1216
-         razcepPhi =[2,19]
-         m = 1217
-         g = 23
-         odg = testPrimitiveRoot(g,m,razcepPhi,Phi)
-
-     Definicija:
-       testPrimitiveRoot(g,m,razcepPhi,Phi)
-
-     Vhodni podatki:
-       g...stevilo ki ga testiramo
-       m...modul s katerim delamo
-       razcepPhi...razcep stevila podan s seznamom dobljenega z Eulerjevo phi funkcijo (npr. [2,3] bi bil razcep stevila, ki se zapise kot 2**x*3**y)
-       Phi...vrednost $\phi(m)$
-
-     Izhodni  podatek:
-       Boolean True/False
-    """
-    skupni = razEvk(g,m,False)
-    if skupni[0] != 1:
-        return False
-    for el in razcepPhi:
-        if NumberMod(g**(Phi//el),m) == NumberMod(1,m):
-            return False
-    return True
 
 def gcd(a,b):
     if b == 0:
@@ -300,25 +263,35 @@ class ElipticCurve:
         self.b = b
         self.mod = modulo
     def __str__(self):
-        """Pri izpisu print nam vrne krivuljo v lepi obliki"""
+        """Pri izpisu print nam vrne
+        krivuljo v lepi obliki"""
         if self.a > 0 and self.b > 0:
-            return "y^2 = x^3 + {0}x + {1} mod {2}".format(self.a,self.b,self.mod)
+            return "y^2 = x^3 + {0}x + {1} mod {2}".format(
+                self.a,self.b,self.mod)
         elif self.a > 0 and self.b <0:
-            return "y^2 = x^3 + {0}x - {1} mod {2}".format(self.a,abs(self.b),self.mod)
+            return "y^2 = x^3 + {0}x - {1} mod {2}".format(
+                self.a,abs(self.b),self.mod)
         elif self.a > 0 and self.b == 0:
-            return "y^2 = x^3 + {0}x mod {1}".format(self.a,self.mod)
+            return "y^2 = x^3 + {0}x mod {1}".format(
+                self.a,self.mod)
         elif self.a == 0 and self.b > 0:
-            return "y^2 = x^3 + {0} mod {1}".format(self.b,self.mod)
+            return "y^2 = x^3 + {0} mod {1}".format(
+                self.b,self.mod)
         elif self.a == 0 and self.b == 0:
-            return "y^2 = x^3 mod {0}".format(self.mod)
+            return "y^2 = x^3 mod {0}".format(
+                self.mod)
         elif self.a == 0 and self.b <0:
-            return "y^2 = x^3 - {0} mod {1}".format(abs(self.b),self.mod)
+            return "y^2 = x^3 - {0} mod {1}".format(
+                abs(self.b),self.mod)
         elif self.a < 0 and self.b >0:
-            return "y^2 = x^3 - {0}x + {1} mod {2}".format(abs(self.a),self.b,self.mod)
+            return "y^2 = x^3 - {0}x + {1} mod {2}".format(
+                abs(self.a),self.b,self.mod)
         elif self.a < 0 and self.b == 0:
-            return "y^2 = x^3 - {0}x mod {1}".format(abs(self.a),self.mod)
+            return "y^2 = x^3 - {0}x mod {1}".format(
+                abs(self.a),self.mod)
         elif self.a < 0 and self.b <0:
-            return "y^2 = x^3 - {0}x - {1} mod {2}".format(abs(self.a),abs(self.b),self.mod)
+            return "y^2 = x^3 - {0}x - {1} mod {2}".format(
+                abs(self.a),abs(self.b),self.mod)
 
 
 
@@ -342,39 +315,14 @@ class ElipticCurve:
         najdl = False
         while not najdl:
             x = random.randint(0,self.mod-1)
-            y2 = NumberMod(x,self.mod)**3 + NumberMod(self.a*x,self.mod) + NumberMod(self.b,self.mod)
+            y2 = NumberMod(x,self.mod)**3\
+                 + NumberMod(self.a*x,self.mod)\
+                 + NumberMod(self.b,self.mod)
             y2 = y2.num
             if pow(y2,(self.mod-1)//2,self.mod) == 1:
                 y = TonelliShanks(y2,self.mod)
                 najdl = True
         return Point(self.a,self.b,self.mod,x,y)
-
-    def randComplex(self):
-        """
-        Opis:
-           Funkcija randNotPrime generira nakljucno tocko na
-           elipticni krivulji E kjer modul ni prastevilo
-           y^2 = x^3 + ax+b mod q
-         Definicija:
-           E.rand()
-         Vhodni podatki:
-           ni vhodnih podatkov
-         Izhodni  podatek:
-           Razred Point, ki predstavlja tocko na
-           elipticni krivulji
-        """
-        najdl = False
-        while not najdl:
-            x = complex(random.randint(0,self.mod-1),random.randint(0,self.mod-1))
-            y2 = CMod(x**3 + self.a*x + self.b,self.mod)
-            
-            for i in range(self.mod**2):
-                y = complex(random.randint(0,self.mod-1),random.randint(0,self.mod-1))
-                y22 = CMod(y**2,self.mod)
-                if y22 == y2:
-                    najdl = True
-                    break
-        return PointComplex(self.a,self.b,self.mod,x,y)
 
     def isOn(self,P):
         """
@@ -393,10 +341,13 @@ class ElipticCurve:
            True/False
         """
         
-        if P.a != self.a or P.b != self.b or P.mod != self.mod:
+        if (P.a != self.a or P.b != self.b
+            or P.mod != self.mod):
             return False
         else:
-            x = NumberMod(P.x,self.mod)**3 + NumberMod(self.a*P.x,self.mod) + NumberMod(self.b,self.mod)
+            x = NumberMod(P.x,self.mod)**3\
+                + NumberMod(self.a*P.x,self.mod)\
+                + NumberMod(self.b,self.mod)
             y = (P.y**2) % self.mod
             return x.num==y
 
@@ -431,22 +382,26 @@ class Point(ElipticCurve):
         super().__init__(a,b, mod)
         self.x = x
         self.y = y
-        if (self.x == INF or self.y == INF) and self.y != self.x:
-            #preverimo ali je tocka v neskoncnosti, v tem primeru zahtevamo,
-            #da sta obe koordianti INF
-            raise Exception('Point is not a proper infinity')
+        if ((self.x == INF or self.y == INF)
+            and self.y != self.x):
+            #preverimo ali je tocka v neskoncnosti,
+            # v tem primeru zahtevamo, da sta
+            #obe koordianti INF
+            raise Exception('Point not infinity')
 
     def __str__(self):
         """Za lepsi izpis tocke po klicu print"""
         if self.x != INF:
-            return "({0},{1}) mod {2}".format(self.x,self.y,self.mod)
+            return "({0},{1}) mod {2}".format(
+                self.x,self.y,self.mod)
         else:
             return u"\u221e"
 
     def __repr__(self):
         """za lepsi izpis tocke po klicu return"""
         if self.x != INF:
-            return "({0},{1}) mod {2}".format(self.x,self.y,self.mod)
+            return "({0},{1}) mod {2}".format(
+                self.x,self.y,self.mod)
         else:
             return u"\u221e"
 
@@ -457,8 +412,11 @@ class Point(ElipticCurve):
         if self.x == INF or Q.x == INF:
             infty = True
         
-        if not(self.a == Q.a and self.b == Q.b and self.mod == Q.mod) and not infty:
-            raise Exception('Points don\'t lie on the same curve, or have different modulus')
+        if (not(self.a == Q.a and self.b == Q.b
+                and self.mod == Q.mod)
+            and not infty):
+            raise Exception("""Points don\'t lie on the
+                samecurve, or have different modulus""")
 
         if self.x == INF:
             return Q
@@ -476,7 +434,8 @@ class Point(ElipticCurve):
         elif self.x == Q.x and self.y != Q.y:
             return Point(None,None,None,INF,INF)
 
-        elif self.x == Q.x and self.y == Q.y and self.y != 0:
+        elif (self.x == Q.x and self.y == Q.y
+              and self.y != 0):
             m = NumberMod(2*self.y,self.mod).inverse().num
             m = (m*(3*(self.x**2)+self.a)) % self.mod
             x3 = (m**2-2*self.x) % self.mod
@@ -490,7 +449,8 @@ class Point(ElipticCurve):
         if self == INFPoint:
             return INFPoint
         else:
-            return Point(self.a,self.b,self.mod,self.x,-self.y % self.mod)
+            return Point(self.a,self.b,self.mod,
+                         self.x,-self.y % self.mod)
 
 
     def __sub__(self,Q):
@@ -524,7 +484,9 @@ class Point(ElipticCurve):
         ali pa predstavljata tocko v neskoncnosti"""
         if self.x == INF and Q.x == INF:
             return True
-        elif self.a == Q.a and self.b == Q.b and self.x == Q.x and self.y == Q.y and self.mod == Q.mod:
+        elif (self.a == Q.a and self.b == Q.b
+              and self.x == Q.x and self.y == Q.y
+              and self.mod == Q.mod):
             return True
         else:
             return False
@@ -567,49 +529,6 @@ def TonelliShanks(n,p1):
             c = pow(b,2,p1)
             t = (t*pow(b,2,p1)) % p1
             R = (R*b) % p1
-    
-
-
-def Factor(n):
-    """
-    Opis:
-       Factor je enostavna neucinkovita funkcija
-       za iskanje fakotrojev stevila
-
-     Definicija:
-       Factor(n)
-
-     Vhodni podatki:
-       n...stevilo, ki ga hocemo faktorizirati
-
-     Izhodni  podatek:
-       Seznam faktorjev stevila n
-    """
-    faktorji = []
-
-    tmp = NumberMod(n,None).isPrime()
-    if tmp:
-        faktorji.append(n)
-        return faktorji
-    else:
-        tmp = n
-        while tmp %2 == 0:
-            faktorji.append(2)
-            tmp = tmp//2
-        i = 3
-        while i*i <= tmp:
-
-            while tmp % i == 0:
-                faktorji.append(i)
-                tmp = tmp//i
-
-            i+=2
-
-        if tmp != 0:
-            faktorji.append(tmp)
-
-    return faktorji
-
 
 def lema(n,a,q):
     s0 = 2
@@ -630,7 +549,3 @@ def NumberPoints(steviloOsnovne,potenca,q):
     sn = lema(potenca,a,q)
     stevilo = pow(q,potenca)+1-sn
     return stevilo
-    
-
-    
-a = Point(0,1,529,253,1)

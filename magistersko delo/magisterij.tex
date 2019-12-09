@@ -117,6 +117,8 @@
 \newcommand{\DEG}[1]{\ \text{deg(}{#1}\text{)}}
 \newcommand{\Div}[1]{\ \text{div(}{#1}\text{)}}
 \newcommand{\ORD}[1]{\ \text{ord(}{#1}\text{)}}
+\newcommand{\SUM}[1]{\ \text{sum(}{#1}\text{)}}
+\newcommand{\ORDp}[2]{\ \text{ord}_{#2}({#1}\text{)}}
 % \DeclareMathOperator{\tr}{tr}  % morda potrebuješ operator za sled ali kaj drugega?
 
 % bold matematika znotraj \textbf{ }, tudi v naslovih, kot \omega spodaj
@@ -257,14 +259,14 @@ FAKULTETA ZA MATEMATIKO IN FIZIKO\\[5mm]
 
 \section*{Program dela}
 \addcontentsline{toc}{section}{Program dela} % dodajmo v kazalo
-Mentor naj napiše program dela skupaj z osnovno literaturo. Na literaturo se
-lahko sklicuje kot~\cite{lebedev2009introduction}, \cite{gurtin1982introduction},
-\cite{zienkiewicz2000finite}, \cite{STtemplate}.
+%Mentor naj napiše program dela skupaj z osnovno literaturo. Na literaturo se
+%lahko sklicuje kot~\cite{lebedev2009introduction}, \cite{gurtin1982introduction},
+
 
 \section*{Osnovna literatura}
 \begin{itemize}
   \plancite{Washington2008}
-  \plancite{Jeffrey2008}
+  %\plancite{Jeffrey2008}
 \end{itemize}
 
 \vspace{2cm}
@@ -500,6 +502,10 @@ Gladko kubično krivuljo nad algebraično zaprtim poljem lahko zapišemo v Weier
 $$y^2z = x^3 + axz^2 + bz^3.$$
 \end{izrek}
 
+\begin{opomba}~
+Takšni krivulji velikokrat rečemo tudi \emph{eliptična krivulja}.
+\end{opomba}
+
 \begin{primer}~
 
 Polinom $P(x,y,z) = z^2y-x^3$ je homogen polinom stopnje $3$. Rešitve enačbe $z^2y-x^3 = 0$ pa podajajo točke na kubični krivulji.
@@ -559,11 +565,6 @@ $$y^2=x^3+ax+b.$$
 Pri čemer upoštevamo zvezo med afinimi in projektivnimi koordinatami točk:
 $$(x,y)\in (\Z/n\Z)^2 \Leftrightarrow [x,y,1]\in \PP^2(\Z/n\Z).$$
 
-\end{definicija}
-
-\begin{definicija}~
-
-\emph{Eliptična} krivulja je gladka kubična krivulja.
 \end{definicija}
 
 \subsection{Tonelli-Shanks}
@@ -1127,6 +1128,8 @@ od koder sledi
 
 \section{Delitelji}
 
+Pri konstrukciji Weilovega parjenja bodo pomembno vlogo igrali t.\ i.\ delitelji. V tem poglavju bomo navedli nekaj definicij in lastnosti, ki jih bomo kasneje potrebovali.
+
 \begin{definicija}~
 
 Naj bo $K$ polje in naj bo $P \in \E{\overline{K}}$. Za vsako točko $P$ definirajmo formalen simbol $[P]$. \emph{Delitelj} $D$ na krivulji $E$ je končna linearna kombinacija takih simbolov s celoštevilskimi koeficienti.
@@ -1140,8 +1143,8 @@ Iz same definicije sledi, da je delitelj element Abelove grupe generirane s simb
 \begin{definicija}~
 
 Definirajmo \emph{vsoto} in \emph{stopnjo} delitelja kot
-$$sum(\sum_{j}a_j[P_j]) = \sum_ja_jP_j \ \in \E{\overline{K}},$$
-$$deg(\sum_{j}a_j[P_j]) = \sum_ja_j \ \in \Z.$$
+$$\SUM{\sum_{j}a_j[P_j]} = \sum_ja_jP_j \ \in \E{\overline{K}},$$
+$$\DEG{\sum_{j}a_j[P_j]} = \sum_ja_j \ \in \Z.$$
 
 \end{definicija}
 
@@ -1153,16 +1156,16 @@ Naj bo $E$ eliptična krivulja. \emph{Funkcija} na $E$ je racionalna funkcija $$
 
 \begin{opomba}~
 
-Naj bo $E$ podana z enačbo $y^2 = x^3+Ax+B$. Racionalna funkcija $\frac{1}{y^2-x^3-Ax-B}$ torej ne predstavlja funkcije.
+Naj bo $E$ podana z enačbo $y^2 = x^3+Ax+B$. Racionalna funkcija $\frac{1}{y^2-x^3-Ax-B}$ torej ne predstavlja funkcije, saj ni definirana za nobeno točko na $E$.
 
 \end{opomba}
 
 \begin{trditev}~
 
-Obstaja taka funkcija $u_P$, imenovana \emph{uniformizer} v točki $P$ z lastnostjo $u_P(P) = 0$, ter lastnostjo, da se da vsaka funkcija $f(x,y)$ zapisati kot
-$$f = u^r_Pg, \ r\in \Z, g(P) \neq 0,\infty.$$
+Obstaja taka funkcija $u_P$, imenovana \emph{uniformizer} v točki $P$ z lastnostjo $u_P(P) = 0$. Prav tako velja, da lahko vsako funkcijo $f(x,y)$ zapišemo kot
+$$f = u^r_Pg, \ r\in \Z,\ g(P) \neq 0,\infty.$$
 Definirajmo \emph{red} funkcije f v točki $P$ kot
-$$ord_P(f)=r.$$
+$$\ORDp{f}{P}=r.$$
 \end{trditev}
 
 \begin{primer}~
@@ -1171,24 +1174,24 @@ Naj bo $y^2 = x^3-x$ eliptična krivulja, naj bo $f(x,y) = x$. Izberimo $u(x,y) 
 $$y^2 = x^3-x = x(x^2-1),$$ 
 od tod sledi $x = y^2\frac{1}{x^2-1}$ nad E.
 Prav tako velja $1/(x^2-1) \neq 0$ v točki $(0,0)$. Od tod sledi, da je 
-$$ord_{(0,0)}(x) = 2, ord_{(0,0)}(x/y) = 1.$$
+$$\ORDp{x}{(0,0)} = 2,\  \ORDp{x/y}{(0,0)}= 1.$$
 \end{primer}
 
 \begin{definicija}~
 
 Naj bo $f$ funkcija nad $E$, ki ni identično enaka $0$. Definirajmo \emph{delitelja} funkcije $f$ kot,
-$$div(f) = \sum_{P\in \E{\overline{K}}} ord_P(f)[P] \in \DIV{E}.$$
+$$\Div{f} = \sum_{P\in \E{\overline{K}}} \ORDp{f}{P}[P] \in \DIV{E}.$$
 \end{definicija}
 
 
-\begin{trditev}~
+\begin{trditev}[\protect{\cite{Washington2008}, Trditev 11.1}]~
 
 \label{trditev 11.1}
 Naj bo $E$ eliptična krivulja in naj bo $f$ funkcija na $E$, ki ni identično enaka $0$. Potem veljajo naslednje trditve:
 \begin{itemize}
 
 \item $f$ ima le končno mnogo ničel in polov
-\item $deg(div(f))=0$
+\item $\DEG{\DIV{f}}=0$
 \item Če $f$ nima ničel ali polov, potem je $f$ konstantna.
 \end{itemize}
 
@@ -1199,9 +1202,9 @@ Naj bo $E$ eliptična krivulja in naj bo $f$ funkcija na $E$, ki ni identično e
 
 \label{izrek 11.2}
 Naj bo $E$ eliptična krivulja. Naj bo $D$ delitelj nad $E$ z $deg(D) = 0$. Potem obstaja taka funkcija $f$ na $E$ z lastnostjo
-$$div(f) = D$$
+$$\Div{f} = D$$
 natanko tedaj ko
-$$sum(D) = \infty.$$
+$$\SUM{D} = \infty.$$
 
 \end{izrek}
 
@@ -1210,41 +1213,41 @@ $$sum(D) = \infty.$$
 Pokažimo najprej, da se da $[P_1]+ [P_2]$ zapisati kot $[P_1+P_2] + [\infty]$ plus delitelj neke funkcije.
 Recimo, da imamo tri točke $P_1,P_2,P_3$ na neki krivulji $E$, ki ležijo na premici $ax+by+c = 0$.
 Naj bo $f(x,y) = ax+by+c$. Potem ima funkcija $f$ ničle v točkah $P_1,P_2,P_3$. Če $b$ ni enak $0$ potem ima funkcija po trditvi \ref{trditev 11.1} trojni pol v $\infty$.
-Velja torej $$div(ax+by+c) = [P_1]+[P_2]+[P_3]-3[\infty].$$
+Velja torej $$\Div{ax+by+c} = [P_1]+[P_2]+[P_3]-3[\infty].$$
 Ker se nahajamo na Weierstrassovi krivulji, kjer točko $-P$ dobimo tako, da samo zamenjamo predznak y-koordinate, lahko za premico skozi točki $P_3 = (x_3,y_3)$, ter $-P_3=(x_3,-y_3)$ vzamemo $x-x_3=0$.
 Po  trditvi \ref{trditev 11.1} ponovno velja
-$$div(x-x_3) = [P_3]+[-P_3]-2[\infty].$$
+$$\Div{x-x_3} = [P_3]+[-P_3]-2[\infty].$$
 Od tod sledi
-$$div\left( \frac{ax+by+c}{x-x_3}\right) = div(ax+by+c) - div(x-x_3) =[P_1]+[P_2]-[-P_3]-[\infty].$$
+$$\text{div}\left( \frac{ax+by+c}{x-x_3}\right) = \Div{ax+by+c} - \Div{x-x_3} =[P_1]+[P_2]-[-P_3]-[\infty].$$
 Ker na krivulji velja $P_1+P_2 = -P_3$ (to sledi iz načina kako na krivulji seštevamo točke), lahko zgornjo enačbo prepišemo v 
 $$[P_1]+[P_2] = [P_1+P_2]+[\infty]+div(g).$$ 
 
 
 Hitro se vidi, da velja
-$$sum(div(g))= P_1+P_2-(P_1+P_2)-\infty = \infty.$$
+$$\SUM{\Div{g}}= P_1+P_2-(P_1+P_2)-\infty = \infty.$$
 Prav tako, pa se iz zgornje enačbe vidi, da velja $[P_1]+[P_2] = 2[\infty] + div(h)$, če velja $P_1+P_2 = \infty$. Zaradi tega je vsota vseh členov s pozitivnimi koeficienti v $D$ enaka nekemu simbolu $[P]$, večkratniku $[\infty]$, ter delitelju neke funkcije. Podobno velja tudi za člene z negativnimi koeficienti. Od tod sledi
-$$D = [P]-[Q]+n[\infty]+div(g_1).$$
+$$D = [P]-[Q]+n[\infty]+\Div{g_1}.$$
 Zaradi tega, ker je $g_1$ kvocient produkta funkcij, ki sestavljajo $g$, velja tudi
-\newline $sum(div(g_1))= \infty$. Po trditvi \ref{trditev 11.1} velja $deg(div(g_1))=0$, ker funkcija ni konstantna. Imamo torej $$0 = deg(D) = 1-1+n+0=n.$$
+\newline $\SUM{\Div{g_1}}= \infty$. Po trditvi \ref{trditev 11.1} velja $\DEG{\Div{g_1}}=0$, ker funkcija ni konstantna. Imamo torej $$0 = \DEG{D} = 1-1+n+0=n.$$
 Od tod sledi
-$$D = [P]-[Q] + div(g_1).$$
+$$D = [P]-[Q] + \Div{g_1}.$$
 Prav tako velja
-$$sum(D) = P-Q+sum(div(g_1)) = P-Q.$$
-Predpostavimo sedaj, da velja $sum(D) = \infty$. Potem $P-Q = \infty$, kar pomeni da mora veljati $P=Q$ in $D = div(g_1)$. Če predpostavimo $D = div(f)$ za neko funkcijo f, potem
-$$[P]-[Q] = div(f/g_1).$$
-Od tod po lemi \ref{lema 11.3} sledi $P = Q$ in torej $sum(D) = \infty$.
+$$\SUM{D} = P-Q+\SUM{\Div{g_1}} = P-Q.$$
+Predpostavimo sedaj, da velja $\SUM{D} = \infty$. Potem $P-Q = \infty$, kar pomeni da mora veljati $P=Q$ in $D = \Div{g_1}$. Če predpostavimo $D = \Div{f}$ za neko funkcijo f, potem
+$$[P]-[Q] = \Div{f/g_1}.$$
+Od tod po lemi \ref{lema 11.3} sledi $P = Q$ in torej $\SUM{D} = \infty$.
 
 \end{proof}
 
-\begin{lema}~
+\begin{lema}[\protect{\cite{Washington2008}, Lema 11.3}]~
 
 \label{lema 11.3}
 
 Naj bosta $P,Q \in \E{\overline{K}}$, ter naj obstaja funkcija $h$ na $E$ za katero velja
-$$div(h)=[P]-[Q].$$
+$$\Div{h}=[P]-[Q].$$
 Potem sledi $P=Q$.
 \end{lema}
-
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Torzijske točke
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1399,7 +1402,7 @@ Od tod pa sledi
 $$E[n] \simeq \Z_{n'} \oplus \Z_{n'} \text{ ali } \Z_n \oplus \Z_{n'}.$$
 \end{proof}
 
-
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%PARJENJE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1909,17 +1912,18 @@ Z uporabo programskega okolja SAGE, lahko napad enostavno tudi sprogramiramo.
 
 \lstinputlisting[language=Python]{IndexCalculus.py}
 
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %MOV
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{MOV}
-MOV napad s pomočjo Weilovega parjenja pretvori problem diskretnega logaritma iz $E(\F{q})$ v problem diskretnega logaritma nad $\F^{\times}_{q^m}$. Na ta način se izognemo težji strukturi grupe. Nov problem diskretnega logaritma pa lahko sedaj rešimo z različnimi napadi, med drugim tudi z napadom Index-Calculus \ref{IndexCalc}. MOV napad deluje če velikost polja $\F{q^m}$ ni dosti večja od velikosti polja $\F{q}$. Postopek napada sledi poteku dokaza naslednje trditve.
+MOV napad s pomočjo Weilovega parjenja pretvori problem diskretnega logaritma iz $E(\F_{q})$ v problem diskretnega logaritma nad $\F^{\times}_{q^m}$. Na ta način se izognemo težji strukturi grupe. Nov problem diskretnega logaritma pa lahko sedaj rešimo z različnimi napadi, med drugim tudi z napadom Index-Calculus \ref{IndexCalc}. MOV napad deluje če velikost polja $\F_{q^m}$ ni dosti večja od velikosti polja $\F_{q}$. Postopek napada sledi poteku dokaza naslednje trditve.
 
 \begin{trditev}~
 
 \label{trd:5.1}
-Naj bo $E$ eliptična krivulja nad $\F{q}$. Naj bosta $P,Q \in E(\F{q})$, ter naj bo $N$ red točke $P$. Predpostavimo, da velja $\text{gcd}(N,q)=1$. Potem obstaja tako število $k$, da velja $Q = kP$ natanko tedaj ko $NQ = \infty$ in $e_N(P,Q)=1$.
+Naj bo $E$ eliptična krivulja nad $\F_{q}$. Naj bosta $P,Q \in E(\F_{q})$, ter naj bo $N$ red točke $P$. Predpostavimo, da velja $\text{gcd}(N,q)=1$. Potem obstaja tako število $k$, da velja $Q = kP$ natanko tedaj ko $NQ = \infty$ in $e_N(P,Q)=1$.
 \end{trditev}
 
 \begin{proof}~
@@ -2107,7 +2111,12 @@ Ker je $y_2^2-y_1^2$ po konstrukciji deljivo z $x_2-x_1$ in ker so vse ostale ko
 
 Obravnavati moramo še primer če je $x_1 \equiv x_2 \MOD{p}$. V tem primeru velja $P = \pm Q$. Izberimo potem $x_1 = x_2$, ter $y_1$ tako, da nam $y_1 \MOD{p}$ podaja y-koordinato točke $P$. Na isti način izberemo še $A'$, ter določimo $B' = y_1^2-x_1^3-A'x_1$. $Q'$ pa izberemo kot $\pm P'$.
 
-MANKA TO DA E' RES ELIPTIČNA. TEGA NI KER JE DISKRIMINANTA K JE NISM OMENU. DOKAZ SICER 2 VRSTICI.
+Preveriti moramo še, da enačba ki predstavlja $E'$ res podaja eliptično kirvuljo. Ker je krivulja $E$ eliptična velja
+$$4A^3+27B^2 \neq 0.$$
+To pa pomeni
+$$4A'^3+27B'^2 \equiv 4A^3+27B^2 \not \equiv 0 \MOD{p}.$$
+
+Velja torej $4A'^3+27B'^2 \neq 0$. Kar pa pomeni, da je $E'$ res eliptična krivulja.
 \end{proof}
 
 
@@ -2237,7 +2246,7 @@ $$k = \frac{m_1}{m_2} = \frac{49202}{4345} \equiv 47 \MOD{163}.$$
 \lstinputlisting[language=Python]{anomalne.py}
 
 
-
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%KRIPTOGRAFIJA NAD ELIPTIČNIMI KRIVULJAMI
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2275,12 +2284,12 @@ Ocenimo lahko, da je verjetnost neobstoja take točke približno $2^{-100}$.
 
 V enem od prejšnjih poglavij smo videli, kako lahko s pomočjo Weilovega parjenja izvedemo napad na supersingularne krivulje. Sedaj pa si bomo ogledali kriptosistem, ki uporablja supersingularne krivulje. Tu se opremo na dejstvo, da kljub napadom kot je MOV problem diskretnega logaritma v $\F^{\times}_p$ ni enostaven. Če izberemo dovolj velik $p$ je ta problem še vedno zelo zahteven. Take krivulje izbiramo zato, ker lahko izkoristimo določene lastnosti.
 
-Delajmo sedaj nad krivuljo $E$ podano z enačbo $y^2=x^3+1$ nad $\F_p$, kjer je $p \equiv 2 \MOD{3}$. Take krivulje so supersingularne. Naj bo $\omega \in \F_{p^2}$ tretji koren enote. Definirajmo preslikavo
+Delajmo sedaj nad krivuljo $E$ podano z enačbo $y^2=x^3+1$ nad $\F_p$, kjer je $p \equiv 2 \MOD{3}$. Take krivulje so supersingularne. Naj bo $\omega \in \F_{p^2}$ primitivni tretji koren enote. Definirajmo preslikavo
 $$\beta:\E{\F_{p^2}} \rightarrow \E{\F_{p^2}}, \ (x,y) \mapsto (\omega x,y), \ \beta(\infty) = \infty.$$
 
 Predpostavimo, da ima $P$ red $n$. Potem ima tudi $\beta(P)$ red $n$. Uporabimo modificirano Weilovo parjenje
 $$e'_n(P_1,P_2)  =e_n(P_1,\beta(P_2)).$$
-Pokazali smo že v lemi \ref{lema:6.1} da v primeru ko velja $3 \nmid n$ in ima $P \in \E{\F_p}$ red $n$, potem sledi , da je $e'_n(P,P)$ primitivni n-ti koren enote.
+Pokazali smo že v lemi \ref{lema:6.1}, da v primeru ko velja $3 \nmid n$ in ima $P \in \E{\F_p}$ red $n$, potem je $e'_n(P,P)$ primitivni n-ti koren enote.
 
 Ker je $E$ supersingularna ima red $p+1$. Predpostavimo še, da velja $p = 6l-1$ za neko praštevilo $l$. To pomeni, da ima točka $6P$ red $l$ ali $1$ za vsako točko $P$.
 Za pripravo kriptosistema najprej neka agencija, ki jamči našo identiteto naredi sledeče:
@@ -2322,6 +2331,9 @@ $$e'_l(D_I,u) = e'_l(sQ_I,rP) = e'_l(Q_I,P)^{sr}= e'_l(Q_I,P_{\text{javni}})^r =
 Sporočilo pa je sedaj
 $$m = v \oplus H_2(e'_l(D_I,u)) = (M \oplus H_2(g^r_I)) \oplus H_2(g^r_I) = M.$$
 
+
+\newpage
+
 \section{Zaključek}
 
 Skozi delo smo spoznali, da izredno pomembno vlogo pri varnosti kriptosistemov nad eliptičnimi krivuljami igra sama izbira krivulje. Tako smo ugotovili, da supersingularne krivulje ne predstavljajo dobre izbire če hočemo delati z zelo majhnimi ključi, saj le te niso odporne na napade kot je MOV. Prav tako smo videli, da lahko probleme nad anomalnimi krivuljami rešimo zelo enostavno. Ker smo si ogledali samo majhen del krivulj in načinov kako lahko izkoristimo njihovo obliko zaključimo delo s primerom krivulje, ki trenutno velja za varno. Krivulja imenovana M-221 je podana z enačbo
@@ -2333,12 +2345,6 @@ Predstavili pa so jo Aranha, Barreto, Pereira in  Ricardini leta 2013.
 \section{Program osnovne strukture kubičnih krivulj}
 \lstinputlisting[language=Python]{base.py}
 
-\cite{Washington2008}
-\cite{Silverman2009}
-\cite{Miller}
-\cite{Jeffrey2008}
-\cite{Lynn2007}
-\cite{Gibson1999}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

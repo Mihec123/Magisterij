@@ -15,7 +15,8 @@ def Lift(P,Q,meja = 20):
             if pow(y2,2,razl) == pow(y1,2,razl):
                 break
             i += 1
-        A1 = int((y2**2-y1**2)/(x2-x1)-(x2**3-x1**3)/(x2-x1))
+        A1 = int((y2**2-y1**2)/(x2-x1)/
+                 -(x2**3-x1**3)/(x2-x1))
         B1 = y1**2-x1**3-A1*x1
     else:
         x2 = x1
@@ -26,7 +27,6 @@ def Lift(P,Q,meja = 20):
             y2 = y1
         else:
             y2 = -y1
-
     return(Point(A1,B1,p**2,x1,y1),Point(A1,B1,p**2,x2,y2))
 
 def AnomalneAttack(P,Q):
@@ -36,20 +36,9 @@ def AnomalneAttack(P,Q):
     Q2 = (p-1)*Q1
     m1 = p*Fraction(P2.y-P1.y,P2.x-P1.x)
     m2 = p*Fraction(Q2.y-Q1.y,Q2.x-Q1.x)
-
     k = m1/m2
     k1 = k.numerator
     k2 = k.denominator
     k2 = NumberMod(k2,p).inverse().num
     k = (k1*k2) % p
     return k
-    
-            
-    
-##P = Point(108,4,853,0,2)
-##Q= Point(108,4,853,563,755)
-##k = AnomalneAttack(P,Q)
-
-P = Point(154,82,163,7,6)
-Q = Point(154,82,163,150,152)
-k = AnomalneAttack(P,Q)
