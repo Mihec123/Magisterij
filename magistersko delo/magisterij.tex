@@ -568,7 +568,8 @@ $$(x,y)\in (\Z/n\Z)^2 \Leftrightarrow [x,y,1]\in \PP^2(\Z/n\Z).$$
 \end{definicija}
 
 \subsection{Tonelli-Shanks}
-Pomembno vlogo v kriptografiji igra tudi naključnost. Če privzamemo, da lahko naključno izberemo število $0 \leq x \leq n$, potem nas zanima, kako učinkovito izberemo naključno točko na krivulji oblike
+Kasneje bomo pri algoritmih velikokrat potrebovali naključno točko na krivulji. S pomočjo algoritma Tonelli-Shanks bomo lahko to naredili učinkovito. Naj bo $n$ modul po katerem delamo.
+Če privzamemo, da lahko naključno izberemo število $0 \leq x \leq n$, potem nas zanima, kako učinkovito izberemo naključno točko na krivulji oblike
 $y^2 = x^3 +Ax+B \ \text{mod } n$. Ideja je preprosta. Naključno generirajmo koordinato $x$ in nato poizkusimo rešiti enačbo $y^2 = X \ \text{mod } n$, če tak $y$ obstaja. V nasprotnem primeru generiramo novo $x$ koordinato in poizkusimo ponovno. Problem se torej skriva le v reševanju kvadratne enačbe. Tu pa nam pomaga Tonneli-Shankov algoritem, ki učinkovito reši zgornjo enačbo.
 
 \begin{trditev}~
@@ -816,6 +817,7 @@ $(2,3)+(1,1)$ je torej enako $(1,4)$ nad $E$.
 
 \begin{definicija}~
 
+Naj bo $K$ polje nad katerim je definirana eliptična krivulja $E$.
 \emph{Endomorfizem} na $E$ je homomorfizem $\alpha: \E{\overline{K}} \rightarrow \E{\overline{K}} $, ki je podan z racionalno funkcijo. Torej obstajata racionalni funkciji $R_1,R_2$ s koeficienti v $\overline{K}$ tako da velja
 $$\alpha(x,y) = (R_1(x,y),R_2(x,y)),$$
 za vse $(x,y) \in \E{\overline{K}}$.
@@ -1128,7 +1130,7 @@ od koder sledi
 
 \section{Delitelji}
 
-Pri konstrukciji Weilovega parjenja bodo pomembno vlogo igrali t.\ i.\ delitelji. V tem poglavju bomo navedli nekaj definicij in lastnosti, ki jih bomo kasneje potrebovali.
+Pri konstrukciji Weilovega parjenja bodo pomembno vlogo igrali t.\ i.\ delitelji. V tem poglavju bomo navedli nekaj definicij in lastnosti, ki jih bomo kasneje potrebovali. Tu bomo uporabljali definicije iz \cite{Washington2008}.
 
 \begin{definicija}~
 
@@ -1162,8 +1164,8 @@ Naj bo $E$ podana z enačbo $y^2 = x^3+Ax+B$. Racionalna funkcija $\frac{1}{y^2-
 
 \begin{trditev}~
 
-Obstaja taka funkcija $u_P$, imenovana \emph{uniformizer} v točki $P$ z lastnostjo $u_P(P) = 0$. Prav tako velja, da lahko vsako funkcijo $f(x,y)$ zapišemo kot
-$$f = u^r_Pg, \ r\in \Z,\ g(P) \neq 0,\infty.$$
+Obstaja taka funkcija $u_P$,  z lastnostjo $u_P(P) = 0$, za katero velja, da lahko vsako funkcijo $f(x,y)$ zapišemo kot
+$$f = u^r_Pg, \text{ za nek } r\in \Z,\text{ in } g(P) \neq 0,\infty.$$
 Definirajmo \emph{red} funkcije f v točki $P$ kot
 $$\ORDp{f}{P}=r.$$
 \end{trditev}
@@ -1255,7 +1257,7 @@ Potem sledi $P=Q$.
 
 \begin{definicija}~
 
-Naj bo $E$ eliptična krivulja nad poljem $K$, ter naj bo $n\in \N$. \emph{Torizjske točke} so množica
+Naj bo $E$ eliptična krivulja nad poljem $K$, ter naj bo $n\in \N$. \emph{Torizjske točke} reda $n$, so točke v množici
 $$E[n] = \{ P \in \E{\overline{K}} | nP = \infty \}.$$
 \end{definicija}
 
@@ -1316,7 +1318,7 @@ Definirajmo še polinoma
 \omega_m &{} = (4y)^{-1}(\gamma_{m+2}\gamma^2_{m-1}-\gamma_{m-2}\gamma^2_{m+1}). \nonumber
 \end{align}
 
-Podobno, kot pri polinomih $\gamma$ lahko tudi tu formuliramo lemo
+Podobno, kot pri polinomih $\gamma$ lahko tudi za $\phi_m$ in $\omega_m$ formuliramo lemo, katere dokaz bomo izpustili.
 
 \begin{lema}~
 
@@ -1329,7 +1331,7 @@ $$E: y^2=x^3+Ax+B.$$
 Polinome v $\Z[x,y^2,A,B]$ lahko gledamo kot polinome v $\Z[x,A,B]$, tako da $y^2$ nadomestimo z $x^3+Ax+B$.
 \begin{opomba}~
 
-Polinom $\gamma_n$ ni nujno samo polinom spremenljivke $x$, saj je odvisno od tega ali je $n$ lih ali sod. Vseeno pa velja, da lahko $\gamma^2_n$ vedno zapišemo kot polinom spremenljivke $x$.
+Polinoma $\gamma_n$ ni nujno možno predstaviti, kot polinom spremenljivke $x$, saj je potenca $y$ odvisna od tega ali je $n$ lih ali sod. Vseeno pa velja, da lahko $\gamma^2_n$ vedno zapišemo kot polinom spremenljivke $x$.
 
 \end{opomba}
 
@@ -1348,14 +1350,14 @@ $$nP = \left( \frac{\phi_n(x)}{\gamma^2_n(x)}, \frac{\omega_n(x,y)}{\gamma^3_n(x
 Naj bo $E$ eliptična krivulja. Endomorfizem $E$ podan kot množenjem z $n$ ima stopnjo $n^2$.
 \end{posledica}
 
-Brez dokazov formulirajmo še nekaj trditev, ki jih bomo potrebovali za dokaz izreka \ref{IzrekTor}.
+Brez dokazov formulirajmo še nekaj pomožnih trditev, ki jih bomo potrebovali za dokaz izreka \ref{IzrekTor}.
 
 \begin{trditev}[\protect{\cite{Washington2008}, Trditev 2.21}]~
 
 \label{trditev:2.21}
 Naj bo $\alpha \neq 0$ seperabilen avtomorfizem eliptične krivulje $E$. Potem velja
 $$\deg \alpha = \# \text{Ker}(\alpha), $$
-kjer je $\text{Ker}(\alpha)$ jedro homomorfizma $\alpha: \E{overline{K}} \rightarrow \E{overline{K}}$.
+kjer je $\text{Ker}(\alpha)$ jedro homomorfizma $\alpha: \E{\overline{K}} \rightarrow \E{\overline{K}}$.
 Če $\alpha \neq 0$ ni seperabilen, potem
 $$\deg \alpha >  \# \text{Ker}(\alpha).$$
 
@@ -1407,8 +1409,8 @@ $$E[n] \simeq \Z_{n'} \oplus \Z_{n'} \text{ ali } \Z_n \oplus \Z_{n'}.$$
 %%PARJENJE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Weilovo parjenje}
-Parjenja imajo pomembno vlogo pri napadih na problem diskretnega logaritma nad
-gladkimi kubičnimi krivuljami.
+Parjenja eliptičnih krivulj imajo pomembno vlogo pri napadih na problem diskretnega logaritma nad
+gladkimi kubičnimi krivuljami, katerimu bomo posvetili nadaljna poglavja.
 
 \begin{definicija}~
 
@@ -1448,7 +1450,7 @@ za vse $S,S_1,S_2,T,T_1,T_2 \in E[n]$.
 \begin{posledica}~
 
 \label{PosledicaTrdParj}
-Naj bosta $T_1,T_2$ baza $E[n]$. Potem je $e_n(T_1,T_2)$ generator grupe $\mu_N$.
+Naj bosta $T_1,T_2$ baza $E[n]$. Potem je $e_n(T_1,T_2)$ generator grupe $\mu_n$.
 \end{posledica}
 
 \begin{proof}~
@@ -1855,9 +1857,10 @@ V obeh primerih mora torej veljati $u,v \equiv 0 \MOD{n}$. Od tod pa sledi, da s
 
 
 
-\subsection{Index Calculus}
+\subsection{Izračun indeksa}
 \label{IndexCalc}
 
+Izračun indeksa je postopek s pomočjo katerega lahko rešimo problem diskretnega logaritma v polju $\F_p$.
 Naj bo $p$ praštevilo in naj bo $g$ generator ciklične grupe $\F^{\times}_{p}$. Naj $L(h)$ označuje vrednost, za katero velja
 $$g^{L(h)} \equiv h \ (\text{mod} \ p).$$
 Iz definicije $L(h)$ sledi, da velja $$L(h_1h_2) = L(h_1)+L(h_2) \ (\text{mod} \ p).$$
@@ -1906,8 +1909,9 @@ Torej je naš iskani $k=588$.
 
 \end{primer}
 
-\subsection{Index Calculus program}
+\subsection{Izračun indeksa program}
 
+Nadaljne programe bomo pisali v programskem okolju SAGE. S pomočjo tega si bomo prihranili ogromno dela pri implementaciji različnih matematičnih objektov, ki jih bomo potrebovali.
 Z uporabo programskega okolja SAGE, lahko napad enostavno tudi sprogramiramo.
 
 \lstinputlisting[language=Python]{IndexCalculus.py}
@@ -1918,7 +1922,7 @@ Z uporabo programskega okolja SAGE, lahko napad enostavno tudi sprogramiramo.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{MOV}
-MOV napad s pomočjo Weilovega parjenja pretvori problem diskretnega logaritma iz $E(\F_{q})$ v problem diskretnega logaritma nad $\F^{\times}_{q^m}$. Na ta način se izognemo težji strukturi grupe. Nov problem diskretnega logaritma pa lahko sedaj rešimo z različnimi napadi, med drugim tudi z napadom Index-Calculus \ref{IndexCalc}. MOV napad deluje če velikost polja $\F_{q^m}$ ni dosti večja od velikosti polja $\F_{q}$. Postopek napada sledi poteku dokaza naslednje trditve.
+MOV napad s pomočjo Weilovega parjenja pretvori problem diskretnega logaritma iz $E(\F_{q})$ v problem diskretnega logaritma nad $\F^{\times}_{q^m}$. Na ta način se izognemo računanju nad krivuljo. Nov problem diskretnega logaritma pa lahko sedaj rešimo z različnimi napadi, med drugim tudi z napadom Index-Calculus \ref{IndexCalc}. MOV napad deluje če velikost polja $\F_{q^m}$ ni dosti večja od velikosti polja $\F_{q}$. Postopek napada sledi poteku dokaza naslednje trditve.
 
 \begin{trditev}~
 
@@ -2010,7 +2014,7 @@ Postopek z naključno izbranimi $T$, bi sedaj še nekajkrat ponovili. Od tod pa 
 \end{primer}
 
 \subsection{Mali korak, Velik korak}
-Kako izračunamo red točke na nek ekonomičen način? Trenutno je najhitrejši algoritem za izračun reda točke Schoof–Elkies–Atkinsonov algoritem (SEA). Tu pa si bomo pogledali malo bolj preprost algoritem, ki pa vseeno predstavlja veliko izboljšanje glede na naiven pristop seštevanja točke same s seboj.
+V tem razdelku bomo opisali, kako izračunamo red točke na nek ekonomičen način. Trenutno je najhitrejši algoritem za izračun reda točke Schoof–Elkies–Atkinsonov algoritem (SEA). Tu pa si bomo pogledali malo bolj preprost algoritem, ki pa vseeno predstavlja veliko izboljšanje glede na naiven pristop seštevanja točke same s seboj.
 Naj bo $P \in E(\F_q)$. Radi bi izračunali red točke $P$. Iščemo torej tako število $k$, da bo veljalo $kP = \infty$. Algoritem Mali korak, Velik korak lahko izračuna red točke v približno $4q^{\frac{1}{4}}$ korakih. Koraki algoritma so sledeči:
 
 \begin{algorithm}[H]
