@@ -1392,9 +1392,10 @@ za neka naravna števila $n_1,n_2,\ldots,n_k$, za katere velja $n_i|n_{i+1}$  za
 $$E[n] \simeq \Z_n \oplus \Z_n,$$
 ko karakteristika polja ne deli $n$.
 
-Pokazati moramo trditev še v primeru, ko $p|n$. Po trditvi \ref{trditev:2.28} množenje z $p$ ni seperabilno. Po trditvi \ref{trditev:2.21} ima jedro $E[p]$ množenja s $p$ red strogo manjši kot je stopnja endomorfizma, ki je $p^2$ po posledici \ref{posledica:3.7}. Ker ima vsak element $E[p]$ red $1$ ali $p$, sledi da ima $E[p]$ red potence $p$. Torej mora biti red $1$ ali $p$. Če je $E[p]$ trivialna, potem je $E[p^k]$ trivialna za vse $k$. Če ima $E[p]$ red $p$ potem trdimo, da velja $E[p^k] \simeq \Z_{p ^k}$ za vse $k$. Enostavno je videti, da je $E[p^k]$ ciklična. Pokazati moramo, da ima taka grupa red $p^k$ in ne nekaj manjšega. Denimo da obstaja element $P$ reda $p^j$. Po izreku \ref{izrek:2.22} je množenje z $p$ surjektivno. Torej obstaja točka $Q$ tako da velja $pQ = P$. Ker velja
+Pokazati moramo trditev še v primeru, ko $p|n$. Po trditvi \ref{trditev:2.28} množenje z $p$ ni seperabilno. Po trditvi \ref{trditev:2.21} ima jedro $E[p]$ množenja s $p$ red strogo manjši kot je stopnja endomorfizma, ki je $p^2$ po posledici \ref{posledica:3.7}. Ker ima vsak element $E[p]$ red $1$ ali $p$, sledi da ima $E[p]$ red potence $p$. Torej mora biti red $1$ ali $p$. Če je $E[p]$ trivialna, potem je $E[p^k]$ trivialna za vse $k$. Če ima $E[p]$ red $p$ potem trdimo, da velja $E[p^k] \simeq \Z_{p ^k}$ za vse $k$. Pokazati moramo, da ima taka grupa red $p^k$ in ne nekaj manjšega. Denimo da obstaja element $P$ reda $p^j$. Po izreku \ref{izrek:2.22} je množenje z $p$ surjektivno. Torej obstaja točka $Q$ tako da velja $pQ = P$. Ker velja
 $$p^jQ = p^{j-1}P \neq \infty, \ p^{j+1}Q = p^jP = \infty,$$
-torej ima $Q$ red $p^{j+1}$. Z indukcijo lahko pokažemo, da obstajajo točke reda $p^k$ za vse $k$. Zato je $E[p^k]$ ciklična reda $p^k$.
+torej ima $Q$ red $p^{j+1}$. Z indukcijo lahko pokažemo, da obstajajo točke reda $p^k$ za vse $k$.
+Ker velja $E[p^{i}] \subsetneq E[p^j]$, za vse $i < j$, v $E[p^k]$ obstaja točka reda $p^k$. To pa ravno pomeni, da je $E[p^k]$ ciklična. Zato je $E[p^k]$ ciklična reda $p^k$.
 
 Zapišimo sedaj $n=p^rn'$, $r\geq0$ in $p\nmid n'$. Potem velja
 $$E[n] \simeq E[n'] \oplus E[p^r].$$
