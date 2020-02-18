@@ -10,10 +10,10 @@
 \newcommand{\imementorja}{doc.~dr.~Anita Buckley} % akademski naziv in ime mentorja, uporabi poln naziv, prof.~dr.~, doc.~dr., ali izr.~prof.~dr.
 \newcommand{\imesomentorja}{pred.~mag.~Matjaž Praprotnik} % akademski naziv in ime somentorja, če ga imate
 \newcommand{\naslovdela}{Kubične krivulje v kriptografiji}
-\newcommand{\letnica}{2019} % letnica magistriranja
+\newcommand{\letnica}{2020} % letnica magistriranja
 \newcommand{\opis}{??.}  % Opis dela v eni povedi. Ne sme vsebovati matematičnih simbolov v $ $.
-\newcommand{\kljucnebesede}{kubična krivulja \sep kriptografija \sep Weilovo parjenje \sep anomalne krivulje \sep supersingularne krivulje \sep MOV napad \sep index calculus \sep Millerjev algoritem \sep torzijske točke \sep ...} % ključne besede, ločene z \sep, da se PDF metapodatki prav procesirajo
-\newcommand{\keywords}{cubic curve \sep cryptography \sep Weil pairing \sep anomalous curves \sep supersingular curves \sep MOV attack \sep Index calculus \sep Miller's algorithm \sep torsion points} % ključne besede v angleščini
+\newcommand{\kljucnebesede}{kubična krivulja\sep kriptografija\sep Weilovo parjenje\sep anomalne krivulje\sep supersingularne krivulje\sep MOV napad\sep index calculus\sep Millerjev algoritem\sep torzijske točke} % ključne besede, ločene z \sep, da se PDF metapodatki prav procesirajo
+\newcommand{\keywords}{cubic curve\sep cryptography\sep Weil pairing\sep anomalous curves\sep supersingular curves\sep MOV attack\sep Index calculus\sep Miller's algorithm\sep torsion points} % ključne besede v angleščini
 \newcommand{\organization}{Univerza v Ljubljani, Fakulteta za matematiko in fiziko} % fakulteta
 \newcommand{\literatura}{literatura}  % pot do datoteke z literaturo (brez .bib končnice)
 \newcommand{\sep}{, }  % separator med ključnimi besedami v besedilu
@@ -308,25 +308,25 @@ Cubic curves in cryptography have some advantages compared to other cryptosystem
 %UVOD
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Uvod}
-Kubične krivulje v kriptografiji dobivajo vedno večji pomen, saj zagotavljajo isto varnost, kot drugi klasični kriptosistemi, pri tem pa potrebujejo manjšo velikost ključa. Ocenjuje se, da je $2048$ bitni ključ v RSA algoritmu enako varen kot $224$ bitni ključ nad kubičnimi krivuljami. Podrobnejšo primerjavo, pa lahko vidimo v spodnji tabeli.
+Eliptične krivulje imajo v kriptografiji velik pomen, saj zagotavljajo isto varnost, kot drugi klasični kriptosistemi, pri tem pa potrebujejo manjšo velikost ključa. Njihovo uporabo je prvi predlagal Victor S. Miller leta 1985 \cite{Miller}, a so le te v širšo rabo vstopile še le okoli leta 2004. Razliko v potrebni dolžini ključa lahko opazujemo na dveh klasičnih zgledih. Kriptosisteme delimo na simetrične in asimetrične. Simetrični kriptosistemi uporabljajo isti ključ za šifriranje in dešifriranje. Pri asimetričnih kriptosistemih pa uporabljamo različna ključa za šifriranje in dešifriranje. Najpogosteje uporabljen asimetrični kriptosistem je RSA. Ime je dobil posvojih avtorjih Rivest, Shamir in Adleman. RSA temelji na problemu faktorizacije števil \cite{Easttom2015}. Ocenjuje se, da je $2048$ bitni ključ v RSA algoritmu enako varen kot $224$ bitni ključ nad eliptičnimi krivuljami.
+Eden najpogosteje uporabljenih simetričnih kriptosistemov pa je AES \cite{Easttom2015}. Podrobnejšo primerjavo, pa lahko vidimo v spodnji tabeli.
 
 \begin{table}[h]
 \centering
 \begin{tabular}{|l|l|l|}
 \hline
-\textit{\textbf{SIM}} & \textit{\textbf{ECC}} & \textit{\textbf{RSA}} \\ \hline
+\textit{\textbf{AES}} & \textit{\textbf{ECC}} & \textit{\textbf{RSA}} \\ \hline
 80                    & 160                   & 1024                  \\ \hline
 112                   & 224                   & 2048                  \\ \hline
 128                   & 256                   & 3072                  \\ \hline
 192                   & 384                   & 7680                  \\ \hline
 256                   & 521                   & 15360                 \\ \hline
 \end{tabular}
- \caption[Primerjava kriptosistemov.]{V tabeli so v posamezni vrstici dolžine ključev v bitih, ki glede na simetrične kriptosisteme, kriptosisteme z uporabo kubičnih krivulj, ter RSA zagotavljajo enako varnost.}
+ \caption[Primerjava kriptosistemov.]{V tabeli so v posamezni vrstici dolžine ključev v bitih, ki glede na AES, kriptosisteme z uporabo kubičnih krivulj, ter RSA zagotavljajo enako varnost \cite{NIST}.}
 \end{table}
-Tu je potrebno dodati, da simetrični kriptosistemi ne omogočajo enostavne komunikacije, saj je za njihovo uporabo potreben predhoden dogovor o ključu. Klasično se uporablja npr.\ RSA ali ECC,  za samo izmenjavo ključa, nato pa se komunikacija nadaljuje s pomočjo simetričnih kriptosistemov
-Krajši ključi predstavljajo veliko prednost v okoljih s slabšo procesorsko močjo in/ali omejenim pomnilnikom. Te naprave pa so v današnjem svetu kljub hitrim tehnološkim napredkom zelo pogoste. Med njih bi lahko umestili razne naprave v t.\ i.\  pametni hiši, razne pametne kartice, itd. Zgodovinsko gledano sega uporaba kubičnih krivulj v kriptografske namene v konec 20.\ stoletja. Uporaba kubičnih krivulj pa ni omejena le na kriptosistem, ki uporabljajo krivulje, ampak lahko služi tudi kot orodje za napade na klasične kriptosisteme. Tako lahko kubične krivulje uporabljamo tudi pri faktorizacijskih algoritmih, saj pri določenih pogojih predstavljajo enega najhitrejših poznanih algoritmov za razcep števil. S pomočjo tega lahko napademo vse kriptosisteme, katerih varnost temelji na problemu faktorizacije.  Njihovo uporabo je prvi predlagal Victor S. Miller leta 1985, a so le te v širšo rabo vstopile še le okoli leta 2004.
+Tu je potrebno dodati, da imajo simetrični kriptosistem problem pri dogovoru ključa, saj se samo z simetričnim kriptosistemom ne moremo varno dogovoriti za ključ. Klasično se uporablja npr.\ RSA ali kriptosistemi nad eliptičnimi krivuljami (na kratko ECC),  za samo izmenjavo ključa, nato pa se komunikacija nadaljuje s pomočjo simetričnih kriptosistemov. Krajši ključi predstavljajo veliko prednost v okoljih s slabšo procesorsko močjo in/ali omejenim pomnilnikom. Te naprave pa so v današnjem svetu kljub hitrim tehnološkim napredkom zelo pogoste. Med njih bi lahko IoT(Internet of Things), pametne kartice, pametne USB ključke, itd. Zgodovinsko gledano sega uporaba kubičnih krivulj v kriptografske namene v konec 20.\ stoletja. S pomočjo eliptičnih krivulj pa lahko izvajamo tudi napade na druge kriptosisteme. Primer tega je uporaba eliptičnih krivulj za faktorizacijo števil, s katerim lahko razbijemo vse algoritme, ki temeljijo na faktorizaciji.  Pri določenih pogojih z uporabo eliptične krivulj dobimo enega najhitrejših poznanih algoritmov za razcep števil \cite{Lenstra1987}. S pomočjo tega lahko napademo vse kriptosisteme, katerih varnost temelji na problemu faktorizacije.
 
-V tem magistrskem delu, se bomo najprej spoznali osnove definicije in izreke v povezavi z kubičnimi krivuljami nad končnimi polji. Za tem pa se bomo posvetili problemu diskretnega logaritma nad eliptičnimi krivuljami. S pomočjo tega bomo spoznali nekaj napadov na eliptične krivulje, ter izvedeli nekaj o primerni izbiri krivulj za kriptografske namene. Pri tem bomo govorili tudi o parjenju nad eliptičnimi krivuljami in spoznali učinkovit algoritem za izračun le tega. Vse skupaj pa bomo pospremili še s programsko kodo.
+V tem magistrskem delu, bomo najprej spoznali osnovne definicije in izreke v povezavi z eliptičnimi krivuljami nad končnimi polji. Za tem pa se bomo posvetili problemu diskretnega logaritma nad eliptičnimi krivuljami. S pomočjo tega bomo spoznali nekaj napadov na eliptične krivulje, ter izvedeli nekaj o primerni izbiri krivulj za kriptografske namene. Govorili bomo tudi o parjenju nad eliptičnimi krivuljami in spoznali učinkovit algoritem za izračun le tega. Vse skupaj pa bomo pospremili še s programsko kodo.
 
 
 \newpage
@@ -340,12 +340,12 @@ V tem magistrskem delu, se bomo najprej spoznali osnove definicije in izreke v p
 
 Skozi celotno delo se bomo ukvarjali s končimi polji in njihovimi razširitvami. Spomnimo se najprej vseh definicij in lastnosti, ki jih bomo kasneje potrebovali.
 
-\emph{Končna polja} ali \emph{Galoisova polja}, so polja s končnim številom elementov. Najpogostejši primer takih polj so število modulo $p$, kjer je $p$ praštevilo. Polje z $q$ elementi označimo z $\F_q$, pojavlja pa se tudi oznaka $GF(q)$. Poglejmo si nekaj pomembnih lastnosti takih polj.
+\emph{Končna polja} ali \emph{Galoisova polja}, so polja s končnim številom elementov. Najpogostejši primer takih polj so število modulo $p$, kjer je $p$ praštevilo. Polje s $q$ elementi označimo z $\F_q$, pojavlja pa se tudi oznaka $GF(q)$. Poglejmo si nekaj pomembnih lastnosti takih polj.
 \begin{trditev}~
 
 Naj bo $p$ praštevilo, potem veljajo naslednje lastnosti.
 \begin{itemize}
-\item Končno polje reda $q$ obstaja natanko tedaj, ko velja $q=p^k$, za nek $k \in \N$.
+\item Končno polje s $q$ elementi obstaja natanko tedaj, ko velja $q=p^k$, za nek $k \in \N$.
 \item Vsa končna polja reda $q$ so si izomorfna.
 \item Vsak element polja $\F_q$ zadošča enačbi $x^{q} -x = 0$.
 \item Multiplikativna grupa končnega polja je ciklična.
@@ -353,12 +353,12 @@ Naj bo $p$ praštevilo, potem veljajo naslednje lastnosti.
 \end{itemize}
 \end{trditev}
 
-Tekom magistrskega dela bomo večkrat delali v poljih katerih število elementov je potenca praštevila. Poglejmo si kako konstruiramo polje z $q = p^n$ elementi.
+Tekom magistrskega dela bomo večkrat delali v poljih, katerih število elementov je potenca praštevila. Poglejmo si kako konstruiramo polje s $q = p^n$ elementi.
 
-Najprej si izberemo nerazcepni polinom $P$ v $\F_p[X]$ stopnje $n$. Potem velja, da je kvocientni prostor
+Najprej si izberemo nerazcepni polinom $P$ v $\F_p[X]$ stopnje $n$. Potem velja, da je kvocientni kolobar
 $$\F_q = \F_p[X]/(P)$$
-polinomov nad $\F_p$ z idealom generiranim z $P$, polje reda $q$.
-Bolj natančno so torej elementi $\F_q$ polinomi nad poljem $\F_p$ stopnje strogo manjše, kot $n$. Seštevanje in odštevanje  poteka na standardni način. Produkt dveh elementov dobimo, kot ostanek pri deljenju z $P$ produkta polinomov v $\F_p[X]$. Inverzne elemente pa lahko poiščemo s pomočjo razširjenega Evklidovega algoritma.
+polinomov nad $\F_p$ z idealom generiranim s $P$, polje reda $q$.
+Bolj natančno so torej elementi $\F_q$ polinomi nad poljem $\F_p$, stopnje strogo manjše, kot $n$. Seštevanje in odštevanje  poteka na standardni način. Produkt dveh elementov dobimo, kot ostanek pri deljenju s $P$ produkta polinomov v $\F_p[X]$. Inverzne elemente pa lahko poiščemo s pomočjo razširjenega Evklidovega algoritma.
 
 \begin{primer}~
 
@@ -410,7 +410,7 @@ $\alpha$   & / & $\alpha$   & 1          & 1+$\alpha$ \\
 
 \begin{primer}~
 
-Poglejmo si še en zanimiv primer. Naj bo $\F_q= \F_{p^2}$, kjer je $p$ praštevilo za katero velja $p \equiv 3 \MOD{4}$. V tem primeru lahko za nerazcepni polinom izberemo $X^2+1$. Elementi polja $\F_q$ so torej oblike
+Poglejmo si še en zanimiv primer. Naj bo $\F_q= \F_{p^2}$, kjer je $p$ praštevilo za katero velja $p \equiv 3 \MOD{4}$.  Polinom oblike $X^2-r$ je nerazcepen natanko tedaj, ko $r$ ni kvadratični ostanek po modolu $p$. Po  Eulerjevem kriteriju je $r$ kvadratični ostanek natanko tedaj ko $a^{r/2} \equiv 1$. V primeru ko je $p \equiv 3 \MOD{4}$, $p-1$ ni kvadratični ostanek, saj je $(p-1)/2 \equiv 1 \MOD{4}$. To pomeni, da je potenca liha, kar pa nam pove, da $p-1$ ni kvadratični ostanek. Torej lahko za nerazcepni polinom izberemo $X^2+1$. Elementi polja $\F_q$ so torej oblike
 $$a+b\alpha,$$
 $a,b \in \F_p$, $\alpha$ pa je število za katero velja $\alpha^2 = 1$. To nas močno spominja na kompleksna števila. Tudi računske operacije se obnašajo enako kot pri kompleksnih številih. V takih poljih lahko torej namesto s polinomi delamo kar s kompleksnimi števili.
 \end{primer}
@@ -459,7 +459,7 @@ $\C$ je algebraično zaprtje $\R$, ni pa algebraično zaprtje $\Q$, saj ni algeb
 
 \begin{definicija}~
 
-\emph{Projektivna ravnina} $\mathbb{P}^2$ nad poljem $\F$ je kvocientni prostor $\F^3-\{0\}/\! \!\sim$, kjer je ekvivalenčna relacija podana z $(a,b,c)\sim(\alpha a,\alpha b,\alpha c)$ za vsak $\alpha \in \F \setminus \{0\}$. Točke v $\mathbb{P}^2$ so torej podane s homogenimi koordinatami $[a,b,c] = [\alpha a,\alpha b,\alpha c]$ za vse $\alpha \neq 0$.
+\emph{Projektivna ravnina} $\mathbb{P}^2$ nad poljem $\F$ je kvocientni prostor $\F^3-\{0\}/\! \!\sim$, kjer je ekvivalenčna relacija $\sim$ podana z $(a,b,c)\sim(\alpha a,\alpha b,\alpha c)$ za vsak $\alpha \in \F \setminus \{0\}$. Točke v $\mathbb{P}^2$ so torej podane s homogenimi koordinatami $[a,b,c] = [\alpha a,\alpha b,\alpha c]$ za vse $\alpha \neq 0$.
 \end{definicija} 
 
 Točko projektivne ravnine si lahko predstavljamo kot premico skozi izhodišče, kot prikazuje slika \ref{fig:ravnina}.
@@ -502,9 +502,10 @@ Gladko kubično krivuljo nad algebraično zaprtim poljem lahko zapišemo v Weier
 $$y^2z = x^3 + axz^2 + bz^3.$$
 \end{izrek}
 
-\begin{opomba}~
-Takšni krivulji velikokrat rečemo tudi \emph{eliptična krivulja}.
-\end{opomba}
+
+\begin{definicija}~
+\emph{Eliptična krivulja} je gladka kubična krivulja.
+\end{definicija}
 
 \begin{primer}~
 
@@ -554,13 +555,13 @@ Na zgornjih slikah lahko vidimo, kako krivuljo predstavimo v projektivni ravnini
 
 
 
-V nadaljevanju nas bodo zanimale predvsem gladke kubične krivulje v polju $\mathbb{Z}/n\mathbb{Z}$.
+V nadaljevanju nas bodo zanimale predvsem gladke kubične krivulje v polju $\mathbb{Z}/p\mathbb{Z}$.
 
 \begin{definicija}~
 
 Za dani števili $a$, $b \in \mathbb{Z}/n\mathbb{Z}$ je \emph{kubična krivulja} nad poljem $\mathbb{Z}/n\mathbb{Z}$ množica točk
 $$E_{(a,b)}(\mathbb{Z}/n\mathbb{Z}) =\left\{ [x,y,z] \in \PP^2(\mathbb{Z}/n\mathbb{Z}): y^2z=x^3+axz^2+bz^3 \right\} .$$
-Drugače povedano, afina kubična krivulja je množica rešitev enačbe
+Drugače povedano, afina kubična krivulja je množica rešitev Weierstrassove enačbe
 $$y^2=x^3+ax+b.$$
 Pri čemer upoštevamo zvezo med afinimi in projektivnimi koordinatami točk:
 $$(x,y)\in (\Z/n\Z)^2 \Leftrightarrow [x,y,1]\in \PP^2(\Z/n\Z).$$
@@ -574,7 +575,7 @@ $y^2 = x^3 +Ax+B \ \text{mod } n$. Ideja je preprosta. Naključno generirajmo ko
 
 \begin{trditev}~
 
-Naj bo $p > 2$ praštevilo. Če se da $n \in \Z_p$ zapisati kot $n = r^2, r \in \Z_p$, potem na algoritem \ref{alg:Tonelli} vrne $r$.
+Naj bo $p > 2$ praštevilo. Če se da $n \in \Z_p$ zapisati kot $n = r^2, r \in \Z_p$, potem nam algoritem \ref{alg:Tonelli} vrne $r$.
 
 \end{trditev}
 
@@ -583,6 +584,8 @@ Naj bo $p > 2$ praštevilo. Če se da $n \in \Z_p$ zapisati kot $n = r^2, r \in 
 \label{alg:Tonelli}
 
 \begin{algorithmic}
+\State Vhod: p, n
+\State Izhod: r, za katerega velja $r^2=n$, če ta obstaja
 \State Najdi tak $z \in Z_p$, da $z$ ni kvadrat
 \State Poišči $s,Q$, tako da $p-1 = Q2^s$
 \State $M = s,c = z^Q,t = n^Q,R=n^{\frac{Q+1}{2}}$
@@ -596,13 +599,16 @@ Naj bo $p > 2$ praštevilo. Če se da $n \in \Z_p$ zapisati kot $n = r^2, r \in 
 		\State  $M = i,c = b^2,t = tb^2,R=Rb$
 	\EndIf
 \EndWhile
-
 \end{algorithmic}
 \end{algorithm}
 
 \begin{opomba}~
 
 V algoritmu \ref{alg:Tonelli} lahko prvi korak izvedemo tako, da preiskušamo naključne $g\in \Z_p$, dokler ne velja $g^{(p-1)/2} = -1$.
+\end{opomba}
+
+\begin{opomba}~
+Števili $s, Q$ iz algoritma poiščemo tako, da število $p-1$ delimo z dva dokler ne dobimo števila, ki ni deljivo z dva. To število je $Q$. Število korakov, ki smo jih naredili pa je $s$.
 \end{opomba}
 
 
@@ -627,7 +633,7 @@ B & \quad \text{če je } \overline{AB} \ \text{tangenta v } B,\ \text{ter} \ A \
 C &\quad \text{če je } A=B \ \{\text{in tangenta v A}\} \cap \mathcal{C}_P = \left\{ A,C \right\}.\\
 \end{cases}
 \]
-Intuitivno operacija $\ast$ vrne tretjo točko v preseku premice skozi $A$ in $B$ in $\mathcal{C}_P$. Poglejmo si še nekaj lastnosti operacije $\ast$. Dokaze sledečih trditev najdemo v \cite[Poglavje 17.3]{gibson}.
+Intuitivno operacija $\ast$ vrne tretjo točko v preseku premice skozi $A$ in $B$ in $\mathcal{C}_P$ kar lahko vidimo na sliki \ref{fig:adicija}. Poglejmo si še nekaj lastnosti operacije $\ast$. Dokaze sledečih trditev najdemo v \cite[Poglavje 17.3]{Gibson1999}.
 
 \begin{trditev}~
 
@@ -968,7 +974,7 @@ $$\DEG{a\alpha+b\beta} = a^2\DEG{\alpha}+b^2\DEG{\beta} + ab(\DEG{\alpha+\beta}-
 
 \begin{proof}~
 
-Naj bo $n \in \Z$, število ki ni deljivo z karakteristiko $K$. Predstavimo $\alpha,\beta$ z matrikami $\alpha_n,\beta_n$, glede na neko bazo $E[n]$.
+Naj bo $n \in \Z$, število ki ni deljivo s karakteristiko $K$. Predstavimo $\alpha,\beta$ z matrikami $\alpha_n,\beta_n$, glede na neko bazo $E[n]$.
 Velja
 \begin{align}
 \text{det}(a\alpha_n+b\beta_n) &{}=  a^2\text{det}(\alpha_n)+b^2\text{det}(\beta_n) + ab(\text{det}(\alpha_n+\beta_n)-\text{det}(\alpha_n)-\text{det}(\beta_n)) \nonumber
@@ -1005,6 +1011,10 @@ $\phi^n_q$ predstavlja kompozicijo $\phi_q \circ \phi_q \circ \ldots \circ \phi_
 Naj bo $E$ eliptična krivulja nad končnim poljem $\F_q$.  Potem red $\E{\F_q}$ zadošča zvezi
 $$|q+1-\#\E{\F_q}| \leq 2\sqrt{q}.$$
 \end{izrek}
+
+\begin{opomba}~
+Hassejev izrek igra pomembno vlogo tudi pri iskanju velikosti grupe, saj nam poda zgornjo in spodnjo mejo. Velikost grupe pa potem nadaljno zožimo z dejstvom da red elementa deli red grupe. 
+\end{opomba}
 
 \begin{proof}~
 
@@ -1157,7 +1167,7 @@ $$\DEG{\sum_{j}a_j[P_j]} = \sum_ja_j \ \in \Z.$$
 
 \begin{definicija}~
 
-Naj bo $E$ eliptična krivulja. \emph{Funkcija} na $E$ je racionalna funkcija $$f(x,y) \in \ \overline{K},$$ ki je definirana za vsaj eno točko na $\E{\overline{K}}$. Funkcija torej zavzame vrednosti v $\overline{K} \cup {\infty}$.
+Naj bo $E$ eliptična krivulja. \emph{Funkcija} na $E$ je racionalna funkcija $$f(x,y) \in \ \overline{K},$$ ki je definirana za vsaj eno točko na $\E{\overline{K}}$. Funkcija torej zavzame vrednosti v $\overline{K} \cup \{ \infty \}$.
 \end{definicija}
 
 \begin{opomba}~
@@ -1170,9 +1180,12 @@ Naj bo $E$ podana z enačbo $y^2 = x^3+Ax+B$. Racionalna funkcija $\frac{1}{y^2-
 
 Obstaja taka funkcija $u_P$,  z lastnostjo $u_P(P) = 0$, za katero velja, da lahko vsako funkcijo $f(x,y)$ zapišemo kot
 $$f = u^r_Pg, \text{ za nek } r\in \Z,\text{ in } g(P) \neq 0,\infty.$$
-Definirajmo \emph{red} funkcije f v točki $P$ kot
-$$\ORDp{f}{P}=r.$$
 \end{trditev}
+
+\begin{definicija}~
+
+\emph{Red} funkcije f v točki $P$ je je število $r$, za katero velja $f = u^r_Pg, \text{ za nek } r\in \Z,\text{ in } g(P) \neq 0,\infty.$
+\end{definicija}
 
 \begin{primer}~
 
@@ -1220,7 +1233,7 @@ Pokažimo najprej, da se da $[P_1]+ [P_2]$ zapisati kot $[P_1+P_2] + [\infty]$ p
 Recimo, da imamo tri točke $P_1,P_2,P_3$ na neki krivulji $E$, ki ležijo na premici $ax+by+c = 0$.
 Naj bo $f(x,y) = ax+by+c$. Potem ima funkcija $f$ ničle v točkah $P_1,P_2,P_3$. Če $b$ ni enak $0$ potem ima funkcija po trditvi \ref{trditev 11.1} trojni pol v $\infty$.
 Velja torej $$\Div{ax+by+c} = [P_1]+[P_2]+[P_3]-3[\infty].$$
-Ker se nahajamo na Weierstrassovi krivulji, kjer točko $-P$ dobimo tako, da samo zamenjamo predznak y-koordinate, lahko za premico skozi točki $P_3 = (x_3,y_3)$, ter $-P_3=(x_3,-y_3)$ vzamemo $x-x_3=0$.
+Ker se nahajamo na krivulji zapisani v Weierstrassovi obliki, kjer točko $-P$ dobimo tako, da samo zamenjamo predznak y-koordinate, lahko za premico skozi točki $P_3 = (x_3,y_3)$, ter $-P_3=(x_3,-y_3)$ vzamemo $x-x_3=0$.
 Po  trditvi \ref{trditev 11.1} ponovno velja
 $$\Div{x-x_3} = [P_3]+[-P_3]-2[\infty].$$
 Od tod sledi
@@ -1414,7 +1427,7 @@ $$E[n] \simeq \Z_{n'} \oplus \Z_{n'} \text{ ali } \Z_n \oplus \Z_{n'}.$$
 %%PARJENJE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Weilovo parjenje}
-Parjenja eliptičnih krivulj imajo pomembno vlogo pri napadih na problem diskretnega logaritma nad
+Parjenja eliptičnih krivulj so uporabna za konstrukcijo različnih kriptografskih sistemov, prav tako pa imajo pomembno vlogo pri napadih na problem diskretnega logaritma nad
 gladkimi kubičnimi krivuljami, katerimu bomo posvetili nadaljna poglavja.
 
 \begin{definicija}~
@@ -1506,12 +1519,12 @@ $$\text{sum}( \sum_{R \in E[n]}([T' + R]- [R])) = \infty$$
 Po izreku \ref{IzrekTor}, se da $E[n]$ zapisati kot $\mathbb{Z}_n \oplus \mathbb{Z}_n$. To pomeni, da $E[n]$ vsebuje $n^2$ različnih točk $R$. Velja torej
 $$\text{sum}(\sum_{R \in E[n]}([T' + R]- [R])) = \sum_{R \in E[n]} T' +R-R = \sum_{R \in E[n]} T' = n^2T' = nT = \infty.$$
 Podobno preverimo, še da velja $\DEG{\sum_{R \in E[n]}([T' + R]- [R])} = 0.$ Torej po izreku \ref{izrek 11.2} taka funkcija $g$ obstaja.
-Označimo z $f \circ n$ funkcijo, ki začne z neko točko jo pomnoži z $n$ in nato na njej uporabi $f$. Točke $P = T' + R$, kjer je $R\in E[n]$ so točke za katere velja $nP=T$. Iz \ref{enacba-Weil}
+Označimo z $f \circ n$ funkcijo, ki začne z neko točko, jo pomnoži z $n$ in nato na njej uporabi $f$. Točke $P = T' + R$, kjer je $R\in E[n]$ so točke za katere velja $nP=T$. Iz \ref{enacba-Weil}
 sledi
 %zakaj je to res
 %????????????????????????????????????????????????????
 $$\Div{f \circ n} = n(\sum_{R \in E[n]}[T' + R]) - n(\sum_{R \in E[n]}[R]) = \Div{g^n}.$$
-Iz definicije delitelja funkcije sledi, da je funkcija $f \circ n$ oblike $g^n$ krat neka konstanta. Če za nov $f$ vzamemo ta $f$ pomnožen s primerno konstanto, potem lahko predpostavimo, da velja
+Iz definicije delitelja funkcije sledi, da je funkcija $f \circ n$ oblike $g^n$ $\times$ neka konstanta. Če za nov $f$ vzamemo ta $f$ pomnožen s primerno konstanto, potem lahko predpostavimo, da velja
 $$f \circ n = g^n.$$
 Naj bo $S \in E[n]$, ter naj bo $P \in \E{\overline{K}}$. Potem velja
 $$g(P+S)^n = f(n(P+S)) = f(nP) = g(P)^n.$$
@@ -1551,7 +1564,7 @@ e_n(S,T_1+T_2) &{}= \frac{g_3(P+S)}{g_3(P)} = \frac{g_1(P+S)}{g_1(P)} \frac{g_2(
 Tu smo upoštevali $nS = \infty$, od koder sledi $h(n(P+S)) = h(nP)$.
 
 \item Predpostavimo, da $T \in E[n]$, tak da velja $e_n(S,T)=1$ za vse $S \in E[n]$. To pomeni, da je $g(P+S) = g(P)$ za vse $P$ in $S \in E[n]$. Po trditvi \ref{manka}%manka%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-obstaja funkcija $h$, tako da velja $g = h \circ n$. Od tod sledi 
+obstaja funkcija $h$, tako da velja $g = h \circ [n]$. Od tod sledi 
 $$(h \circ n) ^n = g^n = f \circ n.$$
 Ker je množenje z $n$ surjektivno na $E(\overline{K})$, od tod sledi $h^n = f$. %%%%%%%%%%%%%%%%ZAKAJ TO RES
 To pa pomeni
@@ -1661,7 +1674,7 @@ $$\Div{g_{P,Q}} = [P] + [Q] - [P+Q] - [\infty].$$
 
 
 \item (Millerjev algoritem) Naj bo $m \geq 1$. Zapišimo $m$ v binarnem kot
-$$m = m_0+m_1\cdot 2 + m_2\cdot 2^2 + \ldots + m_{n-1}\cdot 2^{n-},$$
+$$m = m_0+m_1\cdot 2 + m_2\cdot 2^2 + \ldots + m_{n-1}\cdot 2^{n-1},$$
 kjer so $m_i \in \{ 0,1 \}$ in $m_{n-1} \neq 0$. Potem algoritem \ref{alg:Miller} vrne
 funkcijo $f_P$, za katero velja
 $$\Div{f_P} = m[P]-[mP]-(m-1)[\infty].$$ 
@@ -1677,6 +1690,8 @@ $$\Div{f_P} = m[P]-[mP]-(m-1)[\infty].$$
 \label{alg:Miller}
 
 \begin{algorithmic}
+\State Vhod: število m podano v binarnem zapisu, točka P na eliptični krivulji
+\State Izhod: funkcija $f_P$
 \State $T = P,f = 1$
 \For {$i = n-2:0$}
 	\State $f = f^2 \cdot g_{T,T}$
@@ -1708,7 +1723,7 @@ $$g_{P,Q} = \frac{y-y_P-\lambda(x-x_P)}{x+x_P+x_Q-\lambda^2} .$$
 V primeru da velja $\lambda = \infty$, potem velja $P+Q = \infty$. V tem primeru hočemo imeti delitelj oblike $\Div{g_{P,Q}} = [P] + [-P] - 2[\infty]$. Tak delitelj pa ima ravno funkcija $x-x_P$.
 
 \item Dokažemo s pomočjo indukcije, pri čemer upoštevamo $\Div{g_{T,T}} = 2[T]-[2T]-[\infty]$, $\Div{g_{T,P}} = [T]+[P]-[T+P]-[\infty]$.
-Preverimo, na primeru $m = 3$. binarni zapis $m$ je torej $11$.Sledimo korakom algoritma \ref{alg:Miller}.
+Preverimo, na primeru $m = 3$. Binarni zapis $m$ je torej $11$. Sledimo korakom algoritma \ref{alg:Miller}.
 $$f = f^2 \cdot g_{T,T} = g_{P,P}$$
 Ker je v tem primeru $m_0 = 1$ moramo $f$ popraviti v $f = f \cdot g_{T,P}$. To nam da
 $$f = g_{P,P} \cdot g_{2T,P}.$$
@@ -1731,7 +1746,7 @@ Naj bo $y^2 = x^3+30x+34$ eliptična krivulja nad poljem $\F_{631}$. Izberimo to
 Če želimo uporabiti Millerjev algoritem moramo izbrati točko $S$. Izberimo $S=(0,36)$. Hitro lahko preverimo, da $S$ res zadošča kriterijem izbire.
 Za izračun $e_5(P,Q)$ moramo izračunati $f_P,f_Q$ v dveh različnih točkah. Poglejmo si podrobnejši izračun za $f_P(S)$.
 
-V prvem koraku, moramo izračunati $g_{P,P}(S)$. Po vseh potrebnih izračunih dobimo $$\text{naklon} = 569,\ \text{stevec} = 268,\ \text{imenovalec} = 14.$$ Od tod torej sledi $g_{P,P}(S) = 560$. Ker velja $m_1 = 0$. Torej po prvem koraku dobimo $f = 560, T = 2P$.
+V prvem koraku, moramo izračunati $g_{P,P}(S)$. Po vseh potrebnih izračunih dobimo $$\text{naklon} = 569,\ \text{števec} = 268,\ \text{imenovalec} = 14.$$ Od tod torej sledi $g_{P,P}(S) = 560$. Ker velja $m_1 = 0$. Torej po prvem koraku dobimo $f = 560, T = 2P$.
 
 V drugem koraku moramo poračunati $g_{2P,2P}(S)$, kjer kot rezultat dobimo $399$. Vrednost $f$ pa moramo popraviti na $362$. V tem koraku velja $m_0 = 1$, torej moramo tu poračunati še
 $g_{4P,P}(S)$. Premica med $P,\ 4P$ je navpična zato uporabimo drugo vejo funkcije $g$. Kot rezultat dobimo $g_{4P,P}(S) = 595$. Še zadnjič popravimo $f$ in kot končni rezultat dobimo
@@ -1767,25 +1782,27 @@ Diffe-Hellmanova izmenjava ključev je postopek, pri katerem se dve osebi npr.\ 
 
 \begin{enumerate}
 
-\item Alenka in Boris se dogovorita za eliptično krivuljo $E$ nad končnim obsegom $\F{q}$, ter za točko $P \in \E{\Fq{q}}$.
-\item Alenka se odloči za skrivno število $a \in \N$, in izračuna $P_a = aP$, ter to pošlje Borisu.
-\item Boris se odloči za skrivno število $b \in \N$, in izračuna $P_b = bP$, ter to pošlje Alenki.
+\item Alenka in Boris se dogovorita za eliptično krivuljo $E$ nad končnim obsegom $\Fq{q}$, ter za točko $P \in \E{\Fq{q}}$.
+\item Alenka se naključno odloči za skrivno število $a \in \N$, in izračuna $P_a = aP$, ter to pošlje Borisu. Pri tem red točke $P$ ne sme biti enak $a$.
+\item Boris se naključno odloči za skrivno število $b \in \N$, in izračuna $P_b = bP$, ter to pošlje Alenki. Pri tem red točke $P$ ne sme biti enak $b$.
 \item Alenka izračuna $aP_b=abP$.
 \item Boris izračuna $bP_a=baP$.
+\item Skupni ključ je $abP$.
 
 \end{enumerate}
 \end{algorithm}
 
 Kot sam ključ bi lahko na koncu Alenka in Boris uporabila npr.\  zadnjih $256$ bitov x-koordinate točke $abP$. Tu se zanašamo na to, da je iz $E, \F{q},P, P_a, P_b$ težko izračunati $baP$. Zelo veliko pa je tu odvisno od same izbire krivulje E.
 
-To nas privede do t.\ i.\ problema diskretnega logaritma.
-
+To nas privede do t.\ i.\ problema diskretnega logaritma v grupi točk nad eliptičnimi krivuljami.
 
 \begin{definicija}~
+Naj bo $G$ grupa, kjer njeno operacijo označimo z $\circ$.
+Naj bosta $a, b \in G$. Naj $b^k$ označuje $$b^k = \underbrace{b\circ b\circ \cdots \circ b}_\text{$k$-krat}.$$ Število $k \in \N$, ki reši enačbo $$b^k = a$$ imenujemo \emph{diskretni logaritem} elementa $a$ pri osnovi $b$.
 
-Naj bosta $a, b \in \N$, ter naj bo p praštevilo. Iščemo število k tako, da bo
-$$a^k \equiv b\ (\text{mod} \ p).$$
 \end{definicija}
+
+Problem diskretnega logaritma je torej poiskati tak $k$, ki bo rešil dano enačbo.
 
 \begin{trditev}~
 
@@ -1866,14 +1883,14 @@ V obeh primerih mora torej veljati $u,v \equiv 0 \MOD{n}$. Od tod pa sledi, da s
 \label{IndexCalc}
 
 Izračun indeksa je postopek s pomočjo katerega lahko rešimo problem diskretnega logaritma v polju $\F_p$.
-Naj bo $p$ praštevilo in naj bo $g$ generator ciklične grupe $\F^{\times}_{p}$. Naj $L(h)$ označuje vrednost, za katero velja
+Naj bo $p$ praštevilo in naj bo $g$ generator ciklične grupe $\F^{\times}_{p}$. Za dani $h$ želimo rešiti problem diskretnega logaritma. Naj $L(h)$ označuje diskretni logaritem $h$ pri osnovi $b$, torej
 $$g^{L(h)} \equiv h \ (\text{mod} \ p).$$
 Iz definicije $L(h)$ sledi, da velja $$L(h_1h_2) = L(h_1)+L(h_2) \ (\text{mod} \ p).$$
 Idejo napada na problem diskretnega logaritma v taki grupi najlažje vidimo na primeru.
 
 \begin{primer}~
 
-Naj bo $p = 1217$ in $g= 3$. Rešiti hočemo $3^k \equiv 37 \mod 1217$. Izberimo si bazo praštevil $\{ 2,3,5,7,11,13 \}$. Pri tem upoštevamo, da bo večja baza pomenila več računanja a hkrati lažjo pot do odgovora. Iščemo $x$-e  tako, da bo
+Naj bo $p = 1217$ in $g= 3$. Rešiti hočemo problem diskretnega logaritma pri osnovi $3$ za $h = 37$. Izberimo si bazo praštevil $\{ 2,3,5,7,11,13 \}$. Pri tem upoštevamo, da bo večja baza pomenila več računanja, a hkrati lažjo pot do odgovora. Iščemo $x$-e  tako, da bo
 $$3^x \equiv \pm \text{produktu praštevil iz baze} \mod 1217.$$
 
 Ob iskanju takih $x$ najdemo naslednje enakosti:
@@ -1927,7 +1944,7 @@ Z uporabo programskega okolja SAGE, lahko napad enostavno tudi sprogramiramo.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{MOV}
-MOV napad s pomočjo Weilovega parjenja pretvori problem diskretnega logaritma iz $E(\F_{q})$ v problem diskretnega logaritma nad $\F^{\times}_{q^m}$. Na ta način se izognemo računanju nad krivuljo. Nov problem diskretnega logaritma pa lahko sedaj rešimo z različnimi napadi, med drugim tudi z napadom Index-Calculus \ref{IndexCalc}. MOV napad deluje če velikost polja $\F_{q^m}$ ni dosti večja od velikosti polja $\F_{q}$. Postopek napada sledi poteku dokaza naslednje trditve.
+MOV napad, poimenovan po njegovih avtorjih Menezes, Okamoto in Vanstone, s pomočjo Weilovega parjenja pretvori problem diskretnega logaritma iz $E(\F_{q})$ v problem diskretnega logaritma nad $\F^{\times}_{q^m}$. Na ta način se izognemo računanju nad krivuljo. Nov problem diskretnega logaritma pa lahko sedaj rešimo z različnimi napadi, med drugim tudi z napadom Index-Calculus \ref{IndexCalc}. MOV napad deluje če velikost polja $\F_{q^m}$ ni dosti večja od velikosti polja $\F_{q}$. Postopek napada sledi poteku dokaza naslednje trditve.
 
 \begin{trditev}~
 
@@ -1956,11 +1973,13 @@ Ideja dokaza nam sedaj da korake MOV napada.
 \begin{algorithm}[H]
 \caption[MOV]{MOV napad}
 \label{alg:MOV}
-Izberi $m$ tako, da $$E[N] \subset \E{\F{q^n}}.$$
-Ker imajo vse točke $E[N]$ koordinate v $\overline{\F{q}} = \cup_{j\geq 1}\F_{q^j}$ tak $m$ obstaja. Prav tako je $\mu_N$ v $\F{q^m}$.
+Vhod: Točki P in Q na eliptični krivulji E.\newline
+Izhod: diskretni logaritem $k$.\newline
+Izberi $m$ tako, da $$E[N] \subset \E{\Fq{q^m}}.$$
+Ker imajo vse točke $E[N]$ koordinate v $\overline{\Fq{q}} = \cup_{j\geq 1}\F_{q^j}$ tak $m$ obstaja. Prav tako je $\mu_N$ v $\F{q^m}$.
 Nato postopaj po naslednjih korakih.
 \begin{enumerate}
-\item Izberi točko $T \in \E{\F{q^m}}$.
+\item Naključno izberi točko $T \in \E{\Fq{q^m}}$.
 \item Izračunaj red $M$ točke $T$.
 \item Naj bo $d = \text{gcd}(M,N)$ in naj bo $T_1 = (M/d)T$. Potem ima $T_1$ red, ki deli $N$, torej je $T_1 \in E[N]$.
 \item Izračunaj $\zeta_1 = e_N(P,T_1)$ in $\zeta_2 = e_N(Q,T_1)$. Tu sta $\zeta_1$ in $\zeta_2$ v $\mu_d \subset \F_{q^m}^\times$.
@@ -2004,7 +2023,7 @@ Po lemi \ref{lema:4.5} od tot sledi $S \in \E{\F_{q^2}}$.
 
 \begin{primer}~
 
-Denimo, da želimo rešiti problem diskretnega logaritma na krivulji $E: \ y^2 = x^3+x \MOD{547}$, podanega z točkama $P=(67,481),Q = (167,405)$. Iščemo $k$ tako da bo veljalo $P = kQ$.
+Denimo, da želimo rešiti problem diskretnega logaritma na krivulji $E: \ y^2 = x^3+x \MOD{547}$, podanega s točkama $P=(67,481),Q = (167,405)$. Iščemo $k$ tako da bo veljalo $P = kQ$.
 
 Najprej moramo prvotno polje razširiti z nekim $m$. Ker je podana krivulja supersingularna, lahko za $m$ izberemo $2$. Krivuljo torej razširimo na polje $\F_{547^2}$. Vzemimo za nerazcepni polinom stopnje $2$ polinom $x^2+543x+2$. Elementi tega polja so torej polinomi stopnje $1$ s koeficienti v $\F_p$.
 Sedaj moramo izbrati neko naključno točko $T$. Denimo, da smo izbrali točko $T = (24x+219,273x+466)$. Z algoritmom \ref{alg:babyGiant} sedaj poračunamo red $M$ točke $T$. Kot odgovor dobimo $M = 274$. Poračunati moramo tudi red $N$ točke $P$. Ta pa je enak $N = 137$. Največji skupni delitelj teh števil je $137$. Zaradi tega dobimo novo točko $T1$ kot 
@@ -2025,6 +2044,8 @@ Naj bo $P \in E(\F_q)$. Radi bi izračunali red točke $P$. Iščemo torej tako 
 \begin{algorithm}[H]
 \caption[MV]{Mali korak, Velik korak}
 \label{alg:babyGiant}
+Vhod: točka $P$ na eliptični krivulji $E$.\newline
+Izhod: red točke $P$. \newline
 \begin{enumerate}
 \item Izračunaj $Q = (q+1)P$.
 \item Izberi število $m$ za katero velja $m >q^{\frac{1}{4}}$. Za $j = 0,1,\ldots,m$ izračunaj in shrani $jP$.
@@ -2047,7 +2068,7 @@ Tu se sedaj pojavi še vprašanje zakaj ta algoritem deluje. Odgovor na to vpra�
 
 \begin{lema}~
 
-Naj bo $G$ aditivna grupa in naj bo $g\in G$. Denimo da velja $Mg = 0$ za nek $M \in \N$. Označimo z $p_1,\ldots,p_r$ različna praštevila, ki delijo $M$. Če velja $(M/p_i)g \neq  0$ za vse $i$, potem je $M$ red $g$.
+Naj bo $G$ aditivna grupa in naj bo $g\in G$. Denimo da velja $Mg = 0$ za nek $M \in \N$. Označimo s $p_1,\ldots,p_r$ različna praštevila, ki delijo $M$. Če velja $(M/p_i)g \neq  0$ za vse $i$, potem je $M$ red $g$.
 
 \end{lema}
 
@@ -2084,7 +2105,7 @@ Algoritem MOV sprogramiran v programskem okolju SAGE.
 
 Delovanje MOV temelji na uporabi Weilovega parjenja. Pojavi se torej ideja, da bi konstruirali tako krivuljo, ki vedno da trivialno Weilovo parjenje. S tem bi preprečili MOV napad. Krivulje za katere je to res so take, da za njih velja
 $$\#\E{\F_q} = q.$$
-Takim krivuljam rečemo anomalne krivulje. V primeru, ko je $p$ praštevilo, velja da je $E[n]$ ciklična grupa, kar pomeni da bo Weilovo parjenje konstantno enako $1$. Vender za tak tip krivulj obstaja napad, ki deluje še hitreje kot MOV.
+Takim krivuljam rečemo \emph{anomalne krivulje}. V primeru, ko je $p$ praštevilo, velja da je $E[p]$ ciklična grupa, kar pomeni da bo Weilovo parjenje konstantno enako $1$. Vendar za tak tip krivulj obstaja napad, ki deluje še hitreje kot MOV.
 Pokažimo algoritem, ki deluje če je $q$ praštevilo.
 Za tak napad bomo morali najprej krivuljo $E$ in točki $P,Q$ razširiti iz $\F_p$ na $\Z$. Pri tem bomo potrebovali naslednjo trditev.
 
@@ -2181,6 +2202,8 @@ Vrnimo se sedaj k prvotnemu problemu. Imamo torej anomalno krivuljo $E$ nad $\F_
 \begin{algorithm}[H]
 \caption[AN]{Teoretični algoritem nad anomalnimi krivuljami}
 \label{alg:Anomal}
+Vhod: Točki $P, Q$ nad eliptično krivuljo $E$.\newline
+Izho: diskretni logaritem $k$.\newline
 \begin{enumerate}
 \item Razširi $E,P,Q$ nad $\Z$, kot v trditvi \ref{trd:5.6}.
 \item Naj bo $P_1' = pP',Q_1' = pQ'$.
@@ -2204,12 +2227,14 @@ Torej velja
 $$kl_1-l_2 = \lambda_1(kP_1'-Q_1') = \lambda_1(kpP'-pQ') = \lambda_1(pK') \equiv 0 \MOD{p}.$$
 To pa je ravno to kar hočemo pokazati.
 Izkaže se, da je ta algoritem nepraktičen, saj ima x-koordinata točk ponavadi okoli $p^2$ števk.
-Vendar pa lahko problem rešimo, če delamo po modolu $p^2$ namesto da delamo v $\Q$.
+Vendar pa lahko problem rešimo, če delamo po modulu $p^2$ namesto da delamo v $\Q$.
 Tako pridemo, do novega algoritma
 
 \begin{algorithm}[H]
 \caption[ANC]{Napad na anomalne krivulje}
 \label{alg:AnomalAttack}
+Vhod: Točki $P, Q$ nad eliptično krivuljo $E$.\newline
+Izho: diskretni logaritem $k$.\newline
 \begin{enumerate}
 \item Razširi $E,P,Q$ nad $\Z$, kot v trditvi \ref{trd:5.6}.
 \item Izračunaj $P_2' = (p-1)P' \equiv (x',y') \MOD{p^2}$.
@@ -2262,7 +2287,7 @@ $$k = \frac{m_1}{m_2} = \frac{49202}{4345} \equiv 47 \MOD{163}.$$
 
 \section{Kriptografija nad Eliptičnimi krivuljami}
 
-\subsection{ElGamalova enkripcija}
+\subsection{ElGamalov kriptosistem}
 
 ElGamalova enkripcija javnega ključa temelji na problemu diskretnega logaritma. V primeru, da bi rešili problem diskretnega logaritma, bi lahko prebrali tudi vsa poslana sporočila. Denimo, da hoče Alenka komunicirati z Borisom. Vsaj eden od njih mora imeti na nekem javnem mestu objavljene nekatere informacije. Pa recimo, da ima Boris izbrano neko krivuljo $E$ nad nekim končnim poljem $\F_q$. Na tej krivulji ima izbrano točko $P$. Boris si sedaj izbere še skrivni ključ $s$, s katerim poračuna $B=sP$. Sedaj podatke $E,P,B$ javno objavi. Če hoče Alenka komunicirati z Borisom ta postopek poteka na sledeč način:
 \begin{enumerate}
