@@ -972,6 +972,17 @@ Potem velja
 $$\DEG{a\alpha+b\beta} = a^2\DEG{\alpha}+b^2\DEG{\beta} + ab(\DEG{\alpha+\beta}-\DEG{\alpha}-\DEG{\beta}).$$
 \end{trditev}
 
+\begin{opomba}~
+
+Naj bo $n \in \N$ tak, da $n$ ne deli karakteristike $K$. Ker velja $E[n] \cong \Z_n \bigoplus \Z_n$, lahko za $E[n]$ izberemo neko bazo $\{ \beta_1, \beta_2\}$. To pomeni, da lahko vsak element $E[n]$ zapišemo, kot $m_1\beta_1 + m_2\beta_2$, za neki števili $m_1, m_2 \in \Z_n$. Homomorfizem $\alpha: \E{\overline{K}} \rightarrow \E{\overline{K}}$ preslika $E[n]$ v $E[n]$. Zato obstajajo števila $a,b,c,d \in \Z_n$, da velja
+$$\alpha(\beta_1) = a\beta_1+b\beta_2, \ \alpha(\beta_2) = c\beta_1+d\beta_2.$$
+To pa ravno pomeni, da se lahko vsak tak homomorfizem $\alpha$ predstavimo z matriko oblike
+$$\alpha_n = \begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}.$$
+\end{opomba}
+
 \begin{proof}~
 
 Naj bo $n \in \Z$, število ki ni deljivo s karakteristiko $K$. Predstavimo $\alpha,\beta$ z matrikami $\alpha_n,\beta_n$, glede na neko bazo $E[n]$.
@@ -1059,7 +1070,7 @@ $$\phi^2_{q^n}-k\phi_{q^n}+q^n = 0.$$
 Povedano drugače velja naslednja lastnost. Naj bo $(x,y) \in  \overline{\F_q}$, potem velja
 $$(x^{q^2},y^{q^2})-a(x^q,y^q)+q(x,y) = \infty,$$
 $a$ pa je edino število, tako da ta lastnost velja za vse $(x,y) \in \overline{\F_q} $. Velja še več
-$$a \equiv Trace((\phi_q)_m) \MOD{m},$$
+$$a \equiv Sl((\phi_q)_m) \MOD{m},$$
 za vse $m$, ki zadoščajo $\text{gcd}(m,q)=1$.
 
 \end{izrek}

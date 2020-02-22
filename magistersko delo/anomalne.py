@@ -3,6 +3,29 @@ import random
 from fractions import Fraction
 
 def Lift(P,Q,meja = 20):
+    """
+    Opis:
+       Funkcija Lift sprejme tocki P,Q in ju
+       vlozi v $\Z$, tako da so koordinate
+       modulo p še vedno enake.
+       
+
+     Definicija:
+       Lift(P,Q,meja = 20)
+
+     Vhodni podatki:
+       P...razred Point(ElipticCurve), ki
+           predstavlja tocko na elipticni
+           krivulji in je definiran v dodatku base
+       Q...razred Point(ElipticCurve), ki
+           predstavlja tocko na elipticni
+           krivulji in je definiran v dodatku base
+       meja...predsatvlja zgornjo mejo iskanja
+           nakljucnega stevila v algoritmu
+
+     Izhodni  podatek:
+       Tocki P,Q vlozeni v $\Z$
+    """
     p = P.mod  
     x1 = P.x + random.randint(0,meja)*p
     x2 = Q.x + random.randint(0,meja)*p
@@ -30,6 +53,28 @@ def Lift(P,Q,meja = 20):
     return(Point(A1,B1,p**2,x1,y1),Point(A1,B1,p**2,x2,y2))
 
 def AnomalneAttack(P,Q):
+    """
+    Opis:
+       Funkcija AnomalneAttack izvede resuje
+       problem diskretnega logaritma
+       $$kP = Q$$
+       nad anomalnimi krivuljami
+       
+
+     Definicija:
+       AnomalneAttack(P,Q)
+
+     Vhodni podatki:
+       P...razred Point(ElipticCurve), ki
+           predstavlja tocko na elipticni
+           krivulji in je definiran v dodatku base
+       Q...razred Point(ElipticCurve), ki
+           predstavlja tocko na elipticni
+           krivulji in je definiran v dodatku base
+
+     Izhodni  podatek:
+        diskretni logaritem tocke $P$
+    """
     (P1,Q1) = Lift(P,Q)
     p = P.mod
     P2 = (p-1)*P1

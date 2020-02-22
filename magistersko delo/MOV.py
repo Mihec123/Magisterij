@@ -16,10 +16,10 @@ def MOV(E,q,m,P,Q,st_korakov = 10):
        P...tocka na elipticni krivulji iz SAGE
        Q...tocka na elipticni krivulji iz SAGE
        st_korakov...v algoritmu dobivamo rezultate po nekem
-                    modolu in moramo na koncu s pomocjo
+                    modulu in moramo na koncu s pomocjo
                     kitajskega izreka dobit koncni rezultat.
                     Lahko pa se zgodi da vedno dobivamo po
-                    istih modulih in bi se lahko zaciklali.
+                    istih modulih in se program ne bi koncal.
                     st_korakov omeji kolikokrat se ta del
                     zanke izvede.
 

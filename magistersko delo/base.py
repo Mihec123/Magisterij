@@ -2,7 +2,29 @@ import math
 import random
 
 def razEvk(a, b,inverz = True):
-    """extended quclidian algorithm can compute inverse"""
+    """
+    Opis:
+       funkcija razEvk predstavlja razsirjen
+       Evklidov algoritem
+
+     Definicija:
+       razEvk(a, b,inverz = True)
+
+     Vhodni podatki:
+       a...prvo stevilo
+       b...drugo stevilo
+       inverz...ce zelimo racunati samo inverz
+           ne potrebujemo dodatne vrednosti
+           ki nam jo da razsirjen Evklidov
+           algoritem
+
+     Izhodni  podatek:
+       stevili $gcd(a,b),x,y$ tako, da
+       $ax+by = gcd(a,b)$
+       ali v primeru ko je inverz True
+       stevili $gcd(a,b),a^-1$
+       
+    """
     if inverz == False:
         s0, s1, t0, t1 = 1, 0, 0, 1
         while b != 0:
@@ -137,7 +159,7 @@ class NumberMod:
             return self.num >= other.num
 
     def __pow__(self,b):
-        p = self.mod
+        p = self.modul
         if not isinstance(b,int):
             raise Exception('power must be an integer')
         else:
@@ -233,6 +255,22 @@ class NumberMod:
 
 
 def gcd(a,b):
+    """
+    Opis:
+       Funkcija gcd poisce najvecji
+       skupni delitelj stevil $a,b$
+
+     Definicija:
+       gcd(a,b)
+
+     Vhodni podatki:
+       a...prvo stevilo
+       b...drugo stevilo
+
+     Izhodni  podatek:
+       najvecji skupni delitelj stevil
+       $a,b$
+    """
     if b == 0:
         return a
     else:
@@ -262,6 +300,9 @@ class ElipticCurve:
         self.a = a
         self.b = b
         self.mod = modulo
+        elipticna = self.isEliptic()
+        if not elipticna:
+            raise Exception('Curve is not Eliptic')
     def __str__(self):
         """Pri izpisu print nam vrne
         krivuljo v lepi obliki"""
@@ -350,6 +391,17 @@ class ElipticCurve:
                 + NumberMod(self.b,self.mod)
             y = (P.y**2) % self.mod
             return x.num==y
+    def isEliptic(self):
+        """Preverimo ali je dana krivulja res elipticna"""
+        if not (self.a ==None and self.b== None and self.mod == None):
+            #ce to velja je tocka v neskoncnosti nas ne zanima
+            temp = (4*self.a**3 + 27*self.b**2) % self.mod
+            if temp != 0:
+                return True
+            else:
+                return False
+        else:
+            return True
 
            
 INF = "inf"
@@ -494,6 +546,23 @@ class Point(ElipticCurve):
 INFPoint = Point(None,None,None,INF,INF)
 
 def TonelliShanks(n,p1):
+    """
+    Opis:
+       Funkcija TonelliShanks izracuna kvadraticni
+       ostanek stevila $n$ modulo $p1$
+
+     Definicija:
+       TonelliShanks(n,p1)
+
+     Vhodni podatki:
+       n...stevilo katerega kvadraticni
+           ostanek nas zanima
+       p1...modul po katerem delamo
+
+     Izhodni  podatek:
+       kvadraticni ostanek stevila $n$,
+       ce ta obstaja
+    """
     p = p1-1
     s = 0
     while True:
