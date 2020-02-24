@@ -7,7 +7,7 @@ def Lift(P,Q,meja = 20):
     Opis:
        Funkcija Lift sprejme tocki P,Q in ju
        vlozi v $\Z$, tako da so koordinate
-       modulo p še vedno enake.
+       modulo p se vedno enake.
        
 
      Definicija:

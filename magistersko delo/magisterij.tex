@@ -282,7 +282,7 @@ FAKULTETA ZA MATEMATIKO IN FIZIKO\\[5mm]
 \textbf{\naslovdela} \\[3mm]
 \textsc{Povzetek} \\[2mm]
 \end{center}
-Kubične krivulje nam v kriptografiji dajejo prednosti nad drugimi kriptosistemi, saj veljajo za bolj varne. Skozi delo bomo spoznali, osnovne pojme in definicije, ter si pogledali nekaj načinov uporabe krivulj za namene kriptografije. Videli bomo tudi različne napade na krivulje in na ta način spoznali nekaj o tem, kako pravilno izbrati krivuljo. Predvsem bomo videli česa ne smemo izbrati.
+Skozi delo bomo spoznali osnovne pojme in definicije kubičnih krivulj, ter si ogledali nekaj načinov njihove uporabe v kriptografiji. V primerjavi z drugimi kriptosistemi, kubične krivulje veljajo za bolj varne. Predstavili bomo različne napade na krivulje in na podlagi napadov ocenili, katere krivulje niso oziroma so primerna izbira.
 
 \vfill
 \begin{center}
@@ -290,7 +290,8 @@ Kubične krivulje nam v kriptografiji dajejo prednosti nad drugimi kriptosistemi
 \textsc{Abstract}\\[2mm]
 \end{center}
 
-Cubic curves in cryptography have some advantages compared to other cryptosystems. They are considered safer with the same length of the key. During the course of this master thesis we will learn some basic definitions and some basic theorems about cubic curves. We will follow that with some uses of cubic curves in cryptography, where we will look at some cryptosystems and theier weaknesses. An important thing discussed in the thesis will also be safety. The safety will be considered with multiple attacks on curves. That way we will get a basic idea of what curves not to use in cryptography. 
+Cubic curves in cryptography offer some advantages compared to the other cryptosystems, and they are considered safer if using the same length key. In the master thesis we will first learn some basic definitions and theorems about cubic curves. Then we will present the uses of cubic curves in cryptography, where we will study some cryptosystems and analyze theier weaknesses. An important topic discussed will also be safety, which will be studied with multiple attacks on curves. This way we will get a basic idea of which curves are (not) suitable for the use in cryptography.
+
 
 \vfill\noindent
 \textbf{Math.~Subj.~Class.~(2010):}	11T71, 94A60, 14H52, 11G20  \\[1mm]
@@ -308,8 +309,8 @@ Cubic curves in cryptography have some advantages compared to other cryptosystem
 %UVOD
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Uvod}
-Eliptične krivulje imajo v kriptografiji velik pomen, saj zagotavljajo isto varnost, kot drugi klasični kriptosistemi, pri tem pa potrebujejo manjšo velikost ključa. Njihovo uporabo je prvi predlagal Victor S. Miller leta 1985 \cite{Miller}, a so le te v širšo rabo vstopile še le okoli leta 2004. Razliko v potrebni dolžini ključa lahko opazujemo na dveh klasičnih zgledih. Kriptosisteme delimo na simetrične in asimetrične. Simetrični kriptosistemi uporabljajo isti ključ za šifriranje in dešifriranje. Pri asimetričnih kriptosistemih pa uporabljamo različna ključa za šifriranje in dešifriranje. Najpogosteje uporabljen asimetrični kriptosistem je RSA. Ime je dobil posvojih avtorjih Rivest, Shamir in Adleman. RSA temelji na problemu faktorizacije števil \cite{Easttom2015}. Ocenjuje se, da je $2048$ bitni ključ v RSA algoritmu enako varen kot $224$ bitni ključ nad eliptičnimi krivuljami.
-Eden najpogosteje uporabljenih simetričnih kriptosistemov pa je AES \cite{Easttom2015}. Podrobnejšo primerjavo, pa lahko vidimo v spodnji tabeli.
+Kubične krivulje imajo v kriptografiji velik pomen, saj zagotavljajo enako varnost, kot drugi klasični kriptosistemi, obenem pa potrebujejo manjšo velikost ključa. Njihovo uporabo je prvi predlagal Victor S. Miller leta 1985 \cite{Miller}, a v širšo rabo so vstopile še le okoli leta 2004. Razliko v potrebni dolžini ključa lahko opazujemo na dveh klasičnih zgledih. Kriptosisteme delimo na simetrične in asimetrične. Simetrični kriptosistemi uporabljajo isti ključ za šifriranje in dešifriranje. Pri asimetričnih kriptosistemih pa uporabljamo različna ključa za šifriranje in dešifriranje. Najpogosteje uporabljen asimetrični kriptosistem je RSA. Ime je dobil posvojih avtorjih Rivest, Shamir in Adleman. RSA temelji na problemu faktorizacije števil \cite{Easttom2015}. Ocenjuje se, da je $2048$ bitni ključ v RSA algoritmu enako varen kot $224$ bitni ključ nad eliptičnimi krivuljami.
+Eden najpogosteje uporabljenih simetričnih kriptosistemov pa je AES \cite{Easttom2015}. Podrobnejšo primerjavo pa lahko razberemo iz spodnje tabele.
 
 \begin{table}[h]
 \centering
@@ -322,11 +323,12 @@ Eden najpogosteje uporabljenih simetričnih kriptosistemov pa je AES \cite{Eastt
 192                   & 384                   & 7680                  \\ \hline
 256                   & 521                   & 15360                 \\ \hline
 \end{tabular}
- \caption[Primerjava kriptosistemov.]{V tabeli so v posamezni vrstici dolžine ključev v bitih, ki glede na AES, kriptosisteme z uporabo kubičnih krivulj, ter RSA zagotavljajo enako varnost \cite{NIST}.}
+ \caption[Primerjava kriptosistemov.]{V tabeli so v posamezni vrstici dolžine ključev v bitih, ki zagotavljajo enako varnost, glede na AES, kriptosisteme z uporabo kubičnih krivulj ter RSA \cite{NIST}.}
 \end{table}
-Tu je potrebno dodati, da imajo simetrični kriptosistem problem pri dogovoru ključa, saj se samo z simetričnim kriptosistemom ne moremo varno dogovoriti za ključ. Klasično se uporablja npr.\ RSA ali kriptosistemi nad eliptičnimi krivuljami (na kratko ECC),  za samo izmenjavo ključa, nato pa se komunikacija nadaljuje s pomočjo simetričnih kriptosistemov. Krajši ključi predstavljajo veliko prednost v okoljih s slabšo procesorsko močjo in/ali omejenim pomnilnikom. Te naprave pa so v današnjem svetu kljub hitrim tehnološkim napredkom zelo pogoste. Med njih bi lahko IoT(Internet of Things), pametne kartice, pametne USB ključke, itd. Zgodovinsko gledano sega uporaba kubičnih krivulj v kriptografske namene v konec 20.\ stoletja. S pomočjo eliptičnih krivulj pa lahko izvajamo tudi napade na druge kriptosisteme. Primer tega je uporaba eliptičnih krivulj za faktorizacijo števil, s katerim lahko razbijemo vse algoritme, ki temeljijo na faktorizaciji.  Pri določenih pogojih z uporabo eliptične krivulj dobimo enega najhitrejših poznanih algoritmov za razcep števil \cite{Lenstra1987}. S pomočjo tega lahko napademo vse kriptosisteme, katerih varnost temelji na problemu faktorizacije.
+Tu je potrebno dodati, da imajo simetrični kriptosistem pomankljivost pri dogovoru ključa, saj se ne moremo varno dogovoriti za začetni ključ. Klasično se za izmenjavo ključa uporablja npr.\ RSA ali kriptosistemi nad eliptičnimi krivuljami (na kratko ECC), nato pa se komunikacija nadaljuje s pomočjo simetričnih kriptosistemov. Krajši ključi predstavljajo veliko prednost v okoljih s slabšo procesorsko močjo in/ali omejenim pomnilnikom. Naprave z zgornjimi omejitvami pa so v današnjem svetu kljub hitrim tehnološkim napredkom zelo pogoste. Med njih bi lahko IoT(Internet of Things), pametne kartice, pametne USB ključke, itd. Zgodovinsko gledano sega uporaba kubičnih krivulj za kriptografske namene v konec 20.\ stoletja. Uporaba kubičnih krivulj pa ni omejena le na kriptosisteme, kubične krivulje namreč lahko služijo tudi kot orodje za napade na klasične kriptosisteme. Tako lahko kubične krivulje uporabljamo pri faktorizacijo števil, s katerim lahko razbijemo vse algoritme, ki temeljijo na faktorizaciji.  Pod določenimi pogoji z uporabo kubičnih krivulj dobimo enega najhitrejših poznanih algoritmov za razcep števil \cite{Lenstra1987}. S pomočjo tega lahko napademo vse kriptosisteme, katerih varnost temelji na problemu faktorizacije.
 
-V tem magistrskem delu, bomo najprej spoznali osnovne definicije in izreke v povezavi z eliptičnimi krivuljami nad končnimi polji. Za tem pa se bomo posvetili problemu diskretnega logaritma nad eliptičnimi krivuljami. S pomočjo tega bomo spoznali nekaj napadov na eliptične krivulje, ter izvedeli nekaj o primerni izbiri krivulj za kriptografske namene. Govorili bomo tudi o parjenju nad eliptičnimi krivuljami in spoznali učinkovit algoritem za izračun le tega. Vse skupaj pa bomo pospremili še s programsko kodo.
+V tem magisterskem delu bomo (enako kot v literaturi) gladkim kubičnim krivuljam pogosto rekli eliptične krivulje, saj so mod $\C$ vse definicije ekvivalentne.
+Najprej  bomo spoznali osnovne definicije in izreke o kubičnih krivuljah definiranimi nad končnimi polji. Za tem pa se bomo posvetili problemu diskretnega logaritma nad eliptičnimi krivuljami. Nato tega bomo spoznali nekaj napadov na eliptične krivulje, ter analizirali primerno izbiro krivulj za kriptografske namene. Pri tem bomo uvedli tudi parjenje nad eliptičnimi krivuljami in spoznali učinkovit algoritem za izračun le tega. Za vse skupaj pa bomo napisali tudi programsko kodo.
 
 
 \newpage
@@ -338,14 +340,13 @@ V tem magistrskem delu, bomo najprej spoznali osnovne definicije in izreke v pov
 
 \section{Končna polja}
 
-Skozi celotno delo se bomo ukvarjali s končimi polji in njihovimi razširitvami. Spomnimo se najprej vseh definicij in lastnosti, ki jih bomo kasneje potrebovali.
+Skozi celotno delo se bomo ukvarjali s končimi polji in njihovimi razširitvami. Navedimo najprej vse definicije in lastnosti, ki jih bomo potrebovali.
 
-\emph{Končna polja} ali \emph{Galoisova polja}, so polja s končnim številom elementov. Najpogostejši primer takih polj so število modulo $p$, kjer je $p$ praštevilo. Polje s $q$ elementi označimo z $\F_q$, pojavlja pa se tudi oznaka $GF(q)$. Poglejmo si nekaj pomembnih lastnosti takih polj.
+\emph{Končna polja} ali \emph{Galoisova polja}, so polja s končnim številom elementov. Najosnovnejši primer takih polj so števila modulo $p$, kjer je $p$ praštevilo. Polje s $q$ elementi označimo z $\F_q$, v literaturi pa se pojavlja tudi oznaka $GF(q)$. Poglejmo si nekaj pomembnih lastnosti takih polj, ki so povzeta po \cite{predavanja}.
 \begin{trditev}~
 
-Naj bo $p$ praštevilo, potem veljajo naslednje lastnosti.
 \begin{itemize}
-\item Končno polje s $q$ elementi obstaja natanko tedaj, ko velja $q=p^k$, za nek $k \in \N$.
+\item Končno polje s $q$ elementi obstaja natanko tedaj, ko velja $q=p^k$, za nek $k \in \N$ in neko praštevilo $p$.
 \item Vsa končna polja reda $q$ so si izomorfna.
 \item Vsak element polja $\F_q$ zadošča enačbi $x^{q} -x = 0$.
 \item Multiplikativna grupa končnega polja je ciklična.
@@ -353,16 +354,15 @@ Naj bo $p$ praštevilo, potem veljajo naslednje lastnosti.
 \end{itemize}
 \end{trditev}
 
-Tekom magistrskega dela bomo večkrat delali v poljih, katerih število elementov je potenca praštevila. Poglejmo si kako konstruiramo polje s $q = p^n$ elementi.
-
-Najprej si izberemo nerazcepni polinom $P$ v $\F_p[X]$ stopnje $n$. Potem velja, da je kvocientni kolobar
-$$\F_q = \F_p[X]/(P)$$
-polinomov nad $\F_p$ z idealom generiranim s $P$, polje reda $q$.
-Bolj natančno so torej elementi $\F_q$ polinomi nad poljem $\F_p$, stopnje strogo manjše, kot $n$. Seštevanje in odštevanje  poteka na standardni način. Produkt dveh elementov dobimo, kot ostanek pri deljenju s $P$ produkta polinomov v $\F_p[X]$. Inverzne elemente pa lahko poiščemo s pomočjo razširjenega Evklidovega algoritma \cite{Extended2020}.
+Poglejmo si, kako konstruiramo polje s $q = p^n$ elementi.
+Najprej izberemo nerazcepni polinom $P$ v $\F_p[X]$ stopnje $n$. Potem velja, da je kvocientni prostor polinomov nad $\Fq{p}$ z idealom generiranim s $P$
+$$\F_q = \F_p[X]/(P),$$
+polje reda $q$.
+Bolj natančno so torej elementi $\F_q$ polinomi nad poljem $\F_p$, stopnje strogo manjše kot $n$. Seštevanje in odštevanje  poteka na standardni način. Produkt dveh elementov dobimo, kot ostanek pri deljenju s $P$ produkta polinomov v $\F_p[X]$. Inverzne elemente pa lahko poiščemo s pomočjo razširjenega Evklidovega algoritma \cite{Extended2020}.
 
 \begin{primer}~
 
-Poglejmo si polje $\F_4$. Vzemimo nerazcepni polinom
+Poglejmo si polje $\F_4$. Vzemimo nerazcepni polinom v $\Fq{2}[x]$
 $$X^2+X+1.$$
 Velja torej
 $$\F_4 = \F_2[X]/(X^2+X+1) = \{ 0,1,\alpha,1 +\alpha \},$$
@@ -388,8 +388,8 @@ $\alpha$   & $\alpha$   & 1+$\alpha$ & 0          & 1          \\
 $\times$   & 0 & 1        & $\alpha$   & 1+$\alpha$ \\ \hline
 0          & 0 & 0        & 0          & 0          \\
 1          & 0 & 1        & $\alpha$   & 1+$\alpha$ \\
-$\alpha$   & 0 & $\alpha$ & 1+$\alpha$ & $\alpha$   \\
-1+$\alpha$ & 0 & $\alpha$ & $\alpha$   & 1+$\alpha$
+$\alpha$   & 0 & $\alpha$ & 1+$\alpha$ & $1$   \\
+1+$\alpha$ & 0 & $\alpha$ & $1$   & 1+$\alpha$
 \end{tabular}
 \label{table:mno}
 \end{minipage}
@@ -410,17 +410,17 @@ $\alpha$   & / & $\alpha$   & 1          & 1+$\alpha$ \\
 
 \begin{primer}~
 
-Poglejmo si še en zanimiv primer. Naj bo $\F_q= \F_{p^2}$, kjer je $p$ praštevilo za katero velja $p \equiv 3 \MOD{4}$.  Polinom oblike $X^2-r$ je nerazcepen natanko tedaj, ko $r$ ni kvadratični ostanek po modolu $p$. Po  Eulerjevem kriteriju je $r$ kvadratični ostanek natanko tedaj ko $a^{r/2} \equiv 1$. V primeru ko je $p \equiv 3 \MOD{4}$, $p-1$ ni kvadratični ostanek, saj je $(p-1)/2 \equiv 1 \MOD{4}$. To pomeni, da je potenca liha, kar pa nam pove, da $p-1$ ni kvadratični ostanek. Torej lahko za nerazcepni polinom izberemo $X^2+1$. Elementi polja $\F_q$ so torej oblike
+Poglejmo si še en zanimiv primer. Naj bo $\F_q= \F_{p^2}$, kjer je $p$ praštevilo za katero velja $p \equiv 3 \MOD{4}$.  Polinom oblike $X^2-r$ je nerazcepen natanko tedaj, ko $r$ ni kvadratični ostanek po modolu $p$. Po  Eulerjevem kriteriju \cite{Eulerkriterij} je $r$ kvadratični ostanek natanko tedaj ko $r^{(p-1)/2} \equiv 1$. V primeru ko je $p \equiv 3 \MOD{4}$, $p-1$ ni kvadratični ostanek, saj je $(p-1)/2 \equiv 1 \MOD{4}$. To pomeni, da je potenca liha, kar pa nam pove, da $p-1$ ni kvadratični ostanek. Torej lahko za nerazcepni polinom izberemo $X^2+1$. Elementi polja $\F_q$ so torej oblike
 $$a+b\alpha,$$
-$a,b \in \F_p$, $\alpha$ pa je število za katero velja $\alpha^2 = 1$. To nas močno spominja na kompleksna števila. Tudi računske operacije se obnašajo enako kot pri kompleksnih številih. V takih poljih lahko torej namesto s polinomi delamo kar s kompleksnimi števili.
+$a,b \in \F_p$, $\alpha$ pa je število za katero velja $\alpha^2 = -1$. Ta zapis nas močno spominja na kompleksna števila. Tudi računske operacije se obnašajo enako kot pri kompleksnih številih. V takih poljih lahko torej namesto s polinomi računamo kar s kompleksnimi števili.
 \end{primer}
 
-Velikokrat se bo v nadaljevanju pojavljal tudi pojem algebraičnega zaprtja polja $\F_q$ z oznako $\overline{\F_q}$. Spomnimo se vseh potrebnih pojmov za razumevanje le tega.
+V nadaljevanju se bo pogosto pojavljal tudi pojem algebraičnega zaprtja polja $\F_q$ z oznako $\overline{\F_q}$. Spomnimo se potrebnih pojmov za razumevanje le tega.
 
 \begin{definicija}~
 
-Naj bo polje $\mathcal{E}$ razširitev polja $\mathcal{F}$. Pravimo, da je $a \in \mathcal{E}$ \emph{algebraičen}
-nad $\mathcal{F}$, če obstaja tak $0 \neq f(X) \in \mathcal{F}[X]$, da velja f(a) = 0.
+Naj bo polje $\mathcal{E}$ razširitev polja $\mathcal{F}$. Pravimo, da je element $a \in \mathcal{E}$ \emph{algebraičen}
+nad $\mathcal{F}$, če obstaja neničelni polinom $f(X) \in \mathcal{F}[X]$, za katerega velja f(a) = 0.
 
 \end{definicija}
 
@@ -444,7 +444,7 @@ zaprto in je algebraična razširitev $\mathcal{F}$.
 
 \begin{primer}~
 
-$\C$ je algebraično zaprtje $\R$, ni pa algebraično zaprtje $\Q$, saj ni algebraična razširitev.
+Kompleksna števila $\C$ so algebraično zaprtje $\R$, niso pa algebraično zaprtje $\Q$, saj $\C$ ni algebraična razširitev $\Q$.
 
 \end{primer}
 
@@ -459,7 +459,7 @@ $\C$ je algebraično zaprtje $\R$, ni pa algebraično zaprtje $\Q$, saj ni algeb
 
 \begin{definicija}~
 
-\emph{Projektivna ravnina} $\mathbb{P}^2$ nad poljem $\F$ je kvocientni prostor $\F^3-\{0\}/\! \!\sim$, kjer je ekvivalenčna relacija $\sim$ podana z $(a,b,c)\sim(\alpha a,\alpha b,\alpha c)$ za vsak $\alpha \in \F \setminus \{0\}$. Točke v $\mathbb{P}^2$ so torej podane s homogenimi koordinatami $[a,b,c] = [\alpha a,\alpha b,\alpha c]$ za vse $\alpha \neq 0$.
+\emph{Projektivna ravnina} $\mathbb{P}^2$ nad poljem $\F$ je kvocientni prostor $\F^3-\{0\}/\! \!\sim$, kjer je ekvivalenčna relacija $\sim$ podana z $(a,b,c)\sim(\alpha a,\alpha b,\alpha c)$ za vsak  neničelni $\alpha \in \F$. Točke v $\mathbb{P}^2$ so torej podane s homogenimi koordinatami $[a,b,c] = [\alpha a,\alpha b,\alpha c]$ za vse $\alpha \neq 0$.
 \end{definicija} 
 
 Točko projektivne ravnine si lahko predstavljamo kot premico skozi izhodišče, kot prikazuje slika \ref{fig:ravnina}.
@@ -485,47 +485,44 @@ Polinom $P$ je \emph{homogen} stopnje $d$, če velja $P(\lambda x,\lambda y, \la
 $$\mathcal{C}_P= \{ A \in \mathbb{P}^2, P(A) = 0 \}.$$
 \end{definicija}
 
-\emph{Kubična krivulja} je algebraična krivulja, podana s homogenim polinomom stopnje 3. V splošnem je torej oblike
+\emph{Kubična krivulja} je algebraična krivulja, podana s homogenim polinomom stopnje 3. V splošnem je polinom oblike
 \begin{align}
 &{} a_{300}x^3+a_{210}x^2y+a_{201}x^2z+a_{120}xy^2+a_{102}xz^2+ \nonumber \\
-&{}+a_{012}yz^2+a_{030}y^3+a_{003}z^3+a_{111}xyz+a_{021}y^2z = 0, \nonumber
+&{}+a_{012}yz^2+a_{030}y^3+a_{003}z^3+a_{111}xyz+a_{021}y^2z, \nonumber
 \end{align}
 kjer so $a_{ijk} \in \F$.
-Ta zapis vsebuje $10$ koeficientov, vendar se v gladkih primerih lahko polinom poenostavi.
+Ta zapis vsebuje $10$ koeficientov, vendar se lahko v gladkih primerih polinom poenostavi z ustrezno zamenjavo spremenljivk.
 \begin{definicija}~\\
-Algebraična krivulja je \emph{gladka}, če nima nobenih samopresečišč ali singularnosti.
+Algebraična krivulja je \emph{gladka}, če nima singularne točke.
 \end{definicija}
 
 \begin{izrek}[\protect{\cite{Gibson1999}, Izrek 15.2}]~
 
-Gladko kubično krivuljo nad algebraično zaprtim poljem lahko zapišemo v Weierstrassovi obliki
+Enačbo gladke kubične krivulje nad algebraično zaprtim poljem lahko zapišemo v Weierstrassovi obliki
 $$y^2z = x^3 + axz^2 + bz^3.$$
 \end{izrek}
 
 
-\begin{definicija}~
-\emph{Eliptična krivulja} je gladka kubična krivulja.
-\end{definicija}
+\begin{opomba}~
+Gladki kubični krivulji  velikokrat rečemo tudi \emph{eliptična krivulja}.
+\end{opomba}
 
 \begin{primer}~
 
 Polinom $P(x,y,z) = z^2y-x^3$ je homogen polinom stopnje $3$. Rešitve enačbe $z^2y-x^3 = 0$ pa podajajo točke na kubični krivulji.
-\\
-
-
 \begin{figure}[t]
   \centering
 \begin{minipage}{.45\textwidth}
 \centering
   \includegraphics[width=0.8\textwidth]{images/krivulja.png}
-  \caption[Primer algebraične krivulje.]{Algebraična krivulja, podana s polinomom $z^2y-x^3$.}
+  \caption[Primer algebraične krivulje.]{Algebraična krivulja $\mathcal{C}$ podana s polinomom $z^2y-x^3$.}
   \label{fig:krivulja}
 \end{minipage}%
 \hfill
 \begin{minipage}{.45\textwidth}
 \centering
 \includegraphics[scale=0.5]{images/projektivnaz.png}
-\caption[Presek algebraične krivulje z ravnino $z=1$.]{Presek algebraične krivulje z ravnino $z=1$.}
+\caption[Presek algebraične krivulje z ravnino $z=1$.]{Presek $\mathcal{C}$ z ravnino $z=1$.}
 \label{fig:projektivnaz}
 \end{minipage}
 \end{figure}
@@ -536,46 +533,44 @@ Polinom $P(x,y,z) = z^2y-x^3$ je homogen polinom stopnje $3$. Rešitve enačbe $
 \begin{minipage}{.45\textwidth}
 \centering
 \includegraphics[scale=0.5]{images/projektivnay.png}
-\caption[Presek algebraične krivulje z ravnino $y=1$.]{Presek algebraične krivulje z ravnino $y=1$.}
+\caption[Presek algebraične krivulje z ravnino $y=1$.]{Presek $\mathcal{C}$ z ravnino $y=1$.}
 \label{fig:projektivnay}
 \end{minipage}%
 \hfill
 \begin{minipage}{.45\textwidth}
 \centering
 \includegraphics[scale=0.5]{images/projektivnax.png}
-\caption[Presek algebraične krivulje z ravnino $x=1$.]{Presek algebraične krivulje z ravnino $x=1$.}
+\caption[Presek algebraične krivulje z ravnino $x=1$.]{Presek $\mathcal{C}$ z ravnino $x=1$.}
 \label{fig:projektivnax}
 \end{minipage}
 \end{figure}
-
-
 Na zgornjih slikah lahko vidimo, kako krivuljo predstavimo v projektivni ravnini, ter njene preseke z različnimi afinimi ravninami.
 
 \end{primer}
 
 
 
-V nadaljevanju nas bodo zanimale predvsem gladke kubične krivulje v polju $\mathbb{Z}/p\mathbb{Z}$.
+V nadaljevanju nas bodo zanimale predvsem kubične krivulje v končnem polju $\mathbb{Z}/p\mathbb{Z} \cong \Fq{p}$, za neko praštevilo $p$.
 
 \begin{definicija}~
 
-Za dani števili $a$, $b \in \mathbb{Z}/n\mathbb{Z}$ je \emph{kubična krivulja} nad poljem $\mathbb{Z}/n\mathbb{Z}$ množica točk
-$$E_{(a,b)}(\mathbb{Z}/n\mathbb{Z}) =\left\{ [x,y,z] \in \PP^2(\mathbb{Z}/n\mathbb{Z}): y^2z=x^3+axz^2+bz^3 \right\} .$$
+Za dani števili $a$, $b \in \mathbb{Z}/p\mathbb{Z}$ je \emph{kubična krivulja} nad poljem $\mathbb{Z}/p\mathbb{Z}$ množica točk
+$$E_{(a,b)}(\mathbb{Z}/p\mathbb{Z}) =\left\{ [x,y,z] \in \PP^2(\mathbb{Z}/p\mathbb{Z}): y^2z=x^3+axz^2+bz^3 \right\} .$$
 Drugače povedano, afina kubična krivulja je množica rešitev Weierstrassove enačbe
 $$y^2=x^3+ax+b.$$
 Pri čemer upoštevamo zvezo med afinimi in projektivnimi koordinatami točk:
-$$(x,y)\in (\Z/n\Z)^2 \Leftrightarrow [x,y,1]\in \PP^2(\Z/n\Z).$$
+$$(x,y)\in (\Z/p\Z)^2 \Leftrightarrow [x,y,1]\in \PP^2(\Z/p\Z).$$
 
 \end{definicija}
 
 \subsection{Tonelli-Shanks}
-Kasneje bomo pri algoritmih velikokrat potrebovali naključno točko na krivulji. S pomočjo algoritma Tonelli-Shanks bomo lahko to naredili učinkovito. Naj bo $n$ modul po katerem delamo.
-Če privzamemo, da lahko naključno izberemo število $0 \leq x \leq n$, potem nas zanima, kako učinkovito izberemo naključno točko na krivulji oblike
-$y^2 = x^3 +Ax+B \ \text{mod } n$. Ideja je preprosta. Naključno generirajmo koordinato $x$ in nato poizkusimo rešiti enačbo $y^2 = X \ \text{mod } n$, če tak $y$ obstaja. V nasprotnem primeru generiramo novo $x$ koordinato in poizkusimo ponovno. Problem se torej skriva le v reševanju kvadratne enačbe. Tu pa nam pomaga Tonneli-Shankov algoritem, ki učinkovito reši zgornjo enačbo.
+V algoritmih bomo velikokrat potrebovali naključno točko na krivulji. S pomočjo algoritma Tonelli-Shanks bomo točko na krivulji lahko učinkovito poiskali. Naj bo $p$ modul po katerem računamo.
+Če privzamemo, da lahko naključno izberemo število $0 \leq x \leq p$, potem nas zanima, kako učinkovito izberemo naključno točko $(x,y)$ na krivulji podani z enačbo
+$y^2 = x^3 +ax+b \ \text{mod } p$. Ideja je preprosta. Naključno generirajmo koordinato $x$ in nato poizkusimo rešiti enačbo $y^2 = X \ \text{mod } p$, če tak $y$ obstaja. V nasprotnem primeru generiramo novo $x$ koordinato in poizkusimo ponovno. Problem se torej skriva le v reševanju kvadratne enačbe. Tu pa nam pomaga Tonneli-Shankov algoritem, ki učinkovito reši zgornjo enačbo.
 
 \begin{trditev}~
 
-Naj bo $p > 2$ praštevilo. Če je $n \in \Z_p$ kvadratični ostanek po modolu $p$, potem nam algoritem \ref{alg:Tonelli} vrne $r \in \Z_p$, tako da velja $n = r^2$.
+Naj bo $p > 2$ praštevilo. Če je $n \in \F_p$ kvadratični ostanek po modolu $p$, potem nam Tonelli-Shanks algoritem vrne $r \in \F_p$, tako da velja $n = r^2$.
 
 \end{trditev}
 
@@ -584,9 +579,9 @@ Naj bo $p > 2$ praštevilo. Če je $n \in \Z_p$ kvadratični ostanek po modolu $
 \label{alg:Tonelli}
 
 \begin{algorithmic}
-\State Vhod: $p \in \N, n \in \Z_p$.
-\State Izhod: $r \in \Z_p$, za katerega velja $r^2=n$, če ta obstaja
-\State Najdi tak $z \in Z_p$, da $z$ ni kvadrat
+\State Vhod: praštevilo $p$, $n \in \F_p$.
+\State Izhod: $r \in \F_p$, za katerega velja $r^2=n$, če ta obstaja
+\State Najdi tak $z \in F_p$, da $z$ ni kvadrat
 \State Poišči $s,Q$, tako da $p-1 = Q2^s$
 \State $M = s,c = z^Q,t = n^Q,R=n^{\frac{Q+1}{2}}$
 \While {True}
@@ -604,7 +599,7 @@ Naj bo $p > 2$ praštevilo. Če je $n \in \Z_p$ kvadratični ostanek po modolu $
 
 \begin{opomba}~
 
-V algoritmu \ref{alg:Tonelli} lahko prvi korak izvedemo tako, da preiskušamo naključne $g\in \Z_p$, dokler ne velja $g^{(p-1)/2} = -1$.
+V algoritmu \ref{alg:Tonelli} lahko prvi korak izvedemo tako, da preiskušamo naključne $g\in \F_p$, dokler ne velja $g^{(p-1)/2} = -1$.
 \end{opomba}
 
 \begin{opomba}~
@@ -619,7 +614,7 @@ množenj. Tu $N$ predstavlja število binarnih števk števila $p$, $K$ pa preds
 \subsection{Struktura grupe na kubičnih krivuljah}
 
 
-Za definicijo grupe na kubičnih krivuljah uvedimo najprej pomožno operacijo
+Za definicijo grupe na kubičnih krivuljah nad $\C$ najprej uvedimo pomožno operacijo
 
 $$\ast : \mathcal{C}_P \times \mathcal{C}_P \rightarrow \mathcal{C}_P,$$
 tako da za poljubni točki $A$, $B$ na krivulji velja:
@@ -630,7 +625,7 @@ A & \quad \text{če je } A=B \ \text{prevoj},\\
 C & \quad \text{če je } \overline{AB} \cap \mathcal{C}_P = \left\{ A,B,C \right\},\\
 A & \quad \text{če je } \overline{AB} \ \text{tangenta v } A,\ \text{ter} \ A \neq B,\\
 B & \quad \text{če je } \overline{AB} \ \text{tangenta v } B,\ \text{ter} \ A \neq B,\\
-C &\quad \text{če je } A=B \ \{\text{in tangenta v A}\} \cap \mathcal{C}_P = \left\{ A,C \right\}.\\
+C &\quad \text{če je } A=B \  \text{in}\ \{\text{tangenta v A}\} \cap \mathcal{C}_P = \left\{ A,C \right\}.\\
 \end{cases}
 \]
 Intuitivno operacija $\ast$ vrne tretjo točko v preseku premice skozi $A$ in $B$ in $\mathcal{C}_P$ kar lahko vidimo na sliki \ref{fig:adicija}. Poglejmo si še nekaj lastnosti operacije $\ast$. Dokaze sledečih trditev najdemo v \cite[Poglavje 17.3]{Gibson1999}.
@@ -642,7 +637,7 @@ Operacija $\ast$ ima naslednje lastnosti:
 
 \begin{itemize}
 \item komutativnost: $ A \ast B = B \ast A$,
-\item absorpcija: $(A \ast B ) \ast A = B$ ,
+\item absorpcija: $(A \ast B ) \ast A = B$,
 \item $((A \ast B) \ast C ) \ast D = A \ast ((B \ast D)\ast C)$.
 \end{itemize}
 \end{trditev}
@@ -655,7 +650,7 @@ Kubična krivulja ($\mathcal{C}_P$,$+$) je Abelova grupa za operacijo
 \centering
 \begin{tabular}{llll}
 $+:$ & $\mathcal{C}_P \times \mathcal{C}_P$ & $\rightarrow$ & $\mathcal{C}_P$ \\
-& $(A,B)$ & $\rightarrow$ & $(A\ast B)\ast O$ ,
+& $(A,B)$ & $\mapsto$ & $(A\ast B)\ast O$ ,
 \end{tabular}
 \end{table}
 kjer je $O$ poljubna izbrana točka na krivulji $ \mathcal{C}_P$.
@@ -687,7 +682,7 @@ kjer smo uporabili absorbcijo.
 \end{itemize}
 \end{proof}
 
-Ta definicija operacije nudi eleganten opis strukture grupe, za numerično računanje pa ni primerna. Možno pa je izpeljati formule, s katerimi lahko eksplicitno
+Ta definicija operacije nudi eleganten geometrijski opis strukture grupe, za numerično računanje pa ni primerna. Možno pa je izpeljati formule, s katerimi eksplicitno
 izračunamo vsoto dveh točk, v kolikor imamo kubično krivuljo v Weierstrassvi obliki.
 
 \begin{lema}[Seštevanje točk na Weierstrassovi kubični krivulji]~
@@ -729,12 +724,13 @@ ter $\mu = b_1 - \lambda a_1$.
 
 \begin{opomba}~
 
-Če krivuljo $\mathcal{C}_P$ predstavimo v projektivni ravnini, torej s homogenim polinomom $yz^2=x^3+\alpha x^2z+\beta xz^2+ \gamma yz^2$ je prevoj $O=[0,1,0].$
+Če krivuljo $\mathcal{C}_P$ predstavimo v projektivni ravnini, torej kot ničle homogenega polinomoma $y^2z=x^3+\alpha x^2z+\beta xz^2+ \gamma z^3$ je prevoj $O=[0,1,0].$
+Opazimo, da točke $O = [0,1,0]$ ni možno predstaviti v afini ravnini $z=1$, zato bomo v nadaljevanju pisali $O = \infty$.
 \end{opomba}
 
 \begin{primer}~
 
-Na spodnji sliki je v afini ravnini $y=1$ prikazano kako grafično seštevamo točke na Weierstrassovi kubiki $yz^2-x(x-y)(x+y)=0$. Sešteti želimo točki $A =(-1,0)$ in $B=(2,\sqrt{6}) $.
+Na sliki \ref{fig:adicija} je v afini ravnini $z=1$ prikazano kako grafično seštevamo točke na Weierstrassovi kubiki $y^2z-x(x-z)(x+z)=0$. Sešteti želimo točki $A =[-1,0,1]$ in $B=[2,\sqrt{6},1] $.
 \\
 
 
@@ -751,10 +747,8 @@ Na spodnji sliki je v afini ravnini $y=1$ prikazano kako grafično seštevamo to
 
 \begin{primer}~
 
-Seštejmo točki $A =(-1,0),B=(2,\sqrt{6}) $ na Weierstrassovi kubični krivulji $yz^2-x(x-y)(x+y)=0$ v preseku s projektivno ravnino $y=1$ še računsko z uporabo zgornje leme \ref{sestevanje}.
-Prepišimo našo krivuljo najprej v afino obliko iz leme \ref{sestevanje}. Ker smo v ravnini $y=1$, najprej zamenjajmo vlogi $y$ in $z$.
+Seštejmo točki $A =(-1,0),B=(2,\sqrt{6}) $ na Weierstrassovi kubični krivulji $y^2z-x(x-z)(x+z)=0$ v preseku z afino ravnino $z=1$ še računsko z uporabo zgornje leme \ref{sestevanje}.
 
-$$z^2-x(x-1)(x+1) = 0 $$ 
 Dobimo $z^2 = x^3-x,$
 torej je $\alpha = 0$, $\beta = -1$ in $\gamma=0$. Izračunajmo sedaj $\lambda$ in $\mu$, pri čemer upoštevamo prvi predpis, saj sta x-koordinati točk različni:
 $$\lambda = \frac{-\sqrt{6}}{-1-2} = \frac{\sqrt{6}}{3},$$
@@ -767,14 +761,14 @@ $$x = \frac{6}{9} - 0+1-2=-\frac{1}{3}$$
 
 in
 
-$$z = -\frac{\sqrt{6}}{3}(-\frac{1}{3})-\frac{\sqrt{6}}{3}=-\frac{2\sqrt{6}}{9} \doteq -0.5443.$$
+$$y = -\frac{\sqrt{6}}{3}(-\frac{1}{3})-\frac{\sqrt{6}}{3}=-\frac{2\sqrt{6}}{9} \doteq -0.5443.$$
 
-Iskana točka $A+B \in \PP^2$ je torej enaka $[-\frac{1}{3},1,-\frac{2\sqrt{6}}{9}]$. Dobljeni rezultat se ujema s točko, ki smo jo dobili z grafičnim seštevanjem.
+Iskana točka $A+B \in \PP^2$ je torej enaka $[-\frac{1}{3},-\frac{2\sqrt{6}}{9},1]$. Dobljeni rezultat se ujema s točko, ki smo jo dobili z grafičnim seštevanjem.
 
 \end{primer}
 
 
-Poglejmo si še primer kubične krivulje v $\Z_n$.
+Poglejmo si še primer kubične krivulje nad poljem $\F_p$.
 
 \begin{primer}~
 
@@ -788,8 +782,7 @@ $0$      & $-1$      & $\pm 3$  & $(0,3),(0,2)$ \\
 $1$      & $1$       & $\pm 1$  & $(1,1),(1,4)$ \\
 $2$      & $4$       & $\pm 3$  & $(2,3),(2,2)$ \\
 $3$      & $4$       & $\pm 3$  & $(3,3),(3,2)$ \\
-$4$      & $2$       & /        & /             \\
-$\infty$ & $\infty$  & $\infty$ & $\infty$     
+$4$      & $2$       & /        & /            
 \end{tabular}
 \end{table}
 
@@ -810,7 +803,7 @@ $\infty$ & $\infty$  & $\infty$ & $\infty$
 \end{minipage}
 \end{figure}
 
-Izračunajmo sedaj še $(2,3)+(1,1)$. Uporabimo formule \ref{sestevanje}, tako dobimo
+Izračunajmo sedaj še $(2,3)+(1,1)$. Uporabimo formule v lemi \ref{sestevanje}, tako dobimo
 \begin{align}
 \lambda &{}=\frac{3-1}{2-1} = \frac{2}{1} = 2, \nonumber \\ 
 %m &{}= \frac{1-3}{1-2} = \frac{3}{4} = 3\cdot 4 = 2, \nonumber \\
@@ -819,7 +812,7 @@ x_3 &{} = 4-2-1 = 1, \nonumber \\
 y_3 &{} = -2(1)-4 = 4. \nonumber
 \end{align}
 
-$(2,3)+(1,1)$ je torej enako $(1,4)$ nad $E$.
+$(2,3)+(1,1)$ je torej enako $(1,4)$ na krivulji $E$.
 
 \end{primer}
 
