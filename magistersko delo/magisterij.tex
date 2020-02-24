@@ -344,6 +344,7 @@ Skozi celotno delo se bomo ukvarjali s končimi polji in njihovimi razširitvami
 
 \emph{Končna polja} ali \emph{Galoisova polja}, so polja s končnim številom elementov. Najosnovnejši primer takih polj so števila modulo $p$, kjer je $p$ praštevilo. Polje s $q$ elementi označimo z $\F_q$, v literaturi pa se pojavlja tudi oznaka $GF(q)$. Poglejmo si nekaj pomembnih lastnosti takih polj, ki so povzeta po \cite{predavanja}.
 \begin{trditev}~
+\label{algebra}
 
 \begin{itemize}
 \item Končno polje s $q$ elementi obstaja natanko tedaj, ko velja $q=p^k$, za nek $k \in \N$ in neko praštevilo $p$.
@@ -821,22 +822,22 @@ $(2,3)+(1,1)$ je torej enako $(1,4)$ na krivulji $E$.
 \begin{definicija}~
 
 Naj bo $K$ polje nad katerim je definirana eliptična krivulja $E$.
-\emph{Endomorfizem} na $E$ je homomorfizem $\alpha: \E{\overline{K}} \rightarrow \E{\overline{K}} $, ki je podan z racionalno funkcijo. Torej obstajata racionalni funkciji $R_1,R_2$ s koeficienti v $\overline{K}$ tako da velja
+\emph{Endomorfizem} na $E$ je homomorfizem $\alpha: \E{\overline{K}} \rightarrow \E{\overline{K}} $, ki je podan z racionalno funkcijo. Torej obstajata racionalni funkciji $R_1$ in $R_2$ s koeficienti v $\overline{K}$ za kateri velja
 $$\alpha(x,y) = (R_1(x,y),R_2(x,y)),$$
 za vse $(x,y) \in \E{\overline{K}}$.
 \end{definicija}
 
 \begin{primer}~
 
-Naj bo $E$ krivulja podana z $y^2 = x^3+Ax+B$, ter naj bo $\alpha(P) = 2P$. $\alpha$ je očitno homomorfizem. Prav tako pa po lemi \ref{sestevanje} obstajajo racionalne funkcije za seštevanje točk na kubičnih krivuljah, zato je $\alpha$ tudi endomorfizem nad E.
+Naj bo $E$ krivulja podana z $y^2 = x^3+Ax+B$, ter naj bo $\alpha(P) = 2P$. Tako definiran $\alpha$ je očitno homomorfizem. Po lemi \ref{sestevanje} pa obstajajo racionalne funkcije za seštevanje točk na kubičnih krivuljah, zato je $\alpha$ tudi endomorfizem.
 \end{primer}
 
-Zaradi vseh možnih oblik racionalnih funkcij bo priročno, če bomo zapis endomorfizmov standardizirali, ter bomo od tod naprej privzeli, da so vsi endomorfizmi zapisani v taki obliki.
-V racionalni funkciji $R(x,y)$ lahko zaradi tega ker se nahajamo na Weierstrassovi krivulji vse sode potence $y$ zamenjamo z $x^3+Ax+B$ na primerno potenco. Zaradi tega lahko $R(x,y)$ zapišemo kot
+Zaradi različnih možnih oblik racionalnih funkcij bo priročno, če bomo zapis endomorfizmov standardizirali, ter bomo od tod naprej privzeli, da so vsi endomorfizmi zapisani v enotni obliki.
+V racionalni funkciji $R(x,y)$ lahko, zato ker se nahajamo na Weierstrassovi krivulji, vse sode potence $y$ zamenjamo z $x^3+Ax+B$ na primerno potenco. Zaradi tega lahko $R(x,y)$ zapišemo kot
 $$R(x,y) = \frac{p_1(x)+p_2(x)y}{p_3(x)+p_4(x)y}.$$
-Če sedaj še pomnožimo števec in imenovalec z $p_3-p_4y$ ter potem zamenjamo $y^2$ z $x^3+Ax+B$, dobimo izraz oblike
+Če sedaj še pomnožimo števec in imenovalec s $p_3-p_4y$ ter potem zamenjamo $y^2$ z $x^3+Ax+B$, dobimo izraz oblike
 $$R(x,y) = \frac{q_1(x)+q_2(x)y}{q_3(x)}.$$
-Ker za točke na Weierstrassovi krivulji velja $-(x,y) = (x,-y)$ od tod sledi, da za vsak endomorfizem $\alpha = (R_1,R_2) $ nad $E$ velja
+Za točke na Weierstrassovi krivulji velja $-(x,y) = (x,-y)$, kjer $-(x,y)$ označuje nasprotni element točke $(x,y)$. Od tod sklepamo, da za vsak endomorfizem $\alpha = (R_1,R_2) $ nad $E$ velja
 $$R_1(x,-y) = R_1(x,y), \ R_2(x,-y) = -R_2(x,y).$$
 To sledi iz dejstva, da je $\alpha$ homomorfizem in velja
 $$\alpha(x,-y) = \alpha(-(x,y)) = -\alpha(x,y).$$
@@ -844,47 +845,51 @@ To pa pomeni, da se da $\alpha(x,y)$ zapisati kot
 $\alpha(x,y) = (r_1(x),r_2(x)y),$
 kjer sta $r_1,r_2$ racionalni funkciji.
 
-Če zapišemo sedaj $r_1(x)$ kot
+Če sedaj zapišemo $r_1(x)$ kot
 $$r_1(x) = \frac{p(x)}{q(x)},$$
 potem lahko definiramo še nekaj pojmov. 
 
 \begin{definicija}~
 
-\emph{Stopnja} endomorfizma je  definirano kot
-$$\DEG{\alpha} = \max \{ \deg{p(x)},\deg{q(x)} \},$$
-če je $\alpha$ ne trivialen V primeru $\alpha \equiv 0$, definiramo $\DEG{0} = 0$.
+\emph{Stopnja} endomorfizma je  definirana kot
+$$
+\DEG{\alpha} =
+\begin{cases}
+\max \{ \deg{p(x)},\deg{q(x)} \} & \text{če }\alpha \not\equiv 0, \\
+0 & \text{če } \alpha \equiv 0.
+\end{cases}
+$$
 \end{definicija}
 
 \begin{definicija}~
 
-$\alpha \not \equiv 0$ je \emph{separabilni} endomorfizem če je odvod $r'_1(x) \not \equiv 0$.
+Netrivialni endomorfizem $\alpha$ je \emph{separabilen}, če je odvod $r'_1(x) \not \equiv 0$.
 \end{definicija}
 
 Poglejmo si na primeru, kako določimo stopnjo, ter ali je enodmorfizem seperabilen.
 
 \begin{primer}
-Če vzamemo enak endomorfizem kot v prejšnjem primeru $\alpha(P) = 2P$ imamo funkcijo
+Če vzamemo endomorfizem iz prejšnjega primera $\alpha(P) = 2P,$ dobimo funkcijo
 $$R_1(x,y) = \left(\frac{3x^2+A}{2y}\right)^2-2x.$$
-To lahko sedaj preoblikujemo kot
+To lahko preoblikujemo kot
 \begin{align}
 \left(\frac{3x^2+A}{2y}\right)^2-2x &{}= \frac{9x^4+6Ax^2+A^2}{4y^2}-2x \nonumber \\
 &{} = \frac{9x^4+6Ax^2+A^2 - 2x(4(x^2+Ax+B))}{4(x^2+Ax+B)} \nonumber \\
 &{} = \frac{x^4-2Ax^2-8Bx+A^2}{4(x^2+Ax+B)} \nonumber
 \end{align}
-Dobimo torej
-$$r_1(x) = \frac{x^4-2Ax^2-8Bx+A^2}{4(x^2+Ax+B)}.$$
-Stopnja $deg(\alpha) = 4$.
+Iz
+$$r_1(x) = \frac{x^4-2Ax^2-8Bx+A^2}{4(x^2+Ax+B)}$$
+razberemo, da je stopnja $\DEG{\alpha} = 4$.
 
 Poglejmo si še odvod $r'_1(x)$.
 \begin{align}
 r'_1(x) &{}=\frac{(4x^3-4Ax-8B)4(x^3+Ax+B)-(x^4-2Ax^2-8Bx+A^2)(12x^2+4A)}{16(x^2+Ax+B)^2} \nonumber \\
-&{}= \ldots = \nonumber \\
 &{} = \frac{-A^3 - 8 B^2 + 2 x^5 - 2 A^2 x (1 + x) + 4 B x^2 (2 + x) +  A (-4 B x + 3 x^4)}{4 (B + x (A + x))^2} \nonumber
 \end{align}
 Števec zgornje enačbe pa ni identično enak $0$, torej je endomorfizem seperabilen.
 \begin{opomba}~
 
-Če bi zgornji endomorfizem gledali v $\F_2$, bi dobili primer endomorfizma, ki ni seperabilen.
+Če bi zgornje računali v $\F_2$, bi dobili primer endomorfizma, ki ni seperabilen.
 \end{opomba}
 \end{primer}
 
@@ -894,31 +899,31 @@ V nadaljevanju bomo potrebovali naslednji izrek, za katerega ne bomo podali doka
 
 \label{izrek:2.21}
 Naj bo $\alpha \neq 0$ seperabilni endomorfizem nad eliptično krivuljo $E$. Potem velja
-$$\DEG{\alpha}= \# \text{Ker}(\alpha).$$
-Če $\alpha \neq 0$ ni seperabilen velja
+$$\DEG{\alpha}= \# \text{Ker}(\alpha), \ \text{kjer \# označuje število točk, ki so v jedru } \alpha.$$
+Če $\alpha \neq 0$ ni seperabilen, pa velja
 $$\DEG{\alpha} > \# \text{Ker}(\alpha).$$
 \end{izrek}
 
-\subsection{Frobeniusev endomorfizem}
+\subsection{Frobeniusov endomorfizem}
 
 Naj bo $\F_q$ končno polje z algebraičnim zaprtjem $\overline{\F_q}$ in naj bo
 \begin{align}
 \phi_q:\overline{\F_q} &{} \rightarrow \overline{\F_q}, \nonumber \\
 x &{} \mapsto x^q \nonumber
 \end{align}
-Frobeniuseva preslikava na $\F_q$.
-Če je $E$ eliptična krivulja definirana nad $\F_q$, potem $\phi_q$ deluje na točkah $E$ kot:
-$$\phi_q(x,y) = (x^q,y^q), \ \phi_q(\infty) = \infty.$$
+Frobeniusova preslikava na $\F_q$.
+Če je eliptična krivulja $E$ definirana nad $\F_q$, potem $\phi_q$ deluje na točkah $E$ kot:
+$$\phi_q(x,y) = (x^q,y^q) \text{ in } \phi_q(\infty) = \infty.$$
 
 \begin{lema}~
 
 \label{lema:4.5}
 
-Naj bo $E$ eliptična krivulja definirana nad $\F_q$, in naj bo $(x,y) \in \E{\overline{\F_q}}$. Velja
+Naj bo $E$ eliptična krivulja definirana nad $\F_q$. Za točke $(x,y) \in \E{\overline{\F_q}}$ velja
 \begin{itemize}
 
 \item $\phi_q(x,y) \in \E{\overline{\F_q}}$,
-\item $(x,y) \in \E{\F_q}$ natanko tedaj ko $\phi_q(x,y) = (x,y)$.
+\item $(x,y) \in \E{\F_q}$ natanko tedaj ko je $\phi_q(x,y) = (x,y)$.
 
 
 \end{itemize}
@@ -930,24 +935,22 @@ Naj bo $E$ eliptična krivulja definirana nad $\F_q$, in naj bo $(x,y) \in \E{\o
 Za dokaz leme bomo potrebovali lastnost $$(a+b)^q = a^q+b^q,$$ kjer je $q$ potenca karakteristike polja v katerem delamo. To sledi iz razvoja v vrsto in dejstva, da pri binomskih koeficientih velja
 ${q\choose i} \equiv 0$, za $1 \leq i \leq q-1$. To je res ker pri zapisu binomskega koeficienta po krajšanju vedno ostane vsaj en $q$, ki je potenca karakteristike. 
 
-Prav tako bomo potrebovali dejstvo, da velja $a^q = a$ za vse $a \in \F_q$. Dokaz tega sledi iz dejstva, da ima grupa vseh obrnljivih elementov $\F^{\times}_q$ red $q-1$, kar pa ravno pomeni $a^{q-1} = 1$, za vse $a \in \F_q \neq 0$. To pa je ekvivalentno zgornji trditvi.
+Prav tako bomo potrebovali trditev \ref{algebra}, da za vse $a \in \F_q$ velja $a^q = a$. Dokaz tega sledi iz dejstva, da ima grupa vseh obrnljivih elementov $\F^{\times}_q$ red $q-1$, kar pomeni $a^{q-1} = 1$, za vse $a \in \F_q \neq 0$. To pa je ekvivalentno zgornji trditvi.
 
-Lemo lahko brez težav namesto za krivulje v Weierstrassovi obliki dokažemo za krivulje v posplošeni Weierstrassovi obliki.
-Imamo torej
+Lemo lahko brez težav dokažemo za krivulje v posplošeni Weierstrassovi obliki.
 \begin{equation}
 \label{enc:razWeier}
 y^2+a_1xy+a_3y=x^3+a_2x^2+a_4x+a_6,
 \end{equation}
-$a_i \in \F_q$. Če to enačbo sedaj potenciramo na $q$ in uporabimo zgornja dejstva dobimo
+kjer so $a_i \in \F_q$. Če to enačbo potenciramo na stopnjo $q$ in uporabimo zgornja dejstva, dobimo
 $$(y^q)^2+a_1(x^qy^q)+a_3(y^q)=(x^q)^3+a_2(x^q)^2+a_4(x^q)+a_6.$$
 To pa ravno pomeni, da točke oblike $(x^q,y^q)$ ležijo na krivulji podani z enačbo \ref{enc:razWeier}.
 
-Za drugi del leme se upremo na dejstvo, da velja $x \in \F_q$ natanko tedaj, ko $\phi_q(x) = x$. V eno smer smo to lastnost že dokazali. Potrebujemo še dokaz v drugi smeri. Ta del pa sledi iz lastnosti, da ima polinom $X^q-X$, q različnih ničel v $\overline{\F_p}$. Ker pa
+Za drugi del leme uporabimo dejstvo, da velja $x \in \F_q$ natanko tedaj, ko je $\phi_q(x) = x$. Smer iz leve v desno smo že dokazali zgoraj. Potrebujemo še dokaz v drugo smer. Ta pa sledi iz lastnosti, da ima polinom $X^q-X$ natanko $q$ različnih ničel v $\overline{\F_p}$. Ker pa množici
 $$\{ \alpha \in \overline{\F_p} | \alpha^q = \alpha \} \text{ in } \F_q$$
-vsebujeta $q$ elementov in je ena množica vsebovana v drugi, sledi da sta ti množici enaki.
+vsebujeta $q$ elementov in je $\F_q$ vsebovana v drugi množici, sledi da sta enaki.
 
-Od tod sledi
-
+Od tod za točke $(x,y) \in \E{\Fq{q}}$ sledi
 \begin{align}
 (x,y) \in E(\F_q) &{}\Leftrightarrow x,y \in \F_q \nonumber \\
 &{}  \Leftrightarrow \phi_q(x) = x \text{ in } \phi_q(y) = y  \nonumber \\
@@ -959,15 +962,16 @@ Od tod sledi
 \begin{trditev}~
 
 \label{trd:3.16}
-Naj bosta $\alpha,\beta$ endomorfizma na $E$, ter naj bosta $a,b \in \Z$. Definirajmo endomorfizem
-$$(a+\alpha+b\beta)(P) = a\alpha(P)+b\beta(P).$$
+Naj bo $E$ eliptična krivulja definirana nad $\Fq{q}$.
+Naj bosta $\alpha,\beta$ endomorfizma na $E$ ter $a,b \in \Z$. Definirajmo endomorfizem
+$$(a\alpha+b\beta)(P) = a\alpha(P)+b\beta(P).$$
 Potem velja
-$$\DEG{a\alpha+b\beta} = a^2\DEG{\alpha}+b^2\DEG{\beta} + ab(\DEG{\alpha+\beta}-\DEG{\alpha}-\DEG{\beta}).$$
+$$\DEG{a\alpha+b\beta} = a^2\DEG{\alpha}+b^2\DEG{\beta} + ab\text{(}\DEG{\alpha+\beta}-\DEG{\alpha}-\DEG{\beta}\text{)}.$$
 \end{trditev}
 
 \begin{opomba}~
 
-Naj bo $n \in \N$ tak, da $n$ ne deli karakteristike $K$. Ker velja $E[n] \cong \Z_n \bigoplus \Z_n$, lahko za $E[n]$ izberemo neko bazo $\{ \beta_1, \beta_2\}$. To pomeni, da lahko vsak element $E[n]$ zapišemo, kot $m_1\beta_1 + m_2\beta_2$, za neki števili $m_1, m_2 \in \Z_n$. Homomorfizem $\alpha: \E{\overline{K}} \rightarrow \E{\overline{K}}$ preslika $E[n]$ v $E[n]$. Zato obstajajo števila $a,b,c,d \in \Z_n$, da velja
+Naj $n \in \N$ ne deli karakteristike $K$. Ker velja $E[n] \cong \Z_n \bigoplus \Z_n$, lahko za $E[n]$ izberemo neko bazo $\{ \beta_1, \beta_2\}$. To pomeni, da lahko vsak element $E[n]$ zapišemo, kot $m_1\beta_1 + m_2\beta_2$, za $m_1, m_2 \in \Z_n$. Homomorfizem $\alpha: \E{\overline{K}} \rightarrow \E{\overline{K}}$ preslika $E[n]$ v $E[n]$. Zato obstajajo števila $a,b,c,d \in \Z_n$, da velja
 $$\alpha(\beta_1) = a\beta_1+b\beta_2, \ \alpha(\beta_2) = c\beta_1+d\beta_2.$$
 To pa ravno pomeni, da se lahko vsak tak homomorfizem $\alpha$ predstavimo z matriko oblike
 $$\alpha_n = \begin{bmatrix}
@@ -978,7 +982,7 @@ c & d
 
 \begin{proof}~
 
-Naj bo $n \in \Z$, število ki ni deljivo s karakteristiko $K$. Predstavimo $\alpha,\beta$ z matrikami $\alpha_n,\beta_n$, glede na neko bazo $E[n]$.
+Naj bo $n \in \Z$, število ki ni deljivo s karakteristiko polja. Predstavimo $\alpha,\beta$ z matrikami $\alpha_n,\beta_n$, glede na neko bazo $E[n]$.
 Velja
 \begin{align}
 \text{det}(a\alpha_n+b\beta_n) &{}=  a^2\text{det}(\alpha_n)+b^2\text{det}(\beta_n) + ab(\text{det}(\alpha_n+\beta_n)-\text{det}(\alpha_n)-\text{det}(\beta_n)) \nonumber
@@ -997,10 +1001,10 @@ Ker to drži za neskončno mnogo $n$ v tej enačbi velja enakost.
 \begin{trditev}[\protect{\cite{Washington2008}, Trditev 4.7}]~
 
 \label{trd:4.7}
-Naj bo $E$ definirana nad $\F_q$ in naj bo $n \geq 1$. Velja
+Naj bo $E$ definirana nad $\F_q$ in naj bo $n \geq 1$. Potem velja
 \begin{itemize}
 \item $\text{Ker}(\phi^n_q-1) = \E{\F_{q^n}}$.
-\item $\phi^n_q-1$ je seperabilen endomorfizem. Velja torej $\#\E{\F_{q^n}} = \DEG{\phi^n_q-1}$.
+\item Endomorfizem $\phi^n_q-1$ je seperabilen. Velja torej $\#\E{\F_{q^n}} = \DEG{\phi^n_q-1}$.
 \end{itemize}
 \end{trditev}
 
@@ -1009,7 +1013,7 @@ Naj bo $E$ definirana nad $\F_q$ in naj bo $n \geq 1$. Velja
 $\phi^n_q$ predstavlja kompozicijo $\phi_q \circ \phi_q \circ \ldots \circ \phi_q$. Prav tako pa je $\phi^n_q-1$ endomorfizem, saj je množenje z $-1$ endomorfizem.
 \end{opomba}
 
-\begin{izrek}[Hasse]~
+\begin{izrek}[Hasse \protect{\cite{Washington2008}, Izrek 4.2}]~
 
 \label{izr:Hasse}
 Naj bo $E$ eliptična krivulja nad končnim poljem $\F_q$.  Potem red $\E{\F_q}$ zadošča zvezi
@@ -1020,15 +1024,10 @@ $$|q+1-\#\E{\F_q}| \leq 2\sqrt{q}.$$
 Hassejev izrek igra pomembno vlogo tudi pri iskanju velikosti grupe, saj nam poda zgornjo in spodnjo mejo. Velikost grupe pa potem nadaljno zožimo z dejstvom da red elementa deli red grupe. 
 \end{opomba}
 
-\begin{proof}~
-
-Po trditvi \ref{trd:4.7} lahko zapišemo
-$$a=q+1-\#\E{\F_q} = q+1 -deg(\phi_q-1).$$
-Pokazati moramo $|a| \leq 2\sqrt{q}.$
-Za dokaz tega bomo potrebovali še eno lemo.
 \begin{lema}~
+\label{lema:hasse}
 
-Naj bosta $r,s \in \Z$, taka da velja $gcd(s,q)=1$. Potem velja
+Naj bosta $r,s \in \Z$ tuji števili. Potem velja
 $$\DEG{r\phi_q-s} = r^2q+s^2-rsa.$$
 \end{lema}
 
@@ -1036,16 +1035,21 @@ $$\DEG{r\phi_q-s} = r^2q+s^2-rsa.$$
 
 Z uporabo trditve \ref{trd:3.16} dobimo
 $$\DEG{r\phi_q-s} = r^2\DEG{\phi_q}+s^2\DEG{-1}+rs(\DEG{\phi_q-1}-\DEG{\phi_q}-\DEG{-1}).$$
-Če sedaj uporabimo dejstvo $\DEG{\phi_q} = q,\ \DEG{-1} = 1$, ter $\DEG{\phi_q-1} = q+1-a$, željeni rezultat sledi.
+Če sedaj uporabimo dejstvi $\DEG{\phi_q} = q,\ \DEG{-1} = 1$ ter $\DEG{\phi_q-1} = q+1-a$, željeni rezultat sledi.
 \end{proof}
 
-Ker velja $\DEG{r\phi_q-s} \geq 0$, nam lema implicira
+\begin{proof}[Dokaz izreka \ref{izr:Hasse}]~
+
+Po trditvi \ref{trd:4.7} lahko zapišemo
+$$a=q+1-\#\E{\F_q} = q+1 -\DEG{\phi_q-1}.$$
+Pokazati moramo $|a| \leq 2\sqrt{q}.$
+Ker velja $\DEG{r\phi_q-s} \geq 0$, nam lema \ref{lema:hasse} implicira
 $$q \left( \frac{r}{s} \right)^2-a\frac{r}{s}+1 \geq 0,$$
-za vse $r,s$ za katere velja $\text{gcd}(s,q)=1$. Množica racionalnih števil oblike $r/s$, ki zadoščajo tej lastnosti je gosta v $\R$. To lahko vidimo tako, da za $s$ vzamemo potenco števila $2$ ali $3$. Vsaj eno od teh števil bo tuje $q$, saj je $q$ moč končnega polja in je torej oblike $q = t^n$, za neko praštevilo $t$. Števila oblike $\frac{r}{2^m}$ ali $\frac{r}{3^m}$ pa so očitno gosta v $\R$. Zato velja
+za vse $r,s$ za katere je $\text{gcd}(s,q)=1$. Množica racionalnih števil oblike $r/s$, ki zadoščajo tej lastnosti je gosta v $\R$. To lahko vidimo tako, da za $s$ vzamemo potenco števila $2$ ali $3$. Vsaj eno od teh števil bo tuje $q$, saj je $q$ moč končnega polja in je torej oblike $q = t^n$, za neko praštevilo $t$. Števila oblike $\frac{r}{2^m}$ ali $\frac{r}{3^m}$ pa so očitno gosta v $\R$. Zato velja
 $$qx^2-ax + 1 \geq 0,$$
 za vse $x\in \R$. To pa pomeni, da je diskriminanta polinoma negativna ali nič. Kar povedano z drugimi besedami pomeni
-$$a^2-4q \leq 0,$$
-to pa je ravno pogoj $|a|\leq 2\sqrt{q}$.
+$$a^2-4q \leq 0.$$
+To pa je ravno pogoj $|a|\leq 2\sqrt{q}$.
 
 
 \end{proof}
@@ -1057,13 +1061,13 @@ to pa je ravno pogoj $|a|\leq 2\sqrt{q}$.
 
 Naj bo E eliptična krivulja definirana nad $\F_q$. Naj bo $a = q+1-\#\E{\F_q} = q+1-deg(\phi_q-1)$. Potem velja
 $$\phi^2_q-a\phi_q+q = 0,$$
-kot endomorfizem nad $E$. Prav tako pa je $a$ edino število $k$ za katerega velja
+gledano kot endomorfizem nad $E$. Prav tako pa je $a$ edino število $k$ za katerega velja
 $$\phi^2_{q^n}-k\phi_{q^n}+q^n = 0.$$
 
-Povedano drugače velja naslednja lastnost. Naj bo $(x,y) \in  \overline{\F_q}$, potem velja
+Povedano drugače, velja naslednja lastnost. Naj bo $(x,y) \in  \overline{\F_q}$, potem velja
 $$(x^{q^2},y^{q^2})-a(x^q,y^q)+q(x,y) = \infty,$$
-$a$ pa je edino število, tako da ta lastnost velja za vse $(x,y) \in \overline{\F_q} $. Velja še več
-$$a \equiv Sl((\phi_q)_m) \MOD{m},$$
+obenem pa je $a$ edino število, tako da ta lastnost velja za vse $(x,y) \in \overline{\F_q} $. Velja še več
+$$a \equiv Sled((\phi_q)_m) \text{ mod } m,$$
 za vse $m$, ki zadoščajo $\text{gcd}(m,q)=1$.
 
 \end{izrek}
@@ -1071,8 +1075,8 @@ za vse $m$, ki zadoščajo $\text{gcd}(m,q)=1$.
 \subsection{Red grupe nad eliptičnimi krivuljami}
 
 
-Pogosto nas bo zanimalo tudi, koliko točk leži na dani krivulji $E$. S pomočjo naslednje trditve bomo dobili preprost način kako izračunati $\# \E{\F_q^n}$, če poznamo $\# \E{\F_q}$.
-Pojavlja se še vprašanje kako izračunati $\# \E{\F_q}$. Eden od možnih načinov se nahaja v opombi \ref{opo:MaliVeliki}.
+Pogosto nas zanima, koliko točk leži na dani krivulji $E$. S pomočjo naslednje trditve bomo dobili preprost način kako izračunati $\# \E{\F_{q^n}}$, če poznamo $\# \E{\F_q}$.
+Preostane še vprašanje kako izračunati $\# \E{\F_q}$. Enega od možnih načinov bomo opisali v opombi \ref{opo:MaliVeliki}, kot posledico algoritma Velik korak-majhen korak.
 
 
 
@@ -1081,62 +1085,61 @@ Pojavlja se še vprašanje kako izračunati $\# \E{\F_q}$. Eden od možnih nači
 
 \label{trd:4.12}
 
-Naj bo $\# \E{\F_q} = q+1-a$. Zapišimo $X^2-aX+q = (X-\alpha)(x-\beta)$. Potem velja
+Naj bo $\# \E{\F_q} = q+1-a$, kot v izreku \ref{izrek:4.10}. Zapišimo $X^2-aX+q = (X-\alpha)(x-\beta)$. Potem velja
 $$\# \E{\F_{q^{n}}} = q^n+1-(\alpha^n+\beta^n),$$
 za vse $n \geq 1$.
 
 \end{trditev}
 
-\begin{proof}~
-
-V dokazu bomo najprej potrebovali lastnost $\alpha^n+\beta^n \in \N$. Pri tem nam bo pomagala naslednja lema.
-
+Preden lahko dokažemo zgornjo trditev bomo potrebovali še naslednjo lemo.
 
 \begin{lema}~
 
 \label{lema:4.13}
-Naj bo $s_n = \alpha^n +  \beta^n$. Potem velja $s_0 = 2,s_1 = a, s_{n+1} = as_n-qs_{n-1}$, za vse $n \geq 1$.
+Naj bo $s_n = \alpha^n +  \beta^n$. Potem velja $s_0 = 2,s_1 = a$ in $ s_{n+1} = as_n-qs_{n-1}$, za vse $n \geq 1$.
 
 \end{lema}
 
 \begin{proof}~
 
-Če je $n = 0$, potem lema očitno velja. Za $n=1$ lema sledi iz definicije $\alpha,\beta$, ki sta ničli enačbe $X^2-aX+q$, ter uporabe Vietovih formul. Dokažimo torej še za splošen $n$.
-Ker sta $\alpha,\beta$ ničli, lahko zapišemo $\alpha^2-a\alpha +q = 0,\  \beta^2-a\beta+q=0$. Sedaj enačbi pomnožimo z $\alpha^{n-1},\ \beta^{n-1}$. S tem dobimo
-$$\alpha^{n+1} = a\alpha^n +q\alpha^{n-1},\ \beta^{n+1} = a\beta^n +q\beta^{n-1}.$$
-Če enačbi seštejemo dobimo rekurzivno zvezo
+Če je $n = 0$, potem lema očitno velja. Za $n=1$ lema sledi iz definicije $\alpha$ in $\beta$, ki sta ničli enačbe $X^2-aX+q$, ter uporabe Vietovih formul. Dokažimo lemo še za splošen $n$.
+Ker sta $\alpha$ in $\beta$ ničli iste enačbe, lahko zapišemo $\alpha^2-a\alpha +q = 0$ in $\beta^2-a\beta+q=0$. Sedaj enačbi pomnožimo z $\alpha^{n-1}$ in $\beta^{n-1}$. S tem dobimo
+$$\alpha^{n+1} = a\alpha^n +q\alpha^{n-1}\text{ in } \beta^{n+1} = a\beta^n +q\beta^{n-1}.$$
+Če enačbi seštejemo, dobimo rekurzivno zvezo
 $$s_{n+1} = as_n-qs_{n-1}.$$
 \end{proof}
 
-Iz lema takoj sledi, da velja $\alpha^n+\beta^n \in \N$. Naj bo $f$ funkcija
+\begin{proof}[Dokaz trditve \ref{trd:4.12}]~
+
+Iz leme \ref{lema:4.13} takoj sledi, da velja $\alpha^n+\beta^n \in \N$. Naj bo $f$ funkcija
 
 $$f(X) = (X^n-\alpha^n)(X^n-\beta^n) = X^{2n}-(\alpha^n+\beta^n)X^n+q^n.$$
 Iz prve enakosti sledi, da funkcija $X^2-aX+q = (X-\alpha)(X-\beta)$ deli $f$. Po osnovnem izreku od deljenju lahko f zapišemo kot $f(X) = g(X)Q(x)+r(x)$, kjer je $g(X)= X^2-aX+q$. Prav tako pa ima kvocient $Q$ celoštevilske koeficiente. Po izreku \ref{izrek:4.10} velja
 
 $$(\phi^n_q)^2 -(\alpha^n+\beta^n)\phi^n_q + q^n = f(\phi_q) = Q(\phi_q)(\phi^2_q-a\phi_q+q) = 0,$$
-kjer je $\phi_q$ endomorfizem na $E$. Velja tudi $\phi^n_q = \phi_{q^n}$. Ponovno uporabimo izrek \ref{izrek:4.10} od koder sledi, da obstaja natanko en $k \in \Z$, tako da 
-$\phi^2_{q^n}-k\phi_{q^n}+q^n=0$. Ta $k$ pa je določen z $k = q^n+1-\#\E{\F_{q^n}}$. Od tod torej sledi
+kjer je $\phi_q$ endomorfizem na $E$. Velja tudi $\phi^n_q = \phi_{q^n}$. Ponovno uporabimo izrek \ref{izrek:4.10} od koder sledi, da obstaja natanko en $k \in \Z$, za katerega je
+$\phi^2_{q^n}-k\phi_{q^n}+q^n=0$, in sicer, $k = q^n+1-\#\E{\F_{q^n}}$. Od tod torej sledi
 $$\alpha^n+\beta^n = q^n+1-\#\E{\F_{q^n}}.$$
 
 \end{proof}
 
 \begin{primer}~
 
-Naj bo $E$ podana s predpisom $y^2+xy = x^3+1$. S preprostim pregledom vseh možnosti vidimo, da je $\#\E{\F_2} = 4$. Izračunajmo sedaj $\#\E{\F_4}$. Po trditvi \ref{trd:4.12} moramo
+Naj bo $E$ posplošena Weierstrassova krivulja podana s predpisom $y^2+xy = x^3+1$. S preprostim pregledom vseh možnosti vidimo, da je $\#\E{\F_2} = 4$. Izračunajmo sedaj $\#\E{\F_4}$. Po trditvi \ref{trd:4.12} moramo
 $\#\E{\F_2}$ zapisati kot $q+1-a$. Sledi torej $a = 2+1-4 = -1$. Polinom je potem oblike
-$$X^2+X+2 = (X-\frac{-1+\sqrt{-7}}{2}) (X-\frac{-1-\sqrt{-7}}{2}).$$
-Za število točk na krivulji bomo morali najprej poračunati še $\alpha^2+\beta^2$, pri čemer si lahko pomagamo z lemo \ref{lema:4.13}.
+$$X^2+X+2 = \left( X-\frac{-1+\sqrt{-7}}{2}\right) \left(X-\frac{-1-\sqrt{-7}}{2}\right).$$
+Za število točk na krivulji moramo poračunati še $s_2=\alpha^2+\beta^2$, pri čemer si lahko pomagamo z lemo \ref{lema:4.13}.
 $$s_2 = as_1-qs_0 = (-1)^2-2\cdot2 = -3$$
 Od tod sledi
 $$\#\E{\F_{2^2}} = 2^2+1-s_2 = 4+1+3 = 8.$$
- Če naštejemo vse točke na $\E{\F_{4}} = \{ \infty,(0,1),(1,0),(1,1),(1,2),(3,0),(0,3),(1,3)\}$, vidimo da se naš rezultat ujema.
-Moč tega izreka pa se skriva v velikih potencah. Če bi na primer želeli izračunati
-$\E{\F_{2^{200}}}$ z naštevanjem točk ne bi prišli prav daleč. S pomočjo tega izreka in lema pa lahko hitro poračunamo
-$$(\frac{-1+\sqrt{-7}}{2})^{200}+ (\frac{-1-\sqrt{-7}}{2})^{200} = -2534943693362688758337590430751,$$
+ Če naštejemo vse točke na $\E{\F_{4}} = \{ \infty,(0,1),(1,0),(1,1),(1,2),(3,0),(0,3),(1,3)\}$, vidimo da je naš rezultat pravilen.
+Moč trditve \ref{trd:4.12} pa se skriva v velikih potencah. Če bi na primer želeli izračunati
+$\E{\F_{2^{200}}}$ z naštevanjem točk ne bi prišli prav daleč. S pomočjo zgornje trditve in leme pa lahko hitro poračunamo
+$$\left(\frac{-1+\sqrt{-7}}{2}\right)^{200}+ \left(\frac{-1-\sqrt{-7}}{2}\right)^{200} = -2534943693362688758337590430751,$$
 od koder sledi
 \begin{align}
 \E{\F_{2^{200}}} &{}= 2^{200} + 1 +2534943693362688758337590430751 \nonumber \\
-&{}= 1606938044258990275541962092343697546215565682541130425732128 \nonumber
+&{}= 1606938044258990275541962092343697546215565682541130425732128. \nonumber
 \end{align}
 \end{primer}
 
@@ -1148,11 +1151,11 @@ od koder sledi
 
 \section{Delitelji}
 
-Pri konstrukciji Weilovega parjenja bodo pomembno vlogo igrali t.\ i.\ delitelji. V tem poglavju bomo navedli nekaj definicij in lastnosti, ki jih bomo potrebovali v kasnejših poglavjih. Uporabljali bomo terminologijo, ki jo lahko najdemo v \cite{Washington2008}.
+Pri konstrukciji Weilovega parjenja bodo pomembno vlogo igrali tako imenovani delitelji. V tem poglavju bomo navedli nekaj definicij in lastnosti, ki jih bomo potrebovali v kasnejših poglavjih. Uporabljali bomo terminologijo, ki jo lahko najdemo v \cite{Washington2008}.
 
 \begin{definicija}~
 
-Naj bo $K$ polje in naj bo $P \in \E{\overline{K}}$. Za vsako točko $P$ definirajmo formalen simbol $[P]$. \emph{Delitelj} $D$ na krivulji $E$ je končna linearna kombinacija takih simbolov s celoštevilskimi koeficienti.
+Naj bo $K$ polje in naj bo $P$ točka na krivulji $\E{\overline{K}}$. Za vsako točko $P$ definirajmo formalen simbol $[P]$. \emph{Delitelj} $D$ na krivulji $E$ je končna linearna kombinacija takih simbolov s celoštevilskimi koeficienti.
 $$D = \sum_{j}a_j[P_j], \ a_j \in \Z $$
 
 \end{definicija}
@@ -1171,34 +1174,34 @@ $$\DEG{\sum_{j}a_j[P_j]} = \sum_ja_j \ \in \Z.$$
 
 \begin{definicija}~
 
-Naj bo $E$ eliptična krivulja. \emph{Funkcija} na $E$ je racionalna funkcija $$f(x,y) \in \ \overline{K},$$ ki je definirana za vsaj eno točko na $\E{\overline{K}}$. Funkcija torej zavzame vrednosti v $\overline{K} \cup \{ \infty \}$.
+Naj bo $E$ eliptična krivulja nad poljem $K$. \emph{Funkcija} na $E$ je racionalna funkcija $$f(x,y) \in \ \overline{K},$$ ki je definirana za vsaj eno točko na $\E{\overline{K}}$. Funkcija torej zavzame vrednosti v $\overline{K}$.
 \end{definicija}
 
 \begin{opomba}~
 
-Naj bo $E$ podana z enačbo $y^2 = x^3+Ax+B$. Racionalna funkcija $\frac{1}{y^2-x^3-Ax-B}$ torej ne predstavlja funkcije, saj ni definirana za nobeno točko na $E$.
+Naj bo $E$ podana z enačbo $y^2 = x^3+Ax+B$. Racionalna funkcija $\frac{1}{y^2-x^3-Ax-B}$ torej ne predstavlja funkcije na $E$, saj ni definirana za nobeno točko na $E$.
 
 \end{opomba}
 
 \begin{trditev}[\protect{\cite{Silverman2009}, Trditev 4.3}]~
 \label{trd:red}
 
-Obstaja taka funkcija $u_P$, kateri rečemo uniformizator,  z lastnostjo $u_P(P) = 0$, za katero velja, da lahko vsako funkcijo $f(x,y)$ zapišemo kot
-$$f = u^r_Pg, \text{ za nek } r\in \Z,\text{ in } g(P) \neq 0,\infty.$$
+Naj bo $P$ točka na krivulji $E$. Potem obstaja funkcija $u_P$, kateri rečemo uniformizator, z lastnostjo $u_P(P) = 0$, za katero velja, da lahko vsako funkcijo $f(x,y)$ nad $E$ zapišemo kot
+$$f = u^r_Pg, \text{ za nek } r\in \Z \text{ kjer } g(P) \neq 0 \text{ in } \frac{1}{g(P)} \neq 0.$$
 \end{trditev}
 
 \begin{definicija}~
 
-Številu $r$ iz trditve \ref{trd:red} rečemo \emph{red} funkcije $f$ v točki $P$.
+Številu $r$ iz trditve \ref{trd:red} rečemo \emph{red} funkcije $f$ v točki $P$ in ga označimo z $\ORDp{f}{P}$.
 \end{definicija}
 
 \begin{primer}~
 
-Naj bo $y^2 = x^3-x$ eliptična krivulja, naj bo $f(x,y) = x$. Izberimo $u(x,y) = y$. Očitno je $u(0,0) = 0$. Nad eliptično krivuljo velja 
+Naj bo $y^2 = x^3-x$ eliptična krivulja in naj bo $f(x,y) = x$. Za točko $P = (0,0)$ izberimo $u(x,y) = y$. Očitno je $u(0,0) = 0$. Nad eliptično krivuljo velja 
 $$y^2 = x^3-x = x(x^2-1),$$ 
 od tod sledi $x = y^2\frac{1}{x^2-1}$ nad E.
-Prav tako velja $1/(x^2-1) \neq 0$ v točki $(0,0)$. Od tod sledi, da je 
-$$\ORDp{x}{(0,0)} = 2,\  \ORDp{x/y}{(0,0)}= 1.$$
+Prav tako velja, da $1/(x^2-1) \neq 0$ v točki $(0,0)$. Od tod sledi, da je red funkcij $x$ in $x/y$ enak
+$$\ORDp{x}{(0,0)} = 2\text{ in }  \ORDp{x/y}{(0,0)}= 1.$$
 \end{primer}
 
 \begin{definicija}~
