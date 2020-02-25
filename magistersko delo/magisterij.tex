@@ -818,6 +818,7 @@ $(2,3)+(1,1)$ je torej enako $(1,4)$ na krivulji $E$.
 \end{primer}
 
 \subsection{Endomorfizmi}
+\label{endomorfizmi}
 
 \begin{definicija}~
 
@@ -1206,7 +1207,12 @@ $$\ORDp{x}{(0,0)} = 2\text{ in }  \ORDp{x/y}{(0,0)}= 1.$$
 
 \begin{definicija}~
 
-Naj bo $f$ funkcija nad $E$, ki ni identično enaka $0$. Definirajmo \emph{delitelja} funkcije $f$ kot,
+Točki $P$ rečemo \emph{ničla} funkcije $f$ če je $\ORDp{f}{P} > 0$ in \emph{pol}, če je $\ORDp{f}{P} < 0$
+\end{definicija}
+
+\begin{definicija}~
+
+Naj bo $f$ funkcija nad $E$, ki ni identično enaka $0$. Definirajmo \emph{delitelj} funkcije $f$ kot,
 $$\Div{f} = \sum_{P\in \E{\overline{K}}} \ORDp{f}{P}[P] \in \DIV{E}.$$
 \end{definicija}
 
@@ -1217,8 +1223,8 @@ $$\Div{f} = \sum_{P\in \E{\overline{K}}} \ORDp{f}{P}[P] \in \DIV{E}.$$
 Naj bo $E$ eliptična krivulja in naj bo $f$ funkcija na $E$, ki ni identično enaka $0$. Potem veljajo naslednje trditve:
 \begin{itemize}
 
-\item $f$ ima le končno mnogo ničel in polov
-\item $\DEG{\DIV{f}}=0$
+\item $f$ ima le končno mnogo ničel in polov,
+\item $\DEG{\Div{f}}=0$
 \item Če $f$ nima ničel ali polov, potem je $f$ konstantna.
 \end{itemize}
 
@@ -1231,38 +1237,39 @@ Naj bo $E$ eliptična krivulja in naj bo $f$ funkcija na $E$, ki ni identično e
 Naj bo $E$ eliptična krivulja. Naj bo $D$ delitelj nad $E$ z $deg(D) = 0$. Potem obstaja taka funkcija $f$ na $E$ z lastnostjo
 $$\Div{f} = D$$
 natanko tedaj ko
-$$\SUM{D} = \infty.$$
+$$\SUM{D} = \text{točka }\infty.$$
 
 \end{izrek}
 
 \begin{proof}~
 
-Pokažimo najprej, da se da $[P_1]+ [P_2]$ zapisati kot $[P_1+P_2] + [\infty]$ plus delitelj neke funkcije.
-Recimo, da imamo tri točke $P_1,P_2,P_3$ na neki krivulji $E$, ki ležijo na premici $ax+by+c = 0$.
-Naj bo $f(x,y) = ax+by+c$. Potem ima funkcija $f$ ničle v točkah $P_1,P_2,P_3$. Če $b$ ni enak $0$ potem ima funkcija po trditvi \ref{trditev 11.1} trojni pol v $\infty$.
+Pokažimo najprej, da je možno $[P_1]+ [P_2]$ zapisati kot $$[P_1+P_2] + [\infty] + \text{delitelj neke funkcije}.$$
+Recimo, da imamo tri kolinearne točke $P_1,P_2,P_3$ na krivulji $E$, ki ležijo na premici $ax+by+c = 0$.
+Naj bo $f(x,y) = ax+by+c$, potem ima funkcija $f$ ničle v točkah $P_1,P_2,P_3$. Če $b$ ni enak $0$, potem ima funkcija po trditvi \ref{trditev 11.1} trojni pol v $\infty$.
 Velja torej $$\Div{ax+by+c} = [P_1]+[P_2]+[P_3]-3[\infty].$$
-Ker se nahajamo na krivulji zapisani v Weierstrassovi obliki, kjer točko $-P$ dobimo tako, da samo zamenjamo predznak y-koordinate, lahko za premico skozi točki $P_3 = (x_3,y_3)$, ter $-P_3=(x_3,-y_3)$ vzamemo $x-x_3=0$.
+Ker se nahajamo na krivulji zapisani v Weierstrassovi obliki, kjer točko $-P$ dobimo z zamenjavo predznaka y-koordinate, ima premica skozi točki $P_3 = (x_3,y_3)$ ter $-P_3=(x_3,-y_3)$ enačbo $x-x_3=0$.
 Po  trditvi \ref{trditev 11.1} ponovno velja
 $$\Div{x-x_3} = [P_3]+[-P_3]-2[\infty].$$
 Od tod sledi
 $$\text{div}\left( \frac{ax+by+c}{x-x_3}\right) = \Div{ax+by+c} - \Div{x-x_3} =[P_1]+[P_2]-[-P_3]-[\infty].$$
-Ker na krivulji velja $P_1+P_2 = -P_3$ (to sledi iz načina kako na krivulji seštevamo točke), lahko zgornjo enačbo prepišemo v 
-$$[P_1]+[P_2] = [P_1+P_2]+[\infty]+div(g).$$ 
+Ker na krivulji velja $P_1+P_2 = -P_3$ (to sledi iz definicije seštevanja točk na krivulji), lahko zgornjo enačbo prepišemo v 
+$$[P_1]+[P_2] = [P_1+P_2]+[\infty]+\Div{g}, \text{ kjer je } g=\frac{ax+by+c}{x-x_3}.$$ 
 
 
-Hitro se vidi, da velja
+Hitro opazimo, da velja
 $$\SUM{\Div{g}}= P_1+P_2-(P_1+P_2)-\infty = \infty.$$
-Prav tako, pa se iz zgornje enačbe vidi, da velja $[P_1]+[P_2] = 2[\infty] + div(h)$, če velja $P_1+P_2 = \infty$. Zaradi tega je vsota vseh členov s pozitivnimi koeficienti v $D$ enaka nekemu simbolu $[P]$, večkratniku $[\infty]$, ter delitelju neke funkcije. Podobno velja tudi za člene z negativnimi koeficienti. Od tod sledi
-$$D = [P]-[Q]+n[\infty]+\Div{g_1}.$$
-Zaradi tega, ker je $g_1$ kvocient produkta funkcij, ki sestavljajo $g$, velja tudi
-\newline $\SUM{\Div{g_1}}= \infty$. Po trditvi \ref{trditev 11.1} velja $\DEG{\Div{g_1}}=0$, ker funkcija ni konstantna. Imamo torej $$0 = \DEG{D} = 1-1+n+0=n.$$
+Prav tako pa se iz zgornje enačbe vidi, da je $[P_1]+[P_2] = 2[\infty] + \Div{g}$, če velja $P_1+P_2 = \infty$. Zaradi tega je vsota vseh členov s pozitivnimi koeficienti v $D$ enaka vsoti nekega simbola $[P]$, večkratnika $[\infty]$, ter delitelja neke funkcije. Enako velja tudi za člene z negativnimi koeficienti. Od tod sledi
+$$D = [P]-[Q]+n[\infty]+\Div{h},$$
+kjer je $h$ kvocient produkta funkcij z lastnostjo $\SUM{\Div{g_i}} = \infty$. Zato velja tudi
+\newline $\SUM{\Div{h}}= \infty$. Po trditvi \ref{trditev 11.1} velja $\DEG{\Div{h}}=0$, saj funkcija ni konstantna. Imamo torej $$0 = \DEG{D} = 1-1+n+0=n.$$
 Od tod sledi
-$$D = [P]-[Q] + \Div{g_1}.$$
+$$D = [P]-[Q] + \Div{h}.$$
 Prav tako velja
-$$\SUM{D} = P-Q+\SUM{\Div{g_1}} = P-Q.$$
-Predpostavimo sedaj, da velja $\SUM{D} = \infty$. Potem $P-Q = \infty$, kar pomeni da mora veljati $P=Q$ in $D = \Div{g_1}$. Če predpostavimo $D = \Div{f}$ za neko funkcijo f, potem
-$$[P]-[Q] = \Div{f/g_1}.$$
-Od tod po lemi \ref{lema 11.3} sledi $P = Q$ in torej $\SUM{D} = \infty$.
+$$\SUM{D} = P-Q+\SUM{\Div{h}} = P-Q,$$
+ker je $\infty$ nevtralni element Abelove grupe na $E$.
+Predpostavimo sedaj, da velja $\SUM{D} = \infty$. Potem je $P-Q = \infty$, zato mora veljati $P=Q$ in $D = \Div{h}$. Za dokaz v obratno smer predpostavimo, da je $D = \Div{f}$ za neko funkcijo f. Potem je
+$$[P]-[Q] = \Div{f/h}.$$
+Od tod po spodnji lemi \ref{lema 11.3} sledi, da je $P = Q$ in torej $\SUM{D} = \infty$.
 
 \end{proof}
 
@@ -1270,7 +1277,7 @@ Od tod po lemi \ref{lema 11.3} sledi $P = Q$ in torej $\SUM{D} = \infty$.
 
 \label{lema 11.3}
 
-Naj bosta $P,Q \in \E{\overline{K}}$, ter naj obstaja funkcija $h$ na $E$ za katero velja
+Naj bosta $P,Q \in \E{\overline{K}}$ ter $h$ funkcija na $E$ za katero velja
 $$\Div{h}=[P]-[Q].$$
 Potem sledi $P=Q$.
 \end{lema}
@@ -1286,20 +1293,24 @@ Naj bo $E$ eliptična krivulja nad poljem $K$, ter naj bo $n\in \N$. \emph{Toriz
 $$E[n] = \{ P \in \E{\overline{K}} | nP = \infty \}.$$
 \end{definicija}
 
+Struktura torzijskih točk je opisana v naslednjem izreku.
+
 \begin{izrek}~
 
 \label{IzrekTor}
-Naj bo $E$ eliptična krivulja nad poljem $K$ in naj bo $n \in \N$. Če karakteristika polja $K$ ne deli $n$, ali je enaka $0$ potem
+Naj bo $E$ eliptična krivulja nad poljem $K$ in naj bo $n \in \N$. Če karakteristika polja $K$ ne deli $n$ oziroma je enaka $0$, potem je
 $$E[n] \cong \mathbb{Z}_n \oplus \mathbb{Z}_n.$$
 
-Zapišimo $n=p^rn'$, kjer $p\nmid n'$. Če je karakteristika $K$ enaka $p >0$ in $p|n$ potem velja
-$$E[n] \cong \mathbb{Z}_n' \oplus \mathbb{Z}_n' \text{ ali } E[n] \cong \mathbb{Z}_n \oplus \mathbb{Z}_n'.$$
+Zapišimo $n=p^rn'$, kjer $p$ ne deli $n'$. Če je karakteristika $K$ enaka $p >0$ in $p|n$, potem velja
+$$E[n] \cong \mathbb{Z}_{n'} \oplus \mathbb{Z}_{n'} \text{ ali } E[n] \cong \mathbb{Z}_n \oplus \mathbb{Z}_{n'}.$$
 
 \end{izrek}
 
+Izrek \ref{IzrekTor} bomo dokazali v zadnjem razdelku tega poglavja.
+
 \begin{definicija}~
 
-Definirajmo \emph{deliteljski polinom} $\gamma_m \in \Z[x,y,A,B]$ kot,
+Definirajmo $m$-ti \emph{deliteljski polinom} $\gamma_m \in \Z[x,y,A,B]$ kot,
 
 
 \begin{align}
@@ -1308,27 +1319,26 @@ Definirajmo \emph{deliteljski polinom} $\gamma_m \in \Z[x,y,A,B]$ kot,
 \gamma_2 &{}= 2y  \nonumber \\
 \gamma_3 &{}= 3x^4 + 6Ax^2 + 12Bx-A^2 \nonumber \\
 \gamma_4 &{}= 4y(x^6+5Ax^4+20Bx^3-5A^2x^2-4ABx-8B^2-A^3) \nonumber \\
-\gamma_{2m+1} &{}= \gamma_{m+2}\gamma_{m}^3-\gamma_{m-1}\gamma_{m+1}^3 \text{za } m \geq 2 \nonumber \\
-\gamma_{2m} &{}= (2y)^{-1}\gamma_{m}(\gamma_{m+2}\gamma_{m-1}^2-\gamma_{m-2}\gamma_{m+1}^2)\text{za } m \geq 3 \nonumber
+\gamma_{2m+1} &{}= \gamma_{m+2}\gamma_{m}^3-\gamma_{m-1}\gamma_{m+1}^3 \text{ za } m \geq 2 \nonumber \\
+\gamma_{2m} &{}= (2y)^{-1}\gamma_{m}(\gamma_{m+2}\gamma_{m-1}^2-\gamma_{m-2}\gamma_{m+1}^2)\text{ za } m \geq 3 \nonumber
 \end{align}
 
 \end{definicija}
 
 \begin{lema}~
 
-$\gamma_{n}$ je element $\Z[x,y^2,A,B]$, za vse lihe $n$.  Za sode $n$ pa je $\gamma_{n}$ element \newline $2y\Z[x,y^2,A,B]$.
+Polinom $\gamma_{n}$ je element $\Z[x,y^2,A,B]$ za vse lihe $n$.  Za sode $n$ pa je $\gamma_{n}$ element \newline $2y\Z[x,y^2,A,B]$.
 
 \end{lema}
 
 \begin{proof}~
 
-Dokažimo to s pomočjo indukcije. Za $n \leq 4$ lema očitno velja. Obravnavajmo primera, ko je $n=2m$ in  $n=2m+1$ za nek $m\in\N$.
+Lemo dokažemo s pomočjo indukcije. Za $n \leq 4$ lema očitno velja. Obravnavajmo primera, ko je $n=2m$ in  $n=2m+1$ za nek $m\in\N$.
 \begin{itemize}
-\item{n=2m}
-Indukcijska predpostavka je v tem primeru, da lema velja za vse $n<2m$.
-Predpostavimo lahko, da je $2m>4$, saj vemo da lema velja za $n\leq 4$, torej velja $m>2$. Potem velja $2m>m+2$, kar pomeni, da vsi polinomi v definiciji $\gamma_{2m}$ zadoščajo indukcijski predpostavki. Če je $m$ sodo število ,potem se $\gamma{m},\gamma{m+2},\gamma{m-2}$ nahajajo v $2y\Z[x,y^2,A,B]$. Od tod pa sledi, da je tudi $\gamma_{2m} \in 2y\Z[x,y^2,A,B]$.
-Če je $m$ lih, potem sta $\gamma{m-1},\gamma{m+1} \in 2y\Z[x,y^2,A,B]$. To pa pomeni, da je tudi  $\gamma_{2m} \in 2y\Z[x,y^2,A,B]$.
-\item{n=2m+1}
+\item{$n=2m$}
+Predpostavimo lahko, da je $2m>4$, saj vemo da lema velja za $n\leq 4$, torej je $m>2$. Potem velja $2m>m+2$, kar pomeni, da vsi polinomi v definiciji $\gamma_{2m}$ zadoščajo indukcijski predpostavki. Če je $m$ sodo število, potem se $\gamma_{m},\gamma_{m+2},\gamma_{m-2}$ nahajajo v $2y\Z[x,y^2,A,B]$. Od tod pa sledi, da je tudi $\gamma_{2m} \in 2y\Z[x,y^2,A,B]$.
+Če je $m$ lih, potem sta $\gamma_{m-1},\gamma_{m+1} \in 2y\Z[x,y^2,A,B]$. To pa pomeni, da je tudi  $\gamma_{2m} \in 2y\Z[x,y^2,A,B]$.
+\item{$n=2m+1$}
 Primer obravnavamo podobno kot $n=2m$.
 
 
@@ -1343,27 +1353,27 @@ Definirajmo še polinoma
 \omega_m &{} = (4y)^{-1}(\gamma_{m+2}\gamma^2_{m-1}-\gamma_{m-2}\gamma^2_{m+1}). \nonumber
 \end{align}
 
-Podobno, kot pri polinomih $\gamma$ lahko tudi za $\phi_m$ in $\omega_m$ formuliramo lemo, katere dokaz bomo izpustili.
+Podobno, kot pri polinomih $\gamma_m$ lahko tudi za $\phi_m$ in $\omega_m$ formuliramo lemo, katere dokaz bomo izpustili.
 
 \begin{lema}~
 
-$\phi_{n}$ je element $\Z[x,y^2,A,B]$, za vse $n$. Če je $n$ lih, potem je $\omega_{n}$ element \newline $y\Z[x,y^2,A,B]$. V primeru, da je $n$ sod pa je $\omega_{n}$ element $\Z[x,y^2,A,B]$.
+Polinom $\phi_{n}$ je element $\Z[x,y^2,A,B]$, za vse $n$. Če je $n$ lih, potem je $\omega_{n}$ element v \newline $y\Z[x,y^2,A,B]$. Za sode $n$ pa je $\omega_{n}$ element v $\Z[x,y^2,A,B]$.
 
 \end{lema}
 
-Glejmo sedaj te polinome nad eliptičnimi krivuljami oblike
+Predstavimo sedaj $\gamma_m, \omega_m, \phi_m$ kot polinome nad eliptičnimi krivuljami v Weierstrassovi obliki
 $$E: y^2=x^3+Ax+B.$$
 Polinome v $\Z[x,y^2,A,B]$ lahko gledamo kot polinome v $\Z[x,A,B]$, tako da $y^2$ nadomestimo z $x^3+Ax+B$.
 \begin{opomba}~
 
-Polinoma $\gamma_n$ ni nujno možno predstaviti, kot polinom spremenljivke $x$, saj je potenca $y$ odvisna od tega ali je $n$ lih ali sod. Vseeno pa velja, da lahko $\gamma^2_n$ vedno zapišemo kot polinom spremenljivke $x$.
+Polinoma $\gamma_n$ ni vedno možno predstaviti kot polinom spremenljivke $x$, saj je potenca $y$ odvisna od parnosti $n$. Vseeno pa velja, da lahko $\gamma^2_n$ vedno zapišemo kot polinom spremenljivke $x$.
 
 \end{opomba}
 
 \begin{izrek}[\protect{\cite{Washington2008}, Izrek 3.6}]~
 
 \label{izrek:3.6}
-Naj bo $P = (x,y)$ točka na krivulji $y^2 = x^3+Ax+B$, katere karakteristika ni $2$. Naj bo $n\in \N$, potem velja
+Naj bo $P = (x,y)$ točka na krivulji $y^2 = x^3+Ax+B$, nad poljem s karakteristiko različno od $2$. Naj bo $n\in \N$, potem velja
 $$nP = \left( \frac{\phi_n(x)}{\gamma^2_n(x)}, \frac{\omega_n(x,y)}{\gamma^3_n(x,y)}\right).$$
 
 
@@ -1372,35 +1382,24 @@ $$nP = \left( \frac{\phi_n(x)}{\gamma^2_n(x)}, \frac{\omega_n(x,y)}{\gamma^3_n(x
 \begin{posledica}~
 
 \label{posledica:3.7}
-Naj bo $E$ eliptična krivulja. Endomorfizem $E$ podan kot množenjem z $n$ ima stopnjo $n^2$.
+Naj bo $E$ eliptična krivulja. Endomorfizem $E$ podan kot množenje z $n$, ima stopnjo $n^2$.
 \end{posledica}
 
 Brez dokazov formulirajmo še nekaj pomožnih trditev, ki jih bomo potrebovali za dokaz izreka \ref{IzrekTor}.
 
-\begin{trditev}[\protect{\cite{Washington2008}, Trditev 2.21}]~
-
-\label{trditev:2.21}
-Naj bo $\alpha \neq 0$ seperabilen avtomorfizem eliptične krivulje $E$. Potem velja
-$$\deg \alpha = \# \text{Ker}(\alpha), $$
-kjer je $\text{Ker}(\alpha)$ jedro homomorfizma $\alpha: \E{\overline{K}} \rightarrow \E{\overline{K}}$.
-Če $\alpha \neq 0$ ni seperabilen, potem
-$$\deg \alpha >  \# \text{Ker}(\alpha).$$
-
-\end{trditev}
-
 \begin{izrek}[\protect{\cite{Washington2008}, Izrek 2.22}]~
 
 \label{izrek:2.22}
-Naj bo $E$ eliptična krivulja definirana nad poljem $K$. Naj bo $\alpha \neq 0$ endomorfizem $E$. Potem je $\alpha: \E{\overline{K}} \rightarrow \E{\overline{K}}$ surjektivna preslikava.
+Naj bo $E$ eliptična krivulja definirana nad poljem $K$. Naj bo $\alpha \neq 0$ endomorfizem na $E$. Potem je $\alpha: \E{\overline{K}} \rightarrow \E{\overline{K}}$ surjektivna preslikava.
 
 \end{izrek}
 
 \begin{trditev}[\protect{\cite{Washington2008}, Trditev 2.28}]~
 
 \label{trditev:2.28}
-Naj bo $E$ eliptična krivulja definirana nad poljem $K$, ter naj bo $n\in \N$. Naj bo množenje z $n$ na $E$ podano, kot
+Naj bo $E$ eliptična krivulja definirana nad poljem $K$, ter naj bo $n\in \N$. Naj bo množenje z $n$ na $E$ podano z racionalnima funkcijama $R_n$ in $S_n$, kot v razdelku \ref{endomorfizmi},
 $$n(x,y) = (R_n(x),yS_n(x))$$
-za vse $(x,y) \in \E{\overline{K}}$. Tu sta $R_n,\ S_n$ racionalni funkciji. Potem velja
+za vse $(x,y) \in \E{\overline{K}}$. Potem velja
 $$\frac{R'_n(x)}{S_n(x)} = n.$$
 Od tod pa sledi, da je množenje z $n$ seperabilno natanko tedaj, ko $n$ ni večkratnik karakteristike polja $K$. 
 \end{trditev}
@@ -1411,21 +1410,21 @@ Sedaj imamo vse kar potrebujemo, da dokažemo izrek \ref{IzrekTor}.
 
 Predpostavimo, da $n$ ni večkratnik karakteristike $p$ polja. Po izreku \ref{izrek:3.6} vemo, da ima množenje z $n$ prvo koordinato oblike
 $$R(x) = \frac{x^{n^2}+\ldots}{n^2x^{n^2-1}+ \ldots}.$$
-Če poračunamo odvod dobimo v števcu $n^2x^{2n^2-2}+ \ldots$, kar ni identično enako $0$. To pomeni, da je množenje z $n$ seperabilno. Po posledici \ref{posledica:3.7} in trditvi \ref{trditev:2.21} ima jedro množenja z $n$, E[n], red $n^2$. Iz algebre vemo [\protect{\cite{Clark1984}, Posledica izreka 75}], da so končne Abelove grupe, torej tudi  $E[n]$ izomorfne
+Če poračunamo odvod, v števcu dobimo $n^2x^{2n^2-2}+ \ldots$, kar ni identično enako $0$. To pomeni, da je množenje z $n$ seperabilno. Jedro množenja z $n$ so torzijske točke $E[n]$. Po posledici \ref{posledica:3.7} in izreku \ref{izrek:2.21} ima jedro množenja z $n$ red $n^2$. Iz algebre vemo \cite{predavanja}, da so končne Abelove grupe, torej tudi  $E[n]$, izomorfne
 $$\Z_{n_1} \oplus \Z_{n_2} \oplus \ldots \oplus \Z_{n_k},$$
-za neka naravna števila $n_1,n_2,\ldots,n_k$, za katere velja $n_i|n_{i+1}$  za vse $i$. Naj bo $l$ praštevilo, ki deli $n_1$. Potem $l|n_i$ za vse $i$. To pa pomeni, da ima $E[l] \subseteq E[n]$ red $l^k$. Ker ima $E[l]$ red $l^2$ po tem kar smo povedali zgoraj, od tod sledi $k=2$. Množenje z $n$ ima torej jedro $E[n] \simeq \Z_{n_1} \oplus \Z_{n_2}$. Veljati pa mora tudi $n_2|n$. Ker velja $n^2=\#E[n] = n_1n_2$ od tod sledi $n_1=n_2=n$. Zato velja
+za neka naravna števila $n_1,n_2,\ldots,n_k$, za katere velja $n_i|n_{i+1}$  za vse $i$. Naj bo $l$ praštevilo, ki deli $n_1$. Potem $l|n_i$ za vse $i$. To pa pomeni, da ima $E[l] \subseteq E[n]$ red $l^k$. Ker ima $E[l]$ red $l^2$, iz zgoraj povedanega sledi, da je $k=2$. Množenje z $n$ ima torej jedro $E[n] \simeq \Z_{n_1} \oplus \Z_{n_2}$. Veljati pa mora tudi $n_2|n$. Ker velja $n^2=\#E[n] = n_1n_2$ od tod sledi $n_1=n_2=n$. Zato velja
 $$E[n] \simeq \Z_n \oplus \Z_n,$$
 ko karakteristika polja ne deli $n$.
 
-Pokazati moramo trditev še v primeru, ko $p|n$. Po trditvi \ref{trditev:2.28} množenje z $p$ ni seperabilno. Po trditvi \ref{trditev:2.21} ima jedro $E[p]$ množenja s $p$ red strogo manjši kot je stopnja endomorfizma, ki je $p^2$ po posledici \ref{posledica:3.7}. Ker ima vsak element $E[p]$ red $1$ ali $p$, sledi da ima $E[p]$ red potence $p$. Torej mora biti red $1$ ali $p$. Če je $E[p]$ trivialna, potem je $E[p^k]$ trivialna za vse $k$. Če ima $E[p]$ red $p$ potem trdimo, da velja $E[p^k] \simeq \Z_{p ^k}$ za vse $k$. Pokazati moramo, da ima taka grupa red $p^k$ in ne nekaj manjšega. Denimo da obstaja element $P$ reda $p^j$. Po izreku \ref{izrek:2.22} je množenje z $p$ surjektivno. Torej obstaja točka $Q$ tako da velja $pQ = P$. Ker velja
-$$p^jQ = p^{j-1}P \neq \infty, \ p^{j+1}Q = p^jP = \infty,$$
-torej ima $Q$ red $p^{j+1}$. Z indukcijo lahko pokažemo, da obstajajo točke reda $p^k$ za vse $k$.
-Ker velja $E[p^{i}] \subsetneq E[p^j]$, za vse $i < j$, v $E[p^k]$ obstaja točka reda $p^k$. To pa ravno pomeni, da je $E[p^k]$ ciklična. Zato je $E[p^k]$ ciklična reda $p^k$.
+Trditev moramo pokazati še v primeru, ko $p|n$. Po trditvi \ref{trditev:2.28} množenje s $p$ ni seperabilno, zato ima po izreku \cite{izrek:2.21} jedro $E[p]$ množenja s $p$ red strogo manjši kot je stopnja endomorfizma, ki je $p^2$ po posledici \ref{posledica:3.7}. Ker ima vsak element $E[p]$ red $1$ ali $p$, sledi da ima $E[p]$ red potence $p$. Torej mora biti red $1$ ali $p$. Če je $E[p]$ trivialna, potem je $E[p^k]$ trivialna za vse $k$. Če ima $E[p]$ red $p$ potem trdimo, da velja $E[p^k] \simeq \Z_{p ^k}$ za vse $k$. Pokazati moramo, da ima taka grupa red $p^k$ in ne manjšega. Denimo, da obstaja element $P$ reda $p^j$. Po izreku \ref{izrek:2.22} je množenje s $p$ surjektivno. Torej obstaja točka $Q$ za katero velja $pQ = P$. Ker velja
+$$p^jQ = p^{j-1}P \neq \infty \text{ in } p^{j+1}Q = p^jP = \infty,$$
+ima $Q$ red $p^{j+1}$. Z indukcijo lahko pokažemo, da na krivulji obstajajo točke reda $p^k$ za vse $k$.
+Ker za vse $i < j$ velja $E[p^{i}] \subsetneq E[p^j]$, v $E[p^k]$ obstaja točka reda $p^k$. To pa pomeni, da je $E[p^k]$ ciklična. Zato je $E[p^k]$ ciklična reda $p^k$.
 
 Zapišimo sedaj $n=p^rn'$, $r\geq0$ in $p\nmid n'$. Potem velja
 $$E[n] \simeq E[n'] \oplus E[p^r].$$
-Po dokazanem zgoraj lahko zapišemo $E[n'] \simeq Z_{n'} \oplus Z_{n'}$, ker $p \nmid n'$. Vemo da velja zveza
-$$\Z_{n'} \oplus \Z_{p^r} \simeq \Z_{n'p^r} \simeq Z_n$$.
+Po zgoraj dokazanem lahko zapišemo $E[n'] \simeq Z_{n'} \oplus Z_{n'}$, ker $p \nmid n'$. Vemo, da velja zveza
+$$\Z_{n'} \oplus \Z_{p^r} \simeq \Z_{n'p^r} \simeq Z_n.$$
 Od tod pa sledi
 $$E[n] \simeq \Z_{n'} \oplus \Z_{n'} \text{ ali } \Z_n \oplus \Z_{n'}.$$
 \end{proof}
@@ -1435,14 +1434,14 @@ $$E[n] \simeq \Z_{n'} \oplus \Z_{n'} \text{ ali } \Z_n \oplus \Z_{n'}.$$
 %%PARJENJE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Weilovo parjenje}
-Parjenja eliptičnih krivulj so uporabna za konstrukcijo različnih kriptografskih sistemov, prav tako pa imajo pomembno vlogo pri napadih na problem diskretnega logaritma nad
+Parjenja eliptičnih krivulj \cite{Washington2008} so uporabna za konstrukcijo različnih kriptografskih sistemov, prav tako pa imajo pomembno vlogo pri napadih na problem diskretnega logaritma nad
 gladkimi kubičnimi krivuljami, katerimu bomo posvetili nadaljna poglavja.
 
 \begin{definicija}~
 
 Naj bo $K$ polje in naj bo $n \in \N$ tak, da karakteristika $K$ ne deli $n$.
 $$\mu_n = \{ x \in \overline{K} | x^n = 1 \}$$
-je \emph{grupa n-tih korenov enote} grupe $\overline{K}$.
+je \emph{grupa n-tih korenov enote} $\overline{K}$.
 \end{definicija}
 
 \begin{trditev}~
@@ -1457,13 +1456,13 @@ $$e_n(S_1+S_2,T) = e_n(S_1,T)e_n(S_2,T)$$
 in
 $$e_n(S,T_1+T_2) = e_n(S,T_1)e_n(S,T_2)$$
 za vse $S,S_1,S_2,T,T_1,T_2 \in E[n]$.
-\item $e_n$ je ne degenerirana v obeh spremenljivkah. To pomeni če je $e_n(S,T) = 1$ za vse $T \in E[n]$ potem $S = \infty$, ter obratno.
+\item $e_n$ je ne-degenerirana v obeh spremenljivkah. To pomeni, $e_n(S,T) = 1$ za vse $T \in E[n]$ natanko tedaj ko je $S = \infty$.
 
-\item $e_n(T,T) = 1$ za vse $T \in E[n]$
+\item $e_n(T,T) = 1$ za vse $T \in E[n]$.
 
-\item $e_n(T,S) = e_n(S,T)^{-1}$ za vse $S,T \in E[n]$
+\item $e_n(T,S) = e_n(S,T)^{-1}$ za vse $S,T \in E[n]$.
 
-\item $e_n(\rho S,\rho T) = \rho(e_n(S,T))$ za vse avtomorfizme $\rho$ iz $\bar{K}$, za katere je $\rho$ identiteta na koeficientih $E$.
+\item $e_n(\rho S,\rho T) = \rho(e_n(S,T))$ za vse avtomorfizme $\rho$ na $\bar{K}$, za katere je $\rho$ identiteta na koeficientih enačbe za $E$.
 
 \item $e_n(\alpha(S),\alpha(T)) = e_n(S,T)^{\text{deg}(\alpha)}$ za vse separabilne endomorfizme $\alpha$ polja $E$.
 \end{itemize}
@@ -1476,29 +1475,28 @@ za vse $S,S_1,S_2,T,T_1,T_2 \in E[n]$.
 \begin{posledica}~
 
 \label{PosledicaTrdParj}
-Naj bosta $T_1,T_2$ baza $E[n]$. Potem je $e_n(T_1,T_2)$ generator grupe $\mu_n$.
+Naj bosta $T_1,T_2$ baza za $E[n]$. Potem je $e_n(T_1,T_2)$ generator grupe $\mu_n$.
 \end{posledica}
 
 
 \begin{proof}~
 
-Vemo, da za poljubni točki $T_1,T_2$ velja $e_n(T_1,T_2)^n = 1$, ker se slika parjenja nahaja v grupi $n$-tih korenov enote. Pokazati moramo torej, da če za neko število $d$ velja  $e_n(T_1,T_2)^d = 1$ potem od tod sledi, da je $d \geq n$.
-Recimo torej, da je $e_n(T_1,T_2) = \zeta$, kjer velja $\zeta^d = 1$.
-Po točki ena trditve \ref{trd-WeilPar} velja $$e_n(T_1,dT_2) = e_n(T_1,T_2)^d=1.$$ Prav tako velja $e_n(T_2,dT_2) = e_n(T_2,T_2)^d = 1 $. Naj bo $S \in E[n]$, potem se $S$ izraža kot $S = aT_1+bT_2$ za neka $a,b \in \N$.
-S ponovno uporabo trditve \ref{trd-WeilPar} vidimo, da velja
+Vemo, da za poljubni točki $T_1,T_2$  v $E[n]$ velja $e_n(T_1,T_2)^n = 1$, saj se slika parjenja nahaja v grupi $n$-tih korenov enote. Pokazati moramo torej, da če za neko število $d$ velja  $e_n(T_1,T_2)^d = 1$ potem od tod sledi, da je $d \geq n$.
+Recimo torej, da je $e_n(T_1,T_2) = \zeta$ in $\zeta^d = 1$.
+Po prvi točki trditve \ref{trd-WeilPar} velja $$e_n(T_1,dT_2) = e_n(T_1,T_2)^d=1.$$ Prav tako velja $e_n(T_2,dT_2) = e_n(T_2,T_2)^d = 1 $. Naj bo $S \in E[n]$, potem iz $S = aT_1+bT_2$ za neka $a,b \in \N$, s ponovno uporabo trditve \ref{trd-WeilPar} dobimo
 $$e_n(S,dT_2)= e_n(T_1,dT_2)^ae_n(T_2,dT_2)^b = 1. $$
-Ker to valja za vsak $S$ po točki dva trditve \ref{trd-WeilPar} sledi, da je $dT_2 = \infty$. To pa je mogoče le če $n|d$, kar pomeni da je $n \leq d$.
+Ker to velja za vsak $S$, iz druge točke trditve \ref{trd-WeilPar} sledi, da je $dT_2 = \infty$. To pa je možno le, če $n|d$, kar pomeni, da je $n \leq d$.
 \end{proof}
 
 \begin{posledica}~
 
-Če $E[n] \subseteq \E{K}$, potem $\mu_n \subset K$.
+Če je $E[n] \subseteq \E{K}$, potem je $\mu_n \subset K$.
 
 \end{posledica}
 
 \begin{proof}~
 
-Naj bo $\rho$ tak avtomorfizem $\overline{K}$, da je $\rho$ indentiteta na elementih $K$. Naj bosta $T_1,T_2$ baza $E[n]$. Ker imata po predpostavki točki koordinate v $K$ zanju velja
+Naj bo $\rho$ tak avtomorfizem $\overline{K}$, da je $\rho$ indentiteta na elementih $K$. Naj $T_1,T_2$ tvorita bazo $E[n]$. Ker imata po predpostavki točki koordinate v $K$, zanju velja
 $\rho T_1 = T_1, \ \rho T_2 = T_2$.
 Po trditvi \ref{trd-WeilPar} velja
 $$\zeta = e_n(T_1,T_2) = e_n(\rho T_1,\rho T_2) = \rho(e_n(T_1,T_2)) = \rho(\zeta).$$
@@ -1511,7 +1509,7 @@ Pred dokazom trditve \ref{trd-WeilPar} bomo potrebovali še eno trditev.
 \begin{trditev}[\protect{\cite{Washington2008}, Trditev 9.34}]~
 \label{trd:9.34}
 
-Naj bo $E$ eliptična krivulja na poljem $K$. Naj bo $f$ funkcija, ki elementom iz $E$ priredi element v $\overline{K} \cup \{ \infty \}$, ter naj bo $n \in \N$, tako da $n$ ni deljiv s karakteristiko $K$. Če velja $f(P+T) = f(P)$ za vse $P \in E(\overline{K}), T \in E[n]$. Potem obstaja funkcija $h$ na $E$, za katero velja
+Naj bo $E$ eliptična krivulja nad poljem $K$. Naj bo $f$ funkcija, ki elementom iz $E$ priredi element v $\overline{K} \cup \{ \infty \}$, ter naj bo $n \in \N$, število ki ni deljivo s karakteristiko $K$. Če velja $f(P+T) = f(P)$ za vse $P \in E(\overline{K}), T \in E[n]$. Potem obstaja funkcija $h$ na $E$, za katero velja
 $$f(P) = h(nP), \ \text{za vse } P.$$
 
 \end{trditev}
@@ -1522,7 +1520,7 @@ $$f(P) = h(nP), \ \text{za vse } P.$$
 %POMEMBNO
 %manka utemeljitev da je E[n] \subset E(K) in pa \mu_n \subset E(K)
 Naj bo $T \in E[n]$.
-Po izreku \ref{izrek 11.2} obstaja funkcija $f$, tako da velja
+Po izreku \ref{izrek 11.2} obstaja funkcija $f$, za katero velja
 \begin{equation}
 \label{enacba-Weil}
 \Div{f} = n[T]-n[\infty].
@@ -1530,14 +1528,14 @@ Po izreku \ref{izrek 11.2} obstaja funkcija $f$, tako da velja
 To drži ker je $D = n[T]-n[\infty]$ delitelj za katerega velja $\DEG{D} = 0$. Prav tako pa velja $\text{sum}(D) = \infty$, ker se nahajamo v $E[n]$.
 Izberimo sedaj še točko $T' \in E[n^2]$, za katero velja $nT' = T$. Pokazati želimo, da obstaja funkcija $g$, tako da velja
 $$\Div{g} = \sum_{R \in E[n]}([T' + R]- [R]).$$
-Preden lahko uporabimo izrek \ref{izrek 11.2} moramo preveriti, da vse potrebne lastnosti držijo. Veljati mora torej 
+Preden lahko uporabimo izrek \ref{izrek 11.2} moramo preveriti vse potrebne predpostavke izreka. Veljati mora torej 
 $$\text{sum}( \sum_{R \in E[n]}([T' + R]- [R])) = \infty$$
  in
  $$\DEG{ \sum_{R \in E[n]}([T' + R]- [R])} = 0.$$
-Po izreku \ref{IzrekTor}, se da $E[n]$ zapisati kot $\mathbb{Z}_n \oplus \mathbb{Z}_n$. To pomeni, da $E[n]$ vsebuje $n^2$ različnih točk $R$. Velja torej
+Po izreku \ref{IzrekTor}, je $E[n]$ izomorfna $\mathbb{Z}_n \oplus \mathbb{Z}_n$. To pomeni, da $E[n]$ vsebuje $n^2$ različnih točk. Velja torej
 $$\text{sum}(\sum_{R \in E[n]}([T' + R]- [R])) = \sum_{R \in E[n]} T' +R-R = \sum_{R \in E[n]} T' = n^2T' = nT = \infty.$$
-Podobno preverimo, še da velja $\DEG{\sum_{R \in E[n]}([T' + R]- [R])} = 0.$ Torej po izreku \ref{izrek 11.2} taka funkcija $g$ obstaja.
-Označimo z $f \circ n$ funkcijo, ki začne z neko točko, jo pomnoži z $n$ in nato na njej uporabi $f$. Točke $P = T' + R$, kjer je $R\in E[n]$ so točke za katere velja $nP=T$. Iz \ref{enacba-Weil}
+Podobno preverimo še, da velja $\DEG{\sum_{R \in E[n]}([T' + R]- [R])} = 0.$ Torej po izreku \ref{izrek 11.2} funkcija $g$ obstaja.
+Označimo z $f \circ n$ funkcijo, ki točko pomnoži z $n$ in nato na njenem rezultatu evalvira $f$. Točke $P = T' + R$, kjer je $R\in E[n]$ so točke za katere velja $nP=T$. Iz \ref{enacba-Weil}
 sledi
 %zakaj je to res
 %????????????????????????????????????????????????????
@@ -1571,7 +1569,7 @@ $$\text{div} \left(  \frac{f_3}{f_1f_2}\right) = n \Div{h} = \Div{h^n}.$$
 Zato obstaja konstanta $c \in \overline{K}^{\times}$, tako da velja
 $$f_3 = cf_1f_2h^n.$$
 Od tod pa sledi
-$$g_3 = c^{1/n}(g_1)(g_2)(h \circ n)$$.
+$$g_3 = c^{1/n}(g_1)(g_2)(h \circ n).$$
 
 To pa nas končno pripelje do
 \begin{align}
@@ -1671,7 +1669,7 @@ e_n(\alpha(S),\alpha(T)) &{}= \frac{g_{\alpha(T)}(\alpha(P+S))}{g_{\alpha(T)}(\a
 
 \subsection{Učinkovit algoritem za izračun Weilovega parjenja}
 
-Leta $1986$ je Vicor Miller napisal članek o tem, kako učinkovito izračunati Weilovo parjenje \cite{Miller} .
+Leta $1986$ je Victor Miller objavil algoritem za učinkovit izračun Weilovega parjenja \cite{Miller} .
 
 \begin{izrek}~
 
@@ -1782,7 +1780,7 @@ $$e_5(P,Q) =\frac{473}{88} = 242.$$
 \end{primer}
 
 \subsection{Implementacija Millerjevega algoritma}
-Tu je podana implementacija Millerjevega algoritma v programskem okolju Python.
+V tem razdelku bomo podali implementacijo Millerjevega algoritma v programskem okolju Python.
 
 \lstinputlisting[language=Python]{WeilPairing.py}
 
