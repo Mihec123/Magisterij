@@ -343,9 +343,8 @@ Najprej  bomo spoznali osnovne definicije in izreke o kubičnih krivuljah defini
 Skozi celotno delo se bomo ukvarjali s končimi polji in njihovimi razširitvami. Navedimo najprej vse definicije in lastnosti, ki jih bomo potrebovali.
 
 \emph{Končna polja} ali \emph{Galoisova polja}, so polja s končnim številom elementov. Najosnovnejši primer takih polj so števila modulo $p$, kjer je $p$ praštevilo. Polje s $q$ elementi označimo z $\F_q$, v literaturi pa se pojavlja tudi oznaka $GF(q)$. Poglejmo si nekaj pomembnih lastnosti takih polj, ki so povzeta po \cite{predavanja}.
-\begin{trditev}~
+\begin{trditev}
 \label{algebra}
-
 \begin{itemize}
 \item Končno polje s $q$ elementi obstaja natanko tedaj, ko velja $q=p^k$, za nek $k \in \N$ in neko praštevilo $p$.
 \item Vsa končna polja reda $q$ so si izomorfna.
@@ -361,8 +360,7 @@ $$\F_q = \F_p[X]/(P),$$
 polje reda $q$.
 Bolj natančno so torej elementi $\F_q$ polinomi nad poljem $\F_p$, stopnje strogo manjše kot $n$. Seštevanje in odštevanje  poteka na standardni način. Produkt dveh elementov dobimo, kot ostanek pri deljenju s $P$ produkta polinomov v $\F_p[X]$. Inverzne elemente pa lahko poiščemo s pomočjo razširjenega Evklidovega algoritma \cite{Extended2020}.
 
-\begin{primer}~
-
+\begin{primer}
 Poglejmo si polje $\F_4$. Vzemimo nerazcepni polinom v $\Fq{2}[x]$
 $$X^2+X+1.$$
 Velja torej
@@ -409,8 +407,7 @@ $\alpha$   & / & $\alpha$   & 1          & 1+$\alpha$ \\
 \end{table}
 \end{primer}
 
-\begin{primer}~
-
+\begin{primer}
 Poglejmo si še en zanimiv primer. Naj bo $\F_q= \F_{p^2}$, kjer je $p$ praštevilo za katero velja $p \equiv 3 \MOD{4}$.  Polinom oblike $X^2-r$ je nerazcepen natanko tedaj, ko $r$ ni kvadratični ostanek po modolu $p$. Po  Eulerjevem kriteriju \cite{Eulerkriterij} je $r$ kvadratični ostanek natanko tedaj ko $r^{(p-1)/2} \equiv 1$. V primeru ko je $p \equiv 3 \MOD{4}$, $p-1$ ni kvadratični ostanek, saj je $(p-1)/2 \equiv 1 \MOD{4}$. To pomeni, da je potenca liha, kar pa nam pove, da $p-1$ ni kvadratični ostanek. Torej lahko za nerazcepni polinom izberemo $X^2+1$. Elementi polja $\F_q$ so torej oblike
 $$a+b\alpha,$$
 $a,b \in \F_p$, $\alpha$ pa je število za katero velja $\alpha^2 = -1$. Ta zapis nas močno spominja na kompleksna števila. Tudi računske operacije se obnašajo enako kot pri kompleksnih številih. V takih poljih lahko torej namesto s polinomi računamo kar s kompleksnimi števili.
@@ -418,33 +415,29 @@ $a,b \in \F_p$, $\alpha$ pa je število za katero velja $\alpha^2 = -1$. Ta zapi
 
 V nadaljevanju se bo pogosto pojavljal tudi pojem algebraičnega zaprtja polja $\F_q$ z oznako $\overline{\F_q}$. Spomnimo se potrebnih pojmov za razumevanje le tega.
 
-\begin{definicija}~
-
+\begin{definicija}
 Naj bo polje $\mathcal{E}$ razširitev polja $\mathcal{F}$. Pravimo, da je element $a \in \mathcal{E}$ \emph{algebraičen}
 nad $\mathcal{F}$, če obstaja neničelni polinom $f(X) \in \mathcal{F}[X]$, za katerega velja f(a) = 0.
 
 \end{definicija}
 
-\begin{definicija}~
-
+\begin{definicija}
 Polje $\mathcal{E}$ je \emph{algebraična razširitev} polja $\mathcal{F}$, če je vsak element
 iz $\mathcal{E}$ algebraičen nad $\mathcal{F}$.
 \end{definicija}
 
-\begin{definicija}~
+\begin{definicija}
 Polje $\mathcal{F}$ je \emph{algebrično zaprto}, če ima vsak nekonstanten polinom
 iz $\mathcal{F} [X]$ vsaj eno ničlo v $\mathcal{F}$.
 \end{definicija}
 
-\begin{definicija}~
-
+\begin{definicija}
 Polje $\mathcal{A}$ se imenuje \emph{algebraično zaprtje} poja $\mathcal{F}$, če je algebraično
 zaprto in je algebraična razširitev $\mathcal{F}$.
 \end{definicija}
 
 
-\begin{primer}~
-
+\begin{primer}
 Kompleksna števila $\C$ so algebraično zaprtje $\R$, niso pa algebraično zaprtje $\Q$, saj $\C$ ni algebraična razširitev $\Q$.
 
 \end{primer}
@@ -458,8 +451,7 @@ Kompleksna števila $\C$ so algebraično zaprtje $\R$, niso pa algebraično zapr
 
 \subsection{Točke na krivulji}
 
-\begin{definicija}~
-
+\begin{definicija}
 \emph{Projektivna ravnina} $\mathbb{P}^2$ nad poljem $\F$ je kvocientni prostor $\F^3-\{0\}/\! \!\sim$, kjer je ekvivalenčna relacija $\sim$ podana z $(a,b,c)\sim(\alpha a,\alpha b,\alpha c)$ za vsak  neničelni $\alpha \in \F$. Točke v $\mathbb{P}^2$ so torej podane s homogenimi koordinatami $[a,b,c] = [\alpha a,\alpha b,\alpha c]$ za vse $\alpha \neq 0$.
 \end{definicija} 
 
@@ -475,13 +467,11 @@ Točko projektivne ravnine si lahko predstavljamo kot premico skozi izhodišče,
 \end{figure}
 
 
-\begin{definicija}~
-
-Polinom $P$ je \emph{homogen} stopnje $d$, če velja $P(\lambda x,\lambda y, \lambda z) = \lambda ^d P(x,y,z)$ za vse $\lambda \in \F$.
+\begin{definicija}
+Polinom $P$ je \emph{homogen} stopnje $d$, če velja $$P(\lambda x,\lambda y, \lambda z) = \lambda ^d P(x,y,z) \text{ za vse } \lambda \in \F.$$.
 \end{definicija}
 
-\begin{definicija}~
-
+\begin{definicija}
 \emph{Algebraična krivulja}, podana s homogenim polinomom $P$, je množica točk 
 $$\mathcal{C}_P= \{ A \in \mathbb{P}^2, P(A) = 0 \}.$$
 \end{definicija}
@@ -493,23 +483,25 @@ $$\mathcal{C}_P= \{ A \in \mathbb{P}^2, P(A) = 0 \}.$$
 \end{align}
 kjer so $a_{ijk} \in \F$.
 Ta zapis vsebuje $10$ koeficientov, vendar se lahko v gladkih primerih polinom poenostavi z ustrezno zamenjavo spremenljivk.
-\begin{definicija}~\\
+\begin{definicija}
 Algebraična krivulja je \emph{gladka}, če nima singularne točke.
 \end{definicija}
 
-\begin{izrek}[\protect{\cite{Gibson1999}, Izrek 15.2}]~
-
+\begin{izrek}[\protect{\cite{Gibson1999}, Izrek 15.2}]
 Enačbo gladke kubične krivulje nad algebraično zaprtim poljem lahko zapišemo v Weierstrassovi obliki
 $$y^2z = x^3 + axz^2 + bz^3.$$
 \end{izrek}
 
+\begin{trditev}[\protect{\cite{Silverman2009}, Trditev 1.4}]
+Kubična krivulja v Weierstrassovi obliki je gladka natanko tedaj ko velja
+$$\Delta = -16(4a^3+27b^2) \neq 0.$$
+\end{trditev}
 
-\begin{opomba}~
+\begin{opomba}
 Gladki kubični krivulji  velikokrat rečemo tudi \emph{eliptična krivulja}.
 \end{opomba}
 
-\begin{primer}~
-
+\begin{primer}
 Polinom $P(x,y,z) = z^2y-x^3$ je homogen polinom stopnje $3$. Rešitve enačbe $z^2y-x^3 = 0$ pa podajajo točke na kubični krivulji.
 \begin{figure}[t]
   \centering
@@ -553,8 +545,7 @@ Na zgornjih slikah lahko vidimo, kako krivuljo predstavimo v projektivni ravnini
 
 V nadaljevanju nas bodo zanimale predvsem kubične krivulje v končnem polju $\mathbb{Z}/p\mathbb{Z} \cong \Fq{p}$, za neko praštevilo $p$.
 
-\begin{definicija}~
-
+\begin{definicija}
 Za dani števili $a$, $b \in \mathbb{Z}/p\mathbb{Z}$ je \emph{kubična krivulja} nad poljem $\mathbb{Z}/p\mathbb{Z}$ množica točk
 $$E_{(a,b)}(\mathbb{Z}/p\mathbb{Z}) =\left\{ [x,y,z] \in \PP^2(\mathbb{Z}/p\mathbb{Z}): y^2z=x^3+axz^2+bz^3 \right\} .$$
 Drugače povedano, afina kubična krivulja je množica rešitev Weierstrassove enačbe
@@ -565,12 +556,11 @@ $$(x,y)\in (\Z/p\Z)^2 \Leftrightarrow [x,y,1]\in \PP^2(\Z/p\Z).$$
 \end{definicija}
 
 \subsection{Tonelli-Shanks}
-V algoritmih bomo velikokrat potrebovali naključno točko na krivulji. S pomočjo algoritma Tonelli-Shanks bomo točko na krivulji lahko učinkovito poiskali. Naj bo $p$ modul po katerem računamo.
+V algoritmih bomo velikokrat potrebovali naključno točko na krivulji. S pomočjo algoritma Tonelli-Shanks \cite{Tonelli1891} bomo točko na krivulji lahko učinkovito poiskali. Naj bo $p$ modul po katerem računamo.
 Če privzamemo, da lahko naključno izberemo število $0 \leq x \leq p$, potem nas zanima, kako učinkovito izberemo naključno točko $(x,y)$ na krivulji podani z enačbo
 $y^2 = x^3 +ax+b \ \text{mod } p$. Ideja je preprosta. Naključno generirajmo koordinato $x$ in nato poizkusimo rešiti enačbo $y^2 = X \ \text{mod } p$, če tak $y$ obstaja. V nasprotnem primeru generiramo novo $x$ koordinato in poizkusimo ponovno. Problem se torej skriva le v reševanju kvadratne enačbe. Tu pa nam pomaga Tonneli-Shankov algoritem, ki učinkovito reši zgornjo enačbo.
 
-\begin{trditev}~
-
+\begin{trditev}
 Naj bo $p > 2$ praštevilo. Če je $n \in \F_p$ kvadratični ostanek po modolu $p$, potem nam Tonelli-Shanks algoritem vrne $r \in \F_p$, tako da velja $n = r^2$.
 
 \end{trditev}
@@ -598,12 +588,11 @@ Naj bo $p > 2$ praštevilo. Če je $n \in \F_p$ kvadratični ostanek po modolu $
 \end{algorithmic}
 \end{algorithm}
 
-\begin{opomba}~
-
+\begin{opomba}
 V algoritmu \ref{alg:Tonelli} lahko prvi korak izvedemo tako, da preiskušamo naključne $g\in \F_p$, dokler ne velja $g^{(p-1)/2} = -1$.
 \end{opomba}
 
-\begin{opomba}~
+\begin{opomba}
 Števili $s, Q$ iz algoritma poiščemo tako, da število $p-1$ razpolavljamo dokler ne dobimo števila, ki ni deljivo z dva. To število je $Q$. Število korakov, ki smo jih naredili pa je $s$.
 \end{opomba}
 
@@ -631,8 +620,7 @@ C &\quad \text{če je } A=B \  \text{in}\ \{\text{tangenta v A}\} \cap \mathcal{
 \]
 Intuitivno operacija $\ast$ vrne tretjo točko v preseku premice skozi $A$ in $B$ in $\mathcal{C}_P$ kar lahko vidimo na sliki \ref{fig:adicija}. Poglejmo si še nekaj lastnosti operacije $\ast$. Dokaze sledečih trditev najdemo v \cite[Poglavje 17.3]{Gibson1999}.
 
-\begin{trditev}~
-
+\begin{trditev}
 \label{last zvezda}
 Operacija $\ast$ ima naslednje lastnosti:
 
@@ -643,8 +631,7 @@ Operacija $\ast$ ima naslednje lastnosti:
 \end{itemize}
 \end{trditev}
 
-\begin{izrek}~
-
+\begin{izrek}
 Kubična krivulja ($\mathcal{C}_P$,$+$) je Abelova grupa za operacijo
 
 \begin{table}[ht]
@@ -657,8 +644,7 @@ $+:$ & $\mathcal{C}_P \times \mathcal{C}_P$ & $\rightarrow$ & $\mathcal{C}_P$ \\
 kjer je $O$ poljubna izbrana točka na krivulji $ \mathcal{C}_P$.
 \end{izrek}
 
-\begin{proof}~
-
+\begin{proof}
 S pomočjo trditve \ref{last zvezda} dokažimo, da je ($\mathcal{C}_P$,$+$) res Abelova grupa.
 
 \begin{itemize}
@@ -686,8 +672,7 @@ kjer smo uporabili absorbcijo.
 Ta definicija operacije nudi eleganten geometrijski opis strukture grupe, za numerično računanje pa ni primerna. Možno pa je izpeljati formule, s katerimi eksplicitno
 izračunamo vsoto dveh točk, v kolikor imamo kubično krivuljo v Weierstrassvi obliki.
 
-\begin{lema}[Seštevanje točk na Weierstrassovi kubični krivulji]~
-
+\begin{lema}[Seštevanje točk na Weierstrassovi kubični krivulji]
 \label{sestevanje}
 Naj bo $\mathcal{C}_P$ afina krivulja v Weierstrassovi obliki $y^2 = x^3 + \alpha x^2 + \beta x + \gamma$, ter $O$ prevoj v neskončnosti. Če sta $A_1 = (a_1,b_1)$ in $A_2 = (a_2,b_2)$ točki na afinem delu $\mathcal{C}_P$, potem za $A_3 = A_1 + A_2 = (a_3,b_3)$ velja
 
@@ -698,14 +683,17 @@ Naj bo $\mathcal{C}_P$ afina krivulja v Weierstrassovi obliki $y^2 = x^3 + \alph
 \end{align}
 kjer sta 
 
-\[ \lambda =
+$$
+\lambda =
 \begin{cases}
 \frac{b_1 - b_2}{a_1 - a_2} & \quad \text{če } a_1 \neq a_2 ,\\
 \frac{3a_1^2+ 2 \alpha a_1 + \beta}{2b_1} & \quad \text{sicer} ,\\
 \end{cases}
-\]
-
-ter $\mu = b_1 - \lambda a_1$.
+\quad
+\text{ in }
+\quad
+\mu = b_1 - \lambda a_1.
+$$
 
 %\begin{itemize}
 %\item Če $a_1 \neq a_2$, potem
@@ -723,14 +711,12 @@ ter $\mu = b_1 - \lambda a_1$.
 \end{lema}
 
 
-\begin{opomba}~
-
+\begin{opomba}
 Če krivuljo $\mathcal{C}_P$ predstavimo v projektivni ravnini, torej kot ničle homogenega polinomoma $y^2z=x^3+\alpha x^2z+\beta xz^2+ \gamma z^3$ je prevoj $O=[0,1,0].$
 Opazimo, da točke $O = [0,1,0]$ ni možno predstaviti v afini ravnini $z=1$, zato bomo v nadaljevanju pisali $O = \infty$.
 \end{opomba}
 
-\begin{primer}~
-
+\begin{primer}
 Na sliki \ref{fig:adicija} je v afini ravnini $z=1$ prikazano kako grafično seštevamo točke na Weierstrassovi kubiki $y^2z-x(x-z)(x+z)=0$. Sešteti želimo točki $A =[-1,0,1]$ in $B=[2,\sqrt{6},1] $.
 \\
 
@@ -746,8 +732,7 @@ Na sliki \ref{fig:adicija} je v afini ravnini $z=1$ prikazano kako grafično se�
 
 
 
-\begin{primer}~
-
+\begin{primer}
 Seštejmo točki $A =(-1,0),B=(2,\sqrt{6}) $ na Weierstrassovi kubični krivulji $y^2z-x(x-z)(x+z)=0$ v preseku z afino ravnino $z=1$ še računsko z uporabo zgornje leme \ref{sestevanje}.
 
 Dobimo $z^2 = x^3-x,$
@@ -771,8 +756,7 @@ Iskana točka $A+B \in \PP^2$ je torej enaka $[-\frac{1}{3},-\frac{2\sqrt{6}}{9}
 
 Poglejmo si še primer kubične krivulje nad poljem $\F_p$.
 
-\begin{primer}~
-
+\begin{primer}
 Naj bo $E$ krivulja oblike $y^2 = x^3+x-1$ nad poljem $\Z_5$. Poglejmo si kako izgledajo točke na krivulji $E$.
 
 \begin{table}[H]
@@ -820,23 +804,21 @@ $(2,3)+(1,1)$ je torej enako $(1,4)$ na krivulji $E$.
 \subsection{Endomorfizmi}
 \label{endomorfizmi}
 
-\begin{definicija}~
-
+\begin{definicija}
 Naj bo $K$ polje nad katerim je definirana eliptična krivulja $E$.
 \emph{Endomorfizem} na $E$ je homomorfizem $\alpha: \E{\overline{K}} \rightarrow \E{\overline{K}} $, ki je podan z racionalno funkcijo. Torej obstajata racionalni funkciji $R_1$ in $R_2$ s koeficienti v $\overline{K}$ za kateri velja
 $$\alpha(x,y) = (R_1(x,y),R_2(x,y)),$$
 za vse $(x,y) \in \E{\overline{K}}$.
 \end{definicija}
 
-\begin{primer}~
-
-Naj bo $E$ krivulja podana z $y^2 = x^3+Ax+B$, ter naj bo $\alpha(P) = 2P$. Tako definiran $\alpha$ je očitno homomorfizem. Po lemi \ref{sestevanje} pa obstajajo racionalne funkcije za seštevanje točk na kubičnih krivuljah, zato je $\alpha$ tudi endomorfizem.
+\begin{primer}
+Naj bo $E$ krivulja podana z $y^2 = x^3+ax+b$, ter naj bo $\alpha(P) = 2P$. Tako definiran $\alpha$ je očitno homomorfizem. Po lemi \ref{sestevanje} pa obstajajo racionalne funkcije za seštevanje točk na kubičnih krivuljah, zato je $\alpha$ tudi endomorfizem.
 \end{primer}
 
 Zaradi različnih možnih oblik racionalnih funkcij bo priročno, če bomo zapis endomorfizmov standardizirali, ter bomo od tod naprej privzeli, da so vsi endomorfizmi zapisani v enotni obliki.
-V racionalni funkciji $R(x,y)$ lahko, zato ker se nahajamo na Weierstrassovi krivulji, vse sode potence $y$ zamenjamo z $x^3+Ax+B$ na primerno potenco. Zaradi tega lahko $R(x,y)$ zapišemo kot
+V racionalni funkciji $R(x,y)$ lahko, zato ker se nahajamo na Weierstrassovi krivulji, vse sode potence $y$ zamenjamo z $x^3+ax+b$ na primerno potenco. Zaradi tega lahko $R(x,y)$ zapišemo kot
 $$R(x,y) = \frac{p_1(x)+p_2(x)y}{p_3(x)+p_4(x)y}.$$
-Če sedaj še pomnožimo števec in imenovalec s $p_3-p_4y$ ter potem zamenjamo $y^2$ z $x^3+Ax+B$, dobimo izraz oblike
+Če sedaj še pomnožimo števec in imenovalec s $p_3-p_4y$ ter potem zamenjamo $y^2$ z $x^3+ax+b$, dobimo izraz oblike
 $$R(x,y) = \frac{q_1(x)+q_2(x)y}{q_3(x)}.$$
 Za točke na Weierstrassovi krivulji velja $-(x,y) = (x,-y)$, kjer $-(x,y)$ označuje nasprotni element točke $(x,y)$. Od tod sklepamo, da za vsak endomorfizem $\alpha = (R_1,R_2) $ nad $E$ velja
 $$R_1(x,-y) = R_1(x,y), \ R_2(x,-y) = -R_2(x,y).$$
@@ -850,8 +832,7 @@ kjer sta $r_1,r_2$ racionalni funkciji.
 $$r_1(x) = \frac{p(x)}{q(x)},$$
 potem lahko definiramo še nekaj pojmov. 
 
-\begin{definicija}~
-
+\begin{definicija}
 \emph{Stopnja} endomorfizma je  definirana kot
 $$
 \DEG{\alpha} =
@@ -862,8 +843,7 @@ $$
 $$
 \end{definicija}
 
-\begin{definicija}~
-
+\begin{definicija}
 Netrivialni endomorfizem $\alpha$ je \emph{separabilen}, če je odvod $r'_1(x) \not \equiv 0$.
 \end{definicija}
 
@@ -871,33 +851,31 @@ Poglejmo si na primeru, kako določimo stopnjo, ter ali je enodmorfizem seperabi
 
 \begin{primer}
 Če vzamemo endomorfizem iz prejšnjega primera $\alpha(P) = 2P,$ dobimo funkcijo
-$$R_1(x,y) = \left(\frac{3x^2+A}{2y}\right)^2-2x.$$
+$$R_1(x,y) = \left(\frac{3x^2+a}{2y}\right)^2-2x.$$
 To lahko preoblikujemo kot
 \begin{align}
-\left(\frac{3x^2+A}{2y}\right)^2-2x &{}= \frac{9x^4+6Ax^2+A^2}{4y^2}-2x \nonumber \\
-&{} = \frac{9x^4+6Ax^2+A^2 - 2x(4(x^2+Ax+B))}{4(x^2+Ax+B)} \nonumber \\
-&{} = \frac{x^4-2Ax^2-8Bx+A^2}{4(x^2+Ax+B)} \nonumber
+\left(\frac{3x^2+a}{2y}\right)^2-2x &{}= \frac{9x^4+6ax^2+a^2}{4y^2}-2x \nonumber \\
+&{} = \frac{9x^4+6ax^2+a^2 - 2x(4(x^2+ax+b))}{4(x^2+ax+b)} \nonumber \\
+&{} = \frac{x^4-2ax^2-8bx+a^2}{4(x^2+ax+b)} \nonumber
 \end{align}
 Iz
-$$r_1(x) = \frac{x^4-2Ax^2-8Bx+A^2}{4(x^2+Ax+B)}$$
+$$r_1(x) = \frac{x^4-2ax^2-8bx+a^2}{4(x^2+ax+b)}$$
 razberemo, da je stopnja $\DEG{\alpha} = 4$.
 
 Poglejmo si še odvod $r'_1(x)$.
 \begin{align}
-r'_1(x) &{}=\frac{(4x^3-4Ax-8B)4(x^3+Ax+B)-(x^4-2Ax^2-8Bx+A^2)(12x^2+4A)}{16(x^2+Ax+B)^2} \nonumber \\
-&{} = \frac{-A^3 - 8 B^2 + 2 x^5 - 2 A^2 x (1 + x) + 4 B x^2 (2 + x) +  A (-4 B x + 3 x^4)}{4 (B + x (A + x))^2} \nonumber
+r'_1(x) &{}=\frac{(4x^3-4ax-8b)4(x^3+ax+b)-(x^4-2ax^2-8bx+a^2)(12x^2+4a)}{16(x^2+ax+b)^2} \nonumber \\
+&{} = \frac{-a^3 - 8 b^2 + 2 x^5 - 2 a^2 x (1 + x) + 4 b x^2 (2 + x) +  a (-4 b x + 3 x^4)}{4 (b + x (a + x))^2} \nonumber
 \end{align}
 Števec zgornje enačbe pa ni identično enak $0$, torej je endomorfizem seperabilen.
-\begin{opomba}~
-
+\begin{opomba}
 Če bi zgornje računali v $\F_2$, bi dobili primer endomorfizma, ki ni seperabilen.
 \end{opomba}
 \end{primer}
 
 V nadaljevanju bomo potrebovali naslednji izrek, za katerega ne bomo podali dokaza.
 
-\begin{izrek}[\protect{\cite{Washington2008}, Izrek 2.21}]~
-
+\begin{izrek}[\protect{\cite{Washington2008}, Izrek 2.21}]
 \label{izrek:2.21}
 Naj bo $\alpha \neq 0$ seperabilni endomorfizem nad eliptično krivuljo $E$. Potem velja
 $$\DEG{\alpha}= \# \text{Ker}(\alpha), \ \text{kjer \# označuje število točk, ki so v jedru } \alpha.$$
@@ -916,8 +894,7 @@ Frobeniusova preslikava na $\F_q$.
 Če je eliptična krivulja $E$ definirana nad $\F_q$, potem $\phi_q$ deluje na točkah $E$ kot:
 $$\phi_q(x,y) = (x^q,y^q) \text{ in } \phi_q(\infty) = \infty.$$
 
-\begin{lema}~
-
+\begin{lema}
 \label{lema:4.5}
 
 Naj bo $E$ eliptična krivulja definirana nad $\F_q$. Za točke $(x,y) \in \E{\overline{\F_q}}$ velja
@@ -931,8 +908,7 @@ Naj bo $E$ eliptična krivulja definirana nad $\F_q$. Za točke $(x,y) \in \E{\o
 
 \end{lema}
 
-\begin{proof}~
-
+\begin{proof}
 Za dokaz leme bomo potrebovali lastnost $$(a+b)^q = a^q+b^q,$$ kjer je $q$ potenca karakteristike polja v katerem delamo. To sledi iz razvoja v vrsto in dejstva, da pri binomskih koeficientih velja
 ${q\choose i} \equiv 0$, za $1 \leq i \leq q-1$. To je res ker pri zapisu binomskega koeficienta po krajšanju vedno ostane vsaj en $q$, ki je potenca karakteristike. 
 
@@ -960,8 +936,7 @@ Od tod za točke $(x,y) \in \E{\Fq{q}}$ sledi
 
 \end{proof}
 
-\begin{trditev}~
-
+\begin{trditev}
 \label{trd:3.16}
 Naj bo $E$ eliptična krivulja definirana nad $\Fq{q}$.
 Naj bosta $\alpha,\beta$ endomorfizma na $E$ ter $a,b \in \Z$. Definirajmo endomorfizem
@@ -970,8 +945,7 @@ Potem velja
 $$\DEG{a\alpha+b\beta} = a^2\DEG{\alpha}+b^2\DEG{\beta} + ab\text{(}\DEG{\alpha+\beta}-\DEG{\alpha}-\DEG{\beta}\text{)}.$$
 \end{trditev}
 
-\begin{opomba}~
-
+\begin{opomba}
 Naj $n \in \N$ ne deli karakteristike $K$. Ker velja $E[n] \cong \Z_n \bigoplus \Z_n$, lahko za $E[n]$ izberemo neko bazo $\{ \beta_1, \beta_2\}$. To pomeni, da lahko vsak element $E[n]$ zapišemo, kot $m_1\beta_1 + m_2\beta_2$, za $m_1, m_2 \in \Z_n$. Homomorfizem $\alpha: \E{\overline{K}} \rightarrow \E{\overline{K}}$ preslika $E[n]$ v $E[n]$. Zato obstajajo števila $a,b,c,d \in \Z_n$, da velja
 $$\alpha(\beta_1) = a\beta_1+b\beta_2, \ \alpha(\beta_2) = c\beta_1+d\beta_2.$$
 To pa ravno pomeni, da se lahko vsak tak homomorfizem $\alpha$ predstavimo z matriko oblike
@@ -981,8 +955,7 @@ c & d
 \end{bmatrix}.$$
 \end{opomba}
 
-\begin{proof}~
-
+\begin{proof}
 Naj bo $n \in \Z$, število ki ni deljivo s karakteristiko polja. Predstavimo $\alpha,\beta$ z matrikami $\alpha_n,\beta_n$, glede na neko bazo $E[n]$.
 Velja
 \begin{align}
@@ -999,8 +972,7 @@ Ker to drži za neskončno mnogo $n$ v tej enačbi velja enakost.
 
 \end{proof}
 
-\begin{trditev}[\protect{\cite{Washington2008}, Trditev 4.7}]~
-
+\begin{trditev}[\protect{\cite{Washington2008}, Trditev 4.7}]
 \label{trd:4.7}
 Naj bo $E$ definirana nad $\F_q$ in naj bo $n \geq 1$. Potem velja
 \begin{itemize}
@@ -1009,38 +981,33 @@ Naj bo $E$ definirana nad $\F_q$ in naj bo $n \geq 1$. Potem velja
 \end{itemize}
 \end{trditev}
 
-\begin{opomba}~
-
+\begin{opomba}
 $\phi^n_q$ predstavlja kompozicijo $\phi_q \circ \phi_q \circ \ldots \circ \phi_q$. Prav tako pa je $\phi^n_q-1$ endomorfizem, saj je množenje z $-1$ endomorfizem.
 \end{opomba}
 
-\begin{izrek}[Hasse \protect{\cite{Washington2008}, Izrek 4.2}]~
-
+\begin{izrek}[Hasse \protect{\cite{Washington2008}, Izrek 4.2}]
 \label{izr:Hasse}
 Naj bo $E$ eliptična krivulja nad končnim poljem $\F_q$.  Potem red $\E{\F_q}$ zadošča zvezi
 $$|q+1-\#\E{\F_q}| \leq 2\sqrt{q}.$$
 \end{izrek}
 
-\begin{opomba}~
+\begin{opomba}
 Hassejev izrek igra pomembno vlogo tudi pri iskanju velikosti grupe, saj nam poda zgornjo in spodnjo mejo. Velikost grupe pa potem nadaljno zožimo z dejstvom da red elementa deli red grupe. 
 \end{opomba}
 
-\begin{lema}~
+\begin{lema}
 \label{lema:hasse}
-
 Naj bosta $r,s \in \Z$ tuji števili. Potem velja
 $$\DEG{r\phi_q-s} = r^2q+s^2-rsa.$$
 \end{lema}
 
-\begin{proof}~
-
+\begin{proof}
 Z uporabo trditve \ref{trd:3.16} dobimo
 $$\DEG{r\phi_q-s} = r^2\DEG{\phi_q}+s^2\DEG{-1}+rs(\DEG{\phi_q-1}-\DEG{\phi_q}-\DEG{-1}).$$
 Če sedaj uporabimo dejstvi $\DEG{\phi_q} = q,\ \DEG{-1} = 1$ ter $\DEG{\phi_q-1} = q+1-a$, željeni rezultat sledi.
 \end{proof}
 
-\begin{proof}[Dokaz izreka \ref{izr:Hasse}]~
-
+\begin{proof}[Dokaz izreka \ref{izr:Hasse}]
 Po trditvi \ref{trd:4.7} lahko zapišemo
 $$a=q+1-\#\E{\F_q} = q+1 -\DEG{\phi_q-1}.$$
 Pokazati moramo $|a| \leq 2\sqrt{q}.$
@@ -1056,11 +1023,9 @@ To pa je ravno pogoj $|a|\leq 2\sqrt{q}$.
 \end{proof}
 
 
-\begin{izrek}[\protect{\cite{Washington2008}, Izrek 4.10}]~
-
+\begin{izrek}[\protect{\cite{Washington2008}, Izrek 4.10}]
 \label{izrek:4.10}
-
-Naj bo E eliptična krivulja definirana nad $\F_q$. Naj bo $a = q+1-\#\E{\F_q} = q+1-deg(\phi_q-1)$. Potem velja
+Naj bo E eliptična krivulja definirana nad $\F_q$. Naj bo $a = q+1-\#\E{\F_q} = q+1-\DEG{\phi_q-1}$. Potem velja
 $$\phi^2_q-a\phi_q+q = 0,$$
 gledano kot endomorfizem nad $E$. Prav tako pa je $a$ edino število $k$ za katerega velja
 $$\phi^2_{q^n}-k\phi_{q^n}+q^n = 0.$$
@@ -1082,10 +1047,8 @@ Preostane še vprašanje kako izračunati $\# \E{\F_q}$. Enega od možnih način
 
 
 
-\begin{trditev}~
-
+\begin{trditev}
 \label{trd:4.12}
-
 Naj bo $\# \E{\F_q} = q+1-a$, kot v izreku \ref{izrek:4.10}. Zapišimo $X^2-aX+q = (X-\alpha)(x-\beta)$. Potem velja
 $$\# \E{\F_{q^{n}}} = q^n+1-(\alpha^n+\beta^n),$$
 za vse $n \geq 1$.
@@ -1094,15 +1057,13 @@ za vse $n \geq 1$.
 
 Preden lahko dokažemo zgornjo trditev bomo potrebovali še naslednjo lemo.
 
-\begin{lema}~
-
+\begin{lema}
 \label{lema:4.13}
 Naj bo $s_n = \alpha^n +  \beta^n$. Potem velja $s_0 = 2,s_1 = a$ in $ s_{n+1} = as_n-qs_{n-1}$, za vse $n \geq 1$.
 
 \end{lema}
 
-\begin{proof}~
-
+\begin{proof}
 Če je $n = 0$, potem lema očitno velja. Za $n=1$ lema sledi iz definicije $\alpha$ in $\beta$, ki sta ničli enačbe $X^2-aX+q$, ter uporabe Vietovih formul. Dokažimo lemo še za splošen $n$.
 Ker sta $\alpha$ in $\beta$ ničli iste enačbe, lahko zapišemo $\alpha^2-a\alpha +q = 0$ in $\beta^2-a\beta+q=0$. Sedaj enačbi pomnožimo z $\alpha^{n-1}$ in $\beta^{n-1}$. S tem dobimo
 $$\alpha^{n+1} = a\alpha^n +q\alpha^{n-1}\text{ in } \beta^{n+1} = a\beta^n +q\beta^{n-1}.$$
@@ -1110,8 +1071,7 @@ $$\alpha^{n+1} = a\alpha^n +q\alpha^{n-1}\text{ in } \beta^{n+1} = a\beta^n +q\b
 $$s_{n+1} = as_n-qs_{n-1}.$$
 \end{proof}
 
-\begin{proof}[Dokaz trditve \ref{trd:4.12}]~
-
+\begin{proof}[Dokaz trditve \ref{trd:4.12}]
 Iz leme \ref{lema:4.13} takoj sledi, da velja $\alpha^n+\beta^n \in \N$. Naj bo $f$ funkcija
 
 $$f(X) = (X^n-\alpha^n)(X^n-\beta^n) = X^{2n}-(\alpha^n+\beta^n)X^n+q^n.$$
@@ -1124,8 +1084,7 @@ $$\alpha^n+\beta^n = q^n+1-\#\E{\F_{q^n}}.$$
 
 \end{proof}
 
-\begin{primer}~
-
+\begin{primer}
 Naj bo $E$ posplošena Weierstrassova krivulja podana s predpisom $y^2+xy = x^3+1$. S preprostim pregledom vseh možnosti vidimo, da je $\#\E{\F_2} = 4$. Izračunajmo sedaj $\#\E{\F_4}$. Po trditvi \ref{trd:4.12} moramo
 $\#\E{\F_2}$ zapisati kot $q+1-a$. Sledi torej $a = 2+1-4 = -1$. Polinom je potem oblike
 $$X^2+X+2 = \left( X-\frac{-1+\sqrt{-7}}{2}\right) \left(X-\frac{-1-\sqrt{-7}}{2}\right).$$
@@ -1154,8 +1113,7 @@ od koder sledi
 
 Pri konstrukciji Weilovega parjenja bodo pomembno vlogo igrali tako imenovani delitelji. V tem poglavju bomo navedli nekaj definicij in lastnosti, ki jih bomo potrebovali v kasnejših poglavjih. Uporabljali bomo terminologijo, ki jo lahko najdemo v \cite{Washington2008}.
 
-\begin{definicija}~
-
+\begin{definicija}
 Naj bo $K$ polje in naj bo $P$ točka na krivulji $\E{\overline{K}}$. Za vsako točko $P$ definirajmo formalen simbol $[P]$. \emph{Delitelj} $D$ na krivulji $E$ je končna linearna kombinacija takih simbolov s celoštevilskimi koeficienti.
 $$D = \sum_{j}a_j[P_j], \ a_j \in \Z $$
 
@@ -1164,8 +1122,7 @@ $$D = \sum_{j}a_j[P_j], \ a_j \in \Z $$
 Iz same definicije sledi, da je delitelj element Abelove grupe generirane s simboli $[P]$. Označimo to grupo z $\DIV{E}$.
 
 
-\begin{definicija}~
-
+\begin{definicija}
 Definirajmo \emph{vsoto} in \emph{stopnjo} delitelja kot
 $$\SUM{\sum_{j}a_j[P_j]} = \sum_ja_jP_j \ \in \E{\overline{K}},$$
 $$\DEG{\sum_{j}a_j[P_j]} = \sum_ja_j \ \in \Z.$$
@@ -1173,52 +1130,50 @@ $$\DEG{\sum_{j}a_j[P_j]} = \sum_ja_j \ \in \Z.$$
 \end{definicija}
 
 
-\begin{definicija}~
-
+\begin{definicija}
 Naj bo $E$ eliptična krivulja nad poljem $K$. \emph{Funkcija} na $E$ je racionalna funkcija $$f(x,y) \in \ \overline{K},$$ ki je definirana za vsaj eno točko na $\E{\overline{K}}$. Funkcija torej zavzame vrednosti v $\overline{K}$.
 \end{definicija}
 
-\begin{opomba}~
-
-Naj bo $E$ podana z enačbo $y^2 = x^3+Ax+B$. Racionalna funkcija $\frac{1}{y^2-x^3-Ax-B}$ torej ne predstavlja funkcije na $E$, saj ni definirana za nobeno točko na $E$.
+\begin{opomba}
+Naj bo $E$ podana z enačbo $y^2 = x^3+ax+b$. Racionalna funkcija $\frac{1}{y^2-x^3-ax-b}$ torej ne predstavlja funkcije na $E$, saj ni definirana za nobeno točko na $E$.
 
 \end{opomba}
 
-\begin{trditev}[\protect{\cite{Silverman2009}, Trditev 4.3}]~
+\begin{trditev}[\protect{\cite{Silverman2009}, Trditev 4.3}]
 \label{trd:red}
-
 Naj bo $P$ točka na krivulji $E$. Potem obstaja funkcija $u_P$, kateri rečemo uniformizator, z lastnostjo $u_P(P) = 0$, za katero velja, da lahko vsako funkcijo $f(x,y)$ nad $E$ zapišemo kot
 $$f = u^r_Pg, \text{ za nek } r\in \Z \text{ kjer } g(P) \neq 0 \text{ in } \frac{1}{g(P)} \neq 0.$$
 \end{trditev}
 
-\begin{definicija}~
-
+\begin{definicija}
 Številu $r$ iz trditve \ref{trd:red} rečemo \emph{red} funkcije $f$ v točki $P$ in ga označimo z $\ORDp{f}{P}$.
 \end{definicija}
 
-\begin{primer}~
-
+\begin{primer}
 Naj bo $y^2 = x^3-x$ eliptična krivulja in naj bo $f(x,y) = x$. Za točko $P = (0,0)$ izberimo $u(x,y) = y$. Očitno je $u(0,0) = 0$. Nad eliptično krivuljo velja 
 $$y^2 = x^3-x = x(x^2-1),$$ 
 od tod sledi $x = y^2\frac{1}{x^2-1}$ nad E.
 Prav tako velja, da $1/(x^2-1) \neq 0$ v točki $(0,0)$. Od tod sledi, da je red funkcij $x$ in $x/y$ enak
 $$\ORDp{x}{(0,0)} = 2\text{ in }  \ORDp{x/y}{(0,0)}= 1.$$
+
+Red funkcije je lahko tudi nepozitiven. Vzemimo funkcijo $1/x$. Enačbo krivulje prepišimo v obliko $\frac{1}{x} = \frac{1}{y^2}(x^2-1)$. To pomeni, da je red v točki $P=(0,0)$ enak
+$$\ORDp{1/x}{(0,0)} = -2.$$
+
+Poglejmo si še red funkcije $x/y^2$. Enačbo krivulje prepišimo v obliko $\frac{x}{y^2} = \frac{1}{x^2-1}$. Tu lahko vzamemo za uniformizator poljubno funkcijo, ki zadošča pogoju $u(P) = 0$, saj nastopa s potenco $0$. Torej je red funkcije $x/y^2$ v točki $P=(0,0)$ enak
+$$\ORDp{x/y^2}{(0,0)} = 0.$$
 \end{primer}
 
-\begin{definicija}~
-
+\begin{definicija}
 Točki $P$ rečemo \emph{ničla} funkcije $f$ če je $\ORDp{f}{P} > 0$ in \emph{pol}, če je $\ORDp{f}{P} < 0$
 \end{definicija}
 
-\begin{definicija}~
-
+\begin{definicija}
 Naj bo $f$ funkcija nad $E$, ki ni identično enaka $0$. Definirajmo \emph{delitelj} funkcije $f$ kot,
 $$\Div{f} = \sum_{P\in \E{\overline{K}}} \ORDp{f}{P}[P] \in \DIV{E}.$$
 \end{definicija}
 
 
-\begin{trditev}[\protect{\cite{Washington2008}, Trditev 11.1}]~
-
+\begin{trditev}[\protect{\cite{Washington2008}, Trditev 11.1}]
 \label{trditev 11.1}
 Naj bo $E$ eliptična krivulja in naj bo $f$ funkcija na $E$, ki ni identično enaka $0$. Potem veljajo naslednje trditve:
 \begin{itemize}
@@ -1231,18 +1186,16 @@ Naj bo $E$ eliptična krivulja in naj bo $f$ funkcija na $E$, ki ni identično e
 
 \end{trditev}
 
-\begin{izrek}~
-
+\begin{izrek}
 \label{izrek 11.2}
-Naj bo $E$ eliptična krivulja. Naj bo $D$ delitelj nad $E$ z $deg(D) = 0$. Potem obstaja taka funkcija $f$ na $E$ z lastnostjo
+Naj bo $E$ eliptična krivulja. Naj bo $D$ delitelj nad $E$ z $\DEG{D} = 0$. Potem obstaja taka funkcija $f$ na $E$ z lastnostjo
 $$\Div{f} = D$$
 natanko tedaj ko
 $$\SUM{D} = \text{točka }\infty.$$
 
 \end{izrek}
 
-\begin{proof}~
-
+\begin{proof}
 Pokažimo najprej, da je možno $[P_1]+ [P_2]$ zapisati kot $$[P_1+P_2] + [\infty] + \text{delitelj neke funkcije}.$$
 Recimo, da imamo tri kolinearne točke $P_1,P_2,P_3$ na krivulji $E$, ki ležijo na premici $ax+by+c = 0$.
 Naj bo $f(x,y) = ax+by+c$, potem ima funkcija $f$ ničle v točkah $P_1,P_2,P_3$. Če $b$ ni enak $0$, potem ima funkcija po trditvi \ref{trditev 11.1} trojni pol v $\infty$.
@@ -1273,10 +1226,8 @@ Od tod po spodnji lemi \ref{lema 11.3} sledi, da je $P = Q$ in torej $\SUM{D} = 
 
 \end{proof}
 
-\begin{lema}[\protect{\cite{Washington2008}, Lema 11.3}]~
-
+\begin{lema}[\protect{\cite{Washington2008}, Lema 11.3}]
 \label{lema 11.3}
-
 Naj bosta $P,Q \in \E{\overline{K}}$ ter $h$ funkcija na $E$ za katero velja
 $$\Div{h}=[P]-[Q].$$
 Potem sledi $P=Q$.
@@ -1287,16 +1238,14 @@ Potem sledi $P=Q$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Torzijske točke}
 
-\begin{definicija}~
-
+\begin{definicija}
 Naj bo $E$ eliptična krivulja nad poljem $K$, ter naj bo $n\in \N$. \emph{Torizjske točke} reda $n$, so točke v množici
 $$E[n] = \{ P \in \E{\overline{K}} | nP = \infty \}.$$
 \end{definicija}
 
 Struktura torzijskih točk je opisana v naslednjem izreku.
 
-\begin{izrek}~
-
+\begin{izrek}
 \label{IzrekTor}
 Naj bo $E$ eliptična krivulja nad poljem $K$ in naj bo $n \in \N$. Če karakteristika polja $K$ ne deli $n$ oziroma je enaka $0$, potem je
 $$E[n] \cong \mathbb{Z}_n \oplus \mathbb{Z}_n.$$
@@ -1308,36 +1257,33 @@ $$E[n] \cong \mathbb{Z}_{n'} \oplus \mathbb{Z}_{n'} \text{ ali } E[n] \cong \mat
 
 Izrek \ref{IzrekTor} bomo dokazali v zadnjem razdelku tega poglavja.
 
-\begin{definicija}~
-
-Definirajmo $m$-ti \emph{deliteljski polinom} $\gamma_m \in \Z[x,y,A,B]$ kot,
+\begin{definicija}
+Definirajmo $m$-ti \emph{deliteljski polinom} $\gamma_m \in \Z[x,y,a,b]$ kot,
 
 
 \begin{align}
 \gamma_0 &{}= 0  \nonumber \\
 \gamma_1 &{}= 1  \nonumber \\
 \gamma_2 &{}= 2y  \nonumber \\
-\gamma_3 &{}= 3x^4 + 6Ax^2 + 12Bx-A^2 \nonumber \\
-\gamma_4 &{}= 4y(x^6+5Ax^4+20Bx^3-5A^2x^2-4ABx-8B^2-A^3) \nonumber \\
+\gamma_3 &{}= 3x^4 + 6ax^2 + 12bx-a^2 \nonumber \\
+\gamma_4 &{}= 4y(x^6+5ax^4+20bx^3-5a^2x^2-4abx-8b^2-a^3) \nonumber \\
 \gamma_{2m+1} &{}= \gamma_{m+2}\gamma_{m}^3-\gamma_{m-1}\gamma_{m+1}^3 \text{ za } m \geq 2 \nonumber \\
 \gamma_{2m} &{}= (2y)^{-1}\gamma_{m}(\gamma_{m+2}\gamma_{m-1}^2-\gamma_{m-2}\gamma_{m+1}^2)\text{ za } m \geq 3 \nonumber
 \end{align}
 
 \end{definicija}
 
-\begin{lema}~
-
-Polinom $\gamma_{n}$ je element $\Z[x,y^2,A,B]$ za vse lihe $n$.  Za sode $n$ pa je $\gamma_{n}$ element \newline $2y\Z[x,y^2,A,B]$.
+\begin{lema}
+Polinom $\gamma_{n}$ je element $\Z[x,y^2,a,b]$ za vse lihe $n$.  Za sode $n$ pa je $\gamma_{n}$ element \newline $2y\Z[x,y^2,a,b]$.
 
 \end{lema}
 
-\begin{proof}~
-
+\begin{proof}
 Lemo dokažemo s pomočjo indukcije. Za $n \leq 4$ lema očitno velja. Obravnavajmo primera, ko je $n=2m$ in  $n=2m+1$ za nek $m\in\N$.
 \begin{itemize}
 \item{$n=2m$}
-Predpostavimo lahko, da je $2m>4$, saj vemo da lema velja za $n\leq 4$, torej je $m>2$. Potem velja $2m>m+2$, kar pomeni, da vsi polinomi v definiciji $\gamma_{2m}$ zadoščajo indukcijski predpostavki. Če je $m$ sodo število, potem se $\gamma_{m},\gamma_{m+2},\gamma_{m-2}$ nahajajo v $2y\Z[x,y^2,A,B]$. Od tod pa sledi, da je tudi $\gamma_{2m} \in 2y\Z[x,y^2,A,B]$.
-Če je $m$ lih, potem sta $\gamma_{m-1},\gamma_{m+1} \in 2y\Z[x,y^2,A,B]$. To pa pomeni, da je tudi  $\gamma_{2m} \in 2y\Z[x,y^2,A,B]$.
+Predpostavimo lahko, da je $2m>4$, saj vemo da lema velja za $n\leq 4$, torej je $m>2$. Potem velja $2m>m+2$, kar pomeni, da vsi polinomi v definiciji $\gamma_{2m}$ zadoščajo indukcijski predpostavki. Če je $m$ sodo število, potem se $\gamma_{m},\gamma_{m+2},\gamma_{m-2}$ nahajajo v $2y\Z[x,y^2,a,b]$. Od tod pa sledi, da je tudi $\gamma_{2m} \in 2y\Z[x,y^2,a,b]$.
+Če je $m$ lih, potem sta $\gamma_{m-1},\gamma_{m+1} \in 2y\Z[x,y^2,a,b]$. To pa pomeni, da je tudi  $\gamma_{2m} \in 2y\Z[x,y^2,a,b]$.
 \item{$n=2m+1$}
 Primer obravnavamo podobno kot $n=2m$.
 
@@ -1355,47 +1301,43 @@ Definirajmo še polinoma
 
 Podobno, kot pri polinomih $\gamma_m$ lahko tudi za $\phi_m$ in $\omega_m$ formuliramo lemo, katere dokaz bomo izpustili.
 
-\begin{lema}~
-
-Polinom $\phi_{n}$ je element $\Z[x,y^2,A,B]$, za vse $n$. Če je $n$ lih, potem je $\omega_{n}$ element v \newline $y\Z[x,y^2,A,B]$. Za sode $n$ pa je $\omega_{n}$ element v $\Z[x,y^2,A,B]$.
+\begin{lema}
+Polinom $\phi_{n}$ je element $\Z[x,y^2,a,b]$, za vse $n$. Če je $n$ lih, potem je $\omega_{n}$ element v \newline $y\Z[x,y^2,a,b]$. Za sode $n$ pa je $\omega_{n}$ element v $\Z[x,y^2,a,b]$.
 
 \end{lema}
 
 Predstavimo sedaj $\gamma_m, \omega_m, \phi_m$ kot polinome nad eliptičnimi krivuljami v Weierstrassovi obliki
-$$E: y^2=x^3+Ax+B.$$
-Polinome v $\Z[x,y^2,A,B]$ lahko gledamo kot polinome v $\Z[x,A,B]$, tako da $y^2$ nadomestimo z $x^3+Ax+B$.
-\begin{opomba}~
+$$E: y^2=x^3+ax+b.$$
+Polinome v $\Z[x,y^2,a,b]$ lahko gledamo kot polinome v $\Z[x,a,b]$, tako da $y^2$ nadomestimo z $x^3+ax+b$.
 
+\begin{opomba}
 Polinoma $\gamma_n$ ni vedno možno predstaviti kot polinom spremenljivke $x$, saj je potenca $y$ odvisna od parnosti $n$. Vseeno pa velja, da lahko $\gamma^2_n$ vedno zapišemo kot polinom spremenljivke $x$.
 
 \end{opomba}
 
-\begin{izrek}[\protect{\cite{Washington2008}, Izrek 3.6}]~
+\begin{izrek}[\protect{\cite{Washington2008}, Izrek 3.6}]
 
 \label{izrek:3.6}
-Naj bo $P = (x,y)$ točka na krivulji $y^2 = x^3+Ax+B$, nad poljem s karakteristiko različno od $2$. Naj bo $n\in \N$, potem velja
+Naj bo $P = (x,y)$ točka na krivulji $y^2 = x^3+ax+b$, nad poljem s karakteristiko različno od $2$. Naj bo $n\in \N$, potem velja
 $$nP = \left( \frac{\phi_n(x)}{\gamma^2_n(x)}, \frac{\omega_n(x,y)}{\gamma^3_n(x,y)}\right).$$
 
 
 \end{izrek}
 
-\begin{posledica}~
-
+\begin{posledica}
 \label{posledica:3.7}
 Naj bo $E$ eliptična krivulja. Endomorfizem $E$ podan kot množenje z $n$, ima stopnjo $n^2$.
 \end{posledica}
 
 Brez dokazov formulirajmo še nekaj pomožnih trditev, ki jih bomo potrebovali za dokaz izreka \ref{IzrekTor}.
 
-\begin{izrek}[\protect{\cite{Washington2008}, Izrek 2.22}]~
-
+\begin{izrek}[\protect{\cite{Washington2008}, Izrek 2.22}]
 \label{izrek:2.22}
 Naj bo $E$ eliptična krivulja definirana nad poljem $K$. Naj bo $\alpha \neq 0$ endomorfizem na $E$. Potem je $\alpha: \E{\overline{K}} \rightarrow \E{\overline{K}}$ surjektivna preslikava.
 
 \end{izrek}
 
-\begin{trditev}[\protect{\cite{Washington2008}, Trditev 2.28}]~
-
+\begin{trditev}[\protect{\cite{Washington2008}, Trditev 2.28}]
 \label{trditev:2.28}
 Naj bo $E$ eliptična krivulja definirana nad poljem $K$, ter naj bo $n\in \N$. Naj bo množenje z $n$ na $E$ podano z racionalnima funkcijama $R_n$ in $S_n$, kot v razdelku \ref{endomorfizmi},
 $$n(x,y) = (R_n(x),yS_n(x))$$
@@ -1406,8 +1348,7 @@ Od tod pa sledi, da je množenje z $n$ seperabilno natanko tedaj, ko $n$ ni več
 
 Sedaj imamo vse kar potrebujemo, da dokažemo izrek \ref{IzrekTor}.
 
-\begin{proof}[Dokaz izreka \ref{IzrekTor}]~
-
+\begin{proof}[Dokaz izreka \ref{IzrekTor}]
 Predpostavimo, da $n$ ni večkratnik karakteristike $p$ polja. Po izreku \ref{izrek:3.6} vemo, da ima množenje z $n$ prvo koordinato oblike
 $$R(x) = \frac{x^{n^2}+\ldots}{n^2x^{n^2-1}+ \ldots}.$$
 Če poračunamo odvod, v števcu dobimo $n^2x^{2n^2-2}+ \ldots$, kar ni identično enako $0$. To pomeni, da je množenje z $n$ seperabilno. Jedro množenja z $n$ so torzijske točke $E[n]$. Po posledici \ref{posledica:3.7} in izreku \ref{izrek:2.21} ima jedro množenja z $n$ red $n^2$. Iz algebre vemo \cite{predavanja}, da so končne Abelove grupe, torej tudi  $E[n]$, izomorfne
@@ -1437,15 +1378,13 @@ $$E[n] \simeq \Z_{n'} \oplus \Z_{n'} \text{ ali } \Z_n \oplus \Z_{n'}.$$
 Parjenja eliptičnih krivulj \cite{Washington2008} so uporabna za konstrukcijo različnih kriptografskih sistemov, prav tako pa imajo pomembno vlogo pri napadih na problem diskretnega logaritma nad
 gladkimi kubičnimi krivuljami, katerimu bomo posvetili nadaljna poglavja.
 
-\begin{definicija}~
-
+\begin{definicija}
 Naj bo $K$ polje in naj bo $n \in \N$ tak, da karakteristika $K$ ne deli $n$.
 $$\mu_n = \{ x \in \overline{K} | x^n = 1 \}$$
 je \emph{grupa n-tih korenov enote} $\overline{K}$.
 \end{definicija}
 
-\begin{trditev}~
-
+\begin{trditev}
 \label{trd-WeilPar}
 Naj bo E eliptična krivulja definirana nad poljem $K$, in naj bo $n \in \N$. Predpostavimo, da karakteristika polja $K$ ne deli $n$. Potem obstaja Weilovo parjenje
 $$e_n:E[n] \times E[n] \rightarrow \mu_n,$$
@@ -1464,7 +1403,7 @@ za vse $S,S_1,S_2,T,T_1,T_2 \in E[n]$.
 
 \item $e_n(\rho S,\rho T) = \rho(e_n(S,T))$ za vse avtomorfizme $\rho$ na $\bar{K}$, za katere je $\rho$ identiteta na koeficientih enačbe za $E$.
 
-\item $e_n(\alpha(S),\alpha(T)) = e_n(S,T)^{\text{deg}(\alpha)}$ za vse separabilne endomorfizme $\alpha$ polja $E$.
+\item $e_n(\alpha(S),\alpha(T)) = e_n(S,T)^{\DEG{\alpha}}$ za vse separabilne endomorfizme $\alpha$ polja $E$.
 \end{itemize}
 
 \end{trditev}
@@ -1472,15 +1411,13 @@ za vse $S,S_1,S_2,T,T_1,T_2 \in E[n]$.
 
 
 
-\begin{posledica}~
-
+\begin{posledica}
 \label{PosledicaTrdParj}
 Naj bosta $T_1,T_2$ baza za $E[n]$. Potem je $e_n(T_1,T_2)$ generator grupe $\mu_n$.
 \end{posledica}
 
 
-\begin{proof}~
-
+\begin{proof}
 Vemo, da za poljubni točki $T_1,T_2$  v $E[n]$ velja $e_n(T_1,T_2)^n = 1$, saj se slika parjenja nahaja v grupi $n$-tih korenov enote. Pokazati moramo torej, da če za neko število $d$ velja  $e_n(T_1,T_2)^d = 1$ potem od tod sledi, da je $d \geq n$.
 Recimo torej, da je $e_n(T_1,T_2) = \zeta$ in $\zeta^d = 1$.
 Po prvi točki trditve \ref{trd-WeilPar} velja $$e_n(T_1,dT_2) = e_n(T_1,T_2)^d=1.$$ Prav tako velja $e_n(T_2,dT_2) = e_n(T_2,T_2)^d = 1 $. Naj bo $S \in E[n]$, potem iz $S = aT_1+bT_2$ za neka $a,b \in \N$, s ponovno uporabo trditve \ref{trd-WeilPar} dobimo
@@ -1488,25 +1425,23 @@ $$e_n(S,dT_2)= e_n(T_1,dT_2)^ae_n(T_2,dT_2)^b = 1. $$
 Ker to velja za vsak $S$, iz druge točke trditve \ref{trd-WeilPar} sledi, da je $dT_2 = \infty$. To pa je možno le, če $n|d$, kar pomeni, da je $n \leq d$.
 \end{proof}
 
-\begin{posledica}~
-
+\begin{posledica}
 Če je $E[n] \subseteq \E{K}$, potem je $\mu_n \subset K$.
 
 \end{posledica}
 
-\begin{proof}~
-
+\begin{proof}
 Naj bo $\rho$ tak avtomorfizem $\overline{K}$, da je $\rho$ indentiteta na elementih $K$. Naj $T_1,T_2$ tvorita bazo $E[n]$. Ker imata po predpostavki točki koordinate v $K$, zanju velja
 $\rho T_1 = T_1, \ \rho T_2 = T_2$.
 Po trditvi \ref{trd-WeilPar} velja
 $$\zeta = e_n(T_1,T_2) = e_n(\rho T_1,\rho T_2) = \rho(e_n(T_1,T_2)) = \rho(\zeta).$$
 
-Eden od izrekov Galoisove teorije pa pravi, če je $x \in \overline{K}$ fiksen za vse take avtomorfizme $\rho$ potem je $x\in K$. Torej je $\zeta \in K$. Ker pa je $\zeta$ primitivni koren enote od tod sledi $\mu_n \subset K$.
+Osnovni izrek Galoisove teorije \cite{milneFT} pa pravi, če je $x \in \overline{K}$ fiksen za vse avtomorfizme $\rho$, za katere je $\rho$ identiteta na elementih $K$, potem je $x\in K$. Torej je $\zeta \in K$. Ker pa je $\zeta$ primitivni koren enote, od tod sledi $\mu_n \subset K$.
 
 \end{proof}
 
 Pred dokazom trditve \ref{trd-WeilPar} bomo potrebovali še eno trditev.
-\begin{trditev}[\protect{\cite{Washington2008}, Trditev 9.34}]~
+\begin{trditev}[\protect{\cite{Washington2008}, Trditev 9.34}]
 \label{trd:9.34}
 
 Naj bo $E$ eliptična krivulja nad poljem $K$. Naj bo $f$ funkcija, ki elementom iz $E$ priredi element v $\overline{K} \cup \{ \infty \}$, ter naj bo $n \in \N$, število ki ni deljivo s karakteristiko $K$. Če velja $f(P+T) = f(P)$ za vse $P \in E(\overline{K}), T \in E[n]$. Potem obstaja funkcija $h$ na $E$, za katero velja
@@ -1514,8 +1449,7 @@ $$f(P) = h(nP), \ \text{za vse } P.$$
 
 \end{trditev}
 
-\begin{proof}[Dokaz trditve \ref{trd-WeilPar}]~
-
+\begin{proof}[Dokaz trditve \ref{trd-WeilPar}]
 %%%%%%%%%%%%
 %POMEMBNO
 %manka utemeljitev da je E[n] \subset E(K) in pa \mu_n \subset E(K)
@@ -1660,7 +1594,7 @@ Velja
 e_n(\alpha(S),\alpha(T)) &{}= \frac{g_{\alpha(T)}(\alpha(P+S))}{g_{\alpha(T)}(\alpha(P))} \nonumber \\
 &{} = \prod_i \frac{g_T(P+S-Q'_i)}{g_T(P-Q'_i)} \nonumber \\
 &{} = \prod_i e_n(S,T) \nonumber  \\
-&{} = e_n(S,T)^k = e_n(S,T)^{deg(\alpha)}. \nonumber
+&{} = e_n(S,T)^k = e_n(S,T)^{\DEG{\alpha}}. \nonumber
 \end{align}
 
 \end{enumerate}
@@ -1671,10 +1605,8 @@ e_n(\alpha(S),\alpha(T)) &{}= \frac{g_{\alpha(T)}(\alpha(P+S))}{g_{\alpha(T)}(\a
 
 Leta $1986$ je Victor Miller objavil algoritem za učinkovit izračun Weilovega parjenja \cite{Miller} .
 
-\begin{izrek}~
-
+\begin{izrek}
 \label{izrek:Miller}
-
 Naj bo $E$ eliptična krivulja in naj bosta $P=(x_P,y_P), Q = (x_Q,y_Q)$ ne ničelni točki na $E$.
 \begin{enumerate}
 \item Označimo z $\lambda$ naklon premice, ki povezuje točki $P,Q$. V primeru, da sta ti točki enaki, $\lambda$ predstavlja naklon tangente v točki. Če je premica navpična ($x_P = x_Q$), potem privzamemo, da je $\lambda = \infty$. Definirajmo funkcijo $g_{P,Q}$ na sledeči način:
@@ -1722,7 +1654,7 @@ $$\Div{f_P} = m[P]-[mP]-(m-1)[\infty].$$
 \end{algorithmic}
 \end{algorithm}
 
-\begin{proof}~
+\begin{proof}
 
 \begin{enumerate}
 \item Predpostavimo najprej, da $\lambda \neq \infty$, ter naj $y = \lambda x + \mu$ predstavlja premico skozi $P,Q$ (ali tangento v primeru, da je $P=Q$). Taka premica seka krivuljo $E$ v treh točkah $P,Q,-P-Q$. To sledi iz sestave grupe nad $E$. Za to premico torej velja
@@ -1755,8 +1687,7 @@ S pomočjo izreka $\ref{izrek:Miller}$ lahko sedaj izračunamo Weilovo parjenje 
 $$e_m(P,Q) = \frac{\frac{f_P(Q+S)}{f_P(S)}}{\frac{f_Q(P-S)}{f_Q(-S)}} .$$
 Tu moramo za točko $S$ izbrati $S \notin \{ \infty,P,-Q,P-Q\}$.
 
-\begin{primer}~
-
+\begin{primer}
 Naj bo $y^2 = x^3+30x+34$ eliptična krivulja nad poljem $\F_{631}$. Izberimo točki $P = (36,60),Q = (121,387)$. Izračunati želimo Weilovo parjenje $e_5(P,Q)$
 
 Če želimo uporabiti Millerjev algoritem moramo izbrati točko $S$. Izberimo $S=(0,36)$. Hitro lahko preverimo, da $S$ res zadošča kriterijem izbire.
@@ -1812,7 +1743,7 @@ Kot sam ključ bi lahko na koncu Alenka in Boris uporabila npr.\  zadnjih $256$ 
 
 To nas privede do t.\ i.\ problema diskretnega logaritma v grupi točk nad eliptičnimi krivuljami.
 
-\begin{definicija}~
+\begin{definicija}
 Naj bo $G$ grupa, kjer njeno operacijo označimo z $\circ$.
 Naj bosta $a, b \in G$. Naj $b^k$ označuje $$b^k = \underbrace{b\circ b\circ \cdots \circ b}_\text{$k$-krat}.$$ Število $k \in \N$, ki reši enačbo $$b^k = a$$ imenujemo \emph{diskretni logaritem} elementa $a$ pri osnovi $b$.
 
@@ -1820,14 +1751,12 @@ Naj bosta $a, b \in G$. Naj $b^k$ označuje $$b^k = \underbrace{b\circ b\circ \c
 
 Problem diskretnega logaritma je torej poiskati tak $k$, ki bo rešil dano enačbo.
 
-\begin{trditev}~
-
+\begin{trditev}
 Če lahko rešimo problem diskretnega logaritma, potem smo rešili tudi problem Diffie-Hellmanove izmenjave ključev. Povedano drugače velja
 $$\text{DL} \Rightarrow DH.$$
 \end{trditev}
 
-\begin{proof}~
-
+\begin{proof}
 Problem Diffie-Hellmanove izmenjave ključev lahko enostavno prevedemo na problem diskretnega logaritma na sledeč način:
 
 \begin{itemize}
@@ -1838,18 +1767,12 @@ Problem Diffie-Hellmanove izmenjave ključev lahko enostavno prevedemo na proble
 \end{proof}
 
 %ODLOČITVENI DIFFIE HELMAN
-Na podoben način lahko definiramo tudi odločitveni Diffie-Hellmanov problem, ki se glasi.
-\begin{definicija}~
-
-Naj bodo dani $P,aP,bP,Q$ in $\E{F_q}$. Ali velja $Q = abP$?
-\end{definicija}
-
+Poleg klasičnega problema dikretnega logaritma lahko formuliramo tudi odločitveni problem diskretnega logaritma. Ta je ali lahko pri danih podatkih $P,aP,bP,Q$ in $\E{F_q}$ preverimo, če velja $Q = abP$.
 Povedano drugače, če dobimo namig ki vsebuje $abP$, ali lahko preverimo če ta informacija drži.
 
 Poglejmo si na primeru, kako lahko s pomočjo Weilovega parjenja, v določenih primerih, pridemo do rešitve tega problema.
 
-\begin{primer}~
-
+\begin{primer}
 Naj bo $E$ podana kot $y^2=x^3+1$ nad $\F_q$, kjer je $q \equiv 2 \MOD{3}$. Naj bo $\omega \in \F_{q^2}$ primitivni tretji koren enote. Opazimo, da $\omega \notin \F_q$, saj je red $\F^{\times}_q$ enak $q-1$, kar pa ni deljivo s tri.
 Definirajmo preslikavo
 $$\beta:\E{\overline{\F_q}} \rightarrow \E{\overline{\F_q}}, \ (x,y) \mapsto (\omega x,y), \ \beta(\infty) = \infty.$$
@@ -1871,14 +1794,12 @@ $$Q=abP \iff t \equiv ab \MOD{n} \iff e_n'(aP,bP)=e_n'(P,P)^t.$$
 
 V zgornjem primeru je potrebna še dodatna utemeljitev, ki jo lahko zapišemo kot lemo.
 
-\begin{lema}~
-
+\begin{lema}
 \label{lema:6.1}
 Naj $3 \nmid n$. Če ima $P \in \E{\F_q}$ red n, potem je $e_n'(P,P)$ n-ti koren enote.
 \end{lema}
 
-\begin{proof}~
-
+\begin{proof}
 Naj bo $uP = v\beta(P)$ za neki števili $u,v$. Potem zaradi lastnosti izomorfizmov velja
 $$\beta(vP) = v\beta(P) = uP \in \E{\F_q}.$$
 Obravnavajmo sedaj dva primera.
@@ -1915,8 +1836,7 @@ $$\log_{\alpha}\beta + s \equiv c_1\log_{\alpha}p_1 + \ldots + c_B\log_{\alpha}p
 Tu pa poznamo vse spremenljivke razen $\log_{\alpha}\beta$.
 
 Poglejmo si sedaj algoritem še na primeru.
-\begin{primer}~
-
+\begin{primer}
 Naj bo $p = 1217$ praštevilo in naj bo $g = 3$ generator ciklične grupe $\F^{\times}_{p}$. Za $h = 37$ želimo rešiti problem diskretnega logaritma. Naj $L(x)$ označuje diskretni logaritem $x$ pri osnovi $b$, torej
 $$g^{L(x)} \equiv x \ (\text{mod} \ p).$$
 Izberimo si bazo praštevil $\{ 2,3,5,7,11,13 \}$. Pri tem upoštevamo, da bo večja baza pomenila več računanja, a hkrati lažjo pot do odgovora. Iščemo $x$-e  tako, da bo
@@ -1977,14 +1897,12 @@ Z uporabo programskega okolja SAGE, lahko napad enostavno tudi sprogramiramo.
 \section{MOV}
 MOV napad, poimenovan po njegovih avtorjih Menezes, Okamoto in Vanstone, s pomočjo Weilovega parjenja pretvori problem diskretnega logaritma iz $E(\F_{q})$ v problem diskretnega logaritma nad $\F^{\times}_{q^m}$ \cite{Washington2008}. Na ta način se izognemo računanju nad krivuljo. Nov problem diskretnega logaritma pa lahko sedaj rešimo z različnimi napadi, med drugim tudi z napadom Index-Calculus \ref{IndexCalc}. MOV napad deluje če velikost polja $\F_{q^m}$ ni dosti večja od velikosti polja $\F_{q}$. Postopek napada sledi poteku dokaza naslednje trditve.
 
-\begin{trditev}~
-
+\begin{trditev}
 \label{trd:5.1}
 Naj bo $E$ eliptična krivulja nad $\F_{q}$. Naj bosta $P,Q \in E(\F_{q})$, ter naj bo $N$ red točke $P$. Predpostavimo, da velja $\text{gcd}(N,q)=1$. Potem obstaja tako število $k$, da velja $Q = kP$ natanko tedaj ko $NQ = \infty$ in $e_N(P,Q)=1$.
 \end{trditev}
 
-\begin{proof}~
-
+\begin{proof}
 $(\Rightarrow)$ Če je $Q = kP$, potem je $NQ = kNP$, ampak ker je red $P$ enak $N$ od tod sledi $kNP = \infty$. Prav tako
 $$e_n(P,Q) = e_n(P,P)^k = 1^k = 1.$$
 
@@ -2025,19 +1943,16 @@ kjer krivuljo $E(\F_p)$ MOV napad pretvori v grupo $\F^{\times}_{p^k}$.
 
 MOV napad deluje na supersingularnih krivuljah, saj lahko za take krivulje ponavadi lahko vzamemo $m=2$.
 
-\begin{definicija}~
-
+\begin{definicija}
 Eliptična krivulja $E$ s karakteristiko $p$ je \emph{supersingularna} če je $E[p] \cong 0$.
 \end{definicija}
 
 
-\begin{izrek}~
-
+\begin{izrek}
 Naj bo $E$ eliptična krivulja nad $\F_q$, kjer je $q$ potenca nekega praštevila $p$. Potem velja $\#\E{\F_q} = q+1-a$ za neko število $a$. Krivulja $E$ je supersingularna natanko tedaj ko  velja $a \equiv 0 \MOD{p}$, kar se zgodi natanko tedaj ko $\# \E{\Fq{q}} \equiv 1 \MOD{p}$.
 \end{izrek}
 
-\begin{proof}~
-
+\begin{proof}
 Zapišimo $X^2-aX+q = (X-\alpha)(X-\beta)$. Trditvi \ref{trd:4.12} pravi, da velja
 $$\# \E{\Fq{q^n}}  = q^n+1-(\alpha^n+\beta^n). $$
 
@@ -2060,20 +1975,17 @@ $$\# \E{\Fq{q}}  = q+1-a \equiv 1-a \MOD{p}.$$
 Od tod sledi $\# \E{\Fq{q}} \equiv 1 \MOD{p}$ natanko tedaj ko $a\equiv 0 \MOD{p}$.
 \end{proof}
 
-\begin{opomba}~
-
+\begin{opomba}
 Izkaže se, da je pri pogoju $q=p \geq 5$ ta definicija ekvivalentna temu, da je $a=0$.
 \end{opomba}
 Naslednja trditev, nam bo dala utemeljitev izbire $m$ pri supersingularnih krivuljah.
 
-\begin{trditev}~
-
+\begin{trditev}
 Naj bo $E$ eliptična krivulja nad $\F_q$, ter naj velja $a = q+1-\#\E{\F_q} =0$. Naj bo $N\in \N$. Če obstaja točka $P \in \E{\F_q}$ reda $N$, potem velja
 $$E[N] \subseteq \E{\F_{q^2}}.$$
 \end{trditev}
 
-\begin{proof}~
-
+\begin{proof}
  Frobeniusev endomorfizem $\phi_q$ po izreku \ref{izrek:4.10} zadošča $\phi^2_q-a\phi_q+q=0$. Ker velja $a = 0$, to pomeni
 $$\phi^2_q = -q.$$
 
@@ -2082,8 +1994,7 @@ $$\phi^2_q(S) = -qS = 1\cdot S.$$
 Po lemi \ref{lema:4.5} od tot sledi $S \in \E{\F_{q^2}}$. 
 \end{proof}
 
-\begin{primer}~
-
+\begin{primer}
 Denimo, da želimo rešiti problem diskretnega logaritma na krivulji $E: \ y^2 = x^3+x \MOD{547}$, podanega s točkama $P=(67,481),Q = (167,405)$. Iščemo $k$ tako da bo veljalo $P = kQ$.
 
 Najprej moramo prvotno polje razširiti z nekim $m$. Ker je podana krivulja supersingularna, lahko za $m$ izberemo $2$. Krivuljo torej razširimo na polje $\F_{547^2}$. Vzemimo za nerazcepni polinom stopnje $2$ polinom $x^2+543x+2$. Elementi tega polja so torej polinomi stopnje $1$ s koeficienti v $\F_p$.
@@ -2118,8 +2029,7 @@ Izhod: red točke $P$. \newline
 
 \end{algorithm}
 
-\begin{opomba}~
-
+\begin{opomba}
 \label{opo:MaliVeliki}
 Algoritem \ref{alg:babyGiant} lahko preoblikujemo do te mere, da namesto reda točke izračunamo število točk na krivulji. Vse kar moramo narediti, je ponavljati korake $(1)$-$(6)$ za naključno izbrane točke $P \in E(\F{q})$. Ustavimo se ko najmanjši skupni večkratnik redov točk, deli le eno število $N$ v območju $q+1-2\sqrt{q} \leq N \leq q+q+2\sqrt{q}$. To število $N$ je potem število točk na dani krivulji. Pri tem postopku se upremo na Hassejev izrek o številu točk na eliptični krivulji.
 
@@ -2127,21 +2037,19 @@ Algoritem \ref{alg:babyGiant} lahko preoblikujemo do te mere, da namesto reda to
 
 Tu se sedaj pojavi še vprašanje zakaj ta algoritem deluje. Odgovor na to vprašanje pa nam da naslednja lema.
 
-\begin{lema}~
+\begin{lema}
 
 Naj bo $G$ aditivna grupa in naj bo $g\in G$. Denimo da velja $Mg = 0$ za nek $M \in \N$. Označimo s $p_1,\ldots,p_r$ različna praštevila, ki delijo $M$. Če velja $(M/p_i)g \neq  0$ za vse $i$, potem je $M$ red $g$.
 
 \end{lema}
 
-\begin{proof}~
-
+\begin{proof}
 Naj bo $k$ red $g\in G$. Ker velja $Mg = 0$ vemo, da $k|M$. Denimo, da $k \neq M$. Pokazati moramo, da obstaja praštevilo $p_i$, tako da $(M/p_i)g = 0$. Naj bo $p_i$ praštevilo, ki deli $M/k$. Tako število obstaja, ker $M \neq k$. Potem velja $p_ik|M$, to pa pomeni da $k|(M/p_i)$. Ker pa je $k$ red elementa $g$, to pomeni $(M/p_i)g = 0$.
 
 \end{proof}
 
 
-\begin{primer}~
-
+\begin{primer}
 Vzemimo problem iz prejšnega primera. Zanima nas torej red točke \newline $P=(67,481)$, ki se nahaja na krivulji $y^2 = x^3+x \MOD{547}$.
 
 Najprej poračunamo točko $Q = (q+1)P = 548P = \infty$. Ker je $Q$ točka v neskončnosti lahko izpustimo iskanje pravega $k$ iz algoritma, saj bo pri $k=0,j=0$ veljalo
@@ -2170,49 +2078,46 @@ Takim krivuljam rečemo \emph{anomalne krivulje}. V primeru, ko je $p$ praštevi
 Pokažimo algoritem, ki deluje če je $q$ praštevilo.
 Za tak napad bomo morali najprej krivuljo $E$ in točki $P,Q$ razširiti iz $\F_p$ na $\Z$. Pri tem bomo potrebovali naslednjo trditev.
 
-\begin{trditev}~
-
+\begin{trditev}
 \label{trd:5.6}
-Naj bo $E$ eliptična krivulja nad $\F_p$ in naj bosta $P,Q \in \E{\F_p}$. Predpostavimo še, da je krivulja $E$ oblike $y^2=x^3+Ax+B$. Potem obstajajo cela števila
-$A',B',x_1,x_2,y_1,y_2$ in eliptična krivulja $E'$ podana z
-$$y^2=x^3+A'x+B',$$
+Naj bo $E$ eliptična krivulja nad $\F_p$ in naj bosta $P,Q \in \E{\F_p}$. Predpostavimo še, da je krivulja $E$ oblike $y^2=x^3+ax+b$. Potem obstajajo cela števila
+$a',b',x_1,x_2,y_1,y_2$ in eliptična krivulja $E'$ podana z
+$$y^2=x^3+a'x+b',$$
 ter točke $P'=(x_1,y_1),Q'=(x_2,y_2), \in E'(\Q)$.
 Za ta števila velja
-$$A\equiv A',\ B \equiv B',\ P \equiv P',\ Q \equiv Q' \MOD{p}.$$
+$$a\equiv a',\ b \equiv b',\ P \equiv P',\ Q \equiv Q' \MOD{p}.$$
 
 \end{trditev}
 
-\begin{proof}~
-
+\begin{proof}
 Izberi števili $x_1,x_2$ tako, da velja $x_1,x_2 \MOD{p}$ podajata x-koordinati $P,Q$. Predpostavimo najprej, da $x_1 \not \equiv x_2 \MOD{p}$. Nato izberi $y_1$ tako, da velja
 $P' \equiv P \MOD{p}$. Tu ekvivalenco gledamo po koordinatah. Pri izbiri $y_2$ moramo biti bolj previdni. Izberimo $y_2$ tako, da velja
 $$y_2^2\equiv y_1^2 \MOD{x_2-x_1} \text{ in } (x_2,y_2) \equiv Q \MOD{p}.$$
 To je mogoče, saj lahko uporabimo Kitajski izrek o ostankih, ker velja $gcd(p,x_2-x_1) = 1$.
 
-Na ta način dobimo dve enačbi s pomočjo katerih moramo določiti konstanti $A',B'$.
+Na ta način dobimo dve enačbi s pomočjo katerih moramo določiti konstanti $a',b'$.
 Enačbi se glasita
 \begin{align}
-y_1^2&{}=x_1^3+A'x_1+B, \nonumber  \\
-y_2^2&{}=x_2^3+A'x_2+B. \nonumber
+y_1^2&{}=x_1^3+a'x_1+b, \nonumber  \\
+y_2^2&{}=x_2^3+a'x_2+b. \nonumber
 \end{align}
 
 Rešitev se torej glasi
-$$A' = \frac{(y_2^2-y_1^2)-(x_2^3-x_1^3)}{x_2-x_1}, B' = y_1^2-x_1^3-A'x_1.$$
-Ker je $y_2^2-y_1^2$ po konstrukciji deljivo z $x_2-x_1$ in ker so vse ostale konstante cela števila, od tod sledi, da sta tudi $A',B' \in \Z$. Točki $P',Q'$ pa ležita na $E'$ po konstrukciji.
+$$a' = \frac{(y_2^2-y_1^2)-(x_2^3-x_1^3)}{x_2-x_1}, b' = y_1^2-x_1^3-a'x_1.$$
+Ker je $y_2^2-y_1^2$ po konstrukciji deljivo z $x_2-x_1$ in ker so vse ostale konstante cela števila, od tod sledi, da sta tudi $a',b' \in \Z$. Točki $P',Q'$ pa ležita na $E'$ po konstrukciji.
 
-Obravnavati moramo še primer če je $x_1 \equiv x_2 \MOD{p}$. V tem primeru velja $P = \pm Q$. Izberimo potem $x_1 = x_2$, ter $y_1$ tako, da nam $y_1 \MOD{p}$ podaja y-koordinato točke $P$. Na isti način izberemo še $A'$, ter določimo $B' = y_1^2-x_1^3-A'x_1$. $Q'$ pa izberemo kot $\pm P'$.
+Obravnavati moramo še primer če je $x_1 \equiv x_2 \MOD{p}$. V tem primeru velja $P = \pm Q$. Izberimo potem $x_1 = x_2$, ter $y_1$ tako, da nam $y_1 \MOD{p}$ podaja y-koordinato točke $P$. Na isti način izberemo še $a'$, ter določimo $b' = y_1^2-x_1^3-a'x_1$. $Q'$ pa izberemo kot $\pm P'$.
 
 Preveriti moramo še, da enačba ki predstavlja $E'$ res podaja eliptično kirvuljo. Ker je krivulja $E$ eliptična velja
-$$4A^3+27B^2 \neq 0.$$
+$$4a^3+27b^2 \neq 0.$$
 To pa pomeni
-$$4A'^3+27B'^2 \equiv 4A^3+27B^2 \not \equiv 0 \MOD{p}.$$
+$$4a'^3+27b'^2 \equiv 4a^3+27b^2 \not \equiv 0 \MOD{p}.$$
 
-Velja torej $4A'^3+27B'^2 \neq 0$. Kar pa pomeni, da je $E'$ res eliptična krivulja.
+Velja torej $4a'^3+27b'^2 \neq 0$. Kar pa pomeni, da je $E'$ res eliptična krivulja.
 \end{proof}
 
 
-\begin{definicija}~
-
+\begin{definicija}
 Naj bosta $a,b$ racionalni števili za kateri velja $a/b \neq 0$ in $a,b$ tuji števili. Zapišimo $a/b = p^ra_1/b_1$, kjer $p \nmid a_1b_1$. Potem je \emph{p-adična vrednost} definirana
 kot
 $$v_p(a/b) = r.$$
@@ -2220,20 +2125,18 @@ Definirajmo še
 $$v_p(0) = \infty.$$
 \end{definicija}
 
-\begin{primer}~
-
+\begin{primer}
 $\frac{7}{40} = 2^{-3}\frac{7}{5}$, zato velja
 $$v_2(7/40) = -3.$$
 Poglejmo si še kakšen primer
 $$v_5(50/3) = 2,\ v_7(1/2) = 0.$$
 \end{primer}
 
-Naj bo $E'$ eliptična krivulja nad $\Z$ podana z $y^2 = x^3+A'x+B'$. Naj bo $r \in N$. Potem lahko definiramo
+Naj bo $E'$ eliptična krivulja nad $\Z$ podana z $y^2 = x^3+a'x+b'$. Naj bo $r \in N$. Potem lahko definiramo
 $$E_r' = \{  (x,y) \in E'(\Q) | v_p(x) \leq -2r, v_p(y) \leq -3r \} \cup \{ \infty \}.$$
 
-\begin{izrek}[\protect{\cite{Washington2008}, Izrek 5.8}]~
-
-Naj bo $E'$ podana z $y^2 = x^3+A'x+B'$, $A',B' \in \Z$. Naj bo $p$ praštevilo in naj bo $r \in \N$. Potem velja
+\begin{izrek}[\protect{\cite{Washington2008}, Izrek 5.8}]
+Naj bo $E'$ podana z $y^2 = x^3+a'x+b'$, $a',b' \in \Z$. Naj bo $p$ praštevilo in naj bo $r \in \N$. Potem velja
 \begin{enumerate}
 
 \item $E_r'$ je podgrupa $E'(\Q)$.
@@ -2273,8 +2176,7 @@ Izho: diskretni logaritem $k$.\newline
 
 \end{algorithm}
 
-\begin{opomba}~
-
+\begin{opomba}
 Drugi korak algoritma nam zagotavlja, da so $P_1',Q_1' \in E_1'$. To je res, ker smo na anomalni krivulji in velja $\text{red}_p(pP') = p\cdot \text{red}_p(P') = \infty$.
 \end{opomba}
 
@@ -2309,8 +2211,7 @@ $$m_1 = p\frac{y'-y_1}{x'-x_1}, \ m_2 = p\frac{y''-y2}{x''-x_2}.$$
 
 Utemeljitev delovanja algoritma lahko najdemo v \cite{Washington2008}.
 
-\begin{primer}~
-
+\begin{primer}
 Naj bo krivulja $E$ podana z enačbo $y^2=x^3+154x+82$ nad poljem $\F_{163}$. Naj bosta $P = (7,6),Q = (150,152)$ točki na krivulji. Iščemo tak $k$, da bo veljalo $kP=Q$. Preden lahko uporabimo algoritem \ref{alg:AnomalAttack} se moramo prepričati, da je $E$ res anomalna krivulja. Za točko $P$ velja $163P = \infty$. Ker je $163$ praštevilo od tod sledi, da je red točke $P$ enak $163$. To pa pomeni, da $163|\#\E{\F_{163}}$. Hassejev izrek \ref{izr:Hasse} nam pove 
 \begin{align}
 q+1-2\sqrt{q} &{}\leq \#\E{\F_q} \leq q+1+2\sqrt{q}, \nonumber \\
@@ -2372,7 +2273,7 @@ To na prvi pogled ne deluje resna grožnja, a bi lahko povzročila velika škodo
 $$M' = M-M_2+M_2'.$$
 
 Vprašanje, ki ga moramo tu še razrešiti je kako sporočilo predstaviti kot točko na krivulji. Ena izmed možnosti je način, ki ga je predlagal Koblitz \cite{Koblitz1987}. Denimo, da je krivulja podana z enačbo
-$y^2 = x^3+Ax+B$ nad $\F_p$. Sporočilo $m$ predstavimo kot število $0 \leq m \leq p/100$. Sedaj določimo $x_j = 100m+j$, za $0\leq j < 100$. Podobno, kot pri generiranju naključne točke sedaj poizkusimo določiti koordinato $y_j$ če ta obstaja. Če smo uspeli poračunati obe koordinati je naša točka $M=(x_j,y_j)$. Ker velja $0\leq x_j < p+100$ je $m$ določen kot
+$y^2 = x^3+ax+b$ nad $\F_p$. Sporočilo $m$ predstavimo kot število $0 \leq m \leq p/100$. Sedaj določimo $x_j = 100m+j$, za $0\leq j < 100$. Podobno, kot pri generiranju naključne točke sedaj poizkusimo določiti koordinato $y_j$ če ta obstaja. Če smo uspeli poračunati obe koordinati je naša točka $M=(x_j,y_j)$. Ker velja $0\leq x_j < p+100$ je $m$ določen kot
 $m = \lfloor x_j \rfloor$.
 Ocenimo lahko, da je verjetnost neobstoja take točke približno $2^{-100}$.
 
