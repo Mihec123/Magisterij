@@ -12,7 +12,7 @@
 \newcommand{\naslovdela}{Kubične krivulje v kriptografiji}
 \newcommand{\letnica}{2020} % letnica magistriranja
 \newcommand{\opis}{??.}  % Opis dela v eni povedi. Ne sme vsebovati matematičnih simbolov v $ $.
-\newcommand{\kljucnebesede}{kubična krivulja\sep kriptografija\sep Weilovo parjenje\sep anomalne krivulje\sep supersingularne krivulje\sep MOV napad\sep index calculus\sep Millerjev algoritem\sep torzijske točke} % ključne besede, ločene z \sep, da se PDF metapodatki prav procesirajo
+\newcommand{\kljucnebesede}{kubična krivulja\sep kriptografija\sep Weilovo parjenje\sep anomalne krivulje\sep supersingularne krivulje\sep MOV napad\sep izračun indeksa\sep Millerjev algoritem\sep torzijske točke} % ključne besede, ločene z \sep, da se PDF metapodatki prav procesirajo
 \newcommand{\keywords}{cubic curve\sep cryptography\sep Weil pairing\sep anomalous curves\sep supersingular curves\sep MOV attack\sep Index calculus\sep Miller's algorithm\sep torsion points} % ključne besede v angleščini
 \newcommand{\organization}{Univerza v Ljubljani, Fakulteta za matematiko in fiziko} % fakulteta
 \newcommand{\literatura}{literatura}  % pot do datoteke z literaturo (brez .bib končnice)
@@ -309,7 +309,7 @@ Cubic curves in cryptography offer some advantages compared to the other cryptos
 %UVOD
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Uvod}
-Kubične krivulje imajo v kriptografiji velik pomen, saj zagotavljajo enako varnost, kot drugi klasični kriptosistemi, obenem pa potrebujejo manjšo velikost ključa. Njihovo uporabo je prvi predlagal Victor S. Miller leta 1985 \cite{Miller}, a v širšo rabo so vstopile še le okoli leta 2004. Razliko v potrebni dolžini ključa lahko opazujemo na dveh klasičnih zgledih. Kriptosisteme delimo na simetrične in asimetrične. Simetrični kriptosistemi uporabljajo isti ključ za šifriranje in dešifriranje. Pri asimetričnih kriptosistemih pa uporabljamo različna ključa za šifriranje in dešifriranje. Najpogosteje uporabljen asimetrični kriptosistem je RSA. Ime je dobil posvojih avtorjih Rivest, Shamir in Adleman. RSA temelji na problemu faktorizacije števil \cite{Easttom2015}. Ocenjuje se, da je $2048$ bitni ključ v RSA algoritmu enako varen kot $224$ bitni ključ nad eliptičnimi krivuljami.
+Kubične krivulje imajo v kriptografiji velik pomen, saj zagotavljajo enako varnost kot drugi klasični kriptosistemi, obenem pa potrebujejo manjšo velikost ključa. Njihovo uporabo je prvi predlagal Victor S. Miller leta 1985 \cite{Miller}, a v širšo rabo so vstopile šele okoli leta 2004. Razliko v potrebni dolžini ključa lahko opazujemo na dveh klasičnih zgledih. Kriptosisteme delimo na simetrične in asimetrične. Simetrični kriptosistemi uporabljajo isti ključ za šifriranje in dešifriranje. Pri asimetričnih kriptosistemih pa uporabljamo različna ključa za šifriranje in dešifriranje. Najpogosteje uporabljen asimetrični kriptosistem je RSA. Ime je dobil po svojih avtorjih Rivest, Shamir in Adleman. RSA temelji na problemu faktorizacije števil \cite{Easttom2015}. Ocenjuje se, da je $2048$ bitni ključ v RSA algoritmu enako varen kot $224$ bitni ključ nad eliptičnimi krivuljami.
 Eden najpogosteje uporabljenih simetričnih kriptosistemov pa je AES \cite{Easttom2015}. Podrobnejšo primerjavo pa lahko razberemo iz spodnje tabele.
 
 \begin{table}[h]
@@ -325,10 +325,10 @@ Eden najpogosteje uporabljenih simetričnih kriptosistemov pa je AES \cite{Eastt
 \end{tabular}
  \caption[Primerjava kriptosistemov.]{V tabeli so v posamezni vrstici dolžine ključev v bitih, ki zagotavljajo enako varnost, glede na AES, kriptosisteme z uporabo kubičnih krivulj ter RSA \cite{NIST}.}
 \end{table}
-Tu je potrebno dodati, da imajo simetrični kriptosistem pomankljivost pri dogovoru ključa, saj se ne moremo varno dogovoriti za začetni ključ. Klasično se za izmenjavo ključa uporablja npr.\ RSA ali kriptosistemi nad eliptičnimi krivuljami (na kratko ECC), nato pa se komunikacija nadaljuje s pomočjo simetričnih kriptosistemov. Krajši ključi predstavljajo veliko prednost v okoljih s slabšo procesorsko močjo in/ali omejenim pomnilnikom. Naprave z zgornjimi omejitvami pa so v današnjem svetu kljub hitrim tehnološkim napredkom zelo pogoste. Med njih bi lahko IoT(Internet of Things), pametne kartice, pametne USB ključke, itd. Zgodovinsko gledano sega uporaba kubičnih krivulj za kriptografske namene v konec 20.\ stoletja. Uporaba kubičnih krivulj pa ni omejena le na kriptosisteme, kubične krivulje namreč lahko služijo tudi kot orodje za napade na klasične kriptosisteme. Tako lahko kubične krivulje uporabljamo pri faktorizacijo števil, s katerim lahko razbijemo vse algoritme, ki temeljijo na faktorizaciji.  Pod določenimi pogoji z uporabo kubičnih krivulj dobimo enega najhitrejših poznanih algoritmov za razcep števil \cite{Lenstra1987}. S pomočjo tega lahko napademo vse kriptosisteme, katerih varnost temelji na problemu faktorizacije.
+Tu je potrebno dodati, da imajo simetrični kriptosistemi pomankljivost pri dogovoru ključa, saj se ne moremo varno dogovoriti za začetni ključ. Klasično se za izmenjavo ključa uporablja npr.\ RSA ali kriptosistemi nad eliptičnimi krivuljami (na kratko ECC), nato pa se komunikacija nadaljuje s pomočjo simetričnih kriptosistemov. Krajši ključi predstavljajo veliko prednost v okoljih s slabšo procesorsko močjo in/ali omejenim pomnilnikom. Naprave z zgornjimi omejitvami pa so v današnjem svetu kljub hitrim tehnološkim napredkom zelo pogoste. Med njih bi lahko umestili IoT(Internet of Things), pametne kartice, pametne USB ključke, itd. Zgodovinsko gledano sega uporaba kubičnih krivulj za kriptografske namene v konec 20.\ stoletja. Uporaba kubičnih krivulj pa ni omejena le na kriptosisteme, kubične krivulje namreč lahko služijo tudi kot orodje za napade na klasične kriptosisteme. Tako lahko kubične krivulje uporabljamo pri faktorizaciji števil, s katerim lahko razbijemo vse algoritme, ki temeljijo na faktorizaciji.  Pod določenimi pogoji z uporabo kubičnih krivulj dobimo enega najhitrejših poznanih algoritmov za razcep števil \cite{Lenstra1987}. S pomočjo tega lahko napademo vse kriptosisteme, katerih varnost temelji na problemu faktorizacije.
 
 V tem magisterskem delu bomo (enako kot v literaturi) gladkim kubičnim krivuljam pogosto rekli eliptične krivulje, saj so mod $\C$ vse definicije ekvivalentne.
-Najprej  bomo spoznali osnovne definicije in izreke o kubičnih krivuljah definiranimi nad končnimi polji. Za tem pa se bomo posvetili problemu diskretnega logaritma nad eliptičnimi krivuljami. Nato tega bomo spoznali nekaj napadov na eliptične krivulje, ter analizirali primerno izbiro krivulj za kriptografske namene. Pri tem bomo uvedli tudi parjenje nad eliptičnimi krivuljami in spoznali učinkovit algoritem za izračun le tega. Za vse skupaj pa bomo napisali tudi programsko kodo.
+Najprej  bomo spoznali osnovne definicije in izreke o kubičnih krivuljah definiranimi nad končnimi polji. Za tem pa se bomo posvetili problemu diskretnega logaritma nad eliptičnimi krivuljami. Nato bomo spoznali nekaj napadov na eliptične krivulje, ter analizirali primerno izbiro krivulj za kriptografske namene. Pri tem bomo uvedli tudi parjenje nad eliptičnimi krivuljami in spoznali učinkovit algoritem za izračun le tega. Za vse skupaj pa bomo napisali tudi programsko kodo.
 
 
 \newpage
@@ -343,7 +343,8 @@ Najprej  bomo spoznali osnovne definicije in izreke o kubičnih krivuljah defini
 Skozi celotno delo se bomo ukvarjali s končimi polji in njihovimi razširitvami. Navedimo najprej vse definicije in lastnosti, ki jih bomo potrebovali.
 
 \emph{Končna polja} ali \emph{Galoisova polja}, so polja s končnim številom elementov. Najosnovnejši primer takih polj so števila modulo $p$, kjer je $p$ praštevilo. Polje s $q$ elementi označimo z $\F_q$, v literaturi pa se pojavlja tudi oznaka $GF(q)$. Poglejmo si nekaj pomembnih lastnosti takih polj, ki so povzeta po \cite{predavanja}.
-\begin{trditev}
+\begin{trditev}~
+
 \label{algebra}
 \begin{itemize}
 \item Končno polje s $q$ elementi obstaja natanko tedaj, ko velja $q=p^k$, za nek $k \in \N$ in neko praštevilo $p$.
@@ -408,9 +409,9 @@ $\alpha$   & / & $\alpha$   & 1          & 1+$\alpha$ \\
 \end{primer}
 
 \begin{primer}
-Poglejmo si še en zanimiv primer. Naj bo $\F_q= \F_{p^2}$, kjer je $p$ praštevilo za katero velja $p \equiv 3 \MOD{4}$.  Polinom oblike $X^2-r$ je nerazcepen natanko tedaj, ko $r$ ni kvadratični ostanek po modolu $p$. Po  Eulerjevem kriteriju \cite{Eulerkriterij} je $r$ kvadratični ostanek natanko tedaj ko $r^{(p-1)/2} \equiv 1$. V primeru ko je $p \equiv 3 \MOD{4}$, $p-1$ ni kvadratični ostanek, saj je $(p-1)/2 \equiv 1 \MOD{4}$. To pomeni, da je potenca liha, kar pa nam pove, da $p-1$ ni kvadratični ostanek. Torej lahko za nerazcepni polinom izberemo $X^2+1$. Elementi polja $\F_q$ so torej oblike
+Poglejmo si še en zanimiv primer. Naj bo $\F_q= \F_{p^2}$, kjer je $p$ praštevilo, za katero velja $p \equiv 3 \MOD{4}$.  Polinom oblike $X^2-r$ je nerazcepen natanko tedaj, ko $r$ ni kvadratični ostanek po modolu $p$. Po  Eulerjevem kriteriju \cite{Eulerkriterij} je $r$ kvadratični ostanek natanko tedaj, ko $r^{(p-1)/2} \equiv 1$. V primeru ko je $p \equiv 3 \MOD{4}$, $p-1$ ni kvadratični ostanek, saj je $(p-1)/2 \equiv 1 \MOD{4}$. To pomeni, da je potenca liha, kar pa nam pove, da $p-1$ ni kvadratični ostanek. Torej lahko za nerazcepni polinom izberemo $X^2+1$. Elementi polja $\F_q$ so torej oblike
 $$a+b\alpha,$$
-$a,b \in \F_p$, $\alpha$ pa je število za katero velja $\alpha^2 = -1$. Ta zapis nas močno spominja na kompleksna števila. Tudi računske operacije se obnašajo enako kot pri kompleksnih številih. V takih poljih lahko torej namesto s polinomi računamo kar s kompleksnimi števili.
+$a,b \in \F_p$, $\alpha$ pa je število, za katero velja $\alpha^2 = -1$. Ta zapis nas močno spominja na kompleksna števila. Tudi računske operacije se obnašajo enako kot pri kompleksnih številih. V takih poljih lahko torej namesto s polinomi računamo kar s kompleksnimi števili.
 \end{primer}
 
 V nadaljevanju se bo pogosto pojavljal tudi pojem algebraičnega zaprtja polja $\F_q$ z oznako $\overline{\F_q}$. Spomnimo se potrebnih pojmov za razumevanje le tega.
@@ -493,7 +494,7 @@ $$y^2z = x^3 + axz^2 + bz^3.$$
 \end{izrek}
 
 \begin{trditev}[\protect{\cite{Silverman2009}, Trditev 1.4}]
-Kubična krivulja v Weierstrassovi obliki je gladka natanko tedaj ko velja
+Kubična krivulja v Weierstrassovi obliki je gladka natanko tedaj, ko velja
 $$\Delta = -16(4a^3+27b^2) \neq 0.$$
 \end{trditev}
 
@@ -549,8 +550,8 @@ V nadaljevanju nas bodo zanimale predvsem kubične krivulje v končnem polju $\m
 Za dani števili $a$, $b \in \mathbb{Z}/p\mathbb{Z}$ je \emph{kubična krivulja} nad poljem $\mathbb{Z}/p\mathbb{Z}$ množica točk
 $$E_{(a,b)}(\mathbb{Z}/p\mathbb{Z}) =\left\{ [x,y,z] \in \PP^2(\mathbb{Z}/p\mathbb{Z}): y^2z=x^3+axz^2+bz^3 \right\} .$$
 Drugače povedano, afina kubična krivulja je množica rešitev Weierstrassove enačbe
-$$y^2=x^3+ax+b.$$
-Pri čemer upoštevamo zvezo med afinimi in projektivnimi koordinatami točk:
+$$y^2=x^3+ax+b,$$
+pri čemer upoštevamo zvezo med afinimi in projektivnimi koordinatami točk:
 $$(x,y)\in (\Z/p\Z)^2 \Leftrightarrow [x,y,1]\in \PP^2(\Z/p\Z).$$
 
 \end{definicija}
@@ -618,7 +619,7 @@ B & \quad \text{če je } \overline{AB} \ \text{tangenta v } B,\ \text{ter} \ A \
 C &\quad \text{če je } A=B \  \text{in}\ \{\text{tangenta v A}\} \cap \mathcal{C}_P = \left\{ A,C \right\}.\\
 \end{cases}
 \]
-Intuitivno operacija $\ast$ vrne tretjo točko v preseku premice skozi $A$ in $B$ in $\mathcal{C}_P$ kar lahko vidimo na sliki \ref{fig:adicija}. Poglejmo si še nekaj lastnosti operacije $\ast$. Dokaze sledečih trditev najdemo v \cite[Poglavje 17.3]{Gibson1999}.
+Intuitivno operacija $\ast$ vrne tretjo točko v preseku premice skozi $A$ in $B$ in $\mathcal{C}_P$, kar lahko vidimo na sliki \ref{fig:adicija}. Poglejmo si še nekaj lastnosti operacije $\ast$. Dokaze sledečih trditev najdemo v \cite[Poglavje 17.3]{Gibson1999}.
 
 \begin{trditev}
 \label{last zvezda}
@@ -678,7 +679,7 @@ Naj bo $\mathcal{C}_P$ afina krivulja v Weierstrassovi obliki $y^2 = x^3 + \alph
 
 %staro seštevanje
 \begin{align}
-&{} a_3 = \lambda ^2 - \alpha - a_1 - a_2 \nonumber \\
+&{} a_3 = \lambda ^2 - \alpha - a_1 - a_2, \nonumber \\
 &{} b_3 = -\lambda a_3 - \mu, \nonumber
 \end{align}
 kjer sta 
@@ -687,7 +688,7 @@ $$
 \lambda =
 \begin{cases}
 \frac{b_1 - b_2}{a_1 - a_2} & \quad \text{če } a_1 \neq a_2 ,\\
-\frac{3a_1^2+ 2 \alpha a_1 + \beta}{2b_1} & \quad \text{sicer} ,\\
+\frac{3a_1^2+ 2 \alpha a_1 + \beta}{2b_1} & \quad \text{sicer}\\
 \end{cases}
 \quad
 \text{ in }
@@ -712,7 +713,7 @@ $$
 
 
 \begin{opomba}
-Če krivuljo $\mathcal{C}_P$ predstavimo v projektivni ravnini, torej kot ničle homogenega polinomoma $y^2z=x^3+\alpha x^2z+\beta xz^2+ \gamma z^3$ je prevoj $O=[0,1,0].$
+Če krivuljo $\mathcal{C}_P$ predstavimo v projektivni ravnini, torej kot ničle homogenega polinomoma $y^2z=x^3+\alpha x^2z+\beta xz^2+ \gamma z^3$, je prevoj $O=[0,1,0].$
 Opazimo, da točke $O = [0,1,0]$ ni možno predstaviti v afini ravnini $z=1$, zato bomo v nadaljevanju pisali $O = \infty$.
 \end{opomba}
 
@@ -801,6 +802,164 @@ $(2,3)+(1,1)$ je torej enako $(1,4)$ na krivulji $E$.
 
 \end{primer}
 
+
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%DELITELJI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Delitelji}
+
+Pri konstrukciji Weilovega parjenja bodo pomembno vlogo igrali tako imenovani delitelji. V tem poglavju bomo navedli nekaj definicij in lastnosti, ki jih bomo potrebovali v kasnejših poglavjih. Uporabljali bomo terminologijo, ki jo lahko najdemo v \cite{Washington2008}.
+
+\begin{definicija}
+Naj bo $K$ polje in naj bo $P$ točka na krivulji $\E{\overline{K}}$. Za vsako točko $P$ definirajmo formalen simbol $[P]$. \emph{Delitelj} $D$ na krivulji $E$ je končna linearna kombinacija takih simbolov s celoštevilskimi koeficienti
+$$D = \sum_{j}a_j[P_j], \ a_j \in \Z.$$
+
+\end{definicija}
+
+Iz same definicije sledi, da je delitelj element Abelove grupe generirane s simboli $[P]$. Označimo to grupo z $\DIV{E}$.
+
+
+\begin{definicija}
+Definirajmo \emph{vsoto} in \emph{stopnjo} delitelja kot
+$$\SUM{\sum_{j}a_j[P_j]} = \sum_ja_jP_j \ \in \E{\overline{K}},$$
+$$\DEG{\sum_{j}a_j[P_j]} = \sum_ja_j \ \in \Z.$$
+
+\end{definicija}
+
+
+\begin{definicija}
+Naj bo $E$ eliptična krivulja nad poljem $K$. \emph{Funkcija} na $E$ je racionalna funkcija $$f(x,y) \in \ \overline{K},$$ ki je definirana za vsaj eno točko na $\E{\overline{K}}$. Funkcija torej zavzame vrednosti v $\overline{K}$.
+\end{definicija}
+
+\begin{opomba}
+Naj bo $E$ podana z enačbo $y^2 = x^3+ax+b$. Racionalna funkcija $\frac{1}{y^2-x^3-ax-b}$ torej ne predstavlja funkcije na $E$, saj ni definirana za nobeno točko na $E$.
+
+\end{opomba}
+
+\begin{trditev}[\protect{\cite{Silverman2009}, Trditev 4.3}]
+\label{trd:red}
+Naj bo $P$ točka na krivulji $E$. Potem obstaja funkcija $u_P$, kateri rečemo uniformizator, z lastnostjo $u_P(P) = 0$, za katero velja, da lahko vsako funkcijo $f(x,y)$ nad $E$ zapišemo kot
+$$f = u^r_Pg, \text{ za nek } r\in \Z, \text{ kjer } g(P) \neq 0 \text{ in } \frac{1}{g(P)} \neq 0.$$
+\end{trditev}
+
+\begin{definicija}
+Številu $r$ iz trditve \ref{trd:red} rečemo \emph{red} funkcije $f$ v točki $P$ in ga označimo z $\ORDp{f}{P}$.
+\end{definicija}
+
+\begin{primer}
+Naj bo $y^2 = x^3-x$ eliptična krivulja in naj bo $f(x,y) = x$. Za točko $P = (0,0)$ izberimo $u(x,y) = y$. Očitno je $u(0,0) = 0$. Nad eliptično krivuljo velja 
+$$y^2 = x^3-x = x(x^2-1),$$ 
+od tod sledi $x = y^2\frac{1}{x^2-1}$ nad E.
+Prav tako velja, da $1/(x^2-1) \neq 0$ v točki $(0,0)$. Od tod sledi, da je red funkcij $x$ in $x/y$ enak
+$$\ORDp{x}{(0,0)} = 2\text{ in }  \ORDp{x/y}{(0,0)}= 1.$$
+
+Red funkcije je lahko tudi nepozitiven. Vzemimo funkcijo $1/x$. Enačbo krivulje prepišimo v obliko $\frac{1}{x} = \frac{1}{y^2}(x^2-1)$. To pomeni, da je red v točki $P=(0,0)$ enak
+$$\ORDp{1/x}{(0,0)} = -2.$$
+
+Poglejmo si še red funkcije $x/y^2$. Enačbo krivulje prepišimo v obliko $\frac{x}{y^2} = \frac{1}{x^2-1}$. Tu lahko vzamemo za uniformizator poljubno funkcijo, ki zadošča pogoju $u(P) = 0$, saj nastopa s potenco $0$. Torej je red funkcije $x/y^2$ v točki $P=(0,0)$ enak
+$$\ORDp{x/y^2}{(0,0)} = 0.$$
+\end{primer}
+
+\begin{definicija}
+Točki $P$ rečemo \emph{ničla} funkcije $f$, če je $\ORDp{f}{P} > 0$ in \emph{pol}, če je $\ORDp{f}{P} < 0$
+\end{definicija}
+
+\begin{definicija}
+Naj bo $f$ funkcija nad $E$, ki ni identično enaka $0$. Definirajmo \emph{delitelj} funkcije $f$ kot
+$$\Div{f} = \sum_{P\in \E{\overline{K}}} \ORDp{f}{P}[P] \in \DIV{E}.$$
+\end{definicija}
+
+
+\begin{trditev}[\protect{\cite{Washington2008}, Trditev 11.1}]
+\label{trditev 11.1}
+Naj bo $E$ eliptična krivulja in naj bo $f$ funkcija na $E$, ki ni identično enaka $0$. Potem veljajo naslednje trditve:
+\begin{itemize}
+
+\item $f$ ima le končno mnogo ničel in polov,
+\item $\DEG{\Div{f}}=0$,
+\item če $f$ nima ničel ali polov, potem je $f$ konstantna.
+\end{itemize}
+
+
+\end{trditev}
+
+\begin{izrek}
+\label{izrek 11.2}
+Naj bo $E$ eliptična krivulja. Naj bo $D$ delitelj nad $E$ z $\DEG{D} = 0$. Potem obstaja taka funkcija $f$ na $E$ z lastnostjo
+$$\Div{f} = D$$
+natanko tedaj, ko
+$$\SUM{D} = \text{točka }\infty.$$
+
+\end{izrek}
+
+\begin{proof}
+Pokažimo najprej, da je možno $[P_1]+ [P_2]$ zapisati kot $$[P_1+P_2] + [\infty] + \text{delitelj neke funkcije}.$$
+Recimo, da imamo tri kolinearne točke $P_1,P_2,P_3$ na krivulji $E$, ki ležijo na premici $ax+by+c = 0$.
+Naj bo $f(x,y) = ax+by+c$, potem ima funkcija $f$ ničle v točkah $P_1,P_2,P_3$. Če $b$ ni enak $0$, potem ima funkcija po trditvi \ref{trditev 11.1} trojni pol v $\infty$.
+Velja torej $$\Div{ax+by+c} = [P_1]+[P_2]+[P_3]-3[\infty].$$
+Ker se nahajamo na krivulji zapisani v Weierstrassovi obliki, kjer točko $-P$ dobimo z zamenjavo predznaka y-koordinate, ima premica skozi točki $P_3 = (x_3,y_3)$ ter $-P_3=(x_3,-y_3)$ enačbo $x-x_3=0$.
+Po  trditvi \ref{trditev 11.1} ponovno velja
+$$\Div{x-x_3} = [P_3]+[-P_3]-2[\infty].$$
+Od tod sledi
+$$\text{div}\left( \frac{ax+by+c}{x-x_3}\right) = \Div{ax+by+c} - \Div{x-x_3} =[P_1]+[P_2]-[-P_3]-[\infty].$$
+Ker na krivulji velja $P_1+P_2 = -P_3$ (to sledi iz definicije seštevanja točk na krivulji), lahko zgornjo enačbo prepišemo v 
+$$[P_1]+[P_2] = [P_1+P_2]+[\infty]+\Div{g}, \text{ kjer je } g=\frac{ax+by+c}{x-x_3}.$$ 
+
+
+Hitro opazimo, da velja
+$$\SUM{\Div{g}}= P_1+P_2-(P_1+P_2)-\infty = \infty.$$
+Prav tako pa se iz zgornje enačbe vidi, da je $[P_1]+[P_2] = 2[\infty] + \Div{g}$, če velja $P_1+P_2 = \infty$. Zaradi tega je vsota vseh členov s pozitivnimi koeficienti v $D$ enaka vsoti nekega simbola $[P]$, večkratnika $[\infty]$, ter delitelja neke funkcije. Enako velja tudi za člene z negativnimi koeficienti. Od tod sledi
+$$D = [P]-[Q]+n[\infty]+\Div{h},$$
+kjer je $h$ kvocient produkta funkcij z lastnostjo $\SUM{\Div{g_i}} = \infty$. Zato velja tudi
+\newline $\SUM{\Div{h}}= \infty$. Po trditvi \ref{trditev 11.1} velja $\DEG{\Div{h}}=0$, saj funkcija ni konstantna. Imamo torej $$0 = \DEG{D} = 1-1+n+0=n.$$
+Od tod sledi
+$$D = [P]-[Q] + \Div{h}.$$
+Prav tako velja
+$$\SUM{D} = P-Q+\SUM{\Div{h}} = P-Q,$$
+ker je $\infty$ nevtralni element Abelove grupe na $E$.
+Predpostavimo sedaj, da velja $\SUM{D} = \infty$. Potem je $P-Q = \infty$, zato mora veljati $P=Q$ in $D = \Div{h}$. Za dokaz v obratno smer predpostavimo, da je $D = \Div{f}$ za neko funkcijo f. Potem je
+$$[P]-[Q] = \Div{f/h}.$$
+Od tod po spodnji lemi \ref{lema 11.3} sledi, da je $P = Q$ in torej $\SUM{D} = \infty$.
+
+\end{proof}
+
+\begin{lema}[\protect{\cite{Washington2008}, Lema 11.3}]
+\label{lema 11.3}
+Naj bosta $P,Q \in \E{\overline{K}}$, ter $h$ funkcija na $E$ za katero velja
+$$\Div{h}=[P]-[Q].$$
+Potem sledi $P=Q$.
+\end{lema}
+\newpage
+
+\section{Krivulje končnega reda}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Torzijske točke
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Torzijske točke}
+
+\begin{definicija}
+Naj bo $E$ eliptična krivulja nad poljem $K$, ter naj bo $n\in \N$. \emph{Torizjske točke} reda $n$, so točke v množici
+$$E[n] = \{ P \in \E{\overline{K}} | nP = \infty \}.$$
+\end{definicija}
+
+Struktura torzijskih točk je opisana v naslednjem izreku.
+
+\begin{izrek}
+\label{IzrekTor}
+Naj bo $E$ eliptična krivulja nad poljem $K$ in naj bo $n \in \N$. Če karakteristika polja $K$ ne deli $n$ oziroma je enaka $0$, potem je
+$$E[n] \cong \mathbb{Z}_n \oplus \mathbb{Z}_n.$$
+
+Zapišimo $n=p^rn'$, kjer $p$ ne deli $n'$. Če je karakteristika $K$ enaka $p >0$ in $p|n$, potem velja
+$$E[n] \cong \mathbb{Z}_{n'} \oplus \mathbb{Z}_{n'} \text{ ali } E[n] \cong \mathbb{Z}_n \oplus \mathbb{Z}_{n'}.$$
+
+\end{izrek}
+
+Izrek \ref{IzrekTor} bomo dokazali v zadnjem razdelku tega poglavja.
+
 \subsection{Endomorfizmi}
 \label{endomorfizmi}
 
@@ -856,7 +1015,7 @@ To lahko preoblikujemo kot
 \begin{align}
 \left(\frac{3x^2+a}{2y}\right)^2-2x &{}= \frac{9x^4+6ax^2+a^2}{4y^2}-2x \nonumber \\
 &{} = \frac{9x^4+6ax^2+a^2 - 2x(4(x^2+ax+b))}{4(x^2+ax+b)} \nonumber \\
-&{} = \frac{x^4-2ax^2-8bx+a^2}{4(x^2+ax+b)} \nonumber
+&{} = \frac{x^4-2ax^2-8bx+a^2}{4(x^2+ax+b)}. \nonumber
 \end{align}
 Iz
 $$r_1(x) = \frac{x^4-2ax^2-8bx+a^2}{4(x^2+ax+b)}$$
@@ -865,7 +1024,7 @@ razberemo, da je stopnja $\DEG{\alpha} = 4$.
 Poglejmo si še odvod $r'_1(x)$.
 \begin{align}
 r'_1(x) &{}=\frac{(4x^3-4ax-8b)4(x^3+ax+b)-(x^4-2ax^2-8bx+a^2)(12x^2+4a)}{16(x^2+ax+b)^2} \nonumber \\
-&{} = \frac{-a^3 - 8 b^2 + 2 x^5 - 2 a^2 x (1 + x) + 4 b x^2 (2 + x) +  a (-4 b x + 3 x^4)}{4 (b + x (a + x))^2} \nonumber
+&{} = \frac{-a^3 - 8 b^2 + 2 x^5 - 2 a^2 x (1 + x) + 4 b x^2 (2 + x) +  a (-4 b x + 3 x^4)}{4 (b + x (a + x))^2}. \nonumber
 \end{align}
 Števec zgornje enačbe pa ni identično enak $0$, torej je endomorfizem seperabilen.
 \begin{opomba}
@@ -910,7 +1069,7 @@ Naj bo $E$ eliptična krivulja definirana nad $\F_q$. Za točke $(x,y) \in \E{\o
 
 \begin{proof}
 Za dokaz leme bomo potrebovali lastnost $$(a+b)^q = a^q+b^q,$$ kjer je $q$ potenca karakteristike polja v katerem delamo. To sledi iz razvoja v vrsto in dejstva, da pri binomskih koeficientih velja
-${q\choose i} \equiv 0$, za $1 \leq i \leq q-1$. To je res ker pri zapisu binomskega koeficienta po krajšanju vedno ostane vsaj en $q$, ki je potenca karakteristike. 
+${q\choose i} \equiv 0$, za $1 \leq i \leq q-1$. To je res, ker pri zapisu binomskega koeficienta po krajšanju vedno ostane vsaj en $q$, ki je potenca karakteristike. 
 
 Prav tako bomo potrebovali trditev \ref{algebra}, da za vse $a \in \F_q$ velja $a^q = a$. Dokaz tega sledi iz dejstva, da ima grupa vseh obrnljivih elementov $\F^{\times}_q$ red $q-1$, kar pomeni $a^{q-1} = 1$, za vse $a \in \F_q \neq 0$. To pa je ekvivalentno zgornji trditvi.
 
@@ -946,7 +1105,7 @@ $$\DEG{a\alpha+b\beta} = a^2\DEG{\alpha}+b^2\DEG{\beta} + ab\text{(}\DEG{\alpha+
 \end{trditev}
 
 \begin{opomba}
-Naj $n \in \N$ ne deli karakteristike $K$. Ker velja $E[n] \cong \Z_n \bigoplus \Z_n$, lahko za $E[n]$ izberemo neko bazo $\{ \beta_1, \beta_2\}$. To pomeni, da lahko vsak element $E[n]$ zapišemo, kot $m_1\beta_1 + m_2\beta_2$, za $m_1, m_2 \in \Z_n$. Homomorfizem $\alpha: \E{\overline{K}} \rightarrow \E{\overline{K}}$ preslika $E[n]$ v $E[n]$. Zato obstajajo števila $a,b,c,d \in \Z_n$, da velja
+Naj $n \in \N$ ne deli karakteristike $K$. Ker velja $E[n] \cong \Z_n \bigoplus \Z_n$, lahko za $E[n]$ izberemo neko bazo $\{ \beta_1, \beta_2\}$. To pomeni, da lahko vsak element $E[n]$ zapišemo kot $m_1\beta_1 + m_2\beta_2$, za $m_1, m_2 \in \Z_n$. Homomorfizem $\alpha: \E{\overline{K}} \rightarrow \E{\overline{K}}$ preslika $E[n]$ v $E[n]$. Zato obstajajo števila $a,b,c,d \in \Z_n$, da velja
 $$\alpha(\beta_1) = a\beta_1+b\beta_2, \ \alpha(\beta_2) = c\beta_1+d\beta_2.$$
 To pa ravno pomeni, da se lahko vsak tak homomorfizem $\alpha$ predstavimo z matriko oblike
 $$\alpha_n = \begin{bmatrix}
@@ -967,7 +1126,7 @@ Od tod sledi
 \DEG{a\alpha+b\beta} &{}\equiv a^2\DEG{\alpha}+b^2\DEG{\beta} + ab(\DEG{\alpha+\beta} \nonumber \\
 &{}-\DEG{\alpha}-\DEG{\beta}) \MOD{n}. \nonumber
 \end{align}
-Ker to drži za neskončno mnogo $n$ v tej enačbi velja enakost.
+Ker to drži za neskončno mnogo $n$, v tej enačbi velja enakost.
 
 
 \end{proof}
@@ -992,7 +1151,7 @@ $$|q+1-\#\E{\F_q}| \leq 2\sqrt{q}.$$
 \end{izrek}
 
 \begin{opomba}
-Hassejev izrek igra pomembno vlogo tudi pri iskanju velikosti grupe, saj nam poda zgornjo in spodnjo mejo. Velikost grupe pa potem nadaljno zožimo z dejstvom da red elementa deli red grupe. 
+Hassejev izrek igra pomembno vlogo tudi pri iskanju velikosti grupe, saj nam poda zgornjo in spodnjo mejo. Velikost grupe pa potem nadaljno zožimo z dejstvom, da red elementa deli red grupe. 
 \end{opomba}
 
 \begin{lema}
@@ -1027,7 +1186,7 @@ To pa je ravno pogoj $|a|\leq 2\sqrt{q}$.
 \label{izrek:4.10}
 Naj bo E eliptična krivulja definirana nad $\F_q$. Naj bo $a = q+1-\#\E{\F_q} = q+1-\DEG{\phi_q-1}$. Potem velja
 $$\phi^2_q-a\phi_q+q = 0,$$
-gledano kot endomorfizem nad $E$. Prav tako pa je $a$ edino število $k$ za katerega velja
+gledano kot endomorfizem nad $E$. Prav tako pa je $a$ edino število $k$, za katerega velja
 $$\phi^2_{q^n}-k\phi_{q^n}+q^n = 0.$$
 
 Povedano drugače, velja naslednja lastnost. Naj bo $(x,y) \in  \overline{\F_q}$, potem velja
@@ -1055,7 +1214,7 @@ za vse $n \geq 1$.
 
 \end{trditev}
 
-Preden lahko dokažemo zgornjo trditev bomo potrebovali še naslednjo lemo.
+Preden lahko dokažemo zgornjo trditev, bomo potrebovali še naslednjo lemo.
 
 \begin{lema}
 \label{lema:4.13}
@@ -1078,7 +1237,7 @@ $$f(X) = (X^n-\alpha^n)(X^n-\beta^n) = X^{2n}-(\alpha^n+\beta^n)X^n+q^n.$$
 Iz prve enakosti sledi, da funkcija $X^2-aX+q = (X-\alpha)(X-\beta)$ deli $f$. Po osnovnem izreku od deljenju lahko f zapišemo kot $f(X) = g(X)Q(x)+r(x)$, kjer je $g(X)= X^2-aX+q$. Prav tako pa ima kvocient $Q$ celoštevilske koeficiente. Po izreku \ref{izrek:4.10} velja
 
 $$(\phi^n_q)^2 -(\alpha^n+\beta^n)\phi^n_q + q^n = f(\phi_q) = Q(\phi_q)(\phi^2_q-a\phi_q+q) = 0,$$
-kjer je $\phi_q$ endomorfizem na $E$. Velja tudi $\phi^n_q = \phi_{q^n}$. Ponovno uporabimo izrek \ref{izrek:4.10} od koder sledi, da obstaja natanko en $k \in \Z$, za katerega je
+kjer je $\phi_q$ endomorfizem na $E$. Velja tudi $\phi^n_q = \phi_{q^n}$. Ponovno uporabimo izrek \ref{izrek:4.10}, od koder sledi, da obstaja natanko en $k \in \Z$, za katerega je
 $\phi^2_{q^n}-k\phi_{q^n}+q^n=0$, in sicer, $k = q^n+1-\#\E{\F_{q^n}}$. Od tod torej sledi
 $$\alpha^n+\beta^n = q^n+1-\#\E{\F_{q^n}}.$$
 
@@ -1102,163 +1261,9 @@ od koder sledi
 &{}= 1606938044258990275541962092343697546215565682541130425732128. \nonumber
 \end{align}
 \end{primer}
-
-\newpage
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%DELITELJI
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Delitelji}
-
-Pri konstrukciji Weilovega parjenja bodo pomembno vlogo igrali tako imenovani delitelji. V tem poglavju bomo navedli nekaj definicij in lastnosti, ki jih bomo potrebovali v kasnejših poglavjih. Uporabljali bomo terminologijo, ki jo lahko najdemo v \cite{Washington2008}.
-
+\subsection{Dokaz izreka \ref{IzrekTor}}
 \begin{definicija}
-Naj bo $K$ polje in naj bo $P$ točka na krivulji $\E{\overline{K}}$. Za vsako točko $P$ definirajmo formalen simbol $[P]$. \emph{Delitelj} $D$ na krivulji $E$ je končna linearna kombinacija takih simbolov s celoštevilskimi koeficienti.
-$$D = \sum_{j}a_j[P_j], \ a_j \in \Z $$
-
-\end{definicija}
-
-Iz same definicije sledi, da je delitelj element Abelove grupe generirane s simboli $[P]$. Označimo to grupo z $\DIV{E}$.
-
-
-\begin{definicija}
-Definirajmo \emph{vsoto} in \emph{stopnjo} delitelja kot
-$$\SUM{\sum_{j}a_j[P_j]} = \sum_ja_jP_j \ \in \E{\overline{K}},$$
-$$\DEG{\sum_{j}a_j[P_j]} = \sum_ja_j \ \in \Z.$$
-
-\end{definicija}
-
-
-\begin{definicija}
-Naj bo $E$ eliptična krivulja nad poljem $K$. \emph{Funkcija} na $E$ je racionalna funkcija $$f(x,y) \in \ \overline{K},$$ ki je definirana za vsaj eno točko na $\E{\overline{K}}$. Funkcija torej zavzame vrednosti v $\overline{K}$.
-\end{definicija}
-
-\begin{opomba}
-Naj bo $E$ podana z enačbo $y^2 = x^3+ax+b$. Racionalna funkcija $\frac{1}{y^2-x^3-ax-b}$ torej ne predstavlja funkcije na $E$, saj ni definirana za nobeno točko na $E$.
-
-\end{opomba}
-
-\begin{trditev}[\protect{\cite{Silverman2009}, Trditev 4.3}]
-\label{trd:red}
-Naj bo $P$ točka na krivulji $E$. Potem obstaja funkcija $u_P$, kateri rečemo uniformizator, z lastnostjo $u_P(P) = 0$, za katero velja, da lahko vsako funkcijo $f(x,y)$ nad $E$ zapišemo kot
-$$f = u^r_Pg, \text{ za nek } r\in \Z \text{ kjer } g(P) \neq 0 \text{ in } \frac{1}{g(P)} \neq 0.$$
-\end{trditev}
-
-\begin{definicija}
-Številu $r$ iz trditve \ref{trd:red} rečemo \emph{red} funkcije $f$ v točki $P$ in ga označimo z $\ORDp{f}{P}$.
-\end{definicija}
-
-\begin{primer}
-Naj bo $y^2 = x^3-x$ eliptična krivulja in naj bo $f(x,y) = x$. Za točko $P = (0,0)$ izberimo $u(x,y) = y$. Očitno je $u(0,0) = 0$. Nad eliptično krivuljo velja 
-$$y^2 = x^3-x = x(x^2-1),$$ 
-od tod sledi $x = y^2\frac{1}{x^2-1}$ nad E.
-Prav tako velja, da $1/(x^2-1) \neq 0$ v točki $(0,0)$. Od tod sledi, da je red funkcij $x$ in $x/y$ enak
-$$\ORDp{x}{(0,0)} = 2\text{ in }  \ORDp{x/y}{(0,0)}= 1.$$
-
-Red funkcije je lahko tudi nepozitiven. Vzemimo funkcijo $1/x$. Enačbo krivulje prepišimo v obliko $\frac{1}{x} = \frac{1}{y^2}(x^2-1)$. To pomeni, da je red v točki $P=(0,0)$ enak
-$$\ORDp{1/x}{(0,0)} = -2.$$
-
-Poglejmo si še red funkcije $x/y^2$. Enačbo krivulje prepišimo v obliko $\frac{x}{y^2} = \frac{1}{x^2-1}$. Tu lahko vzamemo za uniformizator poljubno funkcijo, ki zadošča pogoju $u(P) = 0$, saj nastopa s potenco $0$. Torej je red funkcije $x/y^2$ v točki $P=(0,0)$ enak
-$$\ORDp{x/y^2}{(0,0)} = 0.$$
-\end{primer}
-
-\begin{definicija}
-Točki $P$ rečemo \emph{ničla} funkcije $f$ če je $\ORDp{f}{P} > 0$ in \emph{pol}, če je $\ORDp{f}{P} < 0$
-\end{definicija}
-
-\begin{definicija}
-Naj bo $f$ funkcija nad $E$, ki ni identično enaka $0$. Definirajmo \emph{delitelj} funkcije $f$ kot,
-$$\Div{f} = \sum_{P\in \E{\overline{K}}} \ORDp{f}{P}[P] \in \DIV{E}.$$
-\end{definicija}
-
-
-\begin{trditev}[\protect{\cite{Washington2008}, Trditev 11.1}]
-\label{trditev 11.1}
-Naj bo $E$ eliptična krivulja in naj bo $f$ funkcija na $E$, ki ni identično enaka $0$. Potem veljajo naslednje trditve:
-\begin{itemize}
-
-\item $f$ ima le končno mnogo ničel in polov,
-\item $\DEG{\Div{f}}=0$
-\item Če $f$ nima ničel ali polov, potem je $f$ konstantna.
-\end{itemize}
-
-
-\end{trditev}
-
-\begin{izrek}
-\label{izrek 11.2}
-Naj bo $E$ eliptična krivulja. Naj bo $D$ delitelj nad $E$ z $\DEG{D} = 0$. Potem obstaja taka funkcija $f$ na $E$ z lastnostjo
-$$\Div{f} = D$$
-natanko tedaj ko
-$$\SUM{D} = \text{točka }\infty.$$
-
-\end{izrek}
-
-\begin{proof}
-Pokažimo najprej, da je možno $[P_1]+ [P_2]$ zapisati kot $$[P_1+P_2] + [\infty] + \text{delitelj neke funkcije}.$$
-Recimo, da imamo tri kolinearne točke $P_1,P_2,P_3$ na krivulji $E$, ki ležijo na premici $ax+by+c = 0$.
-Naj bo $f(x,y) = ax+by+c$, potem ima funkcija $f$ ničle v točkah $P_1,P_2,P_3$. Če $b$ ni enak $0$, potem ima funkcija po trditvi \ref{trditev 11.1} trojni pol v $\infty$.
-Velja torej $$\Div{ax+by+c} = [P_1]+[P_2]+[P_3]-3[\infty].$$
-Ker se nahajamo na krivulji zapisani v Weierstrassovi obliki, kjer točko $-P$ dobimo z zamenjavo predznaka y-koordinate, ima premica skozi točki $P_3 = (x_3,y_3)$ ter $-P_3=(x_3,-y_3)$ enačbo $x-x_3=0$.
-Po  trditvi \ref{trditev 11.1} ponovno velja
-$$\Div{x-x_3} = [P_3]+[-P_3]-2[\infty].$$
-Od tod sledi
-$$\text{div}\left( \frac{ax+by+c}{x-x_3}\right) = \Div{ax+by+c} - \Div{x-x_3} =[P_1]+[P_2]-[-P_3]-[\infty].$$
-Ker na krivulji velja $P_1+P_2 = -P_3$ (to sledi iz definicije seštevanja točk na krivulji), lahko zgornjo enačbo prepišemo v 
-$$[P_1]+[P_2] = [P_1+P_2]+[\infty]+\Div{g}, \text{ kjer je } g=\frac{ax+by+c}{x-x_3}.$$ 
-
-
-Hitro opazimo, da velja
-$$\SUM{\Div{g}}= P_1+P_2-(P_1+P_2)-\infty = \infty.$$
-Prav tako pa se iz zgornje enačbe vidi, da je $[P_1]+[P_2] = 2[\infty] + \Div{g}$, če velja $P_1+P_2 = \infty$. Zaradi tega je vsota vseh členov s pozitivnimi koeficienti v $D$ enaka vsoti nekega simbola $[P]$, večkratnika $[\infty]$, ter delitelja neke funkcije. Enako velja tudi za člene z negativnimi koeficienti. Od tod sledi
-$$D = [P]-[Q]+n[\infty]+\Div{h},$$
-kjer je $h$ kvocient produkta funkcij z lastnostjo $\SUM{\Div{g_i}} = \infty$. Zato velja tudi
-\newline $\SUM{\Div{h}}= \infty$. Po trditvi \ref{trditev 11.1} velja $\DEG{\Div{h}}=0$, saj funkcija ni konstantna. Imamo torej $$0 = \DEG{D} = 1-1+n+0=n.$$
-Od tod sledi
-$$D = [P]-[Q] + \Div{h}.$$
-Prav tako velja
-$$\SUM{D} = P-Q+\SUM{\Div{h}} = P-Q,$$
-ker je $\infty$ nevtralni element Abelove grupe na $E$.
-Predpostavimo sedaj, da velja $\SUM{D} = \infty$. Potem je $P-Q = \infty$, zato mora veljati $P=Q$ in $D = \Div{h}$. Za dokaz v obratno smer predpostavimo, da je $D = \Div{f}$ za neko funkcijo f. Potem je
-$$[P]-[Q] = \Div{f/h}.$$
-Od tod po spodnji lemi \ref{lema 11.3} sledi, da je $P = Q$ in torej $\SUM{D} = \infty$.
-
-\end{proof}
-
-\begin{lema}[\protect{\cite{Washington2008}, Lema 11.3}]
-\label{lema 11.3}
-Naj bosta $P,Q \in \E{\overline{K}}$ ter $h$ funkcija na $E$ za katero velja
-$$\Div{h}=[P]-[Q].$$
-Potem sledi $P=Q$.
-\end{lema}
-\newpage
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Torzijske točke
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Torzijske točke}
-
-\begin{definicija}
-Naj bo $E$ eliptična krivulja nad poljem $K$, ter naj bo $n\in \N$. \emph{Torizjske točke} reda $n$, so točke v množici
-$$E[n] = \{ P \in \E{\overline{K}} | nP = \infty \}.$$
-\end{definicija}
-
-Struktura torzijskih točk je opisana v naslednjem izreku.
-
-\begin{izrek}
-\label{IzrekTor}
-Naj bo $E$ eliptična krivulja nad poljem $K$ in naj bo $n \in \N$. Če karakteristika polja $K$ ne deli $n$ oziroma je enaka $0$, potem je
-$$E[n] \cong \mathbb{Z}_n \oplus \mathbb{Z}_n.$$
-
-Zapišimo $n=p^rn'$, kjer $p$ ne deli $n'$. Če je karakteristika $K$ enaka $p >0$ in $p|n$, potem velja
-$$E[n] \cong \mathbb{Z}_{n'} \oplus \mathbb{Z}_{n'} \text{ ali } E[n] \cong \mathbb{Z}_n \oplus \mathbb{Z}_{n'}.$$
-
-\end{izrek}
-
-Izrek \ref{IzrekTor} bomo dokazali v zadnjem razdelku tega poglavja.
-
-\begin{definicija}
-Definirajmo $m$-ti \emph{deliteljski polinom} $\gamma_m \in \Z[x,y,a,b]$ kot,
+Definirajmo $m$-ti \emph{deliteljski polinom} $\gamma_m \in \Z[x,y,a,b]$ kot
 
 
 \begin{align}
@@ -1281,10 +1286,10 @@ Polinom $\gamma_{n}$ je element $\Z[x,y^2,a,b]$ za vse lihe $n$.  Za sode $n$ pa
 \begin{proof}
 Lemo dokažemo s pomočjo indukcije. Za $n \leq 4$ lema očitno velja. Obravnavajmo primera, ko je $n=2m$ in  $n=2m+1$ za nek $m\in\N$.
 \begin{itemize}
-\item{$n=2m$}
-Predpostavimo lahko, da je $2m>4$, saj vemo da lema velja za $n\leq 4$, torej je $m>2$. Potem velja $2m>m+2$, kar pomeni, da vsi polinomi v definiciji $\gamma_{2m}$ zadoščajo indukcijski predpostavki. Če je $m$ sodo število, potem se $\gamma_{m},\gamma_{m+2},\gamma_{m-2}$ nahajajo v $2y\Z[x,y^2,a,b]$. Od tod pa sledi, da je tudi $\gamma_{2m} \in 2y\Z[x,y^2,a,b]$.
+\item{$n=2m$:}
+Predpostavimo lahko, da je $2m>4$, saj vemo, da lema velja za $n\leq 4$, torej je $m>2$. Potem velja $2m>m+2$, kar pomeni, da vsi polinomi v definiciji $\gamma_{2m}$ zadoščajo indukcijski predpostavki. Če je $m$ sodo število, potem se $\gamma_{m},\gamma_{m+2},\gamma_{m-2}$ nahajajo v $2y\Z[x,y^2,a,b]$. Od tod pa sledi, da je tudi $\gamma_{2m} \in 2y\Z[x,y^2,a,b]$.
 Če je $m$ lih, potem sta $\gamma_{m-1},\gamma_{m+1} \in 2y\Z[x,y^2,a,b]$. To pa pomeni, da je tudi  $\gamma_{2m} \in 2y\Z[x,y^2,a,b]$.
-\item{$n=2m+1$}
+\item{$n=2m+1$:}
 Primer obravnavamo podobno kot $n=2m$.
 
 
@@ -1299,7 +1304,7 @@ Definirajmo še polinoma
 \omega_m &{} = (4y)^{-1}(\gamma_{m+2}\gamma^2_{m-1}-\gamma_{m-2}\gamma^2_{m+1}). \nonumber
 \end{align}
 
-Podobno, kot pri polinomih $\gamma_m$ lahko tudi za $\phi_m$ in $\omega_m$ formuliramo lemo, katere dokaz bomo izpustili.
+Podobno kot pri polinomih $\gamma_m$, lahko tudi za $\phi_m$ in $\omega_m$ formuliramo lemo, katere dokaz bomo izpustili.
 
 \begin{lema}
 Polinom $\phi_{n}$ je element $\Z[x,y^2,a,b]$, za vse $n$. Če je $n$ lih, potem je $\omega_{n}$ element v \newline $y\Z[x,y^2,a,b]$. Za sode $n$ pa je $\omega_{n}$ element v $\Z[x,y^2,a,b]$.
@@ -1353,11 +1358,11 @@ Predpostavimo, da $n$ ni večkratnik karakteristike $p$ polja. Po izreku \ref{iz
 $$R(x) = \frac{x^{n^2}+\ldots}{n^2x^{n^2-1}+ \ldots}.$$
 Če poračunamo odvod, v števcu dobimo $n^2x^{2n^2-2}+ \ldots$, kar ni identično enako $0$. To pomeni, da je množenje z $n$ seperabilno. Jedro množenja z $n$ so torzijske točke $E[n]$. Po posledici \ref{posledica:3.7} in izreku \ref{izrek:2.21} ima jedro množenja z $n$ red $n^2$. Iz algebre vemo \cite{predavanja}, da so končne Abelove grupe, torej tudi  $E[n]$, izomorfne
 $$\Z_{n_1} \oplus \Z_{n_2} \oplus \ldots \oplus \Z_{n_k},$$
-za neka naravna števila $n_1,n_2,\ldots,n_k$, za katere velja $n_i|n_{i+1}$  za vse $i$. Naj bo $l$ praštevilo, ki deli $n_1$. Potem $l|n_i$ za vse $i$. To pa pomeni, da ima $E[l] \subseteq E[n]$ red $l^k$. Ker ima $E[l]$ red $l^2$, iz zgoraj povedanega sledi, da je $k=2$. Množenje z $n$ ima torej jedro $E[n] \simeq \Z_{n_1} \oplus \Z_{n_2}$. Veljati pa mora tudi $n_2|n$. Ker velja $n^2=\#E[n] = n_1n_2$ od tod sledi $n_1=n_2=n$. Zato velja
+za neka naravna števila $n_1,n_2,\ldots,n_k$, za katere velja $n_i|n_{i+1}$  za vse $i$. Naj bo $l$ praštevilo, ki deli $n_1$. Potem $l|n_i$ za vse $i$. To pa pomeni, da ima $E[l] \subseteq E[n]$ red $l^k$. Ker ima $E[l]$ red $l^2$, iz zgoraj povedanega sledi, da je $k=2$. Množenje z $n$ ima torej jedro $E[n] \simeq \Z_{n_1} \oplus \Z_{n_2}$. Veljati pa mora tudi $n_2|n$. Ker velja $n^2=\#E[n] = n_1n_2$, od tod sledi $n_1=n_2=n$. Zato velja
 $$E[n] \simeq \Z_n \oplus \Z_n,$$
 ko karakteristika polja ne deli $n$.
 
-Trditev moramo pokazati še v primeru, ko $p|n$. Po trditvi \ref{trditev:2.28} množenje s $p$ ni seperabilno, zato ima po izreku \cite{izrek:2.21} jedro $E[p]$ množenja s $p$ red strogo manjši kot je stopnja endomorfizma, ki je $p^2$ po posledici \ref{posledica:3.7}. Ker ima vsak element $E[p]$ red $1$ ali $p$, sledi da ima $E[p]$ red potence $p$. Torej mora biti red $1$ ali $p$. Če je $E[p]$ trivialna, potem je $E[p^k]$ trivialna za vse $k$. Če ima $E[p]$ red $p$ potem trdimo, da velja $E[p^k] \simeq \Z_{p ^k}$ za vse $k$. Pokazati moramo, da ima taka grupa red $p^k$ in ne manjšega. Denimo, da obstaja element $P$ reda $p^j$. Po izreku \ref{izrek:2.22} je množenje s $p$ surjektivno. Torej obstaja točka $Q$ za katero velja $pQ = P$. Ker velja
+Trditev moramo pokazati še v primeru, ko $p|n$. Po trditvi \ref{trditev:2.28} množenje s $p$ ni seperabilno, zato ima po izreku \ref{izrek:2.21} jedro $E[p]$ množenja s $p$ red strogo manjši kot je stopnja endomorfizma, ki je $p^2$ po posledici \ref{posledica:3.7}. Ker ima vsak element $E[p]$ red $1$ ali $p$, sledi da ima $E[p]$ red potence $p$. Torej mora biti red $1$ ali $p$. Če je $E[p]$ trivialna, potem je $E[p^k]$ trivialna za vse $k$. Če ima $E[p]$ red $p$ potem trdimo, da velja $E[p^k] \simeq \Z_{p ^k}$ za vse $k$. Pokazati moramo, da ima taka grupa red $p^k$ in ne manjšega. Denimo, da obstaja element $P$ reda $p^j$. Po izreku \ref{izrek:2.22} je množenje s $p$ surjektivno. Torej obstaja točka $Q$, za katero velja $pQ = P$. Ker velja
 $$p^jQ = p^{j-1}P \neq \infty \text{ in } p^{j+1}Q = p^jP = \infty,$$
 ima $Q$ red $p^{j+1}$. Z indukcijo lahko pokažemo, da na krivulji obstajajo točke reda $p^k$ za vse $k$.
 Ker za vse $i < j$ velja $E[p^{i}] \subsetneq E[p^j]$, v $E[p^k]$ obstaja točka reda $p^k$. To pa pomeni, da je $E[p^k]$ ciklična. Zato je $E[p^k]$ ciklična reda $p^k$.
@@ -1369,7 +1374,6 @@ $$\Z_{n'} \oplus \Z_{p^r} \simeq \Z_{n'p^r} \simeq Z_n.$$
 Od tod pa sledi
 $$E[n] \simeq \Z_{n'} \oplus \Z_{n'} \text{ ali } \Z_n \oplus \Z_{n'}.$$
 \end{proof}
-
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%PARJENJE
@@ -1710,10 +1714,7 @@ $$e_5(P,Q) =\frac{473}{88} = 242.$$
 
 \end{primer}
 
-\subsection{Implementacija Millerjevega algoritma}
-V tem razdelku bomo podali implementacijo Millerjevega algoritma v programskem okolju Python.
 
-\lstinputlisting[language=Python]{WeilPairing.py}
 
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1882,12 +1883,12 @@ Torej je naš iskani $k=588$.
 
 Časovna zahtevnost algoritma je $O(e^{(1+o(1))\sqrt{\ln p \ln \ln p }})$ \cite{Stinson1995}.
 
-\subsection{Izračun indeksa program}
+%\subsection{Izračun indeksa program}
+%
+%Nadaljne programe bomo pisali v prosto dostopnem programskem okolju SAGE. S pomočjo tega si bomo prihranili ogromno dela pri implementaciji različnih matematičnih objektov, ki jih bomo potrebovali.
+%Z uporabo programskega okolja SAGE, lahko napad enostavno tudi sprogramiramo.
 
-Nadaljne programe bomo pisali v prosto dostopnem programskem okolju SAGE. S pomočjo tega si bomo prihranili ogromno dela pri implementaciji različnih matematičnih objektov, ki jih bomo potrebovali.
-Z uporabo programskega okolja SAGE, lahko napad enostavno tudi sprogramiramo.
 
-\lstinputlisting[language=Python]{IndexCalculus.py}
 
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2059,11 +2060,6 @@ Za število $M$ prav tako v obeh primerih dobimo isti rezultat in sicer $M = 548
 \end{primer}
 
 
-\subsection{MOV napad program}
-
-Algoritem MOV sprogramiran v programskem okolju SAGE.
-
-\lstinputlisting[language=Python]{MOV.py}
 
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2238,8 +2234,6 @@ m_2 &{}= 163\frac{3108-1293}{10908-150} = \frac{55}{2} \MOD{26569} \nonumber
 $$k = \frac{m_1}{m_2} = \frac{49202}{4345} \equiv 47 \MOD{163}.$$
 \end{primer}
 
-\subsection{Anonomalne program}
-\lstinputlisting[language=Python]{anomalne.py}
 
 
 \newpage
@@ -2341,9 +2335,22 @@ Predstavili pa so jo Aranha, Barreto, Pereira in  Ricardini leta 2013 \cite{Aran
 
 \appendix
 
-\section{Program osnovne strukture kubičnih krivulj}
+\section{Programska koda}
+\subsection{Python}
+V tem podpoglavju bomo podali programsko kodo v programskem jeziku Python, napisano v verziji $3.6.6$.
+\subsubsection{Osnovne strukture}
 \lstinputlisting[language=Python]{base.py}
+\subsubsection{Weilovo parjenje}
+\lstinputlisting[language=Python]{WeilPairing.py}
+\subsubsection{Anomalne krivulje}
+\lstinputlisting[language=Python]{anomalne.py}
 
+\subsection{SAGE}
+Od sedaj naprej bo vsa programska koda podana v prosto dostopnem programskem okolju SAGE \cite{sagemath}. Uporabljena je bila vezija $8.9$. Za ta korak se odločimo, ker se s tem izognemo implementaciji raznih algebraičnih objektov. Tako se lahko posvetimo samo kriptografskim problemom.
+\subsubsection{Izračun indeksa}
+\lstinputlisting[language=Python]{IndexCalculus.py}
+\subsubsection{MOV napad}
+\lstinputlisting[language=Python]{MOV.py}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

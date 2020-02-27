@@ -334,6 +334,9 @@ class ElipticCurve:
             return "y^2 = x^3 - {0}x - {1} mod {2}".format(
                 abs(self.a),abs(self.b),self.mod)
 
+    def __repr__(self):
+        return str(self)
+
 
 
     def rand(self):
@@ -393,8 +396,10 @@ class ElipticCurve:
             return x.num==y
     def isEliptic(self):
         """Preverimo ali je dana krivulja res elipticna"""
-        if not (self.a ==None and self.b== None and self.mod == None):
-            #ce to velja je tocka v neskoncnosti nas ne zanima
+        if not (self.a ==None and self.b== None
+                and self.mod == None):
+            #ce to velja je tocka v neskoncnosti
+            #nas ne zanima
             temp = (4*self.a**3 + 27*self.b**2) % self.mod
             if temp != 0:
                 return True
@@ -468,7 +473,7 @@ class Point(ElipticCurve):
                 and self.mod == Q.mod)
             and not infty):
             raise Exception("""Points don\'t lie on the
-                samecurve, or have different modulus""")
+                same curve, or have different modulus""")
 
         if self.x == INF:
             return Q
@@ -599,22 +604,11 @@ def TonelliShanks(n,p1):
             t = (t*pow(b,2,p1)) % p1
             R = (R*b) % p1
 
-def lema(n,a,q):
-    s0 = 2
-    s1 = a
-    if n == 1:
-        return a
-    else:
-        i=1
-        while i < n:
-            s2 = a*s1-q*s0
-            s0 = s1
-            s1 = s2
-            i +=1
-        return s2
-
-def NumberPoints(steviloOsnovne,potenca,q):
-    a = q+1-steviloOsnovne
-    sn = lema(potenca,a,q)
-    stevilo = pow(q,potenca)+1-sn
-    return stevilo
+#Zgled definicij
+#Definirajmo elipticno krivuljo E
+E = ElipticCurve(30,34,631)
+#ter tocki P,Q na krivulji E
+P = Point(30,34,631,36,60)
+Q = Point(30,34,631,121,387)
+#nakljucno tocko dobimo z naslednjim klicem
+Nakljucna = E.rand()

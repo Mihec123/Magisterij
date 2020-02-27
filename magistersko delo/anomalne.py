@@ -29,7 +29,7 @@ def Lift(P,Q,meja = 20):
     p = P.mod  
     x1 = P.x + random.randint(0,meja)*p
     x2 = Q.x + random.randint(0,meja)*p
-    if P.x != Q.x:
+    if x1 != x2:
         y1 = P.y + random.randint(0,meja)*p
         razl = abs(x2-x1)
         i=0
@@ -38,7 +38,7 @@ def Lift(P,Q,meja = 20):
             if pow(y2,2,razl) == pow(y1,2,razl):
                 break
             i += 1
-        A1 = int((y2**2-y1**2)/(x2-x1)/
+        A1 = int((y2**2-y1**2)/(x2-x1) \
                  -(x2**3-x1**3)/(x2-x1))
         B1 = y1**2-x1**3-A1*x1
     else:
@@ -87,3 +87,7 @@ def AnomalneAttack(P,Q):
     k2 = NumberMod(k2,p).inverse().num
     k = (k1*k2) % p
     return k
+#Zgled uporabe funkcije na primeru 9.6
+P = Point(154,82,163,7,6)
+Q = Point(154,82,163,150,152)
+k = AnomalneAttack(P,Q)

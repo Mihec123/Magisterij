@@ -11,10 +11,12 @@ def naklon(P,Q):
        naklon(P,Q)
 
      Vhodni podatki:
-       P...razred Point(ElipticCurve), ki predstavlja tocko na
-           elipticni krivulji in je definiran v dodatku base
-       Q...razred Point(ElipticCurve), ki predstavlja tocko na
-           elipticni krivulji in je definiran v dodatku base
+       P...razred Point(ElipticCurve), ki predstavlja
+           tocko na elipticni krivulji in je definiran
+           v dodatku base
+       Q...razred Point(ElipticCurve), ki predstavlja
+           tocko na elipticni krivulji in je definiran
+           v dodatku base
 
      Izhodni  podatek:
        stevilo po modolu P.mod, ki predstavlja naklon
@@ -44,12 +46,15 @@ def g(P,Q,X):
        g(P,Q,X)
 
      Vhodni podatki:
-       P...razred Point(ElipticCurve), ki predstavlja tocko na
-           elipticni krivulji in je definiran v dodatku base
-       Q...razred Point(ElipticCurve), ki predstavlja tocko na
-           elipticni krivulji in je definiran v dodatku base
-       X...razred Point(ElipticCurve), ki predstavlja tocko na
-           elipticni krivulji in je definiran v dodatku base
+       P...razred Point(ElipticCurve), ki predstavlja
+           tocko na elipticni krivulji in je definiran
+           v dodatku base
+       Q...razred Point(ElipticCurve), ki predstavlja
+           tocko na elipticni krivulji in je definiran
+           v dodatku base
+       X...razred Point(ElipticCurve), ki predstavlja
+           tocko na elipticni krivulji in je definiran
+           v dodatku base
 
      Izhodni  podatek:
        stevilo, ki predstavlja vrednost $g_{P,Q}(X)$
@@ -114,12 +119,15 @@ def WeilPairing(P,Q,S,N):
        WeilPairing(P,Q,S,N)
 
      Vhodni podatki:
-       P...razred Point(ElipticCurve), ki predstavlja tocko na
-           elipticni krivulji in je definiran v dodatku base
-       Q...razred Point(ElipticCurve), ki predstavlja tocko na
-           elipticni krivulji in je definiran v dodatku base
-       S...razred Point(ElipticCurve), ki predstavlja tocko, ki
-           ni v podgrupi generirani z P,Q
+       P...razred Point(ElipticCurve), ki predstavlja
+           tocko na elipticni krivulji in je definiran
+           v dodatku base
+       Q...razred Point(ElipticCurve), ki predstavlja
+           tocko na elipticni krivulji in je definiran
+           v dodatku base
+       S...razred Point(ElipticCurve), ki predstavlja
+           tocko, ki se ne nahaja v podgrupi
+           generirani z P,Q
        N...veckratnik reda tocke P
 
      Izhodni  podatek:
@@ -144,9 +152,9 @@ def WeilPairing(P,Q,S,N):
 
     return eN
 
-
+#Zgled uporabe na primeru 6.7
 E = ElipticCurve(30,34,631)
 P = Point(30,34,631,36,60)
 Q = Point(30,34,631,121,387)
-S = E.rand()
+S = Point(30,34,631,0,36)
 eN = WeilPairing(P,Q,S,5)
