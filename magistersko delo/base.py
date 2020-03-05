@@ -550,6 +550,110 @@ class Point(ElipticCurve):
 
 INFPoint = Point(None,None,None,INF,INF)
 
+
+def BabyGiant(P):
+    """
+    Opis:
+       Funkcija BabyGiant je implementacija algoritma
+       Baby step, Giant step za iskanje reda tocke P
+     Definicija:
+       BabyGiant(P)
+     Vhodni podatki:
+       P...razred Point, ki predstavlja tocko na
+           elipticni krivulji
+     Izhodni  podatek:
+       int k, ki predstavlja red tocke P (kP = $\infty$)
+    """
+    q = P.mod
+    Q = (q+1)*P
+    m = int(q**(1/4))+1
+    seznam = []
+
+    for j in range(m+1):
+        seznam.append(j*P)
+
+
+    tmp = (2*m)*P
+    for k in range(-m,m+1):
+        T = Q + k*tmp
+        if T in seznam:
+            j = seznam.index(T)
+            break
+        elif -1*T in seznam:
+            j = seznam.index(-1*T)
+            break
+    st1 = q+1+2*m*k -j
+    st2 = q+1+2*m*k +j
+    if st1*P == INFPoint:
+        M = st1
+    else:
+        M = st2
+
+
+    odg = pomozna(M,P)
+
+    return odg
+
+def pomozna(M,P):
+    """
+    Opis:
+       Funkcija pomozna predstavlja rekurzivni del funkcije
+       BabyGiant
+     Definicija:
+       pomozna(M,P)
+     Vhodni podatki:
+       M...stevilo, ki ga testiramo ce predstavlja red
+           tocke P
+       P...razred Point, ki predstavlja tocko na
+           elipticni krivulji
+     Izhodni  podatek:
+       int k, ki predstavlja red tocke P (kP = $\infty$)
+    """
+    faktorji = Factor(M)
+    for el in faktorji:
+        if (M//el)*P == INFPoint:
+            rez = pomozna(M//el,P)
+            return rez
+    
+    return M
+
+def Factor(n):
+    """
+    Opis:
+       Factor je enostavna neucinkovita funkcija
+       za iskanje fakotrojev stevila
+     Definicija:
+       Factor(n)
+     Vhodni podatki:
+       n...stevilo, ki ga hocemo faktorizirati
+     Izhodni  podatek:
+       Seznam faktorjev stevila n
+    """
+    faktorji = []
+
+    tmp = NumberMod(n,None).isPrime()
+    if tmp:
+        faktorji.append(n)
+        return faktorji
+    else:
+        tmp = n
+        while tmp %2 == 0:
+            faktorji.append(2)
+            tmp = tmp//2
+        i = 3
+        while i*i < tmp:
+
+            while tmp % i == 0:
+                faktorji.append(i)
+                tmp = tmp//i
+
+            i+=2
+
+        if tmp != 0:
+            faktorji.append(tmp)
+
+    return faktorji
+
 def TonelliShanks(n,p1):
     """
     Opis:
