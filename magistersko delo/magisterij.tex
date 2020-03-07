@@ -11,7 +11,7 @@
 \newcommand{\imesomentorja}{pred.~mag.~Matjaž Praprotnik} % akademski naziv in ime somentorja, če ga imate
 \newcommand{\naslovdela}{Kubične krivulje v kriptografiji}
 \newcommand{\letnica}{2020} % letnica magistriranja
-\newcommand{\opis}{??.}  % Opis dela v eni povedi. Ne sme vsebovati matematičnih simbolov v $ $.
+\newcommand{\opis}{Delo obravnava uporabo kubičnih krivulj za ustvarjanje in razbijanje raznih kriptosistemov.}  % Opis dela v eni povedi. Ne sme vsebovati matematičnih simbolov v $ $.
 \newcommand{\kljucnebesede}{kubična krivulja\sep kriptografija\sep Weilovo parjenje\sep anomalne krivulje\sep supersingularne krivulje\sep MOV napad\sep izračun indeksa\sep Millerjev algoritem\sep torzijske točke} % ključne besede, ločene z \sep, da se PDF metapodatki prav procesirajo
 \newcommand{\keywords}{cubic curve\sep cryptography\sep Weil pairing\sep anomalous curves\sep supersingular curves\sep MOV attack\sep Index calculus\sep Miller's algorithm\sep torsion points} % ključne besede v angleščini
 \newcommand{\organization}{Univerza v Ljubljani, Fakulteta za matematiko in fiziko} % fakulteta
@@ -29,7 +29,7 @@
 \begin{filecontents*}{\jobname.xmpdata}
   \Title{\naslovdela}
   \Author{\imeavtorja}
-  \Keywords{\kljucnebesede}
+ % \Keywords{\kljucnebesede}
   \Subject{\opis}
   \Org{\organization}
 \end{filecontents*}
@@ -47,8 +47,8 @@
 \usepackage{graphicx}     % za slike
 \usepackage{emptypage}    % prazne strani so neoštevilčene, ampak so štete
 \usepackage{units}        % fizikalne enote kot \unit[12]{kg} z polovico nedeljivega presledka, glej primer v kodi
-\usepackage{makeidx}      % za stvarno kazalo, lahko zakomentiraš, če ne rabiš
-\makeindex                % za stvarno kazalo, lahko zakomentiraš, če ne rabiš
+%\usepackage{makeidx}      % za stvarno kazalo, lahko zakomentiraš, če ne rabiš
+%\makeindex                % za stvarno kazalo, lahko zakomentiraš, če ne rabiš
 % oblika strani
 \usepackage[
   top=3cm,
@@ -309,7 +309,7 @@ Cubic curves in cryptography offer some advantages compared to the other cryptos
 %UVOD
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Uvod}
-Kubične krivulje imajo v kriptografiji velik pomen, saj zagotavljajo enako varnost kot drugi klasični kriptosistemi, obenem pa potrebujejo manjšo velikost ključa. Njihovo uporabo je prvi predlagal Victor S. Miller leta 1985 \cite{Miller}, a v širšo rabo so vstopile šele okoli leta 2004. Razliko v potrebni dolžini ključa lahko opazujemo na dveh klasičnih zgledih. Kriptosisteme delimo na simetrične in asimetrične. Simetrični kriptosistemi uporabljajo isti ključ za šifriranje in dešifriranje. Pri asimetričnih kriptosistemih pa uporabljamo različna ključa za šifriranje in dešifriranje. Najpogosteje uporabljen asimetrični kriptosistem je RSA. Ime je dobil po svojih avtorjih Rivest, Shamir in Adleman. RSA temelji na problemu faktorizacije števil \cite{Easttom2015}. Ocenjuje se, da je $2048$ bitni ključ v RSA algoritmu enako varen kot $224$ bitni ključ nad eliptičnimi krivuljami.
+Kubične krivulje imajo v kriptografiji velik pomen, saj zagotavljajo enako varnost kot drugi klasični kriptosistemi, obenem pa potrebujejo manjšo velikost ključa. Njihovo uporabo je prvi predlagal Victor S. Miller leta 1985 \cite{Miller}, a v širšo rabo so vstopile šele okoli leta 2004. Razliko v potrebni dolžini ključa lahko opazujemo na dveh klasičnih zgledih. Kriptosisteme delimo na simetrične in asimetrične. Simetrični kriptosistemi uporabljajo isti ključ za šifriranje in dešifriranje. Pri asimetričnih kriptosistemih pa uporabljamo različna ključa za šifriranje in dešifriranje. Najpogosteje uporabljen asimetrični kriptosistem je RSA. Ime je dobil po svojih avtorjih Rivest, Shamir in Adleman. RSA temelji na problemu faktorizacije števil \cite{Easttom2015}. Ocenjuje se, da je 2048 bitni ključ v RSA algoritmu enako varen kot 224 bitni ključ nad eliptičnimi krivuljami.
 Eden najpogosteje uporabljenih simetričnih kriptosistemov pa je AES \cite{Easttom2015}. Podrobnejšo primerjavo pa lahko razberemo iz spodnje tabele.
 
 \begin{table}[h]
@@ -461,7 +461,7 @@ Točko projektivne ravnine si lahko predstavljamo kot premico skozi izhodišče,
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.6\textwidth]{images/ravnina.png}
+  \includegraphics[width=0.6\textwidth]{images/projektivna_ravnina_mathematicafix.pdf}
 % \caption[caption za v kazalo]{Dolg caption pod sliko}
   \caption[Primer točke v projektivni ravnini.]{Točka [a,b,1] v projektivni ravnini.}
   \label{fig:ravnina}
@@ -724,7 +724,7 @@ Na sliki \ref{fig:adicija} je v afini ravnini $z=1$ prikazano kako grafično se�
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.8\textwidth]{images/adicija.png}
+  \includegraphics[width=0.8\textwidth]{images/sestevanje_tock_mathematicafix.pdf}
   \caption[Grafično seštevanje.]{Grafično seštevanje točk na kubični krivulji.}
   \label{fig:adicija}
 \end{figure}
@@ -736,7 +736,7 @@ Na sliki \ref{fig:adicija} je v afini ravnini $z=1$ prikazano kako grafično se�
 \begin{primer}
 Seštejmo točki $A =(-1,0),B=(2,\sqrt{6}) $ na Weierstrassovi kubični krivulji $y^2z-x(x-z)(x+z)=0$ v preseku z afino ravnino $z=1$ še računsko z uporabo zgornje leme \ref{sestevanje}.
 
-Dobimo $z^2 = x^3-x,$
+Dobimo $y^2 = x^3-x,$
 torej je $\alpha = 0$, $\beta = -1$ in $\gamma=0$. Izračunajmo sedaj $\lambda$ in $\mu$, pri čemer upoštevamo prvi predpis, saj sta x-koordinati točk različni:
 $$\lambda = \frac{-\sqrt{6}}{-1-2} = \frac{\sqrt{6}}{3},$$
 
@@ -2378,10 +2378,10 @@ Od sedaj naprej bo vsa programska koda podana v prosto dostopnem programskem oko
 \bibliographystyle{fmf-sl}                 % uporabljen stil je v datoteki fmf-sl.bst, na voljo tudi angleška verzija
 \bibliography{\literatura}                 % literatura je v datoteki, definirani na začetku
 
-% Za stvarno kazalo
-\cleardoublepage                           % na desni strani
-\phantomsection                            % da prav delujejo hiperlinki
-\addcontentsline{toc}{section}{\indexname} % dodajmo v kazalo
-\printindex
+%% Za stvarno kazalo
+%\cleardoublepage                           % na desni strani
+%\phantomsection                            % da prav delujejo hiperlinki
+%\addcontentsline{toc}{section}{\indexname} % dodajmo v kazalo
+%\printindex
 
 \end{document}
