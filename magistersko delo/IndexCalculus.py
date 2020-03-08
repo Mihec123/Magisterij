@@ -65,7 +65,6 @@ def IndexCalculus(g,h,q,baza):
     M = Matrix(IntegerModRing(q-1),tmp)
     B = vector(IntegerModRing(q-1),b)
     X = M.solve_right(B)
-    print(X)
     
     j = 0
     while True:
@@ -79,3 +78,11 @@ def IndexCalculus(g,h,q,baza):
             
             return( enacba*X - j)
         j+=1
+
+
+#Uporaba funkcije na primeru 7.5
+baza = [-1,2,3,5,7,11,13]
+g = 3
+q = 1217
+h = 37
+Lh = IndexCalculus(g,h,q,baza)

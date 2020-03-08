@@ -42,11 +42,8 @@ def MOV(E,q,m,P,Q,st_korakov = 10):
         d = gcd(N,M)
         T1 = int(M/d)*T
         w1 = P1.weil_pairing(T1,N)
-        print(w1)
         w2 = Q1.weil_pairing(T1,N)
-        print(w2)
         if w1 != w2:
-            #k = Naivno(w1,w2)
             k = discrete_log(w2, w1)
             odgovori[0].append(k)
             odgovori[1].append(d)
@@ -58,3 +55,9 @@ def MOV(E,q,m,P,Q,st_korakov = 10):
     #uporabimo kitajski izrek o ostankih
     k = crt(odgovori[0],odgovori[1])
     return k
+
+#Funkcija uporabljena na primeru 8.6
+E = EllipticCurve(GF(547),[1,0])
+P = E(67,481)
+Q = E(167,405)
+k = MOV(E,547,2,P,Q)

@@ -1,0 +1,447 @@
+
+\documentclass{beamer}
+\usepackage{amsmath}
+\usepackage{color}
+\setbeamertemplate{items}[ball] 
+\usepackage{aecompl,accents}
+\usepackage[all]{xy}
+\usepackage[normalem]{ulem}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usetheme{CambridgeUS}
+\useoutertheme{shadow}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left = 2em} 
+\usepackage[slovene]{babel}
+\usepackage[OT2,T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{caption}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{trditev}[theorem]{Trditev}
+\newtheorem{izrek}[theorem]{Izrek}
+\newtheorem{posledica}[theorem]{Posledica}
+\newtheorem{definicija}{Definicija}
+\newtheorem{domneva}[theorem]{Domneva}
+\newtheorem{opomba}[definicija]{Opomba}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title[Kubične krivulje v kriptografiji]{Kubične krivulje v kriptografiji}
+\author{Miha Avsec}
+\date{Ljubljana, 30. marec 2020}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%nove komande
+\newcommand{\F}{\mathbb F}
+\newcommand{\C}{\mathbb C}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\Fq}[1]{{\mathbb{F}}_{#1}}
+\newcommand{\E}[1]{E({#1})}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}[1]{{\mathbb{Z}}_{#1}}
+
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\MOD}[1]{\ \text{(mod }{#1}\text{)}}
+\newcommand{\DIV}[1]{\ \text{Div(}{#1}\text{)}}
+\newcommand{\DEG}[1]{\ \text{deg(}{#1}\text{)}}
+\newcommand{\Div}[1]{\ \text{div(}{#1}\text{)}}
+\newcommand{\ORD}[1]{\ \text{ord(}{#1}\text{)}}
+\newcommand{\SUM}[1]{\ \text{sum(}{#1}\text{)}}
+\newcommand{\ORDp}[2]{\ \text{ord}_{#2}({#1}\text{)}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\frame{\titlepage}
+
+
+\frame{
+\frametitle{Motivacija}
+Zakaj bi uporabljali kubične krivulje za namene kriptografije?
+\begin{itemize}
+
+\item Kubične krivulje nam zagotavljajo večjo varnost glede na dolžino uporabljenega ključa.
+\begin{table}[]
+\begin{tabular}{|l|l|l|}
+\hline
+\textit{\textbf{AES}} & \textit{\textbf{ECC}} & \textit{\textbf{RSA}} \\ \hline
+80                    & 160                   & 1024                  \\ \hline
+112                   & 224                   & 2048                  \\ \hline
+128                   & 256                   & 3072                  \\ \hline
+192                   & 384                   & 7680                  \\ \hline
+256                   & 521                   & 15360                 \\ \hline
+\end{tabular}
+\end{table}
+%Ocenjuje se da je 4096 bitni RSA ključ enako varen kot 313 bitni ključ v kripografkem protokolu nad kubičnimi krivuljami.
+\item Krajši ključi predstavljajo prednost predvsem v okoljih s slabšo procesorsko močjo in omejenim pomnilnikom (pametne kartice, IoT, $\ldots$).
+
+\end{itemize}
+}
+%
+%\frame{
+%\frametitle{RSA}
+%Funkcija uporabljena v RSA algoritmu je 
+%
+%$$f(x) = x^e \mod{N},$$
+%kjer je $N=pq$ produkt dveh praštevil.
+%
+%
+%}
+
+\frame{
+\frametitle{Osnovni pojmi}
+
+\begin{block}{Projektivna ravnina}
+\emph{Projektivna ravnina} $\mathbb{P}^2$ nad poljem $\F$ je kvocientni prostor $\F^3-\{0\}/\! \!\sim$, kjer je ekvivalenčna relacija $\sim$ podana z $(a,b,c)\sim(\alpha a,\alpha b,\alpha c)$ za vsak  neničelni $\alpha \in \F$. Točke v $\mathbb{P}^2$ so torej podane s homogenimi koordinatami $[a,b,c] = [\alpha a,\alpha b,\alpha c]$ za vse $\alpha \neq 0$.
+\end{block}
+
+\begin{block}{Homogen polinom}
+Polinom $P$ je \emph{homogen} stopnje $d$, če velja $$P(\lambda x,\lambda y, \lambda z) = \lambda ^d P(x,y,z) \text{ za vse } \lambda \in \F.$$.
+\end{block}
+
+
+
+}
+
+\frame{
+\frametitle{Osnovni pojmi}
+\begin{block}{Algebraična krivulja}
+\emph{Algebraična krivulja}, podana s homogenim polinomom $P$, je množica točk 
+$$\mathcal{C}_P= \{ A \in \mathbb{P}^2, P(A) = 0 \}.$$
+\end{block}
+
+\begin{block}{Kubična krivulja}
+\emph{Kubična krivulja} je algebraična krivulja, podana s homogenim polinomom stopnje 3. V splošnem je polinom oblike
+\begin{align}
+&{} a_{300}x^3+a_{210}x^2y+a_{201}x^2z+a_{120}xy^2+a_{102}xz^2+ \nonumber \\
+&{}+a_{012}yz^2+a_{030}y^3+a_{003}z^3+a_{111}xyz+a_{021}y^2z, \nonumber
+\end{align}
+kjer so $a_{ijk} \in \F$.
+Ta zapis vsebuje $10$ koeficientov, vendar se lahko v gladkih primerih polinom poenostavi z ustrezno zamenjavo spremenljivk.
+\end{block}
+
+}
+
+\frame{
+\frametitle{Osnovni pojmi}
+\begin{block}{Gladkost}
+Algebraična krivulja je \emph{gladka}, če nima singularne točke.
+\end{block}
+
+\begin{block}{Izrek}
+Enačbo gladke kubične krivulje nad algebraično zaprtim poljem lahko zapišemo v Weierstrassovi obliki
+$$y^2z = x^3 + axz^2 + bz^3.$$
+\end{block}
+
+
+}
+
+\frame{
+\frametitle{Zgled v projektivni ravnini $z=1$}
+
+\begin{figure}[ht]
+\centering
+\begin{minipage}{.5\textwidth}
+\centering
+\includegraphics[scale=0.4]{slika1.jpg}
+\captionof{figure}{$y^2 = x^3-x$}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+\centering
+\includegraphics[scale=0.4]{slika2.jpg}
+\captionof{figure}{$y^2=x^3+x$}
+\end{minipage}
+\end{figure}
+}
+
+\frame{
+\frametitle{Grupa nad kubičnimi krivuljami}
+Za definicijo grupe na kubičnih krivuljah nad $\C$ najprej uvedimo pomožno operacijo
+
+$$\ast : \mathcal{C}_P \times \mathcal{C}_P \rightarrow \mathcal{C}_P,$$
+tako da za poljubni točki $A$, $B$ na krivulji velja:
+
+\[ A \ast B =
+\begin{cases}
+A & \quad \text{če je } A=B \ \text{prevoj},\\
+C & \quad \text{če je } \overline{AB} \cap \mathcal{C}_P = \left\{ A,B,C \right\},\\
+A & \quad \text{če je } \overline{AB} \ \text{tangenta v } A,\ \text{ter} \ A \neq B,\\
+B & \quad \text{če je } \overline{AB} \ \text{tangenta v } B,\ \text{ter} \ A \neq B,\\
+C &\quad \text{če je } A=B \  \text{in}\ \{\text{tangenta v A}\} \cap \mathcal{C}_P = \left\{ A,C \right\}.\\
+\end{cases}
+\]
+
+}
+
+\frame{
+\frametitle{Grupa nad kubičnimi krivuljami}
+\begin{izrek}
+Kubična krivulja ($\mathcal{C}_P$,$+$) je Abelova grupa za operacijo
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{llll}
+$+:$ & $\mathcal{C}_P \times \mathcal{C}_P$ & $\rightarrow$ & $\mathcal{C}_P$ \\
+& $(A,B)$ & $\mapsto$ & $(A\ast B)\ast O$ ,
+\end{tabular}
+\end{table}
+kjer je $O$ poljubna izbrana točka na krivulji $ \mathcal{C}_P$.
+\end{izrek}
+\begin{opomba}
+Za kubično krivuljo v Weierstrassovi obliki za točko $O$ ponavadi izberemo takoimenovano točko v neskončnosti, oblike $[0,1,0]$, ki jo označimo z $\infty$.
+\end{opomba}
+}
+ 
+
+\frame{
+\frametitle{Eliptične krivulje mod n}
+
+Za dani števili $a$, $b \in \mathbb{Z}/p\mathbb{Z}$ je \emph{kubična krivulja} nad poljem $\mathbb{Z}/p\mathbb{Z}$ množica točk
+$$E_{(a,b)}(\mathbb{Z}/p\mathbb{Z}) =\left\{ [x,y,z] \in \PP^2(\mathbb{Z}/p\mathbb{Z}): y^2z=x^3+axz^2+bz^3 \right\} .$$
+Drugače povedano, afina kubična krivulja je množica rešitev Weierstrassove enačbe
+$$y^2=x^3+ax+b,$$
+pri čemer upoštevamo zvezo med afinimi in projektivnimi koordinatami točk:
+$$(x,y)\in (\mathbb{Z} /p\mathbb{Z})^2 \Leftrightarrow [x,y,1]\in \PP^2(\mathbb{Z}/p\mathbb{Z} ).$$
+%V nadaljevnaju bomo za polja uporabljali oznako $\F{q}$, ki predstavlja $\Z{p^k}$.
+}
+
+%zgled $y^2 = x^3+x+1$ nad $F_5$ kniga stran 95.
+
+\frame{
+\frametitle{Delitelji}
+\begin{block}{Delitelj}
+Naj bo $K$ polje in naj bo $P$ točka na krivulji $\E{\overline{K}}$. Za vsako točko $P$ definirajmo formalen simbol $[P]$. \emph{Delitelj} $D$ na krivulji $E$ je končna linearna kombinacija takih simbolov s celoštevilskimi koeficienti
+$$D = \sum_{j}a_j[P_j], \ a_j \in \Z.$$
+\end{block}
+
+\begin{block}{Definicija}
+Definirajmo \emph{vsoto} in \emph{stopnjo} delitelja kot
+$$\SUM{\sum_{j}a_j[P_j]} = \sum_ja_jP_j \ \in \E{\overline{K}},$$
+$$\DEG{\sum_{j}a_j[P_j]} = \sum_ja_j \ \in \Z.$$
+\end{block}
+}
+
+\frame{
+\begin{definicija}
+Naj bo $E$ eliptična krivulja nad poljem $K$. \emph{Funkcija} na $E$ je racionalna funkcija $$f(x,y) \in \ \overline{K},$$ ki je definirana za vsaj eno točko na $\E{\overline{K}}$. Funkcija torej zavzame vrednosti v $\overline{K}$.
+\end{definicija}
+
+\begin{trditev}
+Naj bo $P$ točka na krivulji $E$. Potem obstaja funkcija $u_P$, kateri rečemo uniformizator, z lastnostjo $u_P(P) = 0$, za katero velja, da lahko vsako funkcijo $f(x,y)$ nad $E$ zapišemo kot
+$$f = u^r_Pg, \text{ za nek } r\in \Z, \text{ kjer } g(P) \neq 0 \text{ in } \frac{1}{g(P)} \neq 0.$$
+\end{trditev}
+}
+
+\frame{
+\begin{definicija}
+Številu $r$ iz trditve  rečemo \emph{red} funkcije $f$ v točki $P$ in ga označimo z $\ORDp{f}{P}$.
+\end{definicija}
+
+\begin{definicija}
+Naj bo $f$ funkcija nad $E$, ki ni identično enaka $0$. Definirajmo \emph{delitelj} funkcije $f$ kot
+$$\Div{f} = \sum_{P\in \E{\overline{K}}} \ORDp{f}{P}[P] \in \DIV{E}.$$
+\end{definicija}
+}
+
+\frame{
+\frametitle{Endomorfizem}
+\begin{definicija}
+Naj bo $K$ polje nad katerim je definirana eliptična krivulja $E$.
+\emph{Endomorfizem} na $E$ je homomorfizem $\alpha: \E{\overline{K}} \rightarrow \E{\overline{K}} $, ki je podan z racionalno funkcijo. Torej obstajata racionalni funkciji $R_1$ in $R_2$ s koeficienti v $\overline{K}$ za kateri velja
+$$\alpha(x,y) = (R_1(x,y),R_2(x,y)),$$
+za vse $(x,y) \in \E{\overline{K}}$.
+\end{definicija}
+
+\begin{block}{Standardizirana oblika}
+Endomorfizem $\alpha$ lahko zapišemo v standardizirani obliki
+$$\alpha(x,y) = (r_1(x),r_2(x)y), \text{ kjer je} r_1(x) = \frac{p(x)}{q(x)}.$$
+\end{block}
+}
+
+\frame{
+
+\begin{definicija}
+\emph{Stopnja} endomorfizma je  definirana kot
+$$
+\DEG{\alpha} =
+\begin{cases}
+\max \{ \deg{p(x)},\deg{q(x)} \} & \text{če }\alpha \not\equiv 0, \\
+0 & \text{če } \alpha \equiv 0.
+\end{cases}
+$$
+\end{definicija}
+
+\begin{definicija}
+Netrivialni endomorfizem $\alpha$ je \emph{separabilen}, če je odvod $r'_1(x) \not \equiv 0$.
+\end{definicija}
+}
+
+\frame{
+\frametitle{Diffie-Hellmanova izmenjava ključev nad eliptičnimi krivuljami}
+
+\begin{enumerate}
+
+\item Alice in Bob se dogovorita za elitpično krivuljo $E$ nad končnim obsegom $\Fq{q}$, ter za točko $P \in \E{\Fq{q}}$.
+\item Alice se odloči za naklučno skrivno število $a \in \N$, in izračuna $P_a = aP$, ter to pošlje Bobu.
+\item Bob se odloči za naključno skrivno število $b \in \N$, in izračuna $P_b = bP$, ter to pošlje Alice.
+\item Alice izračuna $aP_b=abP$.
+\item Bob izračuna $bP_a=baP$.
+%\item Alice in Bob se dogovorita za metodo kako iz $abP$ dobiti ključ, npr. zadnjih $256$ bitov x-koordinate točke $abP$.
+
+\end{enumerate}
+
+}
+
+%Edine informcije, ki jo tako dobi nek prisluškovalec so krivulja $E$, končni obseg $\Fq$, ter točke $P, aP,bP$. Iz tega pa mora izračunati $abP$.
+
+\frame{
+\frametitle{Problem diskretnega logaritma}
+\begin{definicija}
+Naj bosta $a,b \in \mathbb{N}$, ter naj bo $p$ praštevilo. Iščemo število $k$ tako da bo
+$$a^k \equiv b\ (\text{mod} \ p).$$
+\end{definicija}
+Problem Diffie-Hellmanove izmenjave ključev lahko prevedemo na problem diskretnega logaritma na sledeč način
+\begin{itemize}
+\item Vzemi $aP$ in izračunaj $a$ tako, da rešiš problem diskretnega logaritma.
+\item Izračunaj $a(bP)$.
+\end{itemize}
+
+Velja torej:
+$$\text{DL} \Rightarrow DH$$
+
+}
+
+%Če Eva lahko reši problem diskretnega logaritma v $\E{\Fq}$, potem lahko iz $P$ in $aP$ izračuna $a$ ter nato izračuna $abP$, ter na ta način dobi ključ.
+
+\frame{
+\frametitle{Napadi na diskretni logaritem}
+\begin{itemize}
+\item Index Calculus
+\item Mali korak velik korak
+%\item MOV napad
+\item Pollar rho
+\item Pollar lambda
+\item Pohlig-Hellman
+
+
+\end{itemize}
+
+
+}
+
+\frame{
+\frametitle{Index Calculus }
+Pričakovana časovna zahtevnost algoritma je $O(e^{\sqrt{2 \text{lnp ln ln p}}})$.
+\begin{definicija}
+Naj bo $p$ praštevilo in naj bo $g$ generator grupe $\Fq{p} ^x$.  Naj $L(h)$ označuje vrednost, da velja
+$$g^{L(h)} \equiv h \ (\text{mod} \ p).$$
+\end{definicija}
+Očitno velja $L(h_1h_2) = L(h_1)+L(h_2) \ (\text{mod} \ p)$.
+
+Ideja napada:
+
+Izračunaj $L(l)$ za dovolj praštevil $l$, da lahko iz tega izračunaš $L(h)$ za poljuben $h$.
+
+}
+\frame{
+\frametitle{Torzijske točke}
+\begin{definicija}
+Naj bo $E$ eliptična krivulja nad poljem $K$, ter naj bo $n\in \N$. Torizjske točke so množica
+$$E[n] = \{ P \in \E{\overline{K}} | nP = \infty \}.$$
+\end{definicija}
+
+\begin{izrek}
+Naj bo $E$ eliptična krivulja nad poljem $K$ in naj bo $n \in \N$. Če karakteristika polja $K$ ne deli $n$, ali je enaka $0$ potem
+$$E[n] \cong \mathbb{Z}_n \oplus \mathbb{Z}_n$$
+
+\end{izrek}
+}
+
+\frame{
+\begin{definicija}
+Naj bo $K$ polje in naj bo $n \in \N$ tak, da karakteristika $K$ ne deli $n$.
+$$\mu_n = \{ x \in \overline{K} | x^n = 1 \}$$
+je grupa n-tih korenov enote grupe $\overline{K}$.
+\end{definicija}
+}
+
+
+\frame{
+\frametitle{Weilovo parjenje}
+
+\begin{trditev}
+Naj bo E eliptična krivulja definirana nad poljem $K$, in naj bo $n \in \N$. Predpostavimo, da karakteristika polja $K$ ne deli $n$. Potem obstaja Weilovo parjenje
+$$e_n:E[n] \times E[n] \rightarrow \mu_n,$$
+za katerega velja:
+\begin{itemize}
+\item $e_n$ je bilinearna v obeh spremenljivkah
+$$e_n(S_1+S_2,T) = e_n(S_1,T)e_n(S_2,T)$$
+in
+$$e_n(S,T_1+T_2) = e_n(S,T_1)e_n(S,T_2)$$
+za vse $S,S_1,S_2,T,T_1,T_2 \in E[n]$.
+\end{itemize}
+\end{trditev}
+
+}
+
+\frame{
+\begin{trditev}[nadaljevanje]
+\begin{itemize}
+
+\item $e_n$ je nedegenerirana v obeh spremenljivkah. To pomeni če je $e_n(S,T) = 1$ za vse $T \in E[n]$ potem $S = \infty$, ter obratno.
+
+\item $e_n(T,T) = 1$ za vse $T \in E[n]$
+
+\item $e_n(T,S) = e_n(S,T)^{-1}$ za vse $S,T \in E[n]$
+
+\item $e_n(\rho S,\rho T) = \rho(e_n(S,T))$ za vse avtomorfizme $\rho$ iz $\overline{K}$, za katere je $\rho$ identiteta na koeficientih $E$.
+
+\item $e_n(\alpha(S),\alpha(T)) = e_n(S,T)^{\text{deg}(\alpha)}$ za vse separabilne endomorfizme $\alpha$ polja $E$.
+
+
+
+\end{itemize}
+\end{trditev}
+}
+
+\frame{
+\begin{posledica}
+Naj bosta $T_1,T_2$ baza $E[n]$. Potem je $e_n(T_1,T_2)$ generator grupe $\mu_n$.
+\end{posledica}
+}
+
+\frame{
+\frametitle{MOV napad}
+MOV napad uporabi Weilovo parjenje, da pretvori problem diskretnega logaritma iz $E(\Fq{q})$ v problem diskretnega logaritma nad $\Fq{q^m}^x$. Nato pa diskretni logaritem nad novim poljem napademo z Index calculus napadom. To deluje če velikost polja $\Fq{q^m}$ ni dosti večja od velikosti polja $\Fq{q}$. Postopek napada sledi poteku dokaza naslednje trditve.
+
+\begin{trditev}
+Naj bo $E$ eliptična krivulja nad $\Fq{q}$. Naj bosta $P,Q \in E(\Fq{q})$, ter naj bo $N$ red točke $P$. Predpostavimo, da velja $\text{gcd}(N,q)=1$. Potem obstaja tako število $k$, da velja $Q = kP$ natanko tedaj ko $NQ = \infty$ in $e_N(P,Q)=1$.
+\end{trditev}
+
+}
+
+\frame{
+\frametitle{MOV napad}
+
+Izberi $m$ tako, da $$E[N] \subset \E{\Fq{q^m}}.$$
+
+Ker imajo vse točke $E[N]$ koordiante v $\overline{\Fq{q}} = \cup_{j\geq 1}\Fq{q^j}$ tak $m$ obstaja. Prav tako je $\mu_N$ v $\Fq{q^m}$.
+
+\begin{enumerate}
+\item Izberi točko $T \in \E{\Fq{q^m}}$.
+\item Izračunaj red $M$ točke $T$.
+\item Naj bo $d = \text{gcd}(M,N)$ in naj bo $T_1 = (M/d)T$. Potem ima $T_1$ red, ki deli $N$, torej je $T_1 \in E[N]$.
+\item Izračunaj $\zeta_1 = e_N(P,T_1)$ in $\zeta_2 = e_N(Q,T_1)$. Tu sta $\zeta_1$ in $\zeta_2$ v $\mu_d \subset \Fq{q^m}^\times$.
+\item Reši problem diskretnega logaritma $\zeta_2 = \zeta_1^k$ v $\Fq{q^m}^\times$. To nam da $k \mod d$.
+\item Ponovi za različne točke $T$ dokler ni $k$ določen.
+\end{enumerate}
+
+
+}
+
+
+
+
+\end{document}
