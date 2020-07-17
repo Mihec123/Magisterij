@@ -1,4 +1,4 @@
-# Magistersko delo
+# Magistrsko delo
 ## Naslov: Kubične krivulje v kriptografiji
 Mentor: doc. dr. Anita Buckley
 
