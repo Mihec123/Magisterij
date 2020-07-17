@@ -381,3 +381,9 @@ TSWLatexianTemp*
 
 # Makeindex log files
 *.lpz
+
+
+#Custom files
+IndexCalculus.py
+MOV.py
+Avsec-27172046-2017.pdf
